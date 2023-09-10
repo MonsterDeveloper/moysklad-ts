@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"module": "es6",
+		"moduleResolution": "Bundler",
+		"allowJs": false,
+		"skipLibCheck": false,
+		"skipDefaultLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"paths": {
+      "@/*": ["src/*"],
+    },
+		"lib": ["es6", "dom"]
+	},
+	"include": ["src", "*.d.ts", "src/**/*.json"]
+}

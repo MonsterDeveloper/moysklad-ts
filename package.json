@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build:docs": "turbo run build --filter=docs",
+    "build:lib": "turbo run build --filter=moysklad-ts",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch"
+  },
+  "devDependencies": {
+    "eslint": "^8.48.0",
+    "turbo": "latest"
+  },
+  "license": "GPL-3.0-only",
+  "author": "Andrei Bobkov <slider7259@gmail.com>",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "pnpm@8.6.10",
+  "name": "moysklad-ts"
+}
