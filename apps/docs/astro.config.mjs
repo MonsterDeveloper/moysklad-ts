@@ -9,6 +9,7 @@ export default defineConfig({
       social: {
         github: "https://github.com/withastro/starlight",
       },
+      customCss: ["./src/custom.css"],
       sidebar: [
         {
           label: "Guides",
