@@ -10,7 +10,7 @@
     "test:watch": "turbo run test:watch"
   },
   "devDependencies": {
-    "eslint": "^8.48.0",
+    "eslint": "^8.49.0",
     "turbo": "latest"
   },
   "license": "GPL-3.0-only",
