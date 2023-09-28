@@ -31,7 +31,5 @@ export type SetExpandableFieldsOptional<
 > = IsEmptyObject<T> extends true
   ? T
   : HasOptionalKeys<P["object"]> extends true
-  ? OptionalKeysOf<P["object"]> extends keyof T
-    ? SetOptional<T, OptionalKeysOf<P["object"]>>
-    : T
+  ? SetOptional<T, Extract<OptionalKeysOf<P["object"]>, keyof T>>
   : T;
