@@ -10,6 +10,9 @@ export default defineConfig({
       name: "moysklad",
       fileName: "moysklad-ts",
     },
+    rollupOptions: {
+      external: ["js-base64"],
+    },
   },
   plugins: [
     tsconfigPaths(),
