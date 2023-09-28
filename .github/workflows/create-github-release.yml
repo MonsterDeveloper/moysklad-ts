@@ -34,9 +34,6 @@ jobs:
         if: steps.version_check.outputs.changed == 'true'
         run: 'echo "Version change found, creating new release! New version: ${{ steps.version_check.outputs.version }} (${{ steps.version_check.outputs.type }})"'
 
-      - name: Install dependencies
-        if: steps.version_check.outputs.changed == 'true'
-        run: pnpm install
       - name: Release
         uses: softprops/action-gh-release@v1
         if: steps.version_check.outputs.changed == 'true'
