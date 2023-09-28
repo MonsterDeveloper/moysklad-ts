@@ -2,7 +2,7 @@ name: Publish moysklad-ts To NPM
 run-name: Publish the library to NPM by @${{ github.actor }}
 on:
   release:
-    types: [published]
+    types: [created]
 
 jobs:
   publish:
