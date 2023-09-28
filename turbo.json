@@ -11,7 +11,10 @@
       "cache": false,
       "persistent": true
     },
-    "test": {},
+    "typecheck": {},
+    "test": {
+      "dependsOn": ["typecheck"]
+    },
     "test:watch": {
       "cache": false,
       "persistent": true

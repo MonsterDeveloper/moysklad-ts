@@ -50,7 +50,7 @@ export interface BonusTransaction
   // TODO expand parentDocument
   parentDocument?: unknown;
   shared: boolean;
-  readonly status?: BonusTransactionStatus;
+  readonly transactionStatus?: BonusTransactionStatus;
   transactionType: BonusTransactionType;
   updated: string;
 }

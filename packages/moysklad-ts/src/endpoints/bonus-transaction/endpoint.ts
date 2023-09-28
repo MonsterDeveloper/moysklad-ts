@@ -1,23 +1,17 @@
-import { ApiClient } from "@/api-client";
 import type { Entity, GetFindResult, ListResponse, Subset } from "@/types";
 import type {
   BonusTransaction,
   BonusTransactionPayload,
   ListBonusTransactionsOptions,
 } from "./types";
+import { BaseEndpoint } from "../base-endpoints";
 
-export class BonusTransactionEndpoint {
-  private client: ApiClient;
-
-  constructor(client: ApiClient) {
-    this.client = client;
-  }
-
+export class BonusTransactionEndpoint extends BaseEndpoint {
   async list<T extends ListBonusTransactionsOptions>(
     options?: Subset<T, ListBonusTransactionsOptions>,
   ): Promise<
     ListResponse<
-      GetFindResult<BonusTransactionPayload, T["expand"]>[],
+      GetFindResult<BonusTransactionPayload, T["expand"]>,
       Entity.BonusTransaction
     >
   > {
@@ -29,7 +23,7 @@ export class BonusTransactionEndpoint {
       searchParameters.append("offset", options.pagination.offset.toString());
 
     const response = await this.client.get("/entity/bonustransaction", {
-      searchParams: searchParameters,
+      searchParameters,
     });
     return response.json();
   }

@@ -29,7 +29,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint --ext .ts .",
+    "typecheck": "vitest typecheck --run"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.6.0",

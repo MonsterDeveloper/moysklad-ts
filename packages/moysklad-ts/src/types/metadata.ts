@@ -1,7 +1,10 @@
+import type { MediaType } from "./media-type";
 import type { Entity } from "./entity";
 
 export interface Metadata<T extends Entity> {
   href: string;
+  metadataHref: string;
+  mediaType: MediaType.Json;
   type: T;
 }
 
