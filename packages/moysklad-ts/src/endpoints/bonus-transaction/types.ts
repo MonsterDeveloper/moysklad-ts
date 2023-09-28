@@ -10,6 +10,7 @@ import type {
 import type { Counterparty, CounterpartyPayload } from "../counterparty";
 import type { EmployeePayload } from "../employee";
 import type { GroupPayload } from "../group";
+import type { BonusProgramPayload } from "../bonus-program";
 
 export enum BonusTransactionCategoryType {
   Regular = "REGULAR",
@@ -33,8 +34,7 @@ export interface BonusTransaction
   readonly accountId: string;
   agent: Counterparty;
   applicable: boolean;
-  // TODO expand bonus program
-  bonusProgram?: unknown;
+  bonusProgram?: Meta<Entity.BonusProgram>;
   bonusValue?: number;
   readonly categoryType?: BonusTransactionCategoryType;
   code?: string;
@@ -61,6 +61,7 @@ export interface BonusTransactionPayload extends Payload {
     agent: CounterpartyPayload;
     owner: EmployeePayload;
     group: GroupPayload;
+    bonusProgram: BonusProgramPayload;
   };
 }
 
