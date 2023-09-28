@@ -28,6 +28,6 @@ jobs:
       - name: Build library
         run: pnpm build:lib
       
-      - run: pnpm publish --filter ./packages/moysklad-ts --access public
+      - run: pnpm publish --filter ./packages/moysklad-ts --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
