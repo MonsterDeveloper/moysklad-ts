@@ -1,17 +1,26 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
-		"module": "es6",
-		"moduleResolution": "Bundler",
-		"allowJs": false,
-		"skipLibCheck": false,
-		"skipDefaultLibCheck": true,
+		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
+		"target": "es2022",
+		"verbatimModuleSyntax": true,
+		"allowJs": false,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+
 		"strict": true,
+		"noUncheckedIndexedAccess": true,
+
+		"moduleResolution": "Bundler",
+		"module": "ESNext",
+		"noEmit": true,
+		"lib": ["ES2022", "DOM"],
+
+		"baseUrl": ".",
 		"paths": {
       "@/*": ["src/*"],
     },
-		"lib": ["es6", "dom"]
 	},
 	"include": ["src", "*.d.ts", "src/**/*.json"]
 }

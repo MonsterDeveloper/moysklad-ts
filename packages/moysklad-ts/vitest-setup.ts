@@ -2,25 +2,13 @@ import { afterAll, afterEach, beforeAll } from "vitest";
 import { setupServer } from "msw/node";
 import { rest } from "msw";
 
-const posts = [
-  {
-    userId: 1,
-    id: 1,
-    title: "first post title",
-    body: "first post body",
-  },
-];
-
 export const restHandlers = [
-  rest.all(
-    "https://online.moysklad.ru/api/remap/1.2",
-    (_, response, context) => {
-      return response(
-        context.status(200),
-        context.json({ moysklad: "default api endpoint" }),
-      );
-    },
-  ),
+  rest.all("https://api.moysklad.ru/api/remap/1.2", (_, response, context) => {
+    return response(
+      context.status(200),
+      context.json({ moysklad: "default api endpoint" }),
+    );
+  }),
   rest.get("https://example.com/api", (_, response, context) => {
     return response(context.status(200), context.json({ example: "api" }));
   }),
