@@ -16,7 +16,7 @@
   "license": "GPL-3.0-only",
   "author": "Andrei Bobkov <slider7259@gmail.com>",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.x.x <= 20.x.x"
   },
   "packageManager": "pnpm@8.6.10",
   "name": "moysklad-ts"
