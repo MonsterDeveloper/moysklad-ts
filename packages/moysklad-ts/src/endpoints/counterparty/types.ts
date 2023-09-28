@@ -1,7 +1,7 @@
 import type { DateTime, Entity, Idable, Meta, Payload } from "@/types";
 import type { EmptyObject } from "type-fest";
 
-export enum CompanyType {
+export enum CounterpartyCompanyType {
   Legal = "legal",
   Entrepreneur = "entrepreneur",
   Individual = "individual",
@@ -42,7 +42,7 @@ interface BaseCounterparty extends Idable, Meta<Entity.Counterparty> {
   // TODO expand bonusProgram
   bonusProgram?: unknown;
   code?: string;
-  companyType: CompanyType;
+  companyType: CounterpartyCompanyType;
   // TODO expand contactpersons
   contactpersons?: unknown;
   created: DateTime;
@@ -75,7 +75,7 @@ interface BaseCounterparty extends Idable, Meta<Entity.Counterparty> {
 }
 
 export interface LegalCounterparty extends BaseCounterparty {
-  companyType: CompanyType.Legal;
+  companyType: CounterpartyCompanyType.Legal;
   inn?: string;
   kpp?: string;
   legalAddress?: string;
@@ -85,7 +85,7 @@ export interface LegalCounterparty extends BaseCounterparty {
 }
 
 export interface EntrepreneurCounterparty extends BaseCounterparty {
-  companyType: CompanyType.Entrepreneur;
+  companyType: CounterpartyCompanyType.Entrepreneur;
   certificateDate?: DateTime;
   certificateNumber?: string;
   inn?: string;
@@ -99,7 +99,7 @@ export interface EntrepreneurCounterparty extends BaseCounterparty {
 }
 
 export interface IndividualCounterparty extends BaseCounterparty {
-  companyType: CompanyType.Individual;
+  companyType: CounterpartyCompanyType.Individual;
   birthDate?: DateTime;
   inn?: string;
   legalAddress?: string;
