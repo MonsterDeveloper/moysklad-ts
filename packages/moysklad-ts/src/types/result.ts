@@ -21,6 +21,7 @@ export type GetFindResult<P extends Payload, E> = IsEqual<E, any> extends true
               ? E[K] extends object
                 ? // expand option is an object
                   // GetFindResult<P["expandable"][K], E[K]>
+                  // TODO add nested expand
                   "object - todo"
                 : // expand option is `true`
                 P["object"][K] extends ListMeta<infer O>
