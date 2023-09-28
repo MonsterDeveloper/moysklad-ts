@@ -62,7 +62,7 @@ export interface ExpectedListResponse {
       };
     };
     created: string;
-    bonusProgram: {
+    bonusProgram?: {
       meta: {
         href: string;
         metadataHref: string;
@@ -70,11 +70,11 @@ export interface ExpectedListResponse {
         mediaType: "application/json";
       };
     };
-    bonusValue: number;
+    bonusValue?: number;
     transactionType: string;
-    transactionStatus: string;
-    executionDate: string;
-    categoryType: string;
+    transactionStatus?: "WAIT_PROCESSING" | "COMPLETED" | "CANCELED";
+    executionDate?: string;
+    categoryType?: string;
   }[];
 }
 
@@ -82,9 +82,11 @@ describe("BonusTransactionEndpoint", () => {
   const client = new ApiClient({ auth: { token: "test-token" } });
   const endpoint = new BonusTransactionEndpoint(client);
 
-  test("list without expand", async () => {
-    const response = await endpoint.list();
+  describe("list", () => {
+    test("without expand", async () => {
+      const response = await endpoint.list();
 
-    assertType<ExpectedListResponse>(response);
+      assertType<ExpectedListResponse>(response);
+    });
   });
 });
