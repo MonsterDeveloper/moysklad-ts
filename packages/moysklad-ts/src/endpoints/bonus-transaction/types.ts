@@ -7,7 +7,7 @@ import type {
   PaginationOptions,
   Payload,
 } from "@/types";
-import type { Counterparty, CounterpartyPayload } from "../counterparty";
+import type { CounterpartyPayload } from "../counterparty";
 import type { EmployeePayload } from "../employee";
 import type { GroupPayload } from "../group";
 import type { BonusProgramPayload } from "../bonus-program";
@@ -33,7 +33,7 @@ export interface BonusTransaction
   extends Idable,
     Meta<Entity.BonusTransaction> {
   readonly accountId: string;
-  agent: Counterparty;
+  agent: Meta<Entity.Counterparty>;
   applicable: boolean;
   bonusProgram?: Meta<Entity.BonusProgram>;
   bonusValue?: number;
