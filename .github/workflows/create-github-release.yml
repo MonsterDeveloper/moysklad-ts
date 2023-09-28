@@ -2,8 +2,8 @@ name: Create GitHub Release
 run-name: Create GitHub release by @${{ github.actor }}
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "v*.*.*"
 
 jobs:
   release:
