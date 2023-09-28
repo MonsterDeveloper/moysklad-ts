@@ -31,7 +31,6 @@ export interface BonusTransaction
   extends Idable,
     Meta<Entity.BonusTransaction> {
   readonly accountId: string;
-  // TODO expand agent
   agent: Counterparty;
   applicable: boolean;
   // TODO expand bonus program
@@ -42,13 +41,11 @@ export interface BonusTransaction
   created: DateTime;
   executionDate?: DateTime;
   externalCode: string;
-  // TODO expand group
   group: Meta<Entity.Group>;
   moment?: DateTime;
   name?: string;
   // TODO expand organization
   organization?: unknown;
-  // TODO expand owner
   owner?: Meta<Entity.Employee>;
   // TODO expand parentDocument
   parentDocument?: unknown;
