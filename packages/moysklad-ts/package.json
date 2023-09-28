@@ -2,6 +2,7 @@
   "name": "moysklad-ts",
   "version": "0.0.2",
   "description": "Fully-typed Moysklad JSON API client",
+  "sideEffects": false,
   "type": "module",
   "keywords": [
     "moysklad",
