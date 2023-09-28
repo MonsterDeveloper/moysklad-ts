@@ -168,5 +168,19 @@ describe("ApiClient", () => {
         }),
       );
     });
+
+    it("should append search parameters to the URL", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({ auth: tokenAuth });
+
+      await client.request("/", {
+        searchParameters: new URLSearchParams({ foo: "bar" }),
+      });
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        "https://api.moysklad.ru/api/remap/1.2/?foo=bar",
+        expect.any(Object),
+      );
+    });
   });
 });

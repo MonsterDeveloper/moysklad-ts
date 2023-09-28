@@ -20,7 +20,7 @@ export type ApiClientOptions = {
 
 type RequestOptions = Omit<RequestInit, "body"> & {
   body?: object;
-  searchParams?: URLSearchParams;
+  searchParameters?: URLSearchParams;
 };
 type RequestOptionsWithoutMethod = Omit<RequestOptions, "method">;
 
@@ -39,21 +39,25 @@ export class ApiClient {
   }
   async request(endpoint: string, options: RequestOptions = {}) {
     const url = endpoint.startsWith("/") ? this.baseUrl + endpoint : endpoint;
-    return fetch(url + (options?.searchParams || ""), {
-      ...options,
-      body: options.body ? JSON.stringify(options.body) : undefined,
-      headers: {
-        ...options.headers,
-        Authorization:
-          "token" in this.auth
-            ? `Bearer ${this.auth.token}`
-            : "Basic " + btoa(`${this.auth.login}:${this.auth.password}`),
-        "User-Agent": this.userAgent,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Accept-Encoding": "gzip",
+
+    return fetch(
+      url + (options.searchParameters ? `?${options.searchParameters}` : ""),
+      {
+        ...options,
+        body: options.body ? JSON.stringify(options.body) : undefined,
+        headers: {
+          ...options.headers,
+          Authorization:
+            "token" in this.auth
+              ? `Bearer ${this.auth.token}`
+              : "Basic " + btoa(`${this.auth.login}:${this.auth.password}`),
+          "User-Agent": this.userAgent,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Accept-Encoding": "gzip",
+        },
       },
-    });
+    );
   }
 
   async get(url: string, options: RequestOptionsWithoutMethod = {}) {
