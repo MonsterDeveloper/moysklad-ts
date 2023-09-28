@@ -23,17 +23,5 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
       
-      - name: Check if version has been updated
-        id: version_check
-        uses: EndBug/version-check@v2
-        with:
-          diff-search: true
-          file-name: ./packages/moysklad-ts/package.json
-      
-      - name: Version update detected
-        if: steps.version_check.outputs.changed == 'true'
-        run: 'echo "Version change found, creating new release! New version: ${{ steps.version_check.outputs.version }} (${{ steps.version_check.outputs.type }})"'
-
-      - name: Release
+      - name: Create release
         uses: softprops/action-gh-release@v1
-        if: steps.version_check.outputs.changed == 'true'
