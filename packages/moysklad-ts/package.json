@@ -61,7 +61,8 @@
   "exports": {
     ".": {
       "import": "./dist/moysklad-ts.js",
-      "require": "./dist/moysklad-ts.umd.cjs"
+      "require": "./dist/moysklad-ts.umd.cjs",
+      "types": "./dist/moysklad-ts.d.ts"
     }
   },
   "dependencies": {
