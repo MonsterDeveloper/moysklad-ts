@@ -1,5 +1,5 @@
 import { ApiClient } from "@/api-client";
-import { assertType, describe, it } from "vitest";
+import { assertType, describe, test } from "vitest";
 import { BonusTransactionEndpoint } from "./endpoint";
 
 export interface ExpectedListResponse {
@@ -82,7 +82,7 @@ describe("BonusTransactionEndpoint", () => {
   const client = new ApiClient({ auth: { token: "test-token" } });
   const endpoint = new BonusTransactionEndpoint(client);
 
-  it("should return a list of bonus transactions", async () => {
+  test("list without expand", async () => {
     const response = await endpoint.list();
 
     assertType<ExpectedListResponse>(response);
