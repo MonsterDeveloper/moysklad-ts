@@ -8,6 +8,7 @@ import type {
   Payload,
 } from "@/types";
 import type { Counterparty, CounterpartyPayload } from "../counterparty";
+import type { EmployeePayload } from "../employee";
 
 export enum BonusTransactionCategoryType {
   Regular = "REGULAR",
@@ -47,7 +48,7 @@ export interface BonusTransaction
   // TODO expand organization
   organization?: unknown;
   // TODO expand owner
-  owner?: unknown;
+  owner?: Meta<Entity.Employee>;
   // TODO expand parentDocument
   parentDocument?: unknown;
   shared: boolean;
@@ -60,6 +61,7 @@ export interface BonusTransactionPayload extends Payload {
   object: BonusTransaction;
   expandable: {
     agent: CounterpartyPayload;
+    owner: EmployeePayload;
   };
 }
 

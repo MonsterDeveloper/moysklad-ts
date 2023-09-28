@@ -31,7 +31,7 @@ export interface ExpectedListResponse {
     };
     id: string;
     accountId: string;
-    owner: {
+    owner?: {
       meta: {
         href: string;
         metadataHref: string;
