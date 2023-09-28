@@ -1,4 +1,5 @@
 import type { DateTime, Entity, Idable, Meta, Payload } from "@/types";
+import type { GroupPayload } from "../group";
 
 export interface Employee extends Idable, Meta<Entity.Employee> {
   readonly accountId: string;
@@ -14,8 +15,7 @@ export interface Employee extends Idable, Meta<Entity.Employee> {
   externalCode: string;
   firstName?: string;
   readonly fullName?: string;
-  // TODO expand group
-  group: unknown;
+  group: Meta<Entity.Group>;
   // TODO add image
   image?: unknown;
   inn?: string;
@@ -35,5 +35,6 @@ export interface EmployeePayload extends Payload {
   object: Employee;
   expandable: {
     owner: EmployeePayload;
+    group: GroupPayload;
   };
 }

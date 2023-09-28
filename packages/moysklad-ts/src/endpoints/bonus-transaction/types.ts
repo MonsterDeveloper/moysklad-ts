@@ -11,6 +11,7 @@ import type { Counterparty, CounterpartyPayload } from "../counterparty";
 import type { EmployeePayload } from "../employee";
 import type { GroupPayload } from "../group";
 import type { BonusProgramPayload } from "../bonus-program";
+import type { OrganizationPayload } from "../organization";
 
 export enum BonusTransactionCategoryType {
   Regular = "REGULAR",
@@ -44,11 +45,9 @@ export interface BonusTransaction
   group: Meta<Entity.Group>;
   moment?: DateTime;
   name?: string;
-  // TODO expand organization
-  organization?: unknown;
+  organization?: Meta<Entity.Organization>;
   owner?: Meta<Entity.Employee>;
-  // TODO expand parentDocument
-  parentDocument?: unknown;
+  parentDocument?: Meta<never>;
   shared: boolean;
   readonly transactionStatus?: BonusTransactionStatus;
   transactionType: BonusTransactionType;
@@ -62,6 +61,7 @@ export interface BonusTransactionPayload extends Payload {
     owner: EmployeePayload;
     group: GroupPayload;
     bonusProgram: BonusProgramPayload;
+    organization: OrganizationPayload;
   };
 }
 
