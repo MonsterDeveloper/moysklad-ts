@@ -11,6 +11,7 @@
     "crm",
     "api"
   ],
+  "homepage": "https://moysklad-ts.vercel.app",
   "repository": {
     "type": "git",
     "url": "https://github.com/MonsterDeveloper/moysklad-ts.git"
