@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ApiClient, MoyskladBasicAuth, MoyskladTokenAuth } from "./api-client";
+import { ApiClient, type BasicAuth, type TokenAuth } from "./api-client";
 import { btoa } from "js-base64";
 
 describe("ApiClient", () => {
@@ -10,11 +10,11 @@ describe("ApiClient", () => {
 
     const baseUrl = "https://example.com/api";
     const userAgent = "test-user-agent";
-    const basicAuth: MoyskladBasicAuth = {
+    const basicAuth: BasicAuth = {
       login: "test-login",
       password: "test-password",
     };
-    const tokenAuth: MoyskladTokenAuth = {
+    const tokenAuth: TokenAuth = {
       token: "test-token",
     };
     const body = { test: "test" };
@@ -26,7 +26,7 @@ describe("ApiClient", () => {
       await client.request("/");
 
       expect(fetchSpy).toHaveBeenCalledWith(
-        "https://online.moysklad.ru/api/remap/1.2/",
+        "https://api.moysklad.ru/api/remap/1.2/",
         expect.any(Object),
       );
     });
@@ -109,6 +109,62 @@ describe("ApiClient", () => {
         expect.any(String),
         expect.objectContaining({
           body: JSON.stringify(body),
+        }),
+      );
+    });
+
+    it("should send a GET request", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({ auth: tokenAuth });
+
+      await client.get("/");
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.objectContaining({
+          method: "GET",
+        }),
+      );
+    });
+
+    it("should send a POST request", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({ auth: tokenAuth });
+
+      await client.post("/");
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.objectContaining({
+          method: "POST",
+        }),
+      );
+    });
+
+    it("should send a PUT request", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({ auth: tokenAuth });
+
+      await client.put("/");
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.objectContaining({
+          method: "PUT",
+        }),
+      );
+    });
+
+    it("should send a DELETE request", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({ auth: tokenAuth });
+
+      await client.delete("/");
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.objectContaining({
+          method: "DELETE",
         }),
       );
     });

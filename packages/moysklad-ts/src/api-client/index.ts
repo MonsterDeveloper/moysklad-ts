@@ -1,1 +1,8 @@
-export { type MoyskladApiClientOptions, ApiClient } from "./api-client";
+export { ApiClient } from "./api-client";
+
+export type {
+  ApiClientOptions,
+  Auth,
+  BasicAuth,
+  TokenAuth,
+} from "./api-client";

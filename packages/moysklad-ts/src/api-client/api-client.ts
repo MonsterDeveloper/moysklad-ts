@@ -1,44 +1,45 @@
 import { version } from "../../package.json";
 import { btoa } from "js-base64";
 
-export type MoyskladBasicAuth = {
+export type BasicAuth = {
   login: string;
   password: string;
 };
 
-export type MoyskladTokenAuth = {
+export type TokenAuth = {
   token: string;
 };
 
-export type MoyskladAuth = MoyskladBasicAuth | MoyskladTokenAuth;
+export type Auth = BasicAuth | TokenAuth;
 
-export type MoyskladApiClientOptions = {
+export type ApiClientOptions = {
   baseUrl?: string;
   userAgent?: string;
-  auth: MoyskladAuth;
+  auth: Auth;
 };
 
 type RequestOptions = Omit<RequestInit, "body"> & {
   body?: object;
+  searchParams?: URLSearchParams;
 };
+type RequestOptionsWithoutMethod = Omit<RequestOptions, "method">;
 
 export class ApiClient {
   private baseUrl: string;
   private userAgent: string;
-  private auth: MoyskladAuth;
+  private auth: Auth;
 
-  constructor(options: MoyskladApiClientOptions) {
-    this.baseUrl =
-      options.baseUrl ?? "https://online.moysklad.ru/api/remap/1.2";
+  constructor(options: ApiClientOptions) {
+    this.baseUrl = options.baseUrl ?? "https://api.moysklad.ru/api/remap/1.2";
     this.userAgent =
       options.userAgent ??
       `moysklad-ts/${version} (+https://github.com/MonsterDeveloper/moysklad-ts)`;
 
     this.auth = options.auth;
   }
-
-  async request(url: string, options: RequestOptions = {}) {
-    return fetch(url.startsWith("/") ? this.baseUrl + url : url, {
+  async request(endpoint: string, options: RequestOptions = {}) {
+    const url = endpoint.startsWith("/") ? this.baseUrl + endpoint : endpoint;
+    return fetch(url + (options?.searchParams || ""), {
       ...options,
       body: options.body ? JSON.stringify(options.body) : undefined,
       headers: {
@@ -50,7 +51,24 @@ export class ApiClient {
         "User-Agent": this.userAgent,
         "Content-Type": "application/json",
         Accept: "application/json",
+        "Accept-Encoding": "gzip",
       },
     });
+  }
+
+  async get(url: string, options: RequestOptionsWithoutMethod = {}) {
+    return this.request(url, { ...options, method: "GET" });
+  }
+
+  async post(url: string, options: RequestOptionsWithoutMethod = {}) {
+    return this.request(url, { ...options, method: "POST" });
+  }
+
+  async put(url: string, options: RequestOptionsWithoutMethod = {}) {
+    return this.request(url, { ...options, method: "PUT" });
+  }
+
+  async delete(url: string, options: RequestOptionsWithoutMethod = {}) {
+    return this.request(url, { ...options, method: "DELETE" });
   }
 }
