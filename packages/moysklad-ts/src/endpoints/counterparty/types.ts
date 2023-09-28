@@ -27,9 +27,11 @@ interface BaseCounterparty extends Idable, Meta<Entity.Counterparty> {
     apartment?: string;
     city?: string;
     comment?: string;
+    // TODO add country
     country?: Meta<never>;
     house?: string;
     postalCode?: string;
+    // TODO add region
     region?: Meta<never>;
     street?: string;
   };
