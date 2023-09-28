@@ -49,9 +49,9 @@ export interface ExpectedListResponse {
       };
     };
     updated: string;
-    name: string;
+    name?: string;
     externalCode: string;
-    moment: string;
+    moment?: string;
     applicable: boolean;
     agent: {
       meta: {

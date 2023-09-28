@@ -9,6 +9,7 @@ import type {
 } from "@/types";
 import type { Counterparty, CounterpartyPayload } from "../counterparty";
 import type { EmployeePayload } from "../employee";
+import type { GroupPayload } from "../group";
 
 export enum BonusTransactionCategoryType {
   Regular = "REGULAR",
@@ -42,7 +43,7 @@ export interface BonusTransaction
   executionDate?: DateTime;
   externalCode: string;
   // TODO expand group
-  group: unknown;
+  group: Meta<Entity.Group>;
   moment?: DateTime;
   name?: string;
   // TODO expand organization
@@ -62,6 +63,7 @@ export interface BonusTransactionPayload extends Payload {
   expandable: {
     agent: CounterpartyPayload;
     owner: EmployeePayload;
+    group: GroupPayload;
   };
 }
 

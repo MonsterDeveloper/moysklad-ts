@@ -29,4 +29,5 @@ export enum Entity {
   Currency = "currency",
   BonusTransaction = "bonustransaction",
   Employee = "employee",
+  Group = "group",
 }
