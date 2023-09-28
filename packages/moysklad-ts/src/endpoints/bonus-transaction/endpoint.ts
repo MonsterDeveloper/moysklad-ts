@@ -8,7 +8,7 @@ import { BaseEndpoint } from "../base-endpoint";
 import { composeSearchParameters } from "@/api-client";
 
 export class BonusTransactionEndpoint extends BaseEndpoint {
-  async list<T extends ListBonusTransactionsOptions>(
+  async list<T extends ListBonusTransactionsOptions = Record<string, unknown>>(
     options?: Subset<T, ListBonusTransactionsOptions>,
   ): Promise<
     ListResponse<
