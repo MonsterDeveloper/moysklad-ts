@@ -63,6 +63,9 @@ importers:
       js-base64:
         specifier: ^3.7.5
         version: 3.7.5
+      type-fest:
+        specifier: ^4.3.1
+        version: 4.3.1
     devDependencies:
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.6.0
@@ -94,9 +97,6 @@ importers:
       prettier:
         specifier: ^3.0.3
         version: 3.0.3
-      type-fest:
-        specifier: ^4.3.1
-        version: 4.3.1
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -5658,7 +5658,7 @@ packages:
   /type-fest@4.3.1:
     resolution: {integrity: sha512-pphNW/msgOUSkJbH58x8sqpq8uQj6b0ZKGxEsLKMUnGorRcDjrUaLS+39+/ub41JNTwrrMyJcUB8+YZs3mbwqw==}
     engines: {node: '>=16'}
-    dev: true
+    dev: false
 
   /typescript@5.0.4:
     resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
