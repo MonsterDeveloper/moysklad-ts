@@ -1,4 +1,5 @@
 import type {
+  DateTime,
   Entity,
   ExpandOptions,
   Idable,
@@ -36,12 +37,12 @@ export interface BonusTransaction
   bonusValue?: number;
   readonly categoryType?: BonusTransactionCategoryType;
   code?: string;
-  created: string;
-  executionDate?: string;
+  created: DateTime;
+  executionDate?: DateTime;
   externalCode: string;
   // TODO expand group
   group: unknown;
-  moment?: string;
+  moment?: DateTime;
   name?: string;
   // TODO expand organization
   organization?: unknown;
@@ -52,7 +53,7 @@ export interface BonusTransaction
   shared: boolean;
   readonly transactionStatus?: BonusTransactionStatus;
   transactionType: BonusTransactionType;
-  updated: string;
+  updated: DateTime;
 }
 
 export interface BonusTransactionPayload extends Payload {
