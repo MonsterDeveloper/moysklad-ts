@@ -5,6 +5,7 @@ import type {
   ListBonusTransactionsOptions,
 } from "./types";
 import { BaseEndpoint } from "../base-endpoint";
+import { composeSearchParameters } from "@/api-client";
 
 export class BonusTransactionEndpoint extends BaseEndpoint {
   async list<T extends ListBonusTransactionsOptions>(
@@ -15,12 +16,7 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
       Entity.BonusTransaction
     >
   > {
-    const searchParameters = new URLSearchParams();
-
-    if (options?.pagination?.limit)
-      searchParameters.append("limit", options.pagination.limit.toString());
-    if (options?.pagination?.offset)
-      searchParameters.append("offset", options.pagination.offset.toString());
+    const searchParameters = composeSearchParameters(options ?? {});
 
     const response = await this.client.get("/entity/bonustransaction", {
       searchParameters,

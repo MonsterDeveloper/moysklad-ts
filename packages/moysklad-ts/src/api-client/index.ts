@@ -6,3 +6,4 @@ export type {
   BasicAuth,
   TokenAuth,
 } from "./api-client";
+export { composeSearchParameters } from "./compose-search-parameters";
