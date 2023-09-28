@@ -33,5 +33,5 @@ export type SetExpandableFieldsOptional<
   : HasOptionalKeys<P["object"]> extends true
   ? OptionalKeysOf<P["object"]> extends keyof T
     ? SetOptional<T, OptionalKeysOf<P["object"]>>
-    : never
+    : T
   : T;

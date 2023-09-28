@@ -4,7 +4,7 @@ import type {
   BonusTransactionPayload,
   ListBonusTransactionsOptions,
 } from "./types";
-import { BaseEndpoint } from "../base-endpoints";
+import { BaseEndpoint } from "../base-endpoint";
 
 export class BonusTransactionEndpoint extends BaseEndpoint {
   async list<T extends ListBonusTransactionsOptions>(

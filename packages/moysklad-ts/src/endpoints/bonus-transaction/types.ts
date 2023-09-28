@@ -6,7 +6,7 @@ import type {
   PaginationOptions,
   Payload,
 } from "@/types";
-import type { EmptyObject } from "type-fest";
+import type { Counterparty, CounterpartyPayload } from "../counterparty";
 
 export enum BonusTransactionCategoryType {
   Regular = "REGULAR",
@@ -29,7 +29,7 @@ export interface BonusTransaction
     Meta<Entity.BonusTransaction> {
   readonly accountId: string;
   // TODO expand agent
-  agent: unknown;
+  agent: Counterparty;
   applicable: boolean;
   // TODO expand bonus program
   bonusProgram?: unknown;
@@ -57,7 +57,9 @@ export interface BonusTransaction
 
 export interface BonusTransactionPayload extends Payload {
   object: BonusTransaction;
-  expandable: EmptyObject;
+  expandable: {
+    agent: CounterpartyPayload;
+  };
 }
 
 export interface ListBonusTransactionsOptions {
