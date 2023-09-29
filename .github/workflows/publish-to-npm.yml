@@ -14,9 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create release
-        uses: softprops/action-gh-release@v1
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -32,8 +29,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Test
+        run: pnpm test
+    
       - name: Build library
         run: pnpm build:lib
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
       
       - run: pnpm publish --filter ./packages/moysklad-ts --access public --no-git-checks
         env:
