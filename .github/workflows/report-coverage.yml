@@ -1,0 +1,38 @@
+name: Coverage Report
+
+on: 
+  pull_request:
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+            
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Test and generate coverage
+        run: pnpm coverage
+      
+      - name: Report coverage
+        uses:  davelosert/vitest-coverage-report-action@v2
+        with:
+          json-summary-path: './packages/moysklad-ts/coverage/coverage-summary.json'
+          json-final-path: './packages/moysklad-ts/coverage/coverage-final.json'
