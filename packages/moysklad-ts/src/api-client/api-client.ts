@@ -1,5 +1,6 @@
 import { version } from "../../package.json";
 import { btoa } from "js-base64";
+import { handleError } from "./handle-error";
 
 export type BasicAuth = {
   login: string;
@@ -40,7 +41,7 @@ export class ApiClient {
   async request(endpoint: string, options: RequestOptions = {}) {
     const url = endpoint.startsWith("/") ? this.baseUrl + endpoint : endpoint;
 
-    return fetch(
+    const response = await fetch(
       url + (options.searchParameters ? `?${options.searchParameters}` : ""),
       {
         ...options,
@@ -58,6 +59,10 @@ export class ApiClient {
         },
       },
     );
+
+    if (!response.ok) await handleError(response);
+
+    return response;
   }
 
   async get(url: string, options: RequestOptionsWithoutMethod = {}) {
