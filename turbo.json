@@ -15,6 +15,9 @@
     "test": {
       "dependsOn": ["typecheck"]
     },
+    "coverage": {
+      "dependsOn": ["typecheck"]
+    },
     "test:watch": {
       "cache": false,
       "persistent": true

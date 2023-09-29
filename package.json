@@ -7,7 +7,8 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "test:watch": "turbo run test:watch"
+    "test:watch": "turbo run test:watch",
+    "coverage": "turbo run coverage"
   },
   "devDependencies": {
     "eslint": "^8.50.0",
