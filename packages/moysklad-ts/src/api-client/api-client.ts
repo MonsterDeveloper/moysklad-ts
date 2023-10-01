@@ -54,7 +54,7 @@ export class ApiClient {
               : "Basic " + btoa(`${this.auth.login}:${this.auth.password}`),
           "User-Agent": this.userAgent,
           "Content-Type": "application/json",
-          Accept: "application/json",
+          Accept: "application/json;charset=utf-8",
           "Accept-Encoding": "gzip",
         },
       },
