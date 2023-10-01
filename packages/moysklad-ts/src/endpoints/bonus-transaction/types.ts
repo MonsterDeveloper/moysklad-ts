@@ -4,6 +4,7 @@ import type {
   ExpandOptions,
   Idable,
   Meta,
+  OrderOptions,
   PaginationOptions,
   Payload,
 } from "@/types";
@@ -63,9 +64,22 @@ export interface BonusTransactionPayload extends Payload {
     bonusProgram: BonusProgramPayload;
     organization: OrganizationPayload;
   };
+  orderable:
+    | "id"
+    | "applicable"
+    | "bonusValue"
+    | "code"
+    | "created"
+    | "executionDate"
+    | "externalCode"
+    | "moment"
+    | "name"
+    | "shared"
+    | "updated";
 }
 
 export interface ListBonusTransactionsOptions {
   pagination?: PaginationOptions;
   expand?: ExpandOptions<BonusTransactionPayload>;
+  order?: OrderOptions<BonusTransactionPayload>;
 }
