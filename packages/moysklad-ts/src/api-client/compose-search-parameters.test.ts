@@ -66,4 +66,55 @@ describe("composeSearchParameters", () => {
       );
     });
   });
+
+  describe("order", () => {
+    it("should not add 'order' parameter if 'order' is undefined", () => {
+      const searchParameters = composeSearchParameters({});
+      expect(searchParameters).toBeUndefined();
+    });
+
+    it("should add 'order' parameter with correct fields if 'order' is a string", () => {
+      const searchParameters = composeSearchParameters({
+        order: "name",
+      });
+      expect(searchParameters?.get("order")).toBe("name");
+    });
+
+    it("should add 'order' parameter with correct fields if 'order' is an array of strings", () => {
+      const searchParameters = composeSearchParameters({
+        order: ["name", "description"],
+      });
+      expect(searchParameters?.get("order")).toBe("name;description");
+    });
+
+    it("should add 'order' parameter with correct fields if 'order' is an array of OrderOption objects", () => {
+      const searchParameters = composeSearchParameters({
+        order: [
+          { field: "name", direction: "asc" },
+          { field: "description", direction: "desc" },
+        ],
+      });
+      expect(searchParameters?.get("order")).toBe("name,asc;description,desc");
+    });
+
+    it("should add 'order' parameter with correct fields if 'order' is an OrderOption object", () => {
+      const searchParameters = composeSearchParameters({
+        order: { field: "name", direction: "asc" },
+      });
+      expect(searchParameters?.get("order")).toBe("name,asc");
+    });
+
+    it("should add 'order' parameter with correct fields if 'order' is an array of strings and OrderOption objects", () => {
+      const searchParameters = composeSearchParameters({
+        order: [
+          "name",
+          { field: "description", direction: "desc" },
+          "externalCode",
+        ],
+      });
+      expect(searchParameters?.get("order")).toBe(
+        "name;description,desc;externalCode",
+      );
+    });
+  });
 });

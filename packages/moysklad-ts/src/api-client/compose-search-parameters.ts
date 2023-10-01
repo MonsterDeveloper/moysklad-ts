@@ -1,4 +1,4 @@
-import type { PaginationOptions } from "@/types";
+import type { OrderOption, PaginationOptions } from "@/types";
 
 function traverseExpand(expand: Record<string, unknown>, depth = 0) {
   if (depth > 2) {
@@ -29,12 +29,28 @@ function traverseExpand(expand: Record<string, unknown>, depth = 0) {
   return fields;
 }
 
+function traverseOrder(order: OrderOption<string> | OrderOption<string>[]) {
+  const fields: string[] = [];
+
+  if (typeof order === "string") fields.push(order);
+  else if (Array.isArray(order)) {
+    for (const orderOption of order) {
+      if (typeof orderOption === "string") fields.push(orderOption);
+      else fields.push(`${orderOption.field},${orderOption.direction}`);
+    }
+  } else fields.push(`${order.field},${order.direction}`);
+
+  return fields;
+}
+
 export function composeSearchParameters({
   pagination,
   expand,
+  order,
 }: {
   pagination?: PaginationOptions;
   expand?: Record<string, unknown>;
+  order?: OrderOption<string> | OrderOption<string>[];
 }) {
   const searchParameters = new URLSearchParams();
 
@@ -47,6 +63,12 @@ export function composeSearchParameters({
     const expandFields = traverseExpand(expand);
     if (expandFields.length > 0)
       searchParameters.append("expand", expandFields.join(","));
+  }
+
+  if (order) {
+    const orderFields = traverseOrder(order);
+    if (orderFields.length > 0)
+      searchParameters.append("order", orderFields.join(";"));
   }
 
   return searchParameters.size > 0 ? searchParameters : undefined;
