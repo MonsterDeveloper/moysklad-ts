@@ -1,81 +1,76 @@
-# Turborepo starter
+# moysklad-ts
+![npm](https://img.shields.io/npm/v/moysklad-ts)
+![npm package minimized gzipped size (select exports)](https://img.shields.io/bundlejs/size/moysklad-ts)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/MonsterDeveloper/moysklad-ts/publish-to-npm.yml)
+![GitHub](https://img.shields.io/github/license/MonsterDeveloper/moysklad-ts)
 
-This is an official starter Turborepo.
 
-## Using this example
+`moysklad-ts` is a fully-typed API wrapper for [Moysklad](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api). This monorepo consists of:
+- [moysklad-ts](./packages/moysklad-ts) - the main package
+- [docs](./apps/docs) - the documentation [website](https://moysklad-ts.vercel.app/)
 
-Run the following command:
+## Usage
 
-```sh
-npx create-turbo@latest
+### Installation
+<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/npm.svg"> npm
+
+```bash
+npm i moysklad-ts
 ```
 
-## What's inside?
+<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/pnpm.svg"> pnpm
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
+```bash
+pnpm add moysklad-ts
 ```
 
-### Develop
+<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/yarn.svg"> Yarn
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
+```bash
+yarn add moysklad-ts
 ```
 
-### Remote Caching
+<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/bun.svg"> bun
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+```bash
+bun add moysklad-ts
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/deno.svg"> Deno
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
+```typescript
+import { Moysklad } from "https://esm.sh/moysklad-ts";
 ```
 
-## Useful Links
+### Example
+```typescript
+import { Moysklad, MoyskladApiError } from "moysklad-ts";
 
-Learn more about the power of Turborepo:
+const moysklad = new Moysklad({
+  auth: {
+    token: "123"
+  }
+});
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+try {
+  const { rows: bonusTransactions } = await moysklad.bonusTransaction.list({
+    expand: { bonusProgram: true }
+  });
+} catch (error) {
+  if (error instanceof MoyskladApiError) {
+    console.error(error.message, error.code, error.moreInfo);
+		return;
+  }
+
+	console.error(error);
+}
+```
+
+## Documentation
+The documentation is available [here](https://moysklad-ts.vercel.app/).
+
+## Contributing
+Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a pull request.
+
+## License
+This project is licensed under the [GPL-3.0 license](./LICENSE).
