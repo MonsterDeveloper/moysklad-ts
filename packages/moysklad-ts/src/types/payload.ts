@@ -5,4 +5,5 @@ export interface Payload<T extends object = object> {
     // but if we do that TypeScript will attempt to compare types recursively
     [ObjectName in string]?: unknown;
   };
+  orderable?: string;
 }
