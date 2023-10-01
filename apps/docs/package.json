@@ -11,7 +11,7 @@
     "lint": "eslint --ext .ts,.tsx,.mjs ."
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.9.1",
+    "@astrojs/starlight": "^0.10.3",
     "astro": "^3.0.6",
     "sharp": "^0.32.5"
   },
