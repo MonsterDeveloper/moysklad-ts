@@ -40,3 +40,6 @@ dist/
 
 # generated types
 .astro/
+
+# husky
+.husky/

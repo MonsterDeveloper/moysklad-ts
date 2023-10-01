@@ -8,11 +8,15 @@
     "lint": "turbo run lint",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
-    "coverage": "turbo run coverage"
+    "coverage": "turbo run coverage",
+    "prepare": "husky install"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
     "eslint": "^8.50.0",
-    "turbo": "latest"
+    "turbo": "latest",
+    "husky": "^8.0.0"
   },
   "license": "GPL-3.0-only",
   "author": "Andrei Bobkov <slider7259@gmail.com>",
