@@ -1,5 +1,5 @@
-import type { DateTime, Entity, Idable, Meta, Payload } from "@/types";
-import type { GroupPayload } from "../group";
+import type { DateTime, Entity, Idable, Meta, Model } from "@/types";
+import type { GroupModel } from "../group";
 
 export interface Employee extends Idable, Meta<Entity.Employee> {
   readonly accountId: string;
@@ -31,10 +31,10 @@ export interface Employee extends Idable, Meta<Entity.Employee> {
   readonly updated: DateTime;
 }
 
-export interface EmployeePayload extends Payload {
+export interface EmployeeModel extends Model {
   object: Employee;
   expandable: {
-    owner: EmployeePayload;
-    group: GroupPayload;
+    owner: EmployeeModel;
+    group: GroupModel;
   };
 }

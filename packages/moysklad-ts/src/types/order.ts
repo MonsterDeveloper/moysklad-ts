@@ -1,4 +1,4 @@
-import type { Payload } from "./payload";
+import type { Model } from "./model";
 
 export interface OrderObject<T extends string> {
   field: T;
@@ -7,6 +7,6 @@ export interface OrderObject<T extends string> {
 
 export type OrderOption<T extends string> = OrderObject<T> | T;
 
-export type OrderOptions<P extends Payload> = P["orderable"] extends string
-  ? OrderOption<P["orderable"]> | OrderOption<P["orderable"]>[]
+export type OrderOptions<M extends Model> = M["orderable"] extends string
+  ? OrderOption<M["orderable"]> | OrderOption<M["orderable"]>[]
   : never;

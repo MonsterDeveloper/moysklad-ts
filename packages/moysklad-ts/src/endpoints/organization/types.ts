@@ -1,7 +1,7 @@
-import type { DateTime, Entity, Idable, Meta, Payload } from "@/types";
-import type { BonusProgramPayload } from "../bonus-program";
-import type { GroupPayload } from "../group";
-import type { EmployeePayload } from "../employee";
+import type { DateTime, Entity, Idable, Meta, Model } from "@/types";
+import type { BonusProgramModel } from "../bonus-program";
+import type { GroupModel } from "../group";
+import type { EmployeeModel } from "../employee";
 
 export enum OrganizationCompanyType {
   Legal = "legal",
@@ -82,11 +82,11 @@ export type Organization =
   | EntrepreneurOrganization
   | IndividualOrganization;
 
-export interface OrganizationPayload extends Payload {
+export interface OrganizationModel extends Model {
   object: Organization;
   expandable: {
-    bonusProgram: BonusProgramPayload;
-    group: GroupPayload;
-    owner: EmployeePayload;
+    bonusProgram: BonusProgramModel;
+    group: GroupModel;
+    owner: EmployeeModel;
   };
 }

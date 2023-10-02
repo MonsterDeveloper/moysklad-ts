@@ -1,4 +1,4 @@
-import type { DateTime, Entity, Idable, Meta, Payload } from "@/types";
+import type { DateTime, Entity, Idable, Meta, Model } from "@/types";
 import type { EmptyObject } from "type-fest";
 
 export enum CounterpartyCompanyType {
@@ -12,11 +12,6 @@ export enum IndividualCounterpartySex {
   Female = "female",
 }
 
-/**
- * Counterparty / Контрагент
- *
- * @link https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-kontragenty
- */
 interface BaseCounterparty extends Idable, Meta<Entity.Counterparty> {
   readonly accountId: string;
   // TODO expand accounts
@@ -110,12 +105,17 @@ export interface IndividualCounterparty extends BaseCounterparty {
   sex?: IndividualCounterpartySex;
 }
 
+/**
+ * Counterparty / Контрагент
+ *
+ * @link https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-kontragenty
+ */
 export type Counterparty =
   | LegalCounterparty
   | EntrepreneurCounterparty
   | IndividualCounterparty;
 
-export interface CounterpartyPayload extends Payload {
+export interface CounterpartyModel extends Model {
   object: Counterparty;
   expandable: EmptyObject;
 }

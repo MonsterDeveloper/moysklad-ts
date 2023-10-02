@@ -4,26 +4,26 @@ import type {
   OptionalKeysOf,
   SetOptional,
 } from "type-fest";
-import type { Payload } from "./payload";
+import type { Model } from "./model";
 
-export type ExpandOptions<T extends Payload> = IsEmptyObject<
-  T["expandable"]
+export type ExpandOptions<M extends Model> = IsEmptyObject<
+  M["expandable"]
 > extends false
   ? {
-      [key in keyof T["expandable"]]?: T["expandable"][key] extends Payload
-        ? boolean | ExpandOptions<T["expandable"][key]>
+      [key in keyof M["expandable"]]?: M["expandable"][key] extends Model
+        ? boolean | ExpandOptions<M["expandable"][key]>
         : never;
     }
   : never;
 
 /**
- * Given a payload `P` and a type `T`, make fields in `T` optional based on their optionality in `P["object"]`.
+ * Given a model `M` and some type `T`, make fields in `T` optional based on their optionality in model's object.
  */
 export type RestoreExpandableFieldsOptionality<
-  P extends Payload,
+  M extends Model,
   T,
 > = IsEmptyObject<T> extends true
   ? T
-  : HasOptionalKeys<P["object"]> extends true
-  ? SetOptional<T, Extract<OptionalKeysOf<P["object"]>, keyof T>>
+  : HasOptionalKeys<M["object"]> extends true
+  ? SetOptional<T, Extract<OptionalKeysOf<M["object"]>, keyof T>>
   : T;

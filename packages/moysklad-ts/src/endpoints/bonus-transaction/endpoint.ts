@@ -1,14 +1,14 @@
 import type {
   Entity,
   GetFindResult,
-  GetPayloadCreatableFields,
-  GetPayloadUpdatableFields,
+  GetModelCreatableFields,
+  GetModelUpdatableFields,
   ListResponse,
   Subset,
   UpdateMeta,
 } from "@/types";
 import type {
-  BonusTransactionPayload,
+  BonusTransactionModel,
   CreateBonusTransactionOptions,
   GetBonusTransactionOptions,
   ListBonusTransactionsOptions,
@@ -22,7 +22,7 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
     options?: Subset<T, ListBonusTransactionsOptions>,
   ): Promise<
     ListResponse<
-      GetFindResult<BonusTransactionPayload, T["expand"]>,
+      GetFindResult<BonusTransactionModel, T["expand"]>,
       Entity.BonusTransaction
     >
   > {
@@ -37,7 +37,7 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
   async get<T extends GetBonusTransactionOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetBonusTransactionOptions>,
-  ): Promise<GetFindResult<BonusTransactionPayload, T["expand"]>> {
+  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>> {
     const searchParameters = composeSearchParameters(options ?? {});
 
     const response = await this.client.get(`/entity/bonustransaction/${id}`, {
@@ -51,9 +51,9 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
     T extends UpdateBonusTransactionOptions = Record<string, unknown>,
   >(
     id: string,
-    data: GetPayloadUpdatableFields<BonusTransactionPayload>,
+    data: GetModelUpdatableFields<BonusTransactionModel>,
     options?: Subset<T, UpdateBonusTransactionOptions>,
-  ): Promise<GetFindResult<BonusTransactionPayload, T["expand"]>> {
+  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>> {
     const searchParameters = composeSearchParameters(options ?? {});
 
     const response = await this.client.put(`/entity/bonustransaction/${id}`, {
@@ -68,13 +68,13 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
     T extends CreateBonusTransactionOptions = Record<string, unknown>,
   >(
     data:
-      | GetPayloadCreatableFields<BonusTransactionPayload>
+      | GetModelCreatableFields<BonusTransactionModel>
       | (
-          | GetPayloadCreatableFields<BonusTransactionPayload>
-          | (GetPayloadUpdatableFields<BonusTransactionPayload> & UpdateMeta)
+          | GetModelCreatableFields<BonusTransactionModel>
+          | (GetModelUpdatableFields<BonusTransactionModel> & UpdateMeta)
         )[],
     options?: Subset<T, CreateBonusTransactionOptions>,
-  ): Promise<GetFindResult<BonusTransactionPayload, T["expand"]>> {
+  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>> {
     const searchParameters = composeSearchParameters(options ?? {});
 
     const response = await this.client.post("/entity/bonustransaction", {

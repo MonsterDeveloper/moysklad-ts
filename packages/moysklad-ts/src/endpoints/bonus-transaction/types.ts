@@ -6,13 +6,13 @@ import type {
   Meta,
   OrderOptions,
   PaginationOptions,
-  Payload,
+  Model,
 } from "@/types";
-import type { CounterpartyPayload } from "../counterparty";
-import type { EmployeePayload } from "../employee";
-import type { GroupPayload } from "../group";
-import type { BonusProgramPayload } from "../bonus-program";
-import type { OrganizationPayload } from "../organization";
+import type { CounterpartyModel } from "../counterparty";
+import type { EmployeeModel } from "../employee";
+import type { GroupModel } from "../group";
+import type { BonusProgramModel } from "../bonus-program";
+import type { OrganizationModel } from "../organization";
 
 export enum BonusTransactionCategoryType {
   Regular = "REGULAR",
@@ -55,14 +55,14 @@ export interface BonusTransaction
   updated: DateTime;
 }
 
-export interface BonusTransactionPayload extends Payload {
+export interface BonusTransactionModel extends Model {
   object: BonusTransaction;
   expandable: {
-    agent: CounterpartyPayload;
-    owner: EmployeePayload;
-    group: GroupPayload;
-    bonusProgram: BonusProgramPayload;
-    organization: OrganizationPayload;
+    agent: CounterpartyModel;
+    owner: EmployeeModel;
+    group: GroupModel;
+    bonusProgram: BonusProgramModel;
+    organization: OrganizationModel;
   };
   orderable:
     | "id"
@@ -82,19 +82,19 @@ export interface BonusTransactionPayload extends Payload {
 
 export interface ListBonusTransactionsOptions {
   pagination?: PaginationOptions;
-  expand?: ExpandOptions<BonusTransactionPayload>;
-  order?: OrderOptions<BonusTransactionPayload>;
+  expand?: ExpandOptions<BonusTransactionModel>;
+  order?: OrderOptions<BonusTransactionModel>;
   search?: string;
 }
 
 export interface GetBonusTransactionOptions {
-  expand?: ExpandOptions<BonusTransactionPayload>;
+  expand?: ExpandOptions<BonusTransactionModel>;
 }
 
 export interface UpdateBonusTransactionOptions {
-  expand?: ExpandOptions<BonusTransactionPayload>;
+  expand?: ExpandOptions<BonusTransactionModel>;
 }
 
 export interface CreateBonusTransactionOptions {
-  expand?: ExpandOptions<BonusTransactionPayload>;
+  expand?: ExpandOptions<BonusTransactionModel>;
 }

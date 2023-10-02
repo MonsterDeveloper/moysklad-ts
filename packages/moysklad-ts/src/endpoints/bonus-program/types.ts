@@ -1,4 +1,4 @@
-import type { Entity, Idable, Meta, Payload } from "@/types";
+import type { Entity, Idable, Meta, Model } from "@/types";
 import type { EmptyObject } from "type-fest";
 
 export enum WelcomeBonusMode {
@@ -35,7 +35,7 @@ export type BonusProgram =
   | BonusProgramWithoutWelcomeBonuses
   | BonusProgramWithWelcomeBonuses;
 
-export interface BonusProgramPayload extends Payload {
+export interface BonusProgramModel extends Model {
   object: BonusProgram;
   expandable: EmptyObject;
 }

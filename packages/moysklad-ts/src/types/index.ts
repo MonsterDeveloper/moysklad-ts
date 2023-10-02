@@ -4,7 +4,7 @@ export * from "./metadata";
 export * from "./mixins";
 export * from "./pagination";
 export * from "./response";
-export * from "./payload";
+export * from "./model";
 export * from "./expand";
 export * from "./subset";
 export * from "./result";
