@@ -16,15 +16,6 @@ export type ExpandOptions<T extends Payload> = IsEmptyObject<
     }
   : never;
 
-export type IsExpandableFieldOptional<
-  P extends Payload,
-  K,
-> = K extends keyof P["object"]
-  ? K extends OptionalKeysOf<P["object"]>
-    ? true
-    : false
-  : never;
-
 export type SetExpandableFieldsOptional<
   P extends Payload,
   T,
