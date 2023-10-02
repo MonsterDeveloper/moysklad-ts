@@ -4,10 +4,15 @@ import type { Entity } from "./entity";
 export interface Metadata<T extends Entity> {
   href: string;
   metadataHref: string;
-  mediaType: MediaType.Json;
+  mediaType: MediaType;
   type: T;
   uuidHref?: string;
   downloadHref?: string;
+}
+
+export interface UpdateMetadata {
+  href: string;
+  mediaType: MediaType;
 }
 
 export interface ListMetadata<T extends Entity> extends Metadata<T> {
@@ -22,4 +27,8 @@ export interface Meta<T extends Entity> {
 
 export interface ListMeta<T extends Entity> {
   meta: ListMetadata<T>;
+}
+
+export interface UpdateMeta {
+  meta: UpdateMetadata;
 }
