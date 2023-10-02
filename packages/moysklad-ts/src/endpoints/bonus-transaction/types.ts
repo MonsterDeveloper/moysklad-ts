@@ -76,6 +76,8 @@ export interface BonusTransactionPayload extends Payload {
     | "name"
     | "shared"
     | "updated";
+
+  creatable: "agent" | "transactionType";
 }
 
 export interface ListBonusTransactionsOptions {
@@ -90,5 +92,9 @@ export interface GetBonusTransactionOptions {
 }
 
 export interface UpdateBonusTransactionOptions {
+  expand?: ExpandOptions<BonusTransactionPayload>;
+}
+
+export interface CreateBonusTransactionOptions {
   expand?: ExpandOptions<BonusTransactionPayload>;
 }

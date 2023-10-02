@@ -19,6 +19,8 @@ export interface ListMetadata<T extends Entity> extends Metadata<T> {
   size: number;
   limit: number;
   offset: number;
+  nextHref?: string;
+  previousHref?: string;
 }
 
 export interface Meta<T extends Entity> {

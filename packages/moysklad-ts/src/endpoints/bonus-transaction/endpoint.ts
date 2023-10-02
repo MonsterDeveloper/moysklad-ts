@@ -1,12 +1,15 @@
 import type {
   Entity,
   GetFindResult,
+  GetPayloadCreatableFields,
   GetPayloadUpdatableFields,
   ListResponse,
   Subset,
+  UpdateMeta,
 } from "@/types";
 import type {
   BonusTransactionPayload,
+  CreateBonusTransactionOptions,
   GetBonusTransactionOptions,
   ListBonusTransactionsOptions,
   UpdateBonusTransactionOptions,
@@ -54,6 +57,27 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
     const searchParameters = composeSearchParameters(options ?? {});
 
     const response = await this.client.put(`/entity/bonustransaction/${id}`, {
+      body: data,
+      searchParameters,
+    });
+
+    return response.json();
+  }
+
+  async create<
+    T extends CreateBonusTransactionOptions = Record<string, unknown>,
+  >(
+    data:
+      | GetPayloadCreatableFields<BonusTransactionPayload>
+      | (
+          | GetPayloadCreatableFields<BonusTransactionPayload>
+          | (GetPayloadUpdatableFields<BonusTransactionPayload> & UpdateMeta)
+        )[],
+    options?: Subset<T, CreateBonusTransactionOptions>,
+  ): Promise<GetFindResult<BonusTransactionPayload, T["expand"]>> {
+    const searchParameters = composeSearchParameters(options ?? {});
+
+    const response = await this.client.post("/entity/bonustransaction", {
       body: data,
       searchParameters,
     });
