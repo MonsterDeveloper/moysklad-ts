@@ -16,7 +16,10 @@ export type ExpandOptions<T extends Payload> = IsEmptyObject<
     }
   : never;
 
-export type SetExpandableFieldsOptional<
+/**
+ * Given a payload `P` and a type `T`, make fields in `T` optional based on their optionality in `P["object"]`.
+ */
+export type RestoreExpandableFieldsOptionality<
   P extends Payload,
   T,
 > = IsEmptyObject<T> extends true

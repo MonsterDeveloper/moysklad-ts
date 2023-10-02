@@ -1,6 +1,6 @@
 import type { IsEqual, ConditionalKeys, IsEmptyObject } from "type-fest";
 import type { Payload } from "./payload";
-import type { SetExpandableFieldsOptional } from "./expand";
+import type { RestoreExpandableFieldsOptionality } from "./expand";
 import type { ListMeta } from "./metadata";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,7 +9,7 @@ export type GetFindResult<P extends Payload, E> = IsEqual<E, any> extends true
   : IsEmptyObject<E> extends true
   ? P["object"]
   : E extends object
-  ? SetExpandableFieldsOptional<
+  ? RestoreExpandableFieldsOptionality<
       P,
       {
         // only map through truthy values
