@@ -13,6 +13,8 @@ The core team will review your pull request and either merge it, request changes
 - You have [Node.js](https://nodejs.org/en/) at version >= 18.x.x and <= 20.x.x and [pnpm](https://pnpm.io) at v8 installed.
 - You are familiar with [Git](https://git-scm.com).
 
+	> You can also use GitPod to instantly initialize a development environment. Just click the GitPod button in the [README](./README.md).
+
 **Before submitting your pull request** make sure the following requirements are fulfilled:
 
 - Fork the repository and create your new branch from `main`.
