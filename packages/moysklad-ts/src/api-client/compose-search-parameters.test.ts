@@ -117,4 +117,18 @@ describe("composeSearchParameters", () => {
       );
     });
   });
+
+  describe("search", () => {
+    it("should not add 'search' parameter if 'search' is undefined", () => {
+      const searchParameters = composeSearchParameters({});
+      expect(searchParameters).toBeUndefined();
+    });
+
+    it("should add 'search' parameter with correct value if 'search' is a string", () => {
+      const searchParameters = composeSearchParameters({
+        search: "sample search string",
+      });
+      expect(searchParameters?.get("search")).toBe("sample search string");
+    });
+  });
 });

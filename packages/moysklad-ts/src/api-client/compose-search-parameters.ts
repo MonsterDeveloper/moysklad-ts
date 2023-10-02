@@ -47,10 +47,12 @@ export function composeSearchParameters({
   pagination,
   expand,
   order,
+  search,
 }: {
   pagination?: PaginationOptions;
   expand?: Record<string, unknown>;
   order?: OrderOption<string> | OrderOption<string>[];
+  search?: string;
 }) {
   const searchParameters = new URLSearchParams();
 
@@ -70,6 +72,8 @@ export function composeSearchParameters({
     if (orderFields.length > 0)
       searchParameters.append("order", orderFields.join(";"));
   }
+
+  if (search) searchParameters.append("search", search);
 
   return searchParameters.size > 0 ? searchParameters : undefined;
 }
