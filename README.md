@@ -17,30 +17,33 @@
 ```bash
 npm i moysklad-ts
 ```
+<details>
+  <summary>Other package managers</summary>
 
-<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/pnpm.svg"> pnpm
+  <img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/pnpm.svg"> pnpm
 
-```bash
-pnpm add moysklad-ts
-```
+  ```bash
+  pnpm add moysklad-ts
+  ```
 
-<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/yarn.svg"> Yarn
+  <img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/yarn.svg"> Yarn
 
-```bash
-yarn add moysklad-ts
-```
+  ```bash
+  yarn add moysklad-ts
+  ```
 
-<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/bun.svg"> bun
+  <img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/bun.svg"> bun
 
-```bash
-bun add moysklad-ts
-```
+  ```bash
+  bun add moysklad-ts
+  ```
 
-<img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/deno.svg"> Deno
+  <img height="18" src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/deno.svg"> Deno
 
-```typescript
-import { Moysklad } from "https://esm.sh/moysklad-ts";
-```
+  ```typescript
+  import { Moysklad } from "https://esm.sh/moysklad-ts";
+  ```
+</details>
 
 ### Example
 ```typescript
