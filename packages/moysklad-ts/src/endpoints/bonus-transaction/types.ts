@@ -82,6 +82,7 @@ export interface ListBonusTransactionsOptions {
   pagination?: PaginationOptions;
   expand?: ExpandOptions<BonusTransactionPayload>;
   order?: OrderOptions<BonusTransactionPayload>;
+  search?: string;
 }
 
 export interface GetBonusTransactionOptions {
