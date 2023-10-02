@@ -6,6 +6,8 @@ export interface Metadata<T extends Entity> {
   metadataHref: string;
   mediaType: MediaType.Json;
   type: T;
+  uuidHref?: string;
+  downloadHref?: string;
 }
 
 export interface ListMetadata<T extends Entity> extends Metadata<T> {
