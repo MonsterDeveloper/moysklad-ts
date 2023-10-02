@@ -83,3 +83,11 @@ export interface ListBonusTransactionsOptions {
   expand?: ExpandOptions<BonusTransactionPayload>;
   order?: OrderOptions<BonusTransactionPayload>;
 }
+
+export interface GetBonusTransactionOptions {
+  expand?: ExpandOptions<BonusTransactionPayload>;
+}
+
+export interface UpdateBonusTransactionOptions {
+  expand?: ExpandOptions<BonusTransactionPayload>;
+}

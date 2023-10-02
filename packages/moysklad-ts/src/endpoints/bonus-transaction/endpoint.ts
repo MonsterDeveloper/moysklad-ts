@@ -1,8 +1,15 @@
-import type { Entity, GetFindResult, ListResponse, Subset } from "@/types";
 import type {
-  BonusTransaction,
+  Entity,
+  GetFindResult,
+  GetPayloadUpdatableFields,
+  ListResponse,
+  Subset,
+} from "@/types";
+import type {
   BonusTransactionPayload,
+  GetBonusTransactionOptions,
   ListBonusTransactionsOptions,
+  UpdateBonusTransactionOptions,
 } from "./types";
 import { BaseEndpoint } from "../base-endpoint";
 import { composeSearchParameters } from "@/api-client";
@@ -24,8 +31,32 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
     return response.json();
   }
 
-  async get(id: string): Promise<BonusTransaction> {
-    const response = await this.client.get(`/entity/bonustransaction/${id}`);
+  async get<T extends GetBonusTransactionOptions = Record<string, unknown>>(
+    id: string,
+    options?: Subset<T, GetBonusTransactionOptions>,
+  ): Promise<GetFindResult<BonusTransactionPayload, T["expand"]>> {
+    const searchParameters = composeSearchParameters(options ?? {});
+
+    const response = await this.client.get(`/entity/bonustransaction/${id}`, {
+      searchParameters,
+    });
+
+    return response.json();
+  }
+
+  async update<
+    T extends UpdateBonusTransactionOptions = Record<string, unknown>,
+  >(
+    id: string,
+    data: GetPayloadUpdatableFields<BonusTransactionPayload>,
+    options?: Subset<T, UpdateBonusTransactionOptions>,
+  ): Promise<GetFindResult<BonusTransactionPayload, T["expand"]>> {
+    const searchParameters = composeSearchParameters(options ?? {});
+
+    const response = await this.client.put(`/entity/bonustransaction/${id}`, {
+      body: data,
+      searchParameters,
+    });
 
     return response.json();
   }
