@@ -1,4 +1,6 @@
 # moysklad-ts
+<a href="https://gitpod.io/#https://github.com/MonsterDeveloper/moysklad-ts" rel="nofollow noopener noreferrer" target="_blank" class="after:hidden"><img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod"></a>
+
 ![npm](https://img.shields.io/npm/v/moysklad-ts)
 ![npm package minimized gzipped size (select exports)](https://img.shields.io/bundlejs/size/moysklad-ts)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/MonsterDeveloper/moysklad-ts/publish-to-npm.yml)
