@@ -36,3 +36,4 @@ jobs:
         with:
           json-summary-path: './packages/moysklad-ts/coverage/coverage-summary.json'
           json-final-path: './packages/moysklad-ts/coverage/coverage-final.json'
+          vite-config-path: './packages/moysklad-ts/vite.config.ts'
