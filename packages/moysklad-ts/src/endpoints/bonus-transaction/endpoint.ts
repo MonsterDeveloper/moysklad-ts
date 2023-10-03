@@ -10,6 +10,7 @@ import type {
 import type {
   BonusTransactionModel,
   CreateBonusTransactionOptions,
+  FirstBonusTransactionOptions,
   GetBonusTransactionOptions,
   ListBonusTransactionsOptions,
   UpdateBonusTransactionOptions,
@@ -99,5 +100,16 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
     });
 
     return response.json();
+  }
+
+  async first<T extends FirstBonusTransactionOptions = Record<string, unknown>>(
+    options?: Subset<T, FirstBonusTransactionOptions>,
+  ): Promise<
+    ListResponse<
+      GetFindResult<BonusTransactionModel, T["expand"]>,
+      Entity.BonusTransaction
+    >
+  > {
+    return this.list({ ...options, pagination: { limit: 1 } });
   }
 }
