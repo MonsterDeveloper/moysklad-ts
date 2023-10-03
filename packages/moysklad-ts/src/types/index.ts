@@ -10,3 +10,4 @@ export * from "./subset";
 export * from "./result";
 export * from "./datetime";
 export * from "./order";
+export * from "./batch-delete";

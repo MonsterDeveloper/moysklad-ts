@@ -1,11 +1,13 @@
-import type {
-  Entity,
-  GetFindResult,
-  GetModelCreatableFields,
-  GetModelUpdatableFields,
-  ListResponse,
-  Subset,
-  UpdateMeta,
+import {
+  MediaType,
+  type BatchDeleteResult,
+  type Entity,
+  type GetFindResult,
+  type GetModelCreatableFields,
+  type GetModelUpdatableFields,
+  type ListResponse,
+  type Subset,
+  type UpdateMeta,
 } from "@/types";
 import type {
   BonusTransactionModel,
@@ -117,5 +119,22 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
     const response = await this.list({ pagination: { limit: 0 } });
 
     return response.meta.size;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.client.delete(`${ENDPOINT_URL}/${id}`);
+  }
+
+  async batchDelete(ids: string[]): Promise<BatchDeleteResult[]> {
+    const response = await this.client.post(`${ENDPOINT_URL}/delete`, {
+      body: ids.map((id) => ({
+        meta: {
+          href: this.client.buildUrl(`${ENDPOINT_URL}/${id}`),
+          mediaType: MediaType.Json,
+        },
+      })),
+    });
+
+    return response.json();
   }
 }
