@@ -112,4 +112,10 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
   > {
     return this.list({ ...options, pagination: { limit: 1 } });
   }
+
+  async size(): Promise<number> {
+    const response = await this.list({ pagination: { limit: 0 } });
+
+    return response.meta.size;
+  }
 }
