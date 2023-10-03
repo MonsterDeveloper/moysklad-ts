@@ -87,6 +87,11 @@ export interface ListBonusTransactionsOptions {
   search?: string;
 }
 
+export type FirstBonusTransactionOptions = Omit<
+  ListBonusTransactionsOptions,
+  "pagination"
+>;
+
 export interface GetBonusTransactionOptions {
   expand?: ExpandOptions<BonusTransactionModel>;
 }

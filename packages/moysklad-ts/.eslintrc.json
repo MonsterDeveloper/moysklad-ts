@@ -10,6 +10,7 @@
   "plugins": ["@typescript-eslint", "unicorn", "sonarjs", "prettier"],
   "rules": {
     "no-console": "error",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "sonarjs/no-identical-functions": "off"
   }
 }
