@@ -39,7 +39,7 @@ export class ApiClient {
     this.auth = options.auth;
   }
   async request(endpoint: string, options: RequestOptions = {}) {
-    const url = endpoint.startsWith("/") ? this.baseUrl + endpoint : endpoint;
+    const url = this.buildUrl(endpoint);
 
     const response = await fetch(
       url + (options.searchParameters ? `?${options.searchParameters}` : ""),
@@ -79,5 +79,33 @@ export class ApiClient {
 
   async delete(url: string, options: RequestOptionsWithoutMethod = {}) {
     return this.request(url, { ...options, method: "DELETE" });
+  }
+
+  private normalizeUrl(url: string): string {
+    return url.replaceAll(/\/{2,}/g, "/");
+  }
+
+  private buildStringUrl(url: string): URL {
+    const shouldIncludeBaseUrl = !url.startsWith("http");
+
+    const returnUrl = shouldIncludeBaseUrl ? `${this.baseUrl}/${url}` : url;
+
+    return new URL(this.normalizeUrl(returnUrl));
+  }
+
+  private buildArrayUrl(url: string[]): URL {
+    const shouldIncludeBaseUrl = !url[0]?.startsWith("http");
+
+    const returnUrl = shouldIncludeBaseUrl
+      ? `${this.baseUrl}/${url.join("/")}`
+      : url.join("/");
+
+    return new URL(this.normalizeUrl(returnUrl));
+  }
+
+  buildUrl(url: string | string[]): URL {
+    if (typeof url === "string") return this.buildStringUrl(url);
+
+    return this.buildArrayUrl(url);
   }
 }

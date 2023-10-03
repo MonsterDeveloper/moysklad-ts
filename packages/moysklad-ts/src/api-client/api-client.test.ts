@@ -2,13 +2,14 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { ApiClient, type BasicAuth, type TokenAuth } from "./api-client";
 import { btoa } from "js-base64";
 
+const EXAMPLE_BASE_URL = "https://example.com/api";
+
 describe("ApiClient", () => {
   describe("request", () => {
     afterEach(() => {
       vi.restoreAllMocks();
     });
 
-    const baseUrl = "https://example.com/api";
     const userAgent = "test-user-agent";
     const basicAuth: BasicAuth = {
       login: "test-login",
@@ -33,20 +34,29 @@ describe("ApiClient", () => {
 
     it("should send a request with a custom base URL", async () => {
       const fetchSpy = vi.spyOn(globalThis, "fetch");
-      const client = new ApiClient({ auth: tokenAuth, baseUrl });
+      const client = new ApiClient({
+        auth: tokenAuth,
+        baseUrl: EXAMPLE_BASE_URL,
+      });
 
       await client.request("/");
 
-      expect(fetchSpy).toHaveBeenCalledWith(`${baseUrl}/`, expect.any(Object));
+      expect(fetchSpy).toHaveBeenCalledWith(
+        `${EXAMPLE_BASE_URL}/`,
+        expect.any(Object),
+      );
     });
 
     it("should send a request to a full URL", async () => {
       const fetchSpy = vi.spyOn(globalThis, "fetch");
       const client = new ApiClient({ auth: tokenAuth });
 
-      await client.request(baseUrl);
+      await client.request(EXAMPLE_BASE_URL);
 
-      expect(fetchSpy).toHaveBeenCalledWith(baseUrl, expect.any(Object));
+      expect(fetchSpy).toHaveBeenCalledWith(
+        EXAMPLE_BASE_URL,
+        expect.any(Object),
+      );
     });
 
     it("should send a request with basic auth", async () => {
@@ -181,6 +191,45 @@ describe("ApiClient", () => {
         "https://api.moysklad.ru/api/remap/1.2/?foo=bar",
         expect.any(Object),
       );
+    });
+  });
+
+  describe("buildUrl", () => {
+    it("should build a URL with a string relative path", () => {
+      const client = new ApiClient({ auth: { token: "" } });
+
+      const url = client.buildUrl("/foo");
+
+      expect(url.toString()).toBe("https://api.moysklad.ru/api/remap/1.2/foo");
+    });
+
+    it("should build a URL with a string array relative path", () => {
+      const client = new ApiClient({ auth: { token: "" } });
+
+      const url = client.buildUrl(["/foo", "/bar"]);
+
+      expect(url.toString()).toBe(
+        "https://api.moysklad.ru/api/remap/1.2/foo/bar",
+      );
+    });
+
+    it("should build a URL with a full URL", () => {
+      const client = new ApiClient({ auth: { token: "" } });
+
+      const url = client.buildUrl(`${EXAMPLE_BASE_URL}/foo`);
+
+      expect(url.toString()).toBe(`${EXAMPLE_BASE_URL}/foo`);
+    });
+
+    it("should normalize a URL", () => {
+      const client = new ApiClient({
+        auth: { token: "" },
+        baseUrl: EXAMPLE_BASE_URL,
+      });
+
+      const url = client.buildUrl(`/foo//bar/123`);
+
+      expect(url.toString()).toBe(`${EXAMPLE_BASE_URL}/foo/bar/123`);
     });
   });
 });
