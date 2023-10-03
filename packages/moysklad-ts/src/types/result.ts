@@ -4,9 +4,9 @@ import type { RestoreExpandableFieldsOptionality } from "./expand";
 import type { ListMeta } from "./metadata";
 
 // prettier-ignore
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type GetFindResult<M extends Model, E> =
   // ❔ Is expand not defined ..
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   IsEqual<E, any> extends true
     
     // 🚫 return default.
