@@ -29,11 +29,11 @@ export type GetModelUpdatableFields<M extends Model> = {
         ? UpdateMeta | null
         : UpdateMeta
 
-    // key is optional?
-    : undefined extends M["object"][Key]
-      // make it nullable
-      ? M["object"][Key] | null
-      : M["object"][Key];
+      // key is optional?
+      : undefined extends M["object"][Key]
+        // make it nullable
+        ? M["object"][Key] | null
+        : M["object"][Key];
 };
 
 // prettier-ignore
