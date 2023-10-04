@@ -15,6 +15,7 @@ export interface Model<T extends object = object> {
   requiredCreateFields?: string;
 }
 
+// TODO should return never if the model has no updatable fields
 // prettier-ignore
 /**
  * Extract the updatable fields from a model's object and replace the Meta with UpdateMeta.
@@ -38,6 +39,7 @@ export type GetModelUpdatableFields<M extends Model> = {
         : M["object"][Key];
 };
 
+// TODO should return never if the model has no required create fields
 // prettier-ignore
 /**
  * Given model M, get the required fields for creating a new object.
@@ -49,9 +51,10 @@ export type GetModelRequiredCreateFields<M extends Model> = {
     Meta<any> extends M["object"][Key]
       // replace it with UpdateMeta
       ? UpdateMeta
-      : M["object"][Key];
+      : NonNullable<M["object"][Key]>;
 };
 
+// TODO should return never if the model has no creatable fields
 // prettier-ignore
 /**
  * Given model M, get the fields for creating a new object.
