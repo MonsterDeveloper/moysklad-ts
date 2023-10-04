@@ -1,5 +1,6 @@
-import type { Primitive } from "type-fest";
-import type { DateTime } from ".";
+import type { IsEmptyObject, Primitive } from "type-fest";
+import type { DateTime } from "./datetime";
+import type { Model } from "./model";
 
 export interface EqualsFilter<T extends Primitive> {
   eq: T | T[];
@@ -102,3 +103,9 @@ export type Filter =
   | NumberFilter
   | StringFilter
   | DateTimeFilter;
+
+export type FilterOptions<M extends Model> = IsEmptyObject<
+  M["filters"]
+> extends true
+  ? never
+  : Partial<M["filters"]>;

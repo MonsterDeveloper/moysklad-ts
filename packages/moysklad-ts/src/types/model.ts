@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { WritableKeysOf } from "type-fest";
 import type { UpdateMeta, Meta } from "./metadata";
+import type { Filter } from "./filters";
 
 export interface Model<T extends object = object> {
   object: T;
@@ -11,6 +12,7 @@ export interface Model<T extends object = object> {
   };
   orderable?: string;
   creatable?: string;
+  filters: Record<string, Filter>;
 }
 
 // prettier-ignore

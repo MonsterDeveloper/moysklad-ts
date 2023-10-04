@@ -7,6 +7,12 @@ import type {
   OrderOptions,
   PaginationOptions,
   Model,
+  IdFilter,
+  BooleanFilter,
+  NumberFilter,
+  StringFilter,
+  DateTimeFilter,
+  FilterOptions,
 } from "@/types";
 import type { CounterpartyModel } from "../counterparty";
 import type { EmployeeModel } from "../employee";
@@ -78,6 +84,25 @@ export interface BonusTransactionModel extends Model {
     | "updated";
 
   creatable: "agent" | "transactionType";
+  filters: {
+    accountId: IdFilter;
+    agent: IdFilter;
+    applicable: BooleanFilter;
+    bonusProgram: IdFilter;
+    bonusValue: NumberFilter;
+    code: StringFilter;
+    created: DateTimeFilter;
+    externalCode: StringFilter;
+    group: IdFilter;
+    id: IdFilter;
+    moment: DateTimeFilter;
+    name: StringFilter;
+    organization: IdFilter;
+    owner: IdFilter;
+    shared: BooleanFilter;
+    updated: DateTimeFilter;
+    updatedBy: IdFilter;
+  };
 }
 
 export interface ListBonusTransactionsOptions {
@@ -85,6 +110,7 @@ export interface ListBonusTransactionsOptions {
   expand?: ExpandOptions<BonusTransactionModel>;
   order?: OrderOptions<BonusTransactionModel>;
   search?: string;
+  filter?: FilterOptions<BonusTransactionModel>;
 }
 
 export type FirstBonusTransactionOptions = Omit<
