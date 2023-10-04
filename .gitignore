@@ -41,5 +41,5 @@ dist/
 # generated types
 .astro/
 
-# husky
-.husky/
+# opencommit
+.husky/prepare-commit-msg
