@@ -8,7 +8,6 @@ import type {
 import type { Meta } from "./metadata";
 import type { Entity } from "./entity";
 import type { MediaType } from "./media-type";
-import type { Simplify } from "type-fest";
 
 describe("model", () => {
   describe("GetModelUpdatableFields", () => {
