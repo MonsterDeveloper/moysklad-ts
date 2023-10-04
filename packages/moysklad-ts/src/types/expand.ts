@@ -6,6 +6,9 @@ import type {
 } from "type-fest";
 import type { Model } from "./model";
 
+/**
+ * Given a model `M`, get an option for `expand` query parameter.
+ */
 export type ExpandOptions<M extends Model> = IsEmptyObject<
   M["expandable"]
 > extends false
