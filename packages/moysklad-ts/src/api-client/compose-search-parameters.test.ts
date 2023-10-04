@@ -280,20 +280,20 @@ describe("composeSearchParameters", () => {
       expect(searchParameters?.get("filter")).toBe("name~sample name");
     });
 
-    it("should add 'filter' parameter with correct value for LeftLikeFilter", () => {
+    it("should add 'filter' parameter with correct value for StartsWithFilter", () => {
       const searchParameters = composeSearchParameters({
         filter: {
-          name: { llike: "sample name" },
+          name: { sw: "sample name" },
         },
       });
 
       expect(searchParameters?.get("filter")).toBe("name~=sample name");
     });
 
-    it("should add 'filter' parameter with correct value for RightLikeFilter", () => {
+    it("should add 'filter' parameter with correct value for EndsWithFilter", () => {
       const searchParameters = composeSearchParameters({
         filter: {
-          name: { rlike: "sample name" },
+          name: { ew: "sample name" },
         },
       });
 
@@ -303,7 +303,7 @@ describe("composeSearchParameters", () => {
     it("should handle filter combinations", () => {
       const searchParameters = composeSearchParameters({
         filter: {
-          name: { llike: "hello", rlike: "world" },
+          name: { sw: "hello", ew: "world" },
           quantity: { gte: 10, lte: 20 },
           isArchived: { eq: false },
         },

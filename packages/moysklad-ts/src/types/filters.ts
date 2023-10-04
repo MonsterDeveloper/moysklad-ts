@@ -46,18 +46,18 @@ export interface LikeFilter {
   like: string;
 }
 
-export interface LeftLikeFilter {
-  llike: string;
+export interface StartsWithFilter {
+  sw: string;
 }
 
-export interface RightLikeFilter {
-  rlike: string;
+export interface EndsWithFilter {
+  ew: string;
 }
 
 /**
- * A type that is used to ensure that equality and nonequality filters are not used together.
+ * A type that is used to ensure that equality and inequality filters are not used together.
  */
-type EqualityFilter<T extends Primitive> =
+export type EqualityFilter<T extends Primitive> =
   | EqualsFilter<T>
   | NotEqualsFilter<T>
   | IsNullFilter
@@ -65,10 +65,7 @@ type EqualityFilter<T extends Primitive> =
 
 export type IdFilter = Partial<EqualityFilter<string>> | string | string[];
 
-export type BooleanFilter =
-  | Partial<EqualityFilter<boolean>>
-  | boolean
-  | boolean[];
+export type BooleanFilter = Partial<EqualityFilter<boolean>> | boolean;
 
 export type NumberFilter =
   | Partial<
@@ -83,7 +80,7 @@ export type NumberFilter =
 
 export type StringFilter =
   | Partial<
-      EqualityFilter<string> & LikeFilter & LeftLikeFilter & RightLikeFilter
+      EqualityFilter<string> & LikeFilter & StartsWithFilter & EndsWithFilter
     >
   | string
   | string[];

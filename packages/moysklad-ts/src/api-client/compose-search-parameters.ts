@@ -109,12 +109,12 @@ function traverseFilter(field: string, filter: Filter) {
       continue;
     }
 
-    if (operator === "llike") {
+    if (operator === "sw") {
       filters.push(`${field}~=${condition}`);
       continue;
     }
 
-    if (operator === "rlike") {
+    if (operator === "ew") {
       filters.push(`${field}=~${condition}`);
     }
   }
