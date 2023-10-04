@@ -7,6 +7,6 @@ export interface OrderObject<T extends string> {
 
 export type OrderOption<T extends string> = OrderObject<T> | T;
 
-export type OrderOptions<M extends Model> = M["orderable"] extends string
-  ? OrderOption<M["orderable"]> | OrderOption<M["orderable"]>[]
+export type OrderOptions<M extends Model> = M["orderableFields"] extends string
+  ? OrderOption<M["orderableFields"]> | OrderOption<M["orderableFields"]>[]
   : never;

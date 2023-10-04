@@ -38,4 +38,5 @@ export type BonusProgram =
 export interface BonusProgramModel extends Model {
   object: BonusProgram;
   expandable: EmptyObject;
+  filters: EmptyObject;
 }

@@ -70,7 +70,7 @@ export interface BonusTransactionModel extends Model {
     bonusProgram: BonusProgramModel;
     organization: OrganizationModel;
   };
-  orderable:
+  orderableFields:
     | "id"
     | "applicable"
     | "bonusValue"
@@ -83,7 +83,7 @@ export interface BonusTransactionModel extends Model {
     | "shared"
     | "updated";
 
-  creatable: "agent" | "transactionType";
+  requiredCreateFields: "agent" | "transactionType";
   filters: {
     accountId: IdFilter;
     agent: IdFilter;

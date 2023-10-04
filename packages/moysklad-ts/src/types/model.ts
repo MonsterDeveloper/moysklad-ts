@@ -10,9 +10,9 @@ export interface Model<T extends object = object> {
     // but if we do that TypeScript will attempt to compare types recursively
     [ObjectName in string]?: unknown;
   };
-  orderable?: string;
-  creatable?: string;
   filters: Record<string, Filter>;
+  orderableFields?: string;
+  requiredCreateFields?: string;
 }
 
 // prettier-ignore
@@ -44,7 +44,7 @@ export type GetModelUpdatableFields<M extends Model> = {
  */
 export type GetModelRequiredCreateFields<M extends Model> = {
   // iterate over creatable fields in model's object, while making them required
-  [Key in Extract<M["creatable"], keyof M["object"]>]-?:
+  [Key in Extract<M["requiredCreateFields"], keyof M["object"]>]-?:
     // value is a Meta object?
     Meta<any> extends M["object"][Key]
       // replace it with UpdateMeta
