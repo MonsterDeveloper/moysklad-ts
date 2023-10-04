@@ -1,4 +1,4 @@
-import type { OrderOption, PaginationOptions } from "@/types";
+import type { Filter, OrderOption, PaginationOptions } from "@/types";
 
 function traverseExpand(expand: Record<string, unknown>, depth = 0) {
   if (depth > 2) {
@@ -43,16 +43,97 @@ function traverseOrder(order: OrderOption<string> | OrderOption<string>[]) {
   return fields;
 }
 
+function traverseFilter(field: string, filter: Filter) {
+  const filters = [] as string[];
+  if (
+    typeof filter === "string" ||
+    typeof filter === "number" ||
+    typeof filter === "boolean"
+  ) {
+    filters.push(`${field}=${filter}`);
+    return filters;
+  }
+
+  if (Array.isArray(filter)) {
+    filters.push(...filter.map((v) => `${field}=${v}`));
+    return filters;
+  }
+
+  for (const [operator, condition] of Object.entries(filter)) {
+    if (operator === "eq" || operator === "ne") {
+      if (Array.isArray(condition)) {
+        filters.push(
+          ...condition.map(
+            (v) => `${field}${operator === "eq" ? "=" : "!="}${v}`,
+          ),
+        );
+        continue;
+      }
+
+      filters.push(`${field}${operator === "eq" ? "=" : "!="}${condition}`);
+      continue;
+    }
+
+    if (operator === "isNull") {
+      filters.push(`${field}${condition ? "" : "!"}=`);
+      continue;
+    }
+
+    if (operator === "isNotNull") {
+      filters.push(`${field}${condition ? "!" : ""}=`);
+      continue;
+    }
+
+    if (operator === "gt") {
+      filters.push(`${field}>${condition}`);
+      continue;
+    }
+
+    if (operator === "gte") {
+      filters.push(`${field}>=${condition}`);
+      continue;
+    }
+
+    if (operator === "lt") {
+      filters.push(`${field}<${condition}`);
+      continue;
+    }
+
+    if (operator === "lte") {
+      filters.push(`${field}<=${condition}`);
+      continue;
+    }
+
+    if (operator === "like") {
+      filters.push(`${field}~${condition}`);
+      continue;
+    }
+
+    if (operator === "llike") {
+      filters.push(`${field}~=${condition}`);
+      continue;
+    }
+
+    if (operator === "rlike") {
+      filters.push(`${field}=~${condition}`);
+    }
+  }
+
+  return filters;
+}
+
 export function composeSearchParameters({
   pagination,
   expand,
   order,
   search,
+  filter,
 }: {
   pagination?: PaginationOptions;
   expand?: Record<string, unknown>;
   order?: OrderOption<string> | OrderOption<string>[];
   search?: string;
+  filter?: Record<string, Filter>;
 }) {
   const searchParameters = new URLSearchParams();
 
@@ -74,6 +155,17 @@ export function composeSearchParameters({
   }
 
   if (search) searchParameters.append("search", search);
+
+  if (filter) {
+    const filters = [] as string[];
+
+    for (const [field, value] of Object.entries(filter)) {
+      filters.push(...traverseFilter(field, value));
+    }
+
+    if (filters.length > 0)
+      searchParameters.append("filter", filters.join(";"));
+  }
 
   return searchParameters.size > 0 ? searchParameters : undefined;
 }

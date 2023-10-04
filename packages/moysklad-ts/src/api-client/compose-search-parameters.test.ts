@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { describe, it, expect } from "vitest";
 import { composeSearchParameters } from "./compose-search-parameters";
 
@@ -129,6 +130,188 @@ describe("composeSearchParameters", () => {
         search: "sample search string",
       });
       expect(searchParameters?.get("search")).toBe("sample search string");
+    });
+  });
+
+  describe("filter", () => {
+    it("should not add 'filter' parameter if 'filter' is undefined", () => {
+      const searchParameters = composeSearchParameters({});
+      expect(searchParameters).toBeUndefined();
+    });
+
+    it("should add 'filter' parameter with correct value for primitives", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          name: "sample name",
+          isArchived: false,
+          quantity: 10,
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(
+        "name=sample name;isArchived=false;quantity=10",
+      );
+    });
+
+    it("should add 'filter' parameter with correct value for arrays", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          name: ["sample name 1", "sample name 2"],
+          quantity: [10, 20],
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(
+        "name=sample name 1;name=sample name 2;quantity=10;quantity=20",
+      );
+    });
+
+    it("should add 'filter' parameter with correct value for EqualsFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          name: { eq: "sample name" },
+          group: { eq: ["sample group 1", "sample group 2"] },
+          quantity: { eq: 10 },
+          isArchived: { eq: false },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(
+        "name=sample name;group=sample group 1;group=sample group 2;quantity=10;isArchived=false",
+      );
+    });
+
+    it("should add 'filter' parameter with correct value for NotEqualsFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          name: { ne: "sample name" },
+          group: { ne: ["sample group 1", "sample group 2"] },
+          quantity: { ne: 10 },
+          isArchived: { ne: false },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(
+        "name!=sample name;group!=sample group 1;group!=sample group 2;quantity!=10;isArchived!=false",
+      );
+    });
+
+    it("should add 'filter' parameter with correct value for GreaterThanFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          quantity: { gt: 10 },
+          created: { gt: "2021-01-01" },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(
+        "quantity>10;created>2021-01-01",
+      );
+    });
+
+    it("should add 'filter' parameter with correct value for GreaterOrEqualsFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          quantity: { gte: 10 },
+          created: { gte: "2021-01-01" },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(
+        "quantity>=10;created>=2021-01-01",
+      );
+    });
+
+    it("should add 'filter' parameter with correct value for LessThanFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          quantity: { lt: 10 },
+          created: { lt: "2021-01-01" },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(
+        "quantity<10;created<2021-01-01",
+      );
+    });
+
+    it("should add 'filter' parameter with correct value for LessOrEqualsFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          quantity: { lte: 10 },
+          created: { lte: "2021-01-01" },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(
+        "quantity<=10;created<=2021-01-01",
+      );
+    });
+
+    it("should add 'filter' parameter with correct value for IsNullFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          name: { isNull: true },
+          quantity: { isNull: false },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe("name=;quantity!=");
+    });
+
+    it("should add 'filter' parameter with correct value for IsNotNullFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          name: { isNotNull: true },
+          quantity: { isNotNull: false },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe("name!=;quantity=");
+    });
+
+    it("should add 'filter' parameter with correct value for LikeFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          name: { like: "sample name" },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe("name~sample name");
+    });
+
+    it("should add 'filter' parameter with correct value for LeftLikeFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          name: { llike: "sample name" },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe("name~=sample name");
+    });
+
+    it("should add 'filter' parameter with correct value for RightLikeFilter", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          name: { rlike: "sample name" },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe("name=~sample name");
+    });
+
+    it("should handle filter combinations", () => {
+      const searchParameters = composeSearchParameters({
+        filter: {
+          name: { llike: "hello", rlike: "world" },
+          quantity: { gte: 10, lte: 20 },
+          isArchived: { eq: false },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(
+        "name~=hello;name=~world;quantity>=10;quantity<=20;isArchived=false",
+      );
     });
   });
 });
