@@ -47,12 +47,22 @@ export interface RightLikeFilter {
 }
 
 export type IdFilter =
-  | Partial<EqualsFilter<string> & NotEqualsFilter<string>>
+  | Partial<
+      IsNullFilter &
+        IsNotNullFilter &
+        EqualsFilter<string> &
+        NotEqualsFilter<string>
+    >
   | string
   | string[];
 
 export type BooleanFilter =
-  | Partial<EqualsFilter<boolean> & NotEqualsFilter<boolean>>
+  | Partial<
+      IsNullFilter &
+        IsNotNullFilter &
+        EqualsFilter<boolean> &
+        NotEqualsFilter<boolean>
+    >
   | boolean
   | boolean[];
 
