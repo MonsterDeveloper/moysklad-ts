@@ -1,3 +1,4 @@
+// TODO add response field
 export class MoyskladError extends Error {
   public status: number;
 
