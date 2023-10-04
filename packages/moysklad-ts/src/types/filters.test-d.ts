@@ -206,7 +206,7 @@ describe("filters", () => {
         filters: EmptyObject;
       }
 
-      expectTypeOf<FilterOptions<Model>>().toEqualTypeOf<never>();
+      expectTypeOf<FilterOptions<Model>>().toBeNever();
     });
 
     it("should return available filters for a model", () => {
