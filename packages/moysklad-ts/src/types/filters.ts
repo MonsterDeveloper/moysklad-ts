@@ -4,6 +4,22 @@ import type { Model } from "./model";
 
 export interface EqualsFilter<T extends Primitive> {
   eq: T | T[];
+  ne: never;
+  gt: never;
+  gte: never;
+  lt: never;
+  lte: never;
+}
+
+export interface IsNullFilter {
+  isNull: boolean;
+  isNotNull: never;
+  eq: never;
+  ne: never;
+}
+
+export interface IsNotNullFilter {
+  isNotNull: boolean;
 }
 
 export interface NotEqualsFilter<T extends Primitive> {
@@ -26,14 +42,6 @@ export interface LessOrEqualsFilter<T extends Primitive> {
   lte: T;
 }
 
-export interface IsNullFilter {
-  isNull: boolean;
-}
-
-export interface IsNotNullFilter {
-  isNotNull: boolean;
-}
-
 export interface LikeFilter {
   like: string;
 }
@@ -46,32 +54,25 @@ export interface RightLikeFilter {
   rlike: string;
 }
 
-export type IdFilter =
-  | Partial<
-      IsNullFilter &
-        IsNotNullFilter &
-        EqualsFilter<string> &
-        NotEqualsFilter<string>
-    >
-  | string
-  | string[];
+/**
+ * A type that is used to ensure that equality and nonequality filters are not used together.
+ */
+type EqualityFilter<T extends Primitive> =
+  | EqualsFilter<T>
+  | NotEqualsFilter<T>
+  | IsNullFilter
+  | IsNotNullFilter;
+
+export type IdFilter = Partial<EqualityFilter<string>> | string | string[];
 
 export type BooleanFilter =
-  | Partial<
-      IsNullFilter &
-        IsNotNullFilter &
-        EqualsFilter<boolean> &
-        NotEqualsFilter<boolean>
-    >
+  | Partial<EqualityFilter<boolean>>
   | boolean
   | boolean[];
 
 export type NumberFilter =
   | Partial<
-      IsNullFilter &
-        IsNotNullFilter &
-        EqualsFilter<number> &
-        NotEqualsFilter<number> &
+      EqualityFilter<number> &
         GreaterThanFilter<number> &
         GreaterOrEqualsFilter<number> &
         LessThanFilter<number> &
@@ -82,23 +83,14 @@ export type NumberFilter =
 
 export type StringFilter =
   | Partial<
-      IsNullFilter &
-        IsNotNullFilter &
-        EqualsFilter<string> &
-        NotEqualsFilter<string> &
-        LikeFilter &
-        LeftLikeFilter &
-        RightLikeFilter
+      EqualityFilter<string> & LikeFilter & LeftLikeFilter & RightLikeFilter
     >
   | string
   | string[];
 
 export type DateTimeFilter =
   | Partial<
-      IsNullFilter &
-        IsNotNullFilter &
-        EqualsFilter<DateTime> &
-        NotEqualsFilter<DateTime> &
+      EqualityFilter<DateTime> &
         GreaterThanFilter<DateTime> &
         GreaterOrEqualsFilter<DateTime> &
         LessThanFilter<DateTime> &
