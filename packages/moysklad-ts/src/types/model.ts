@@ -21,7 +21,7 @@ export interface Model<T extends object = object> {
  */
 export type GetModelUpdatableFields<M extends Model> = {
   // itarate over non-readonly fields in model's object, excluding some Moysklad-specific readonly fields
-  [Key in Exclude<WritableKeysOf<M["object"]>,"meta" | "id" | "accountId">]?:
+  [Key in Exclude<WritableKeysOf<M["object"]>, "meta" | "id" | "accountId">]?:
 
     // value is a Meta object?
     Meta<any> extends M["object"][Key]
