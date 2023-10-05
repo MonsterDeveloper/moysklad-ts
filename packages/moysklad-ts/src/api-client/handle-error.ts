@@ -2,20 +2,17 @@ import { MoyskladApiError, MoyskladError } from "@/errors";
 
 export async function handleError(response: Response): Promise<never> {
   if (!response.headers.has("Content-Type"))
-    throw new MoyskladError(
-      "Response has no Content-Type header",
-      response.status,
-    );
+    throw new MoyskladError("Response has no Content-Type header", response);
 
   if (!response.headers.get("Content-Type")?.includes("application/json"))
     throw new MoyskladError(
       "Response Content-Type is not application/json",
-      response.status,
+      response,
     );
 
   const text = await response.text();
 
-  if (!text) throw new MoyskladError("Response body is empty", response.status);
+  if (!text) throw new MoyskladError("Response body is empty", response);
 
   const data: unknown = JSON.parse(text);
 
@@ -39,14 +36,14 @@ export async function handleError(response: Response): Promise<never> {
     )
       throw new MoyskladApiError(
         error.error,
-        response.status,
         error.code,
         error.moreInfo,
+        response,
       );
   }
 
   throw new MoyskladError(
     `HTTP ${response.status} ${response.statusText}`,
-    response.status,
+    response,
   );
 }

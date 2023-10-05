@@ -6,7 +6,7 @@ describe("handleError", () => {
   it("should throw a MoyskladError if the response has no Content-Type header", async () => {
     const response = new Response(undefined, { status: 400 });
     await expect(handleError(response)).rejects.toThrow(
-      new MoyskladError("Response has no Content-Type header", 400),
+      new MoyskladError("Response has no Content-Type header", response),
     );
   });
 
@@ -16,7 +16,10 @@ describe("handleError", () => {
       headers: { "Content-Type": "text/plain" },
     });
     await expect(handleError(response)).rejects.toThrow(
-      new MoyskladError("Response Content-Type is not application/json", 400),
+      new MoyskladError(
+        "Response Content-Type is not application/json",
+        response,
+      ),
     );
   });
 
@@ -39,9 +42,9 @@ describe("handleError", () => {
     await expect(handleError(response)).rejects.toThrow(
       new MoyskladApiError(
         "Some error message",
-        400,
         123,
         "https://example.com",
+        response,
       ),
     );
   });
@@ -52,7 +55,7 @@ describe("handleError", () => {
       headers: { "Content-Type": "application/json" },
     });
     await expect(handleError(response)).rejects.toThrow(
-      new MoyskladError("Response body is empty", 400),
+      new MoyskladError("Response body is empty", response),
     );
   });
 
@@ -63,7 +66,7 @@ describe("handleError", () => {
       headers: { "Content-Type": "application/json" },
     });
     await expect(handleError(response)).rejects.toThrow(
-      new MoyskladError("HTTP 400 Bad Request", 400),
+      new MoyskladError("HTTP 400 Bad Request", response),
     );
   });
 });

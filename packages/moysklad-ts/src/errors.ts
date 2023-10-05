@@ -1,10 +1,9 @@
-// TODO add response field
 export class MoyskladError extends Error {
-  public status: number;
+  public response: Response;
 
-  constructor(message: string, status: number) {
+  constructor(message: string, response: Response) {
     super(message);
-    this.status = status;
+    this.response = response;
   }
 }
 
@@ -12,9 +11,13 @@ export class MoyskladApiError extends MoyskladError {
   public code: number;
   public moreInfo: string;
 
-  constructor(message: string, status: number, code: number, moreInfo: string) {
-    super(message, status);
-    this.status = status;
+  constructor(
+    message: string,
+    code: number,
+    moreInfo: string,
+    response: Response,
+  ) {
+    super(message, response);
     this.code = code;
     this.moreInfo = moreInfo;
   }
