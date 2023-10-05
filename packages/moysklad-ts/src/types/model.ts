@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { WritableKeysOf } from "type-fest";
+import type { ReadonlyKeysOf } from "type-fest";
 import type { UpdateMeta, Meta } from "./metadata";
 import type { Filter } from "./filters";
 
@@ -15,14 +15,13 @@ export interface Model<T extends object = object> {
   requiredCreateFields?: string;
 }
 
-// TODO should return never if the model has no updatable fields
 // prettier-ignore
 /**
  * Extract the updatable fields from a model's object and replace the Meta with UpdateMeta.
  */
 export type GetModelUpdatableFields<M extends Model> = {
   // itarate over non-readonly fields in model's object, excluding some Moysklad-specific readonly fields
-  [Key in Exclude<WritableKeysOf<M["object"]>, "meta" | "id" | "accountId">]?:
+  [Key in keyof M["object"] as Exclude<Key, ReadonlyKeysOf<M["object"]> | "meta" | "id" | "accountId">]?:
 
     // value is a Meta object?
     Meta<any> extends M["object"][Key]
@@ -39,7 +38,6 @@ export type GetModelUpdatableFields<M extends Model> = {
         : M["object"][Key];
 };
 
-// TODO should return never if the model has no required create fields
 // prettier-ignore
 /**
  * Given model M, get the required fields for creating a new object.
@@ -54,7 +52,6 @@ export type GetModelRequiredCreateFields<M extends Model> = {
       : NonNullable<M["object"][Key]>;
 };
 
-// TODO should return never if the model has no creatable fields
 // prettier-ignore
 /**
  * Given model M, get the fields for creating a new object.

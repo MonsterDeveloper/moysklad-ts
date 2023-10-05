@@ -8,17 +8,20 @@ import type {
 import type { Meta } from "./metadata";
 import type { Entity } from "./entity";
 import type { MediaType } from "./media-type";
+import type { IsEmptyObject } from "type-fest";
 
 describe("model", () => {
   describe("GetModelUpdatableFields", () => {
-    it("should return never if the model has no updatable fields", () => {
+    it("should return an empty object if the model has no updatable fields", () => {
       interface TestModel extends Model {
         object: {
           readonly id: string;
         };
       }
 
-      expectTypeOf<GetModelUpdatableFields<TestModel>>().toBeNever();
+      expectTypeOf<
+        IsEmptyObject<GetModelUpdatableFields<TestModel>>
+      >().toEqualTypeOf<true>();
     });
 
     it("should return model's updatable fields", () => {
@@ -90,14 +93,16 @@ describe("model", () => {
   });
 
   describe("GetModelRequiredCreateFields", () => {
-    it("should return never if the model has no required create fields", () => {
+    it("should return an empty object if the model has no required create fields", () => {
       interface TestModel extends Model {
         object: {
           readonly id: string;
         };
       }
 
-      expectTypeOf<GetModelRequiredCreateFields<TestModel>>().toBeNever();
+      expectTypeOf<
+        IsEmptyObject<GetModelRequiredCreateFields<TestModel>>
+      >().toEqualTypeOf<true>();
     });
 
     it("should return model's required create fields", () => {
@@ -138,13 +143,15 @@ describe("model", () => {
   });
 
   describe("GetModelCreatableFields", () => {
-    it("should return never if the model has no creatable fields", () => {
+    it("should return an empty object if the model has no creatable fields", () => {
       interface TestModel extends Model {
         object: {
           readonly id: string;
         };
       }
-      expectTypeOf<GetModelCreatableFields<TestModel>>().toBeNever();
+      expectTypeOf<
+        IsEmptyObject<GetModelCreatableFields<TestModel>>
+      >().toEqualTypeOf<true>();
     });
 
     it("should return model's creatable fields", () => {
