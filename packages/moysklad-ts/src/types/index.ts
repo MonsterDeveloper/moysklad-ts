@@ -12,3 +12,4 @@ export * from "./datetime";
 export * from "./order";
 export * from "./batch-delete";
 export * from "./filters";
+export * from "./document-rate";
