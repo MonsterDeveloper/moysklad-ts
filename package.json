@@ -17,7 +17,7 @@
     "@commitlint/load": "^17.7.2",
     "eslint": "^8.50.0",
     "husky": "^8.0.0",
-    "turbo": "latest"
+    "turbo": "^1.10.14"
   },
   "license": "GPL-3.0-only",
   "author": "Andrei Bobkov <slider7259@gmail.com>",
