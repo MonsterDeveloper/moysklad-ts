@@ -5,11 +5,11 @@ import { btoa } from "js-base64";
 const EXAMPLE_BASE_URL = "https://example.com/api";
 
 describe("ApiClient", () => {
-  describe("request", () => {
-    afterEach(() => {
-      vi.restoreAllMocks();
-    });
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
+  describe("request", () => {
     const userAgent = "test-user-agent";
     const basicAuth: BasicAuth = {
       login: "test-login",
