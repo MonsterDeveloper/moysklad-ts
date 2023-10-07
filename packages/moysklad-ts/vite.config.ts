@@ -25,6 +25,7 @@ export default defineConfig({
     coverage: {
       reporter: ["json", "json-summary", "html"],
       all: true,
+      exclude: ["**/*.test-d.ts", "mocks/**/*"],
     },
   },
 });
