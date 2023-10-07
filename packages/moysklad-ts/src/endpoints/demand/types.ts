@@ -156,3 +156,9 @@ export interface ListDemandsOptions {
   search?: string;
   filter?: FilterOptions<DemandModel>;
 }
+
+export interface GetDemandOptions {
+  expand?: ExpandOptions<DemandModel>;
+}
+
+export type FirstDemandOptions = Omit<ListDemandsOptions, "pagination">;
