@@ -137,9 +137,9 @@ export function composeSearchParameters({
 }) {
   const searchParameters = new URLSearchParams();
 
-  if (pagination?.limit)
+  if (typeof pagination?.limit === "number")
     searchParameters.append("limit", pagination.limit.toString());
-  if (pagination?.offset)
+  if (typeof pagination?.offset === "number")
     searchParameters.append("offset", pagination.offset.toString());
 
   if (expand) {
