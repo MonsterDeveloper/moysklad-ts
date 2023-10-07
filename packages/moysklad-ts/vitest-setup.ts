@@ -5,7 +5,7 @@ import mocks from "./mocks";
 const server = setupServer(...mocks);
 
 // Start server before all tests
-beforeAll(() => server.listen({ onUnhandledRequest: "warn" }));
+beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
 
 //  Close server after all tests
 afterAll(() => server.close());
