@@ -14,7 +14,7 @@ function rightPad2(value: string) {
  * @returns A Date object representing the parsed date and time.
  * @throws An error if the input string is not in the correct format.
  */
-export function parseDateTime(dateTime: DateTime) {
+export function parseDateTime(dateTime: DateTime): Date {
   // 2017-04-08 13:33:00.123
   const m = MOYSKLAD_DATE_TIME_REGEX.exec(dateTime);
   if (!m || m.length < 7 || m.length > 8) {
