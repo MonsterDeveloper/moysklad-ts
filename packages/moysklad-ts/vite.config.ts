@@ -37,6 +37,13 @@ export default defineConfig({
         // index files (re-exports)
         "src/**/index.ts",
       ],
+      // only watermark functions and branches
+      watermarks: {
+        functions: [100, 100],
+        lines: [0, 0],
+        statements: [0, 0],
+        branches: [100, 100],
+      },
     },
   },
 });
