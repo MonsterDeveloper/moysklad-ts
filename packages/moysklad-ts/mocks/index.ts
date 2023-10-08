@@ -15,6 +15,9 @@ export default [
   rest.get("https://example.com/api", (_, response, context) => {
     return response(context.status(200), context.json({ example: "api" }));
   }),
+  rest.get("https://example.com/error", (_, response, context) => {
+    return response(context.status(400), context.json({ sample: "error" }));
+  }),
   ...security,
   ...bonusTransaction,
   ...demand,

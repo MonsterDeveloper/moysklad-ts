@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ApiClient, type BasicAuth, type TokenAuth } from "./api-client";
 import { btoa } from "js-base64";
+import { MoyskladError } from "@/errors";
 
 const EXAMPLE_BASE_URL = "https://example.com/api";
 
@@ -123,6 +124,15 @@ describe("ApiClient", () => {
       );
     });
 
+    it("should throw an error if a response is not OK", async () => {
+      const client = new ApiClient({
+        auth: tokenAuth,
+        baseUrl: "https://example.com",
+      });
+
+      await expect(client.request("/error")).rejects.toThrow(MoyskladError);
+    });
+
     it("should send a GET request", async () => {
       const fetchSpy = vi.spyOn(globalThis, "fetch");
       const client = new ApiClient({ auth: tokenAuth });
@@ -211,6 +221,14 @@ describe("ApiClient", () => {
       expect(url.toString()).toBe(
         "https://api.moysklad.ru/api/remap/1.2/foo/bar",
       );
+    });
+
+    it("should build a URL with a string array absolute path", () => {
+      const client = new ApiClient({ auth: { token: "" } });
+
+      const url = client.buildUrl(["https://example.org", "foo", "bar"]);
+
+      expect(url.toString()).toBe("https://example.org/foo/bar");
     });
 
     it("should build a URL with a full URL", () => {
