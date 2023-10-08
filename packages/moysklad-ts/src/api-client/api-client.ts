@@ -143,13 +143,13 @@ export class ApiClient {
 
     rows.push(...data.rows);
 
-    const promises: Promise<unknown>[] = [];
+    const tasks: (() => Promise<unknown>)[] = [];
     for (let offset = limit; offset < size; offset += limit) {
-      promises.push(fetcher(limit, offset).then(({ rows }) => rows));
+      tasks.push(() => fetcher(limit, offset).then(({ rows }) => rows));
     }
 
     const generator = batchPromises(
-      promises,
+      tasks,
       this.batchGetOptions.concurrencyLimit,
     );
 

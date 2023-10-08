@@ -41,12 +41,14 @@ export class DemandEndpoint extends BaseEndpoint {
       Entity.BonusTransaction
     >
   > {
-    return this.client.batchGet(async (limit, offset) => {
-      return this.list({
-        ...options,
-        pagination: { limit, offset },
-      });
-    });
+    return this.client.batchGet(
+      async (limit, offset) =>
+        this.list({
+          ...options,
+          pagination: { limit, offset },
+        }),
+      Boolean(options?.expand),
+    );
   }
 
   async get<T extends GetDemandOptions = Record<string, unknown>>(
