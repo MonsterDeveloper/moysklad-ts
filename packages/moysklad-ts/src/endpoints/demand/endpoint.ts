@@ -5,9 +5,11 @@ import {
   type GetFindResult,
   type ListResponse,
   type Subset,
+  type BatchGetResult,
 } from "@/types";
 import { BaseEndpoint } from "../base-endpoint";
 import type {
+  AllDemandsOptions,
   DemandModel,
   FirstDemandOptions,
   GetDemandOptions,
@@ -29,6 +31,22 @@ export class DemandEndpoint extends BaseEndpoint {
       searchParameters,
     });
     return response.json();
+  }
+
+  async all<T extends AllDemandsOptions = Record<string, unknown>>(
+    options?: Subset<T, AllDemandsOptions>,
+  ): Promise<
+    BatchGetResult<
+      GetFindResult<DemandModel, T["expand"]>,
+      Entity.BonusTransaction
+    >
+  > {
+    return this.client.batchGet(async (limit, offset) => {
+      return this.list({
+        ...options,
+        pagination: { limit, offset },
+      });
+    });
   }
 
   async get<T extends GetDemandOptions = Record<string, unknown>>(

@@ -162,3 +162,4 @@ export interface GetDemandOptions {
 }
 
 export type FirstDemandOptions = Omit<ListDemandsOptions, "pagination">;
+export type AllDemandsOptions = Omit<ListDemandsOptions, "pagination">;

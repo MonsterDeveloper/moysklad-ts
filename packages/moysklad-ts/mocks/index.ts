@@ -4,6 +4,7 @@ import { MOYSKLAD_BASE_URL } from "./constants";
 import security from "./security";
 import bonusTransaction from "./bonus-transaction";
 import demand from "./demand";
+import batchGet from "./batch-get";
 
 export default [
   rest.all(MOYSKLAD_BASE_URL, (_, response, context) => {
@@ -18,6 +19,7 @@ export default [
   rest.get("https://example.com/error", (_, response, context) => {
     return response(context.status(400), context.json({ sample: "error" }));
   }),
+  batchGet,
   ...security,
   ...bonusTransaction,
   ...demand,

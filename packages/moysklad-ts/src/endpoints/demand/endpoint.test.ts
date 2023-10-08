@@ -180,4 +180,20 @@ describe("DemandEndpoint", () => {
       );
     });
   });
+
+  describe("all", () => {
+    it("should fetch all demands", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({
+        auth: { token: "" },
+        baseUrl: "https://batch-get.com",
+      });
+      const endpoint = new DemandEndpoint(client);
+
+      const { rows } = await endpoint.all();
+
+      expect(fetchSpy).toHaveBeenCalledTimes(6);
+      expect(rows).toHaveLength(5555);
+    });
+  });
 });
