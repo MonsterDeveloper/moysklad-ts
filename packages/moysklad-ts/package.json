@@ -30,7 +30,7 @@
     "build": "vite build",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:ui": "vitest --ui",
+    "test:ui": "vitest --ui --coverage.enabled=true",
     "coverage": "vitest run --coverage",
     "lint": "eslint --ext .ts .",
     "typecheck": "vitest typecheck --run"
