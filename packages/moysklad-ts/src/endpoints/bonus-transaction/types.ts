@@ -113,6 +113,11 @@ export interface ListBonusTransactionsOptions {
   filter?: FilterOptions<BonusTransactionModel>;
 }
 
+export type AllBonusTransactionsOptions = Omit<
+  ListBonusTransactionsOptions,
+  "pagination"
+>;
+
 export type FirstBonusTransactionOptions = Omit<
   ListBonusTransactionsOptions,
   "pagination"

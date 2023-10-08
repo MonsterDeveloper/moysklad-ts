@@ -8,8 +8,10 @@ import {
   type ListResponse,
   type Subset,
   type UpdateMeta,
+  type BatchGetResult,
 } from "@/types";
 import type {
+  AllBonusTransactionsOptions,
   BonusTransactionModel,
   CreateBonusTransactionOptions,
   FirstBonusTransactionOptions,
@@ -37,6 +39,22 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
       searchParameters,
     });
     return response.json();
+  }
+
+  async all<T extends AllBonusTransactionsOptions = Record<string, unknown>>(
+    options?: Subset<T, AllBonusTransactionsOptions>,
+  ): Promise<
+    BatchGetResult<
+      GetFindResult<BonusTransactionModel, T["expand"]>,
+      Entity.BonusTransaction
+    >
+  > {
+    return this.client.batchGet(async (limit, offset) => {
+      return this.list({
+        ...options,
+        pagination: { limit, offset },
+      });
+    });
   }
 
   async get<T extends GetBonusTransactionOptions = Record<string, unknown>>(

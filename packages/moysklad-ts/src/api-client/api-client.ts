@@ -1,6 +1,13 @@
 import { version } from "../../package.json";
 import { btoa } from "js-base64";
 import { handleError } from "./handle-error";
+import type {
+  ListResponse,
+  Entity,
+  BatchGetResult,
+  BatchGetOptions,
+} from "@/types";
+import { batchPromises } from "@/utils";
 
 export type BasicAuth = {
   login: string;
@@ -17,6 +24,7 @@ export type ApiClientOptions = {
   baseUrl?: string;
   userAgent?: string;
   auth: Auth;
+  batchGetOptions?: BatchGetOptions;
 };
 
 type RequestOptions = Omit<RequestInit, "body"> & {
@@ -29,6 +37,7 @@ export class ApiClient {
   private baseUrl: string;
   private userAgent: string;
   private auth: Auth;
+  private batchGetOptions: Required<BatchGetOptions>;
 
   constructor(options: ApiClientOptions) {
     this.baseUrl = options.baseUrl ?? "https://api.moysklad.ru/api/remap/1.2";
@@ -37,7 +46,14 @@ export class ApiClient {
       `moysklad-ts/${version} (+https://github.com/MonsterDeveloper/moysklad-ts)`;
 
     this.auth = options.auth;
+    this.batchGetOptions = {
+      limit: 1000,
+      expandLimit: 100,
+      concurrencyLimit: 3,
+      ...options.batchGetOptions,
+    };
   }
+
   async request(
     endpoint: string,
     { searchParameters, ...options }: RequestOptions = {},
@@ -110,5 +126,40 @@ export class ApiClient {
     if (typeof url === "string") return this.buildStringUrl(url);
 
     return this.buildArrayUrl(url);
+  }
+
+  async batchGet<T, E extends Entity>(
+    fetcher: (limit: number, offset: number) => Promise<ListResponse<T, E>>,
+    hasExpand?: boolean,
+  ): Promise<BatchGetResult<T, E>> {
+    const rows: T[] = [];
+    const limit = hasExpand
+      ? this.batchGetOptions.expandLimit
+      : this.batchGetOptions.limit;
+
+    const data = await fetcher(limit, 0);
+    const size = data.meta.size;
+    const context = data.context;
+
+    rows.push(...data.rows);
+
+    const promises: Promise<unknown>[] = [];
+    for (let offset = limit; offset < size; offset += limit) {
+      promises.push(fetcher(limit, offset).then(({ rows }) => rows));
+    }
+
+    const generator = batchPromises(
+      promises,
+      this.batchGetOptions.concurrencyLimit,
+    );
+
+    for await (const promisesValues of generator) {
+      rows.push(...(promisesValues.flat() as T[]));
+    }
+
+    return {
+      context,
+      rows,
+    };
   }
 }

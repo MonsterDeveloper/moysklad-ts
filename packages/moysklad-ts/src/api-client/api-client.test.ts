@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { ApiClient, type BasicAuth, type TokenAuth } from "./api-client";
 import { btoa } from "js-base64";
 import { MoyskladError } from "@/errors";
+import type { ListMetadata } from "@/types";
 
 const EXAMPLE_BASE_URL = "https://example.com/api";
 
@@ -10,17 +11,17 @@ describe("ApiClient", () => {
     vi.restoreAllMocks();
   });
 
-  describe("request", () => {
-    const userAgent = "test-user-agent";
-    const basicAuth: BasicAuth = {
-      login: "test-login",
-      password: "test-password",
-    };
-    const tokenAuth: TokenAuth = {
-      token: "test-token",
-    };
-    const body = { test: "test" };
+  const userAgent = "test-user-agent";
+  const basicAuth: BasicAuth = {
+    login: "test-login",
+    password: "test-password",
+  };
+  const tokenAuth: TokenAuth = {
+    token: "test-token",
+  };
+  const body = { test: "test" };
 
+  describe("request", () => {
     it("should send a request with default Moysklad base URL", async () => {
       const fetchSpy = vi.spyOn(globalThis, "fetch");
       const client = new ApiClient({ auth: tokenAuth });
@@ -133,6 +134,22 @@ describe("ApiClient", () => {
       await expect(client.request("/error")).rejects.toThrow(MoyskladError);
     });
 
+    it("should append search parameters to the URL", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({ auth: tokenAuth });
+
+      await client.request("/", {
+        searchParameters: new URLSearchParams({ foo: "bar" }),
+      });
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        "https://api.moysklad.ru/api/remap/1.2/?foo=bar",
+        expect.any(Object),
+      );
+    });
+  });
+
+  describe("get", () => {
     it("should send a GET request", async () => {
       const fetchSpy = vi.spyOn(globalThis, "fetch");
       const client = new ApiClient({ auth: tokenAuth });
@@ -146,7 +163,9 @@ describe("ApiClient", () => {
         }),
       );
     });
+  });
 
+  describe("post", () => {
     it("should send a POST request", async () => {
       const fetchSpy = vi.spyOn(globalThis, "fetch");
       const client = new ApiClient({ auth: tokenAuth });
@@ -160,7 +179,9 @@ describe("ApiClient", () => {
         }),
       );
     });
+  });
 
+  describe("put", () => {
     it("should send a PUT request", async () => {
       const fetchSpy = vi.spyOn(globalThis, "fetch");
       const client = new ApiClient({ auth: tokenAuth });
@@ -174,7 +195,9 @@ describe("ApiClient", () => {
         }),
       );
     });
+  });
 
+  describe("delete", () => {
     it("should send a DELETE request", async () => {
       const fetchSpy = vi.spyOn(globalThis, "fetch");
       const client = new ApiClient({ auth: tokenAuth });
@@ -186,20 +209,6 @@ describe("ApiClient", () => {
         expect.objectContaining({
           method: "DELETE",
         }),
-      );
-    });
-
-    it("should append search parameters to the URL", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
-      const client = new ApiClient({ auth: tokenAuth });
-
-      await client.request("/", {
-        searchParameters: new URLSearchParams({ foo: "bar" }),
-      });
-
-      expect(fetchSpy).toHaveBeenCalledWith(
-        "https://api.moysklad.ru/api/remap/1.2/?foo=bar",
-        expect.any(Object),
       );
     });
   });
@@ -248,6 +257,70 @@ describe("ApiClient", () => {
       const url = client.buildUrl(`/foo//bar/123`);
 
       expect(url.toString()).toBe(`${EXAMPLE_BASE_URL}/foo/bar/123`);
+    });
+  });
+
+  describe("batchGet", () => {
+    const bigData = [...Array.from({ length: 5555 }).keys()];
+    const smallData = [...Array.from({ length: 5 }).keys()];
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+    const constructFetcher = (data: number[]) =>
+      vi.fn(async (limit: number, offset: number) => ({
+        rows: data.slice(offset, offset + limit),
+        meta: { size: data.length } as unknown as ListMetadata<never>,
+        context: {} as never,
+      }));
+
+    it("should fetch all rows with default limit", async () => {
+      const client = new ApiClient({ auth: { token: "" } });
+      const fetcher = constructFetcher(bigData);
+
+      const result = await client.batchGet(fetcher);
+      expect(fetcher).toHaveBeenCalledTimes(Math.ceil(bigData.length / 1000));
+      expect(result.rows).toEqual(bigData);
+    });
+
+    it("should fetch all rows with expand limit", async () => {
+      const client = new ApiClient({ auth: { token: "" } });
+
+      const fetcher = constructFetcher(bigData);
+
+      const result = await client.batchGet(fetcher, true);
+      expect(fetcher).toHaveBeenCalledTimes(Math.ceil(bigData.length / 100));
+      expect(result.rows).toEqual(bigData);
+    });
+
+    it("should fetch all rows with custom limit", async () => {
+      const client = new ApiClient({
+        auth: { token: "" },
+        batchGetOptions: { limit: 150 },
+      });
+
+      const fetcher = constructFetcher(bigData);
+
+      const result = await client.batchGet(fetcher);
+      expect(fetcher).toHaveBeenCalledTimes(Math.ceil(bigData.length / 150));
+      expect(result.rows).toEqual(bigData);
+    });
+
+    it("should fetch all rows if row count is less than limit", async () => {
+      const client = new ApiClient({ auth: { token: "" } });
+
+      const fetcher = constructFetcher(smallData);
+
+      const result = await client.batchGet(fetcher);
+      expect(fetcher).toHaveBeenCalledTimes(1);
+      expect(result.rows).toEqual(smallData);
+    });
+
+    it("should return empty rows if no data", async () => {
+      const client = new ApiClient({ auth: { token: "" } });
+
+      const fetcher = constructFetcher([]);
+
+      const result = await client.batchGet(fetcher);
+      expect(fetcher).toHaveBeenCalledTimes(1);
+      expect(result.rows).toEqual([]);
     });
   });
 });

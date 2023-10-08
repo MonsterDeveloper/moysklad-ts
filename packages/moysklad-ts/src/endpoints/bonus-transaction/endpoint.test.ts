@@ -264,4 +264,20 @@ describe("BonusTransactionEndpoint", () => {
       );
     });
   });
+
+  describe("all", () => {
+    it("should fetch all bonus transactions", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({
+        auth: { token: "" },
+        baseUrl: "https://batch-get.com",
+      });
+      const endpoint = new BonusTransactionEndpoint(client);
+
+      const { rows } = await endpoint.all();
+
+      expect(fetchSpy).toHaveBeenCalledTimes(6);
+      expect(rows).toHaveLength(5555);
+    });
+  });
 });

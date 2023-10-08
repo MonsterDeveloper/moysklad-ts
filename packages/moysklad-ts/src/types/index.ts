@@ -13,3 +13,5 @@ export * from "./order";
 export * from "./batch-delete";
 export * from "./filters";
 export * from "./document-rate";
+export * from "./context";
+export * from "./batch-get";
