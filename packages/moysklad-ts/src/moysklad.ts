@@ -1,3 +1,4 @@
+/* c8 ignore start */
 import { ApiClient, type ApiClientOptions } from "@/api-client";
 import {
   BonusTransactionEndpoint,
@@ -18,3 +19,5 @@ export class Moysklad {
     this.demand = new DemandEndpoint(this.client);
   }
 }
+
+/* c8 ignore stop */
