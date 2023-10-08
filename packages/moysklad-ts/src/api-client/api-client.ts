@@ -38,11 +38,14 @@ export class ApiClient {
 
     this.auth = options.auth;
   }
-  async request(endpoint: string, options: RequestOptions = {}) {
+  async request(
+    endpoint: string,
+    { searchParameters, ...options }: RequestOptions = {},
+  ) {
     const url = this.buildUrl(endpoint);
 
     const response = await fetch(
-      url + (options.searchParameters ? `?${options.searchParameters}` : ""),
+      url + (searchParameters ? `?${searchParameters}` : ""),
       {
         ...options,
         body: options.body ? JSON.stringify(options.body) : undefined,
