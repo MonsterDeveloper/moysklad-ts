@@ -3,6 +3,7 @@ import { MOYSKLAD_BASE_URL } from "./constants";
 
 import security from "./security";
 import bonusTransaction from "./bonus-transaction";
+import demand from "./demand";
 
 export default [
   rest.all(MOYSKLAD_BASE_URL, (_, response, context) => {
@@ -16,4 +17,5 @@ export default [
   }),
   ...security,
   ...bonusTransaction,
+  ...demand,
 ];
