@@ -37,7 +37,7 @@ describe("BonusTransactionEndpoint", () => {
 
       expect(fetchSpy).toHaveBeenCalledWith(
         expect.stringContaining(
-          `${ENDPOINT_URL}?expand=organization.owner&filter=name%3D123`,
+          `${ENDPOINT_URL}?limit=100&expand=organization.owner&filter=name%3D123`,
         ),
         expect.objectContaining({ method: "GET" }),
       );
@@ -66,7 +66,7 @@ describe("BonusTransactionEndpoint", () => {
       await endpoint.get("123", { expand: { group: true } });
 
       expect(fetchSpy).toHaveBeenCalledWith(
-        expect.stringContaining(`${ENDPOINT_URL}/123?expand=group`),
+        expect.stringContaining(`${ENDPOINT_URL}/123?limit=100&expand=group`),
         expect.objectContaining({ method: "GET" }),
       );
     });
@@ -101,7 +101,7 @@ describe("BonusTransactionEndpoint", () => {
       await endpoint.update("123", data, { expand: { owner: true } });
 
       expect(fetchSpy).toHaveBeenCalledWith(
-        expect.stringContaining(`${ENDPOINT_URL}/123?expand=owner`),
+        expect.stringContaining(`${ENDPOINT_URL}/123?limit=100&expand=owner`),
         expect.objectContaining({
           method: "PUT",
           body: JSON.stringify(data),
@@ -135,7 +135,7 @@ describe("BonusTransactionEndpoint", () => {
       await endpoint.create({} as never, { expand: { owner: true } });
 
       expect(fetchSpy).toHaveBeenCalledWith(
-        expect.stringContaining(`${ENDPOINT_URL}?expand=owner`),
+        expect.stringContaining(`${ENDPOINT_URL}?limit=100&expand=owner`),
         expect.objectContaining({
           method: "POST",
           body: JSON.stringify({}),
@@ -171,7 +171,9 @@ describe("BonusTransactionEndpoint", () => {
       await endpoint.upsert(data as never, { expand: { organization: true } });
 
       expect(fetchSpy).toHaveBeenCalledWith(
-        expect.stringContaining(`${ENDPOINT_URL}?expand=organization`),
+        expect.stringContaining(
+          `${ENDPOINT_URL}?limit=100&expand=organization`,
+        ),
         expect.objectContaining({
           method: "POST",
           body: JSON.stringify(data),

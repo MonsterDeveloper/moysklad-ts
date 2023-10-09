@@ -136,16 +136,18 @@ export function composeSearchParameters({
   filter?: Record<string, Filter>;
 }) {
   const searchParameters = new URLSearchParams();
+  const expandFields = expand && traverseExpand(expand);
 
   if (typeof pagination?.limit === "number")
     searchParameters.append("limit", pagination.limit.toString());
+  else if (expandFields && expandFields.length > 0)
+    searchParameters.append("limit", "100");
+
   if (typeof pagination?.offset === "number")
     searchParameters.append("offset", pagination.offset.toString());
 
-  if (expand) {
-    const expandFields = traverseExpand(expand);
-    if (expandFields.length > 0)
-      searchParameters.append("expand", expandFields.join(","));
+  if (expandFields && expandFields.length > 0) {
+    searchParameters.append("expand", expandFields.join(","));
   }
 
   if (order) {

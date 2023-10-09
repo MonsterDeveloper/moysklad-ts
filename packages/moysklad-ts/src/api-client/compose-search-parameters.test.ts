@@ -34,7 +34,7 @@ describe("composeSearchParameters", () => {
       expect(searchParameters).toBeUndefined();
     });
 
-    it("should add 'expand' parameter with correct fields if 'expand' is not empty", () => {
+    it("should add 'expand' and limit parameters with correct fields if 'expand' is not empty", () => {
       const expand = {
         owner: false,
         group: true,
@@ -48,7 +48,7 @@ describe("composeSearchParameters", () => {
       };
       const searchParameters = composeSearchParameters({ expand });
       expect(searchParameters?.toString().replaceAll("%2C", ",")).toBe(
-        "expand=group,demand,agent.owner,agent.account.group",
+        "limit=100&expand=group,demand,agent.owner,agent.account.group",
       );
     });
 

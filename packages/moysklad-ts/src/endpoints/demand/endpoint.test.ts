@@ -38,7 +38,7 @@ describe("DemandEndpoint", () => {
 
       expect(fetchSpy).toHaveBeenCalledWith(
         expect.stringContaining(
-          `${ENDPOINT_URL}?expand=organization.owner&filter=name%3D123`,
+          `${ENDPOINT_URL}?limit=100&expand=organization.owner&filter=name%3D123`,
         ),
         expect.objectContaining({ method: "GET" }),
       );
@@ -70,7 +70,7 @@ describe("DemandEndpoint", () => {
 
       expect(fetchSpy).toHaveBeenCalledWith(
         expect.stringContaining(
-          `${ENDPOINT_URL}/123?expand=organization.owner`,
+          `${ENDPOINT_URL}/123?limit=100&expand=organization.owner`,
         ),
         expect.objectContaining({ method: "GET" }),
       );

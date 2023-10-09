@@ -36,7 +36,7 @@ describe("CounterpartyEndpoint", () => {
 
       expect(fetchSpy).toHaveBeenCalledWith(
         expect.stringContaining(
-          `${ENDPOINT_URL}?expand=owner.group&filter=name%3D123`,
+          `${ENDPOINT_URL}?limit=100&expand=owner.group&filter=name%3D123`,
         ),
         expect.objectContaining({ method: "GET" }),
       );
@@ -83,7 +83,7 @@ describe("CounterpartyEndpoint", () => {
       });
 
       expect(fetchSpy).toHaveBeenCalledWith(
-        expect.stringContaining(`${ENDPOINT_URL}/123?expand=group`),
+        expect.stringContaining(`${ENDPOINT_URL}/123?limit=100&expand=group`),
         expect.objectContaining({ method: "GET" }),
       );
     });
@@ -120,7 +120,9 @@ describe("CounterpartyEndpoint", () => {
       );
 
       expect(fetchSpy).toHaveBeenCalledWith(
-        expect.stringContaining(`${ENDPOINT_URL}/123?expand=owner.group`),
+        expect.stringContaining(
+          `${ENDPOINT_URL}/123?limit=100&expand=owner.group`,
+        ),
         expect.objectContaining({
           method: "PUT",
           body: JSON.stringify({ name: "New Name" }),
