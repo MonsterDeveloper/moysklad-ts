@@ -4,10 +4,14 @@ import type {
   DateTimeFilter,
   Entity,
   EnumFilter,
+  ExpandOptions,
+  FilterOptions,
   IdFilter,
   Idable,
   Meta,
   Model,
+  OrderOptions,
+  PaginationOptions,
   StringFilter,
 } from "@/types";
 import type { EmployeeModel } from "../employee";
@@ -169,4 +173,25 @@ export interface CounterpartyModel extends Model {
     | "phone"
     | "email"
     | "fax";
+}
+
+export interface ListCounterpartiesOptions {
+  pagination?: PaginationOptions;
+  expand?: ExpandOptions<CounterpartyModel>;
+  order?: OrderOptions<CounterpartyModel>;
+  search?: string;
+  filter?: FilterOptions<CounterpartyModel>;
+}
+
+export type AllCounterpartiesOptions = Omit<
+  ListCounterpartiesOptions,
+  "pagination"
+>;
+
+export interface GetCounterpartyOptions {
+  expand?: ExpandOptions<CounterpartyModel>;
+}
+
+export interface UpdateCounterpartyOptions {
+  expand?: ExpandOptions<CounterpartyModel>;
 }

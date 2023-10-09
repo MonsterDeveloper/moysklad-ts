@@ -2,6 +2,7 @@
 import { ApiClient, type ApiClientOptions } from "@/api-client";
 import {
   BonusTransactionEndpoint,
+  CounterpartyEndpoint,
   DemandEndpoint,
   SecurityEndpoint,
 } from "@/endpoints";
@@ -11,12 +12,14 @@ export class Moysklad {
   public bonusTransaction: BonusTransactionEndpoint;
   public security: SecurityEndpoint;
   public demand: DemandEndpoint;
+  public counterparty: CounterpartyEndpoint;
 
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
     this.bonusTransaction = new BonusTransactionEndpoint(this.client);
     this.security = new SecurityEndpoint(this.client);
     this.demand = new DemandEndpoint(this.client);
+    this.counterparty = new CounterpartyEndpoint(this.client);
   }
 }
 
