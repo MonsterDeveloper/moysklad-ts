@@ -1,5 +1,17 @@
-import type { DateTime, Entity, Idable, Meta, Model } from "@/types";
-import type { EmptyObject } from "type-fest";
+import type {
+  BooleanFilter,
+  DateTime,
+  DateTimeFilter,
+  Entity,
+  EnumFilter,
+  IdFilter,
+  Idable,
+  Meta,
+  Model,
+  StringFilter,
+} from "@/types";
+import type { EmployeeModel } from "../employee";
+import type { GroupModel } from "../group";
 
 export enum CounterpartyCompanyType {
   Legal = "legal",
@@ -50,13 +62,11 @@ interface BaseCounterparty extends Idable, Meta<Entity.Counterparty> {
   fax?: string;
   // TODO expand files
   files: unknown;
-  // TODO expand group
-  group: unknown;
+  group: Meta<Entity.Group>;
   name: string;
   // TODO expand notes
   notes?: unknown;
-  // TODO expand owner
-  owner?: unknown;
+  owner?: Meta<Entity.Employee>;
   phone?: string;
   // TODO add priceType
   priceType?: unknown;
@@ -117,5 +127,46 @@ export type Counterparty =
 
 export interface CounterpartyModel extends Model {
   object: Counterparty;
-  expandable: EmptyObject;
+  expandable: {
+    owner: EmployeeModel;
+    group: GroupModel;
+  };
+  filters: {
+    accountId: IdFilter;
+    actualAddress: StringFilter;
+    archived: BooleanFilter;
+    // TODO filters for attributes
+    code: StringFilter;
+    companyType: EnumFilter<CounterpartyCompanyType>;
+    created: DateTimeFilter;
+    description: StringFilter;
+    discountCardNumber: StringFilter;
+    email: StringFilter;
+    externalCode: StringFilter;
+    fax: StringFilter;
+    group: IdFilter;
+    id: IdFilter;
+    name: StringFilter;
+    owner: IdFilter;
+    priceType: IdFilter;
+    shared: BooleanFilter;
+    // TODO filters for state
+    syncId: IdFilter;
+    tags: StringFilter;
+    updated: DateTimeFilter;
+  };
+  orderableFields:
+    | "id"
+    | "version"
+    | "updated"
+    | "updatedBy"
+    | "name"
+    | "description"
+    | "code"
+    | "externalCode"
+    | "archived"
+    | "created"
+    | "phone"
+    | "email"
+    | "fax";
 }
