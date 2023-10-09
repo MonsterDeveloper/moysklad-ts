@@ -4,6 +4,7 @@
 import { assertType, describe, expectTypeOf, it } from "vitest";
 import type {
   BooleanFilter,
+  EnumFilter,
   EqualityFilter,
   FilterOptions,
   IdFilter,
@@ -93,6 +94,39 @@ describe("filters", () => {
 
     it("should accept is not null filter", () => {
       assertType(idFilter({ id: { isNotNull: true } }));
+    });
+  });
+
+  describe("EnumFilter", () => {
+    enum TestEnum {
+      Value1 = "value1",
+      Value2 = "value2",
+    }
+
+    const enumFilter = (filter: Record<string, EnumFilter<TestEnum>>) => {};
+
+    it("should accept a string", () => {
+      assertType(enumFilter({ name: TestEnum.Value1 }));
+    });
+
+    it("should accept an array of strings", () => {
+      assertType(enumFilter({ name: [TestEnum.Value1] }));
+    });
+
+    it("should accept equals filter", () => {
+      assertType(enumFilter({ name: { eq: TestEnum.Value2 } }));
+    });
+
+    it("should accept not equals filter", () => {
+      assertType(enumFilter({ name: { ne: TestEnum.Value2 } }));
+    });
+
+    it("should accept is null filter", () => {
+      assertType(enumFilter({ name: { isNull: true } }));
+    });
+
+    it("should accept is not null filter", () => {
+      assertType(enumFilter({ name: { isNotNull: true } }));
     });
   });
 

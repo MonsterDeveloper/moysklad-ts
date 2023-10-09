@@ -65,6 +65,11 @@ export type EqualityFilter<T extends Primitive> =
 
 export type IdFilter = Partial<EqualityFilter<string>> | string | string[];
 
+export type EnumFilter<T extends Primitive> =
+  | Partial<EqualityFilter<T>>
+  | T
+  | T[];
+
 export type BooleanFilter = Partial<EqualityFilter<boolean>> | boolean;
 
 export type NumberFilter =
