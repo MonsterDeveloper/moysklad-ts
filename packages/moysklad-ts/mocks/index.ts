@@ -5,6 +5,7 @@ import security from "./security";
 import bonusTransaction from "./bonus-transaction";
 import demand from "./demand";
 import batchGet from "./batch-get";
+import counterparty from "./counterparty";
 
 export default [
   rest.all(MOYSKLAD_BASE_URL, (_, response, context) => {
@@ -23,4 +24,5 @@ export default [
   ...security,
   ...bonusTransaction,
   ...demand,
+  ...counterparty,
 ];
