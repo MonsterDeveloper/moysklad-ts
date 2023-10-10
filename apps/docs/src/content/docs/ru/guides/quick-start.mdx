@@ -6,12 +6,12 @@ description: moysklad-ts quick start.
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 :::caution
-This library is in alpha stage and is not yet ready for production use.
+Данная библиотека находится на стадии альфа-тестирования и ещё не готова к использованию в продакшене.
 :::
 
-# Installation
+# Установка
 
-The library requires Node.js version 18 or higher, or another compatible runtime with [`fetch` API](https://developer.mozilla.org/en-US/docs/Web/API/fetch).
+Библиотека требует Node.js версии 18 и выше, либо другой соответствующей среды исполнения, в которой доступен [`fetch` API](https://developer.mozilla.org/en-US/docs/Web/API/fetch).
 
 <Tabs>
 	<TabItem label="npm">`npm i moysklad-ts`</TabItem>
@@ -21,7 +21,7 @@ The library requires Node.js version 18 or higher, or another compatible runtime
 	<TabItem label="Deno">`import { Moysklad } from "https://esm.sh/moysklad-ts";`</TabItem>
 </Tabs>
 
-## Initialization
+## Инициализация
 
 ```typescript
 import { Moysklad } from "moysklad-ts";
@@ -35,26 +35,26 @@ const moysklad = new Moysklad({
 
 :::note
 {/* TODO add initialization options page */}
-For all available options, see [Initialization reference](/reference/initialization).
+Для всех доступных опций см. [Опции инициализации](/reference/initialization).
 :::
 
-## Basic usage
+## Базовое использование
 ```typescript
-// Get a counterparty with owner
+// Получить контрагента с владельцем
 const counterparty = await moysklad.counterparty.get("5427bc76-b95f-11eb-0a80-04bb000cd583", {
-  expand: { owner: true }, // the result is fully typed
+  expand: { owner: true }, // результат полностью типизирован
 });
 
-// Get all demands with a counterparty
+// Получить все отгрузки с контрагентом
 const demands = await moysklad.demand.all({
   expand: { agent: true },
 });
 
-// Get the first demand of a counterparty
+// Получить первую отгрузку контрагента
 const demand = await moysklad.demand.first({
   filter: {
     agent: moysklad.client.buildUrl(["entity", "counterparty", "5427bc76-b95f-11eb-0a80-04bb000cd583"]).toString(),
-  }, // enjoy the autocomplete for all request options
+  }, // автокомплит для всех опций запроса
 });
 ```
 {/* TODO add further reading  */}
