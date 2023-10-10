@@ -71,6 +71,7 @@ try {
 
 ## Documentation
 The documentation is available [here](https://moysklad-ts.vercel.app/).
+Документация на русском языке доступна [здесь](https://moysklad-ts.vercel.app/ru/).
 
 ## Contributing
 Please read the [contributing guidelines](../../CONTRIBUTING.md) before submitting a pull request.
