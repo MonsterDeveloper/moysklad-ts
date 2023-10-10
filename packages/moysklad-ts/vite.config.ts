@@ -5,6 +5,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   build: {
+    minify: false,
+    sourcemap: true,
     lib: {
       entry: fileURLToPath(new URL("src/index.ts", import.meta.url)),
       name: "moysklad",
@@ -17,7 +19,7 @@ export default defineConfig({
   plugins: [
     tsconfigPaths(),
     dts({
-      rollupTypes: true,
+      entryRoot: "src",
     }),
   ],
   test: {

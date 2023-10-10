@@ -58,12 +58,12 @@
   ],
   "main": "./dist/moysklad-ts.umd.cjs",
   "module": "./dist/moysklad-ts.js",
-  "types": "./dist/moysklad-ts.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/moysklad-ts.js",
       "require": "./dist/moysklad-ts.umd.cjs",
-      "types": "./dist/moysklad-ts.d.ts"
+      "types": "./dist/index.d.ts"
     }
   },
   "dependencies": {
