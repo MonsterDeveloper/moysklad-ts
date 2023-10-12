@@ -1,0 +1,12 @@
+---
+title: Initialization
+description: moysklad-ts initialization reference.
+tableOfContents: false
+---
+
+| Parameter         | Default                                                                                                           | Description                                                                                                                                                                                                                                                          |
+|-------------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `auth`            | —                                                                                                                 | Can either be `{ token: string }` for token-based auth, or `{ login: string, password: string }` for HTTP Basic Auth. (see [Moysklad Docs](https://github.com/wmakeev/moysklad#%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F) |
+| `baseUrl`         | `"https://api.moysklad.ru/api/remap/1.2"`                                                                         | Moysklad API base URL                                                                                                                                                                                                                                                |
+| `userAgent`       | `moysklad-ts/${version} (+https://github.com/MonsterDeveloper/moysklad-ts)`, where `{version}`  - library version | Content of the "User-Agent" header for outgoing requests. It is convenient to use it to control changes via API on the "Audit" tab.                                                                                                                                  |
+| `batchGetOptions` | `{ limit: 1000, expandLimit: 100, concurrencyLimit: 3 }`                                                          | Options for fetching all entities from the API (`.all()` method). Sets the limits for requests' sizes with and without expand, and a limit of concurrent requests.                                                                                                   |
