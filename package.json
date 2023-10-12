@@ -15,9 +15,9 @@
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
     "@commitlint/load": "^17.7.2",
-    "eslint": "^8.50.0",
-    "husky": "^8.0.0",
-    "turbo": "^1.10.14"
+    "eslint": "^8.51.0",
+    "husky": "^8.0.3",
+    "turbo": "^1.10.15"
   },
   "license": "GPL-3.0-only",
   "author": "Andrei Bobkov <slider7259@gmail.com>",
