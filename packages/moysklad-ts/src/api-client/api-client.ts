@@ -15,15 +15,25 @@ export type BasicAuth = {
 };
 
 export type TokenAuth = {
+  // Auth token
   token: string;
 };
 
 export type Auth = BasicAuth | TokenAuth;
 
+/**
+ * ApiClient initialization options
+ *
+ * @see https://moysklad-ts.vercel.app/reference/initialization/
+ */
 export type ApiClientOptions = {
+  /** Moysklad API base url */
   baseUrl?: string;
+  /** User-Agent header */
   userAgent?: string;
+  /** Auth options */
   auth: Auth;
+  /** Batch get options */
   batchGetOptions?: BatchGetOptions;
 };
 
