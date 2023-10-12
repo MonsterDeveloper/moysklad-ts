@@ -7,7 +7,10 @@ export type BatchGetResult<T, E extends Entity> = Pick<
 >;
 
 export interface BatchGetOptions {
+  /** Limit query parameter for 1 request */
   limit?: number;
+  /** Limit query param for 1 request with `expand` */
   expandLimit?: number;
+  /** Limit of concurrent requests */
   concurrencyLimit?: number;
 }
