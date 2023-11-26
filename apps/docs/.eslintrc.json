@@ -11,5 +11,14 @@
   "rules": {
     "no-console": "error",
     "prettier/prettier": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["env.d.ts"],
+      "rules": {
+        "@typescript-eslint/triple-slash-reference": "off",
+        "unicorn/prevent-abbreviations": "off"
+      }
+    }
+  ]
 }
