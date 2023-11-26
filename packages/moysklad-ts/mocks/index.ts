@@ -6,6 +6,7 @@ import bonusTransaction from "./bonus-transaction";
 import demand from "./demand";
 import batchGet from "./batch-get";
 import counterparty from "./counterparty";
+import customerOrder from "./customer-order";
 
 export default [
   rest.all(MOYSKLAD_BASE_URL, (_, response, context) => {
@@ -25,4 +26,5 @@ export default [
   ...bonusTransaction,
   ...demand,
   ...counterparty,
+  ...customerOrder,
 ];

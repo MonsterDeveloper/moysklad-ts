@@ -1,4 +1,5 @@
 import type {
+  Attribute,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -47,8 +48,7 @@ interface BaseCounterparty extends Idable, Meta<Entity.Counterparty> {
     street?: string;
   };
   archived: boolean;
-  // TODO attributes
-  attributes?: unknown;
+  attributes?: Attribute[]; // TODO attributes filters
   bonusPoints?: number;
   // TODO expand bonusProgram
   bonusProgram?: unknown;
