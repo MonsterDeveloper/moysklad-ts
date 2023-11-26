@@ -5,6 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   build: {
+    target: "esnext",
     minify: false,
     sourcemap: true,
     lib: {
