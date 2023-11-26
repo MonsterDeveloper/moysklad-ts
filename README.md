@@ -73,13 +73,14 @@ try {
 
 ## Documentation
 The documentation is available [here](https://moysklad-ts.vercel.app/).
+
 Документация на русском языке доступна [здесь](https://moysklad-ts.vercel.app/ru/).
 
 ## Contributing
-Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a pull request.
+Please read the [contributing guidelines](../../CONTRIBUTING.md) before submitting a pull request.
 
 ## License
-This project is licensed under the [GPL-3.0 license](./LICENSE).
+This project is licensed under the [GPL-3.0 license](../../LICENSE).
 
 ## Roadmap
 ### Core features
