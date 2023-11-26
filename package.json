@@ -12,18 +12,16 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.7.2",
-    "@commitlint/config-conventional": "^17.7.0",
-    "@commitlint/load": "^17.7.2",
-    "eslint": "^8.51.0",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@commitlint/load": "^18.4.3",
     "husky": "^8.0.3",
-    "turbo": "^1.10.15"
+    "turbo": "^1.10.16"
   },
   "license": "GPL-3.0-only",
   "author": "Andrei Bobkov <slider7259@gmail.com>",
   "engines": {
     "node": ">=18.x.x <= 20.x.x"
   },
-  "packageManager": "pnpm@8.6.10",
-  "name": "moysklad-ts"
+  "packageManager": "pnpm@8.6.10"
 }
