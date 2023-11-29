@@ -150,3 +150,12 @@ export interface ListCustomerOrdersOptions {
 export interface GetCustomerOrderOptions {
   expand?: ExpandOptions<CustomerOrderModel>;
 }
+
+export type FirstCustomerOrderOptions = Omit<
+  ListCustomerOrdersOptions,
+  "pagination"
+>;
+export type AllCustomerOrdersOptions = Omit<
+  ListCustomerOrdersOptions,
+  "pagination"
+>;
