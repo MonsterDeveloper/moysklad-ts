@@ -67,6 +67,7 @@ describe("model", () => {
       expectTypeOf<GetModelUpdatableFields<TestModel>>().toEqualTypeOf<{
         agent?: {
           meta: {
+            type: Entity.Counterparty;
             href: string;
             mediaType: MediaType;
           };
@@ -84,6 +85,7 @@ describe("model", () => {
       expectTypeOf<GetModelUpdatableFields<TestModel>>().toEqualTypeOf<{
         agent?: {
           meta: {
+            type: Entity.Counterparty;
             href: string;
             mediaType: MediaType;
           };
@@ -134,6 +136,7 @@ describe("model", () => {
       expectTypeOf<GetModelRequiredCreateFields<TestModel>>().toEqualTypeOf<{
         agent: {
           meta: {
+            type: Entity.Counterparty;
             href: string;
             mediaType: MediaType;
           };

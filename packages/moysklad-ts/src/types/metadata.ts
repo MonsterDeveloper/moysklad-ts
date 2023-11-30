@@ -10,7 +10,8 @@ export interface Metadata<T extends Entity> {
   downloadHref?: string;
 }
 
-export interface UpdateMetadata {
+export interface UpdateMetadata<T extends Entity> {
+  type: T;
   href: string;
   mediaType: MediaType;
 }
@@ -31,6 +32,6 @@ export interface ListMeta<T extends Entity> {
   meta: ListMetadata<T>;
 }
 
-export interface UpdateMeta {
-  meta: UpdateMetadata;
+export interface UpdateMeta<T extends Entity> {
+  meta: UpdateMetadata<T>;
 }

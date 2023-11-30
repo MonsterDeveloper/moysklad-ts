@@ -3,6 +3,7 @@ import type { ReadonlyKeysOf } from "type-fest";
 import type { UpdateMeta, Meta } from "./metadata";
 import type { Filter } from "./filters";
 import type { Attribute } from "./attribute";
+import type { Entity } from "./entity";
 
 export interface Model<T extends object = object> {
   object: T;
@@ -25,16 +26,16 @@ export type GetModelUpdatableFields<M extends Model> = {
   [Key in keyof M["object"] as Exclude<Key, ReadonlyKeysOf<M["object"]> | "meta" | "id" | "accountId">]?:
 
     // value is a Meta object?
-    Meta<any> extends M["object"][Key]
-      // key is optional?
-      ? undefined extends M["object"][Key]
-        // make it nullable
-        ? UpdateMeta | null
-        : UpdateMeta
+    M["object"][Key] extends Meta<infer T>
+      ? UpdateMeta<T> 
+    // key is optional?
+    : M["object"][Key] extends Meta<infer T> | undefined
+      // make it nullable
+      ? UpdateMeta<T> | null
     
     // value is an Attribute array?
     : Attribute[] extends M["object"][Key]
-      ? (UpdateMeta & Pick<Attribute, "value">)[]
+      ? (UpdateMeta<Entity.AttributeMetadata> & Pick<Attribute, "value">)[]
 
       // key is optional?
       : undefined extends M["object"][Key]
@@ -51,9 +52,9 @@ export type GetModelRequiredCreateFields<M extends Model> = {
   // iterate over creatable fields in model's object, while making them required
   [Key in Extract<M["requiredCreateFields"], keyof M["object"]>]-?:
     // value is a Meta object?
-    Meta<any> extends M["object"][Key]
+    M["object"][Key] extends Meta<infer T> 
       // replace it with UpdateMeta
-      ? UpdateMeta
+      ? UpdateMeta<T>
       : NonNullable<M["object"][Key]>;
 };
 

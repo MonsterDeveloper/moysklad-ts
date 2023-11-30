@@ -110,7 +110,8 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
   >(
     data: (
       | GetModelCreatableFields<BonusTransactionModel>
-      | (GetModelUpdatableFields<BonusTransactionModel> & UpdateMeta)
+      | (GetModelUpdatableFields<BonusTransactionModel> &
+          UpdateMeta<Entity.BonusTransaction>)
     )[],
     options?: Subset<T, CreateBonusTransactionOptions>,
   ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>[]> {
