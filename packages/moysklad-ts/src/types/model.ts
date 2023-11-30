@@ -2,6 +2,7 @@
 import type { ReadonlyKeysOf } from "type-fest";
 import type { UpdateMeta, Meta } from "./metadata";
 import type { Filter } from "./filters";
+import type { Attribute } from "./attribute";
 
 export interface Model<T extends object = object> {
   object: T;
@@ -30,6 +31,10 @@ export type GetModelUpdatableFields<M extends Model> = {
         // make it nullable
         ? UpdateMeta | null
         : UpdateMeta
+    
+    // value is an Attribute array?
+    : Attribute[] extends M["object"][Key]
+      ? (UpdateMeta & Pick<Attribute, "value">)[]
 
       // key is optional?
       : undefined extends M["object"][Key]
