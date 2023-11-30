@@ -6,14 +6,18 @@ import {
   type Subset,
   MediaType,
   type BatchDeleteResult,
+  type GetModelCreatableFields,
+  type GetModelUpdatableFields,
 } from "@/types";
 import { BaseEndpoint } from "../base-endpoint";
 import type {
   AllCustomerOrdersOptions,
+  CreateCustomerOrderOptions,
   CustomerOrderModel,
   FirstCustomerOrderOptions,
   GetCustomerOrderOptions,
   ListCustomerOrdersOptions,
+  UpdateCustomerOrderOptions,
 } from "./types";
 import { composeSearchParameters } from "@/api-client";
 
@@ -85,6 +89,35 @@ export class CustomerOrderEndpoint extends BaseEndpoint {
   }
   async delete(id: string): Promise<void> {
     await this.client.delete(`${ENDPOINT_URL}/${id}`);
+  }
+
+  async update<T extends UpdateCustomerOrderOptions = Record<string, unknown>>(
+    id: string,
+    data: GetModelUpdatableFields<CustomerOrderModel>,
+    options?: Subset<T, UpdateCustomerOrderOptions>,
+  ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>> {
+    const searchParameters = composeSearchParameters(options ?? {});
+
+    const response = await this.client.put(`${ENDPOINT_URL}/${id}`, {
+      body: data,
+      searchParameters,
+    });
+
+    return response.json();
+  }
+
+  async create<T extends CreateCustomerOrderOptions = Record<string, unknown>>(
+    data: GetModelCreatableFields<CustomerOrderModel>,
+    options?: Subset<T, CreateCustomerOrderOptions>,
+  ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>> {
+    const searchParameters = composeSearchParameters(options ?? {});
+
+    const response = await this.client.post(ENDPOINT_URL, {
+      body: data,
+      searchParameters,
+    });
+
+    return response.json();
   }
 
   async batchDelete(ids: string[]): Promise<BatchDeleteResult[]> {

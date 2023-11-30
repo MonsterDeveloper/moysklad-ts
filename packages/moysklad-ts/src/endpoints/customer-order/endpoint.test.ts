@@ -195,4 +195,76 @@ describe("CustomerOrderEndpoint", () => {
       );
     });
   });
+
+  describe("update", () => {
+    it("should send a PUT request with id and data", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({ auth: { token: "" } });
+      const endpoint = new CustomerOrderEndpoint(client);
+
+      const data = { name: "123" };
+
+      await endpoint.update("123", data);
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`${ENDPOINT_URL}/123`),
+        expect.objectContaining({
+          method: "PUT",
+          body: JSON.stringify(data),
+        }),
+      );
+    });
+
+    it("should send a PUT request with search parameters", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({ auth: { token: "" } });
+      const endpoint = new CustomerOrderEndpoint(client);
+
+      const data = { name: "123" };
+
+      await endpoint.update("123", data, { expand: { owner: true } });
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`${ENDPOINT_URL}/123?limit=100&expand=owner`),
+        expect.objectContaining({
+          method: "PUT",
+          body: JSON.stringify(data),
+        }),
+      );
+    });
+  });
+
+  describe("create", () => {
+    it("should send a POST request with data", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({ auth: { token: "" } });
+      const endpoint = new CustomerOrderEndpoint(client);
+
+      await endpoint.create({} as never);
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        expect.stringContaining(ENDPOINT_URL),
+        expect.objectContaining({
+          method: "POST",
+          body: JSON.stringify({}),
+        }),
+      );
+    });
+
+    it("should send a POST request with search parameters", async () => {
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      const client = new ApiClient({ auth: { token: "" } });
+      const endpoint = new CustomerOrderEndpoint(client);
+
+      await endpoint.create({} as never, { expand: { owner: true } });
+
+      expect(fetchSpy).toHaveBeenCalledWith(
+        expect.stringContaining(`${ENDPOINT_URL}?limit=100&expand=owner`),
+        expect.objectContaining({
+          method: "POST",
+          body: JSON.stringify({}),
+        }),
+      );
+    });
+  });
 });

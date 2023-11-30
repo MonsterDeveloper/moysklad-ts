@@ -147,6 +147,14 @@ export interface ListCustomerOrdersOptions {
   filter?: FilterOptions<CustomerOrderModel>;
 }
 
+export interface CreateCustomerOrderOptions {
+  expand?: ExpandOptions<CustomerOrderModel>;
+}
+
+export interface UpdateCustomerOrderOptions {
+  expand?: ExpandOptions<CustomerOrderModel>;
+}
+
 export interface GetCustomerOrderOptions {
   expand?: ExpandOptions<CustomerOrderModel>;
 }
