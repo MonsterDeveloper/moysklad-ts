@@ -3,3 +3,4 @@ export * from "./security";
 export * from "./demand";
 export * from "./counterparty";
 export * from "./customer-order";
+export * from "./custom-entity";

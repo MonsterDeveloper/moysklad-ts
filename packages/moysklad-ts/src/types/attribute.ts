@@ -105,8 +105,8 @@ export interface ProductAttribute extends BaseAttribute {
 export interface CustomEntityAttribute extends BaseAttribute {
   description?: string;
   type: AttributeType.CustomEntity;
-  customEntityMeta: Metadata<Entity.CustomEntity>;
-  value: Meta<Entity.CustomEntity> & { name: string };
+  customEntityMeta: Metadata<Entity.CustomEntityMetadata>;
+  value: Meta<Entity.CustomEntityMetadata> & { name: string };
 }
 
 export type Attribute =

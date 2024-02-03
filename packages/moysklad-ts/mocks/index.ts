@@ -7,6 +7,7 @@ import demand from "./demand";
 import batchGet from "./batch-get";
 import counterparty from "./counterparty";
 import customerOrder from "./customer-order";
+import customEntity from "./custom-entity";
 
 export default [
   rest.all(MOYSKLAD_BASE_URL, (_, response, context) => {
@@ -27,4 +28,5 @@ export default [
   ...demand,
   ...counterparty,
   ...customerOrder,
+  ...customEntity,
 ];
