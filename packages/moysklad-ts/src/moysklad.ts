@@ -7,6 +7,7 @@ import {
   DemandEndpoint,
   SecurityEndpoint,
   CustomEntityEndpoint,
+  ProductEndpoint,
 } from "@/endpoints";
 
 export class Moysklad {
@@ -17,6 +18,7 @@ export class Moysklad {
   public counterparty: CounterpartyEndpoint;
   public customerOrder: CustomerOrderEndpoint;
   public customEntity: CustomEntityEndpoint;
+  public product: ProductEndpoint;
 
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
@@ -26,6 +28,7 @@ export class Moysklad {
     this.counterparty = new CounterpartyEndpoint(this.client);
     this.customerOrder = new CustomerOrderEndpoint(this.client);
     this.customEntity = new CustomEntityEndpoint(this.client);
+    this.product = new ProductEndpoint(this.client);
   }
 }
 

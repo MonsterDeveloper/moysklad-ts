@@ -17,3 +17,4 @@ export * from "./context";
 export * from "./batch-get";
 export * from "./tax-system";
 export * from "./attribute";
+export * from "./price-type";
