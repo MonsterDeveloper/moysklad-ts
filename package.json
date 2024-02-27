@@ -23,5 +23,6 @@
   "engines": {
     "node": ">=18.x.x <= 20.x.x"
   },
-  "packageManager": "pnpm@8.6.10"
+  "packageManager": "pnpm@8.6.10",
+  "version": "0.0.1"
 }
