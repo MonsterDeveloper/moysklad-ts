@@ -139,6 +139,13 @@ describe("composeSearchParameters", () => {
       expect(searchParameters).toBeUndefined();
     });
 
+    it("should not add 'filter' parameter if filter value is undefined", () => {
+      const searchParameters = composeSearchParameters({
+        filter: { pathName: undefined },
+      });
+      expect(searchParameters).toBeUndefined();
+    });
+
     it("should add 'filter' parameter with correct value for primitives", () => {
       const searchParameters = composeSearchParameters({
         filter: {

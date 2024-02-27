@@ -43,8 +43,11 @@ function traverseOrder(order: OrderOption<string> | OrderOption<string>[]) {
   return fields;
 }
 
-function traverseFilter(field: string, filter: Filter) {
+function traverseFilter(field: string, filter: Filter | undefined) {
   const filters = [] as string[];
+
+  if (filter === undefined) return filters;
+
   if (
     typeof filter === "string" ||
     typeof filter === "number" ||
@@ -133,7 +136,7 @@ export function composeSearchParameters({
   expand?: Record<string, unknown>;
   order?: OrderOption<string> | OrderOption<string>[];
   search?: string;
-  filter?: Record<string, Filter>;
+  filter?: Record<string, Filter | undefined>;
 }) {
   const searchParameters = new URLSearchParams();
   const expandFields = expand && traverseExpand(expand);
