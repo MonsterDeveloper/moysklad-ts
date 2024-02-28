@@ -18,3 +18,4 @@ export * from "./batch-get";
 export * from "./tax-system";
 export * from "./attribute";
 export * from "./price-type";
+export * from "./barcodes";

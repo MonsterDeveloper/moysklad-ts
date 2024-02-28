@@ -1,5 +1,6 @@
 import type {
   Attribute,
+  Barcodes,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -19,13 +20,6 @@ import type {
 } from "@/types";
 import type { CounterpartyModel } from "..";
 import type { GroupModel } from "../group";
-
-type Barcodes = {
-  ean13?: string;
-  ean8?: string;
-  code128?: string;
-  gtin?: string;
-}[];
 
 export enum PaymentItemType {
   Good = "GOOD",
