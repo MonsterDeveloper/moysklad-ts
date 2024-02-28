@@ -1,6 +1,6 @@
 {
   "name": "moysklad-ts",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "Fully-typed Moysklad JSON API client",
   "sideEffects": false,
   "type": "module",
