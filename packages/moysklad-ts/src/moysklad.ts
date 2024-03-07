@@ -9,6 +9,7 @@ import {
   CustomEntityEndpoint,
   ProductEndpoint,
   VariantEndpoint,
+  ReportEndpoint,
 } from "@/endpoints";
 
 export class Moysklad {
@@ -21,6 +22,7 @@ export class Moysklad {
   public customEntity: CustomEntityEndpoint;
   public product: ProductEndpoint;
   public variant: VariantEndpoint;
+  public report: ReportEndpoint;
 
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
@@ -32,6 +34,7 @@ export class Moysklad {
     this.customEntity = new CustomEntityEndpoint(this.client);
     this.product = new ProductEndpoint(this.client);
     this.variant = new VariantEndpoint(this.client);
+    this.report = new ReportEndpoint(this.client);
   }
 }
 

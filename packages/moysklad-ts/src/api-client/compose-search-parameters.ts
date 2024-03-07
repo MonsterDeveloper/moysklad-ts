@@ -131,6 +131,7 @@ export function composeSearchParameters({
   order,
   search,
   filter,
+  ...options
 }: {
   pagination?: PaginationOptions;
   expand?: Record<string, unknown>;
@@ -170,6 +171,12 @@ export function composeSearchParameters({
 
     if (filters.length > 0)
       searchParameters.append("filter", filters.join(";"));
+  }
+
+  if (options) {
+    for (const [field, value] of Object.entries(options)) {
+      searchParameters.append(field, String(value));
+    }
   }
 
   return searchParameters.size > 0 ? searchParameters : undefined;

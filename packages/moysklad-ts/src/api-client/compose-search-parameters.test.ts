@@ -321,4 +321,18 @@ describe("composeSearchParameters", () => {
       );
     });
   });
+
+  describe("rest options", () => {
+    it("should add rest options as URLSearchParams", () => {
+      const searchParameters = composeSearchParameters({
+        foo: "bar",
+        bar: "baz",
+        number: 1,
+      } as never);
+
+      expect(searchParameters?.get("foo")).toBe("bar");
+      expect(searchParameters?.get("bar")).toBe("baz");
+      expect(searchParameters?.get("number")).toBe("1");
+    });
+  });
 });

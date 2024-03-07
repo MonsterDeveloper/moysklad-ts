@@ -45,4 +45,12 @@ export enum Entity {
   BonusProgram = "bonusprogram",
   Employee = "employee",
   Group = "group",
+  Image = "image",
+  Stock = "stock",
 }
+
+export type AssortmentEntity =
+  | Entity.Product
+  | Entity.Service
+  | Entity.Bundle
+  | Entity.Variant;
