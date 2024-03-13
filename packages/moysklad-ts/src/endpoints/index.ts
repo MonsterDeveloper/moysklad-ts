@@ -7,3 +7,4 @@ export * from "./custom-entity";
 export * from "./product";
 export * from "./variant";
 export * from "./report";
+export * from "./wizard";

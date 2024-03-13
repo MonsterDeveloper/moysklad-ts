@@ -47,6 +47,9 @@ export enum Entity {
   Group = "group",
   Image = "image",
   Stock = "stock",
+  Enter = "enter",
+  SalesReturn = "salesreturn",
+  RetailSalesReturn = "retailsalesreturn",
 }
 
 export type AssortmentEntity =

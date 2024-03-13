@@ -10,6 +10,7 @@ import {
   ProductEndpoint,
   VariantEndpoint,
   ReportEndpoint,
+  WizardEndpoint,
 } from "@/endpoints";
 
 export class Moysklad {
@@ -23,6 +24,7 @@ export class Moysklad {
   public product: ProductEndpoint;
   public variant: VariantEndpoint;
   public report: ReportEndpoint;
+  public wizard: WizardEndpoint;
 
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
@@ -35,6 +37,7 @@ export class Moysklad {
     this.product = new ProductEndpoint(this.client);
     this.variant = new VariantEndpoint(this.client);
     this.report = new ReportEndpoint(this.client);
+    this.wizard = new WizardEndpoint(this.client);
   }
 }
 
