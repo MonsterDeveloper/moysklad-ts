@@ -71,7 +71,10 @@ export class ApiClient {
     const url = this.buildUrl(endpoint);
 
     const response = await fetch(
-      url + (searchParameters ? `?${searchParameters}` : ""),
+      url +
+        (searchParameters && searchParameters.size > 0
+          ? `?${searchParameters}`
+          : ""),
       {
         ...options,
         body: options.body ? JSON.stringify(options.body) : undefined,

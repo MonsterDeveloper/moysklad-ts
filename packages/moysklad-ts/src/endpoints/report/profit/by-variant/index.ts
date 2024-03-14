@@ -1,0 +1,1 @@
+export { ByVariantEndpoint } from "./endpoint";
