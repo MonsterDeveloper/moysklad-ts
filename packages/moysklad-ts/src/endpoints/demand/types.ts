@@ -1,4 +1,5 @@
 import type {
+  AssortmentEntity,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -30,6 +31,41 @@ export enum DemandOverheadDistribution {
 export interface DemandOverhead {
   sum: number;
   distribution: DemandOverheadDistribution;
+}
+
+export interface DemandPosition extends Idable, Meta<Entity.DemandPosition> {
+  /** ID учетной записи */
+  readonly accountId: string;
+  /** Метаданные товара/услуги/серии/модификации/комплекта, которую представляет собой позиция */
+  assortment: Meta<AssortmentEntity>;
+  /** Себестоимость (только для услуг) */
+  cost?: number;
+  /** Процент скидки или наценки. Наценка указывается отрицательным числом, т.е. -10 создаст наценку в 10% */
+  discount?: number;
+  /** Упаковка Товара. */
+  pack?: unknown; // TODO add pack type;
+  /** Цена товара/услуги в копейках */
+  price: number;
+  /** Количество товаров/услуг данного вида в позиции. Если позиция - товар, у которого включен учет по серийным номерам, то значение в этом поле всегда будет равно количеству серийных номеров для данной позиции в документе. */
+  quantity: number;
+  /** Ячейка на складе. */
+  slot?: Meta<Entity.Slot>;
+  /** Серийные номера. Значение данного атрибута игнорируется, если товар позиции не находится на серийном учете. В ином случае количество товаров в позиции будет равно количеству серийных номеров, переданных в значении атрибута. */
+  things?: string[];
+  /** Коды маркировки товаров и транспортных упаковок. */
+  trackingCodes?: unknown; // TODO add trackingCodes type;
+  /** Коды маркировки товаров в формате тега 1162. */
+  trackingCodes_1162?: unknown; // TODO add trackingCodes_1162 type;
+  /** Накладные расходы. Если Позиции Отгрузки не заданы, то накладные расходы нельзя задать. */
+  readonly overhead: number;
+  /** НДС, которым облагается текущая позиция */
+  vat: number;
+  /** Включен ли НДС для позиции. С помощью этого флага для позиции можно выставлять НДС = 0 или НДС = "без НДС". (`vat` = `0`, `vatEnabled` = `false`) -> `vat` = "без НДС", (`vat` = `0`, `vatEnabled` = `true`) -> `vat` = 0%. */
+  vatEnabled: boolean;
+}
+
+export interface DemandPositionModel extends Model {
+  object: DemandPosition;
 }
 
 export interface Demand extends Idable, Meta<Entity.Demand> {
@@ -104,6 +140,7 @@ export interface DemandModel extends Model {
     group: GroupModel;
     organization: OrganizationModel;
     owner: EmployeeModel;
+    positions: DemandPositionModel;
   };
   filters: {
     id: IdFilter;

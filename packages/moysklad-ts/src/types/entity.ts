@@ -51,6 +51,7 @@ export enum Entity {
   SalesReturn = "salesreturn",
   RetailSalesReturn = "retailsalesreturn",
   SalesByVariant = "salesbyvariant",
+  Slot = "slot",
 }
 
 export type AssortmentEntity =
