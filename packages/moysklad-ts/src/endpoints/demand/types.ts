@@ -147,6 +147,7 @@ export interface DemandModel extends Model {
     positions: DemandPositionModel;
   };
   filters: {
+    assortment: IdFilter;
     id: IdFilter;
     accountId: IdFilter;
     agent: IdFilter;
