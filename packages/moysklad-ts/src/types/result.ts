@@ -2,21 +2,35 @@ import type { IsEqual, ConditionalKeys, IsEmptyObject } from "type-fest";
 import type { Model } from "./model";
 import type { RestoreExpandableFieldsOptionality } from "./expand";
 import type { ListMeta } from "./metadata";
+import type { PositionFields, PositionStockData } from "./position-fields";
+
+// TODO finish & format
+export type IncludeFields<
+  Result,
+  M extends Model,
+  F extends PositionFields | undefined,
+> = F extends PositionFields
+  ? F[number] extends "stock"
+    ? "stock" extends keyof M["object"]
+      ? Omit<Result, "stock"> & { stock: PositionStockData }
+      : Result
+    : Result
+  : Result;
 
 // prettier-ignore
-export type GetFindResult<M extends Model, E> =
+export type GetFindResult<M extends Model, E, F extends PositionFields | undefined = undefined> =
   // ❔ Is expand not defined ..
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   IsEqual<E, any> extends true
     
     // 🚫 return default.
-    ? M["object"]
+    ? IncludeFields<M["object"], M, F>
     
     // ❔ Is expand empty object ..
     : IsEmptyObject<E> extends true
       
       // 🚫 return default.
-      ? M["object"]
+      ? IncludeFields<M["object"], M, F>
 
       // ❔ Is expand not empty object ..
       : E extends object
@@ -45,14 +59,14 @@ export type GetFindResult<M extends Model, E> =
                         
                         // ℹ️ expand option is an object
                         // ⤵️ Recursively falling into a nested expand.
-                        ? GetFindResult<M["expandable"][K], E[K]>
+                        ? GetFindResult<M["expandable"][K], E[K], F>
                         
                         // ℹ️ expand option is `true`
                         // ❔ Is the entity field a list ..
                         : M["object"][K] extends ListMeta<infer O>
                           
                           // ✅ Expand list field.
-                          ? ListMeta<O> & { rows: M["expandable"][K]["object"][] }
+                          ? ListMeta<O> & { rows: IncludeFields<M["expandable"][K]["object"], M["expandable"][K], F>[] }
 
                           // ❔ Is the entity field an array ..
                           : NonNullable<M["object"][K]> extends Array<unknown>
@@ -77,4 +91,4 @@ export type GetFindResult<M extends Model, E> =
             Omit<M["object"], ConditionalKeys<E, true | object>>
         
         // 🚫 expand not defined
-        : M["object"];
+        : IncludeFields<M["object"], M, F>;

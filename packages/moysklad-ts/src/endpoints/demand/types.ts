@@ -15,6 +15,7 @@ import type {
   NumberFilter,
   OrderOptions,
   PaginationOptions,
+  PositionFields,
   StringFilter,
 } from "@/types";
 import type { CounterpartyModel } from "../counterparty";
@@ -62,6 +63,9 @@ export interface DemandPosition extends Idable, Meta<Entity.DemandPosition> {
   vat: number;
   /** Включен ли НДС для позиции. С помощью этого флага для позиции можно выставлять НДС = 0 или НДС = "без НДС". (`vat` = `0`, `vatEnabled` = `false`) -> `vat` = "без НДС", (`vat` = `0`, `vatEnabled` = `true`) -> `vat` = 0%. */
   vatEnabled: boolean;
+
+  /** Данные по себестоимости и остаткам. */
+  stock?: undefined;
 }
 
 export interface DemandPositionModel extends Model {
@@ -188,6 +192,7 @@ export interface DemandModel extends Model {
 
 export interface ListDemandsOptions {
   pagination?: PaginationOptions;
+  fields?: PositionFields;
   expand?: ExpandOptions<DemandModel>;
   order?: OrderOptions<DemandModel>;
   search?: string;
@@ -196,6 +201,7 @@ export interface ListDemandsOptions {
 
 export interface GetDemandOptions {
   expand?: ExpandOptions<DemandModel>;
+  fields?: PositionFields;
 }
 
 export type FirstDemandOptions = Omit<ListDemandsOptions, "pagination">;

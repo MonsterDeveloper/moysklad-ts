@@ -1,12 +1,52 @@
 import { describe, expectTypeOf, it } from "vitest";
-import type { GetFindResult } from "./result";
+import type { GetFindResult, IncludeFields } from "./result";
 import type { Model } from "./model";
 import type { EmptyObject, Simplify } from "type-fest";
 import type { ListMeta, Meta } from "./metadata";
 import type { Entity } from "./entity";
 import type { SimplifyDeep } from "type-fest/source/merge-deep";
+import type { PositionStockData } from ".";
 
 describe("result", () => {
+  describe("IncludeFields", () => {
+    it("should return the result if fields are undefined", () => {
+      interface SampleModel extends Model {
+        object: {
+          name: string;
+        };
+      }
+      expectTypeOf<
+        IncludeFields<SampleModel["object"], SampleModel, undefined>
+      >().toEqualTypeOf<SampleModel["object"]>;
+    });
+
+    it("should return the result if fields are empty", () => {
+      interface SampleModel extends Model {
+        object: {
+          name: string;
+        };
+      }
+      expectTypeOf<
+        IncludeFields<SampleModel["object"], SampleModel, []>
+      >().toEqualTypeOf<SampleModel["object"]>();
+    });
+
+    it("should return the result if fields contain stock", () => {
+      interface SampleModel extends Model {
+        object: {
+          name: string;
+          stock?: undefined;
+        };
+      }
+
+      expectTypeOf<
+        Simplify<IncludeFields<SampleModel["object"], SampleModel, ["stock"]>>
+      >().toEqualTypeOf<{
+        name: string;
+        stock: PositionStockData;
+      }>();
+    });
+  });
   describe("GetFindResult", () => {
     it("should return model's obejct if expand is not defined", () => {
       interface SampleModel extends Model {
@@ -132,6 +172,34 @@ describe("result", () => {
             groupName: string;
           };
         };
+      }>();
+    });
+
+    it("should handle position fields", () => {
+      interface DemandPosition {
+        quantity: number;
+        stock?: undefined;
+      }
+      interface DemandPositionModel extends Model {
+        object: DemandPosition;
+      }
+      interface DemandModel extends Model {
+        object: {
+          positions: ListMeta<Entity.DemandPosition>;
+        };
+        expandable: {
+          positions: DemandPositionModel;
+        };
+      }
+
+      type Result = GetFindResult<
+        DemandModel,
+        { positions: true },
+        ["stock"]
+      >["positions"]["rows"][number];
+      expectTypeOf<Simplify<Result>>().toEqualTypeOf<{
+        quantity: number;
+        stock: PositionStockData;
       }>();
     });
   });

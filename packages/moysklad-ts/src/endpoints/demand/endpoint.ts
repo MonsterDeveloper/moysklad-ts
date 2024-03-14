@@ -23,7 +23,10 @@ export class DemandEndpoint extends BaseEndpoint {
   async list<T extends ListDemandsOptions = Record<string, unknown>>(
     options?: Subset<T, ListDemandsOptions>,
   ): Promise<
-    ListResponse<GetFindResult<DemandModel, T["expand"]>, Entity.Demand>
+    ListResponse<
+      GetFindResult<DemandModel, T["expand"], T["fields"]>,
+      Entity.Demand
+    >
   > {
     const searchParameters = composeSearchParameters(options ?? {});
 
@@ -37,7 +40,7 @@ export class DemandEndpoint extends BaseEndpoint {
     options?: Subset<T, AllDemandsOptions>,
   ): Promise<
     BatchGetResult<
-      GetFindResult<DemandModel, T["expand"]>,
+      GetFindResult<DemandModel, T["expand"], T["fields"]>,
       Entity.BonusTransaction
     >
   > {
@@ -54,7 +57,7 @@ export class DemandEndpoint extends BaseEndpoint {
   async get<T extends GetDemandOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetDemandOptions>,
-  ): Promise<GetFindResult<DemandModel, T["expand"]>> {
+  ): Promise<GetFindResult<DemandModel, T["expand"], T["fields"]>> {
     const searchParameters = composeSearchParameters(options ?? {});
 
     const response = await this.client.get(`${ENDPOINT_URL}/${id}`, {
@@ -67,7 +70,10 @@ export class DemandEndpoint extends BaseEndpoint {
   async first<T extends FirstDemandOptions = Record<string, unknown>>(
     options?: Subset<T, FirstDemandOptions>,
   ): Promise<
-    ListResponse<GetFindResult<DemandModel, T["expand"]>, Entity.Demand>
+    ListResponse<
+      GetFindResult<DemandModel, T["expand"], T["fields"]>,
+      Entity.Demand
+    >
   > {
     return this.list({ ...options, pagination: { limit: 1 } });
   }
