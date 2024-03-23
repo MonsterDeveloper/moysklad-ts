@@ -73,6 +73,17 @@ export type GetModelCreatableFields<
 /**
  * Data for creating or batch updating a model.
  */
-export type ModelCreateOrUpdateData<
-  M extends Model
-> = "meta" extends keyof M["object"] ?  GetModelCreatableFields<M> | Array<GetModelCreatableFields<M> | (GetModelUpdatableFields<M> & Pick<M["object"], "meta">)> : never;
+export type ModelCreateOrUpdateData<M extends Model> =
+  // Object has a meta field?
+  "meta" extends keyof M["object"]
+    // Meta is a Meta object?
+    ? M["object"]["meta"] extends Meta<infer T>
+      ?
+        // Create object or an array of create/update objects
+          | GetModelCreatableFields<M>
+          | Array<
+              | GetModelCreatableFields<M>
+              | (GetModelUpdatableFields<M> & UpdateMeta<T>)
+            >
+      : never
+    : never;
