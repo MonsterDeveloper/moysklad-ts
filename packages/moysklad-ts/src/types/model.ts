@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ReadonlyKeysOf } from "type-fest";
-import type { UpdateMeta, Meta } from "./metadata";
+import type { UpdateMeta, Meta, Metadata } from "./metadata";
 import type { Filter } from "./filters";
 import type { Attribute } from "./attribute";
 import type { Entity } from "./entity";
@@ -77,7 +77,7 @@ export type ModelCreateOrUpdateData<M extends Model> =
   // Object has a meta field?
   "meta" extends keyof M["object"]
     // Meta is a Meta object?
-    ? M["object"]["meta"] extends Meta<infer T>
+    ? M["object"]["meta"] extends Metadata<infer T>
       ?
         // Create object or an array of create/update objects
           | GetModelCreatableFields<M>
