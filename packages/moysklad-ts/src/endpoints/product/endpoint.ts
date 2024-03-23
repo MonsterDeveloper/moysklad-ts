@@ -6,8 +6,8 @@ import {
   type Subset,
   MediaType,
   type BatchDeleteResult,
-  type GetModelCreatableFields,
   type GetModelUpdatableFields,
+  type ModelCreateOrUpdateData,
 } from "@/types";
 import { BaseEndpoint } from "../base-endpoint";
 import type {
@@ -101,7 +101,7 @@ export class ProductEndpoint extends BaseEndpoint {
   }
 
   async create<T extends CreateProductOptions = Record<string, unknown>>(
-    data: GetModelCreatableFields<ProductModel>,
+    data: ModelCreateOrUpdateData<ProductModel>,
     options?: Subset<T, CreateProductOptions>,
   ): Promise<GetFindResult<ProductModel, T["expand"]>> {
     const searchParameters = composeSearchParameters(options ?? {});

@@ -68,3 +68,11 @@ export type GetModelCreatableFields<
 > =
   // required create fields + updatable fields excluding the required ones
   R & Omit<GetModelUpdatableFields<M>, keyof R>;
+
+// prettier-ignore
+/**
+ * Data for creating or batch updating a model.
+ */
+export type ModelCreateOrUpdateData<
+  M extends Model
+> = "meta" extends keyof M["object"] ?  GetModelCreatableFields<M> | Array<GetModelCreatableFields<M> | (GetModelUpdatableFields<M> & Pick<M["object"], "meta">)> : never;
