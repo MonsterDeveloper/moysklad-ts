@@ -12,6 +12,7 @@ export default defineConfig({
       entry: fileURLToPath(new URL("src/index.ts", import.meta.url)),
       name: "moysklad",
       fileName: "moysklad-ts",
+      formats: ["es"],
     },
     rollupOptions: {
       external: ["js-base64"],
