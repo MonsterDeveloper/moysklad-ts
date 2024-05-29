@@ -1,9 +1,10 @@
 {
   "name": "moysklad-ts",
   "version": "0.0.35",
-  "description": "Fully-typed Moysklad JSON API client",
+  "description": "Полностью типизированный, современный и лёгкий клиент МойСклад JSON API",
   "sideEffects": false,
   "type": "module",
+  "packageManager": "bun@1.1.10",
   "keywords": [
     "moysklad",
     "warehouse",
@@ -21,7 +22,7 @@
     "url": "https://github.com/MonsterDeveloper/moysklad-ts/issues"
   },
   "license": "GPL-3.0-only",
-  "author": "Andrei Bobkov <slider7259@gmail.com>",
+  "author": "Andrei Bobkov <me@ctoofeverything.dev>",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -34,6 +35,7 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint --ext .ts .",
     "typecheck": "tsc && vitest typecheck --run",
+    "update": "bunx npm-check-updates -ui --reject '*eslint*'",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -61,13 +63,9 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/moysklad-ts.umd.cjs",
-  "module": "./dist/moysklad-ts.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/moysklad-ts.js",
-      "require": "./dist/moysklad-ts.umd.cjs",
       "types": "./dist/index.d.ts"
     }
   },
