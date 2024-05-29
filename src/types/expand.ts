@@ -6,6 +6,7 @@ import type {
 } from "type-fest";
 import type { Model } from "./model";
 
+// prettier-ignore
 /**
  * Given a model `M`, get an option for `expand` query parameter.
  */

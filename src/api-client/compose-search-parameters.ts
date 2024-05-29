@@ -43,6 +43,7 @@ function traverseOrder(order: OrderOption<string> | OrderOption<string>[]) {
   return fields;
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 function traverseFilter(field: string, filter: Filter | undefined) {
   const filters = [] as string[];
 
@@ -125,6 +126,7 @@ function traverseFilter(field: string, filter: Filter | undefined) {
   return filters;
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export function composeSearchParameters({
   pagination,
   expand,

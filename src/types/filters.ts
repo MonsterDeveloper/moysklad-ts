@@ -108,8 +108,5 @@ export type Filter =
   | StringFilter
   | DateTimeFilter;
 
-export type FilterOptions<M extends Model> = IsEmptyObject<
-  M["filters"]
-> extends true
-  ? never
-  : Partial<M["filters"]>;
+export type FilterOptions<M extends Model> =
+  IsEmptyObject<M["filters"]> extends true ? never : Partial<M["filters"]>;
