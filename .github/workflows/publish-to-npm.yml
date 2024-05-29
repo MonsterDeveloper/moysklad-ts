@@ -1,5 +1,5 @@
-name: Publish moysklad-ts To NPM
-run-name: Publish the library to NPM by @${{ github.actor }}
+name: Publish moysklad-ts to NPM
+run-name: Publish to NPM by @${{ github.actor }}
 
 on:
   push:
@@ -14,30 +14,34 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v1
         with:
-          version: 8
+          bun-version: 1.1.10
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
             
       - name: Install dependencies
-        run: pnpm install
+        run: bun i --ignore-scripts --frozen-lockfile
 
+      - name: Typecheck
+        run: bun run typecheck
+      
+      - name: Lint
+        run: bun run lint
+      
       - name: Test
-        run: pnpm test
+        run: bun run test
     
-      - name: Build library
-        run: pnpm build:lib
+      - name: Build
+        run: bun run build
 
       - name: Create release
         uses: softprops/action-gh-release@v1
       
-      - run: pnpm publish --filter ./packages/moysklad-ts --access public --no-git-checks
+      - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

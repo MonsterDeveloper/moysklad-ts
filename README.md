@@ -1,15 +1,13 @@
 # moysklad-ts
-<a href="https://gitpod.io/#https://github.com/MonsterDeveloper/moysklad-ts" rel="nofollow noopener noreferrer" target="_blank" class="after:hidden"><img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod"></a>
-
 ![npm](https://img.shields.io/npm/v/moysklad-ts)
 ![npm package minimized gzipped size (select exports)](https://img.shields.io/bundlejs/size/moysklad-ts)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/MonsterDeveloper/moysklad-ts/publish-to-npm.yml)
 ![GitHub](https://img.shields.io/github/license/MonsterDeveloper/moysklad-ts)
 
+	This library is in alpha stage and is not ready for production use.
 
-`moysklad-ts` is a fully-typed API wrapper for [Moysklad](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api). This monorepo consists of:
-- [moysklad-ts](./packages/moysklad-ts) - the main package
-- [docs](./apps/docs) - the documentation [website](https://moysklad-ts.vercel.app/)
+
+`moysklad-ts` is a fully-typed API wrapper for [Moysklad](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api).
 
 ## Usage
 
