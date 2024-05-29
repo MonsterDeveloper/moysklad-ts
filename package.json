@@ -36,7 +36,7 @@
     "lint": "eslint --ext .ts .",
     "typecheck": "tsc && vitest --typecheck.only --run",
     "update": "bunx npm-check-updates -ui --reject '*eslint*'",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.12.0",
@@ -58,7 +58,7 @@
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/load": "^19.2.0",
-    "husky": "^8.0.3"
+    "husky": "^9.0.11"
   },
   "files": [
     "dist"
