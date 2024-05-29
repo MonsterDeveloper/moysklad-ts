@@ -3,6 +3,7 @@ import type { DateTime } from "./datetime";
 import type { Model } from "./model";
 
 export interface EqualsFilter<T extends Primitive> {
+  /** Равно (`=`) */
   eq: T | T[];
   ne: never;
   gt: never;
@@ -19,38 +20,47 @@ export interface IsNullFilter {
 }
 
 export interface IsNotNullFilter {
+  /** Не пустое */
   isNotNull: boolean;
 }
 
 export interface NotEqualsFilter<T extends Primitive> {
+  /** Не равно (`!=`) */
   ne: T | T[];
 }
 
 export interface GreaterThanFilter<T extends Primitive> {
+  /** Больше (`>`) */
   gt: T;
 }
 
 export interface GreaterOrEqualsFilter<T extends Primitive> {
+  /** Больше либо равно (`>=`) */
   gte: T;
 }
 
 export interface LessThanFilter<T extends Primitive> {
+  /** Меньше (`<`) */
   lt: T;
 }
 
 export interface LessOrEqualsFilter<T extends Primitive> {
+  /** Меньше либо равно (`<=`) */
   lte: T;
 }
 
 export interface LikeFilter {
+  /** Содержит (`~`) */
   like: string;
 }
 
 export interface StartsWithFilter {
+  /** Начинается с (`~=`) */
   sw: string;
 }
 
 export interface EndsWithFilter {
+  /** Заканчивается на (`=~`) */
   ew: string;
 }
 

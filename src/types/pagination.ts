@@ -1,14 +1,14 @@
 /**
- * Options for pagination.
+ * Опции пагинации
  */
 export interface PaginationOptions {
   /**
-   * The maximum number of items to return in a single page. Min 1, max 1000.
+   * Максимальное количество элементов, которое вернется в одной странице. Мин 1, макс 1000.
    * @default 1000
    */
   limit?: number;
   /**
-   * The number of items to skip before starting to collect the result set.
+   * Количество элементов, которые нужно пропустить перед началом сбора результирующего набора.
    * @default 0
    */
   offset?: number;
