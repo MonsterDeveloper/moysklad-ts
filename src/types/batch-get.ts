@@ -6,11 +6,14 @@ export type BatchGetResult<T, E extends Entity> = Pick<
   "rows" | "context"
 >;
 
+/**
+ * Опции для получения всех сущностей из API (метод `.all()`).
+ */
 export interface BatchGetOptions {
-  /** Limit query parameter for 1 request */
+  /** URL параметр `limit` для каждого запроса */
   limit?: number;
-  /** Limit query param for 1 request with `expand` */
+  /** URL параметр `limit` для каждого запроса с `expand` */
   expandLimit?: number;
-  /** Limit of concurrent requests */
+  /** Ограничение количества одновременных запросов */
   concurrencyLimit?: number;
 }

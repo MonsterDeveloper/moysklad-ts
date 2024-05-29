@@ -14,18 +14,95 @@ import {
   PaymentInEndpoint,
 } from "@/endpoints";
 
+/**
+ * Основной класс Moysklad
+ *
+ * @param options - Опции для создания экземпляра класса
+ *
+ * {@linkcode ApiClientOptions}
+ */
 export class Moysklad {
+  /**
+   * API клиент
+   *
+   * {@linkcode ApiClient}
+   */
   public client: ApiClient;
+  /**
+   * Бонусные операции
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-bonusnaq-operaciq
+   */
   public bonusTransaction: BonusTransactionEndpoint;
+
+  /**
+   * Безопасность (токены)
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
+   */
   public security: SecurityEndpoint;
+
+  /**
+   * Отгрузки
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-otgruzka
+   */
   public demand: DemandEndpoint;
+
+  /**
+   * Контрагенты
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent
+   */
   public counterparty: CounterpartyEndpoint;
+
+  /**
+   * Заказы покупателей
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq
+   */
   public customerOrder: CustomerOrderEndpoint;
+
+  /**
+   * Пользовательские справочники
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-pol-zowatel-skij-sprawochnik
+   */
   public customEntity: CustomEntityEndpoint;
+
+  /**
+   * Товары
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar
+   */
   public product: ProductEndpoint;
+
+  /**
+   * Модификации
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq
+   */
   public variant: VariantEndpoint;
+
+  /**
+   * Отчёты
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety
+   */
   public report: ReportEndpoint;
+
+  /**
+   * Автозаполнение
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-awtozapolnenie
+   */
   public wizard: WizardEndpoint;
+
+  /**
+   * Входящие платежи
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-vhodqschij-platezh
+   */
   public paymentIn: PaymentInEndpoint;
 
   constructor(options: ApiClientOptions) {

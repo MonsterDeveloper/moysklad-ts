@@ -9,31 +9,67 @@ import type {
 } from "@/types";
 import { batchPromises } from "@/utils";
 
+/**
+ * Опции для Basic авторизации
+ *
+ * @link https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
+ */
 export type BasicAuth = {
+  /** Логин */
   login: string;
+  /** Пароль */
   password: string;
 };
 
+/**
+ * Опции для авторизации по токену
+ *
+ * @link https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
+ */
 export type TokenAuth = {
-  // Auth token
+  /** Токен */
   token: string;
 };
 
+/**
+ * Опции для авторизации
+ *
+ * @link https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
+ */
 export type Auth = BasicAuth | TokenAuth;
 
 /**
- * ApiClient initialization options
+ * Опции для инициализации API клиента
  *
- * @see https://moysklad-ts.vercel.app/reference/initialization/
+ * @see https://github.com/MonsterDeveloper/moysklad-ts?tab=readme-ov-file#%D0%BE%D0%BF%D1%86%D0%B8%D0%B8-%D0%B8%D0%BD%D0%B8%D1%86%D0%B8%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8
  */
 export type ApiClientOptions = {
-  /** Moysklad API base url */
+  /**
+   * Базовый URL
+   *
+   * @default https://api.moysklad.ru/api/remap/1.2
+   */
   baseUrl?: string;
-  /** User-Agent header */
+
+  /**
+   * User-Agent header
+   *
+   * @default `moysklad-ts/${version} (+https://github.com/MonsterDeveloper/moysklad-ts)`, где `{version}` - версия библиотеки
+   */
   userAgent?: string;
-  /** Auth options */
+  /**
+   * Опции авторизации
+   *
+   * {@linkcode Auth}
+   */
   auth: Auth;
-  /** Batch get options */
+  /**
+   * Опции для получения всех сущностей из API (метод `.all()`).
+   *
+   * Устанавливает ограничения на размер запросов с expand и без него, а также ограничение на количество одновременных запросов.
+   *
+   * @default { limit: 1000, expandLimit: 100, concurrencyLimit: 3 }
+   */
   batchGetOptions?: BatchGetOptions;
 };
 
@@ -43,6 +79,7 @@ type RequestOptions = Omit<RequestInit, "body"> & {
 };
 type RequestOptionsWithoutMethod = Omit<RequestOptions, "method">;
 
+/** API клиент */
 export class ApiClient {
   private baseUrl: string;
   private userAgent: string;
@@ -64,6 +101,17 @@ export class ApiClient {
     };
   }
 
+  /**
+   * Сделать запрос к API МойСклад.
+   *
+   * @param endpoint - относительный путь до ресурса
+   * @param options - опции запроса
+   *
+   * @example
+   * ```ts
+   * const response = await apiClient.request("/entity/counterparty", { method: "POST", body: { name: "ООО Ромашка" } });
+   * ```
+   */
   async request(
     endpoint: string,
     { searchParameters, ...options }: RequestOptions = {},
@@ -97,26 +145,60 @@ export class ApiClient {
     return response;
   }
 
+  /**
+   * Shorthand для GET запроса.
+   *
+   * {@linkcode request}
+   * */
   async get(url: string, options: RequestOptionsWithoutMethod = {}) {
     return this.request(url, { ...options, method: "GET" });
   }
 
+  /**
+   * Shorthand для POST запроса.
+   *
+   * {@linkcode request}
+   */
   async post(url: string, options: RequestOptionsWithoutMethod = {}) {
     return this.request(url, { ...options, method: "POST" });
   }
 
+  /**
+   * Shorthand для PUT запроса.
+   *
+   * {@linkcode request}
+   */
   async put(url: string, options: RequestOptionsWithoutMethod = {}) {
     return this.request(url, { ...options, method: "PUT" });
   }
 
+  /**
+   * Shorthand для DELETE запроса.
+   *
+   * {@linkcode request}
+   */
   async delete(url: string, options: RequestOptionsWithoutMethod = {}) {
     return this.request(url, { ...options, method: "DELETE" });
   }
 
+  /**
+   * Нормализует URL, удаляя лишние слеши.
+   *
+   * @param url - URL
+   *
+   * @returns Нормализованный URL
+   */
   private normalizeUrl(url: string): string {
     return url.replaceAll(/\/{2,}/g, "/");
   }
 
+  /**
+   * Строит объект типа `URL` из строки.
+   *
+   * @param url - URL
+   *
+   * @returns Объект типа `URL`
+   */
   private buildStringUrl(url: string): URL {
     const shouldIncludeBaseUrl = !url.startsWith("http");
 
@@ -125,6 +207,13 @@ export class ApiClient {
     return new URL(this.normalizeUrl(returnUrl));
   }
 
+  /**
+   * Cтроит объект типа `URL` из массива строк.
+   *
+   * @param url - массив строк URL
+   *
+   * @returns Объект типа `URL`
+   */
   private buildArrayUrl(url: string[]): URL {
     const shouldIncludeBaseUrl = !url[0]?.startsWith("http");
 
@@ -135,12 +224,39 @@ export class ApiClient {
     return new URL(this.normalizeUrl(returnUrl));
   }
 
+  /**
+   * Строит URL из строки или массива строк.
+   *
+   * @param url - строка или массив строк URL
+   *
+   * @returns Объект типа `URL` с нормализованным URL и базовым адресом, указанным в опциях инциализации
+   *
+   * @example С массивом строк
+   * ```ts
+   * buildUrl(["entity", "counterparty", "5427bc76-b95f-11eb-0a80-04bb000cd583"])
+   * // "https://api.moysklad.ru/api/remap/1.2/entity/counterparty/5427bc76-b95f-11eb-0a80-04bb000cd583"
+   * ```
+   *
+   * @example Со строкой
+   * ```ts
+   * buildUrl("entity/counterparty/5427bc76-b95f-11eb-0a80-04bb000cd583")
+   * // "https://api.moysklad.ru/api/remap/1.2/entity/counterparty/5427bc76-b95f-11eb-0a80-04bb000cd583"
+   * ```
+   */
   buildUrl(url: string | string[]): URL {
     if (typeof url === "string") return this.buildStringUrl(url);
 
     return this.buildArrayUrl(url);
   }
 
+  /**
+   * Получить все сущности из API. Но лучше используйте метод `.all()` в эндпоинтах (например, `moysklad.counterparty.all()`).
+   *
+   * @param fetcher - функция, которая делает запрос к API и возвращает список сущностей
+   * @param hasExpand - флаг, указывающий на наличие expand в запросе
+   *
+   * @returns Объект с массивом сущностей и контекстом
+   */
   async batchGet<T, E extends Entity>(
     fetcher: (limit: number, offset: number) => Promise<ListResponse<T, E>>,
     hasExpand?: boolean,
