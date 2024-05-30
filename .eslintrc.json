@@ -1,16 +1,28 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/strict-type-checked",
     "plugin:unicorn/recommended",
     "plugin:sonarjs/recommended",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": true
+  },
   "plugins": ["@typescript-eslint", "unicorn", "sonarjs", "prettier"],
   "rules": {
     "no-console": "error",
     "prettier/prettier": "error",
-    "sonarjs/no-identical-functions": "off"
-  }
+    "sonarjs/no-identical-functions": "off",
+    "@typescript-eslint/no-unsafe-return": "off"
+  },
+  "overrides": [
+    {
+      "files": "*.test.ts",
+      "rules": {
+        "@typescript-eslint/no-unsafe-assignment": "off"
+      }
+    }
+  ]
 }

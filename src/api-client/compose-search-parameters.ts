@@ -10,11 +10,7 @@ function traverseExpand(expand: Record<string, unknown>, depth = 0) {
   for (const [key, value] of Object.entries(expand)) {
     if (!value) continue;
 
-    if (
-      typeof value === "object" &&
-      value !== null &&
-      Object.keys(value).length > 0
-    ) {
+    if (typeof value === "object" && Object.keys(value).length > 0) {
       const subFields = traverseExpand(
         value as Record<string, unknown>,
         depth + 1,
@@ -175,10 +171,8 @@ export function composeSearchParameters({
       searchParameters.append("filter", filters.join(";"));
   }
 
-  if (options) {
-    for (const [field, value] of Object.entries(options)) {
-      searchParameters.append(field, String(value));
-    }
+  for (const [field, value] of Object.entries(options)) {
+    searchParameters.append(field, String(value));
   }
 
   return searchParameters.size > 0 ? searchParameters : undefined;

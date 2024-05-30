@@ -2,7 +2,7 @@ import { ApiClient } from "@/api-client";
 import { assertType, describe, test } from "vitest";
 import { BonusTransactionEndpoint } from "./endpoint";
 
-export interface ExpectedListResponse {
+interface ExpectedListResponse {
   context: {
     employee: {
       meta: {

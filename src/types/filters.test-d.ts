@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable @typescript-eslint/no-unused-vars */

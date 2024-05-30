@@ -265,6 +265,7 @@ describe("ApiClient", () => {
     const smallData = [...Array.from({ length: 5 }).keys()];
     // eslint-disable-next-line unicorn/consistent-function-scoping
     const constructFetcher = (data: number[]) =>
+      // eslint-disable-next-line @typescript-eslint/require-await
       vi.fn(async (limit: number, offset: number) => ({
         rows: data.slice(offset, offset + limit),
         meta: { size: data.length } as unknown as ListMetadata<never>,

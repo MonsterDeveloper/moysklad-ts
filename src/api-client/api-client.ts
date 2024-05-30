@@ -119,9 +119,9 @@ export class ApiClient {
     const url = this.buildUrl(endpoint);
 
     const response = await fetch(
-      url +
+      url.toString() +
         (searchParameters && searchParameters.size > 0
-          ? `?${searchParameters}`
+          ? `?${searchParameters.toString()}`
           : ""),
       {
         ...options,
