@@ -40,7 +40,7 @@ export interface PaymentIn extends Idable, Meta<Entity.PaymentIn> {
   name: string;
   organization: Meta<Entity.Organization>;
   organizationAccount?: Meta<Entity.Account>;
-  owner: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>;
   paymentPurpose: string;
   readonly printed: boolean;
   project?: Meta<Entity.Project>;
