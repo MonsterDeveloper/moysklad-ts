@@ -12,6 +12,7 @@ import {
   ReportEndpoint,
   WizardEndpoint,
   PaymentInEndpoint,
+  PaymentOutEndpoint,
 } from "@/endpoints";
 
 /**
@@ -105,6 +106,13 @@ export class Moysklad {
    */
   public paymentIn: PaymentInEndpoint;
 
+  /**
+   * Исходящие платежи
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-ishodqschij-platezh-ishodqschie-platezhi
+   */
+  public paymentOut: PaymentOutEndpoint;
+
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
     this.bonusTransaction = new BonusTransactionEndpoint(this.client);
@@ -118,6 +126,7 @@ export class Moysklad {
     this.report = new ReportEndpoint(this.client);
     this.wizard = new WizardEndpoint(this.client);
     this.paymentIn = new PaymentInEndpoint(this.client);
+    this.paymentOut = new PaymentOutEndpoint(this.client);
   }
 }
 
