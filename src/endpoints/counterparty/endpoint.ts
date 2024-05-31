@@ -3,6 +3,7 @@ import { composeSearchParameters } from "@/api-client";
 import type {
   AllCounterpartiesOptions,
   CounterpartyModel,
+  FirstCounterpartyOptions,
   GetCounterpartyOptions,
   ListCounterpartiesOptions,
   UpdateCounterpartyOptions,
@@ -24,7 +25,7 @@ export class CounterpartyEndpoint extends BaseEndpoint {
   ): Promise<
     ListResponse<
       GetFindResult<CounterpartyModel, T["expand"]>,
-      Entity.BonusTransaction
+      Entity.Counterparty
     >
   > {
     const searchParameters = composeSearchParameters(options ?? {});
@@ -40,7 +41,7 @@ export class CounterpartyEndpoint extends BaseEndpoint {
   ): Promise<
     BatchGetResult<
       GetFindResult<CounterpartyModel, T["expand"]>,
-      Entity.BonusTransaction
+      Entity.Counterparty
     >
   > {
     return this.client.batchGet(
@@ -78,5 +79,22 @@ export class CounterpartyEndpoint extends BaseEndpoint {
     });
 
     return response.json();
+  }
+
+  async first<T extends FirstCounterpartyOptions = Record<string, unknown>>(
+    options?: Subset<T, FirstCounterpartyOptions>,
+  ): Promise<
+    ListResponse<
+      GetFindResult<CounterpartyModel, T["expand"]>,
+      Entity.Counterparty
+    >
+  > {
+    return this.list({ ...options, pagination: { limit: 1 } });
+  }
+
+  async size(): Promise<number> {
+    const response = await this.list({ pagination: { limit: 0 } });
+
+    return response.meta.size;
   }
 }
