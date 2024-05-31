@@ -4,16 +4,21 @@ import {
   type BatchGetResult,
   type Entity,
   type GetFindResult,
+  type GetModelCreatableFields,
+  type GetModelUpdatableFields,
   type ListResponse,
   type Subset,
+  type UpdateMeta,
 } from "@/types";
 import { BaseEndpoint } from "../base-endpoint";
 import type {
   AllPaymentInsOptions,
+  CreatePaymentInOptions,
   FirstPaymentInOptions,
   GetPaymentInOptions,
   ListPaymentInsOptions,
   PaymentInModel,
+  UpdatePaymentInOptions,
 } from "./types";
 import { composeSearchParameters } from "@/api-client";
 
@@ -55,6 +60,52 @@ export class PaymentInEndpoint extends BaseEndpoint {
     const searchParameters = composeSearchParameters(options ?? {});
 
     const response = await this.client.get(`${ENDPOINT_URL}/${id}`, {
+      searchParameters,
+    });
+
+    return response.json();
+  }
+
+  async update<T extends UpdatePaymentInOptions = Record<string, unknown>>(
+    id: string,
+    data: GetModelUpdatableFields<PaymentInModel>,
+    options?: Subset<T, UpdatePaymentInOptions>,
+  ): Promise<GetFindResult<PaymentInModel, T["expand"]>> {
+    const searchParameters = composeSearchParameters(options ?? {});
+
+    const response = await this.client.put(`${ENDPOINT_URL}/${id}`, {
+      body: data,
+      searchParameters,
+    });
+
+    return response.json();
+  }
+
+  async create<T extends CreatePaymentInOptions = Record<string, unknown>>(
+    data: GetModelCreatableFields<PaymentInModel>,
+    options?: Subset<T, CreatePaymentInOptions>,
+  ): Promise<GetFindResult<PaymentInModel, T["expand"]>> {
+    const searchParameters = composeSearchParameters(options ?? {});
+
+    const response = await this.client.post(ENDPOINT_URL, {
+      body: data,
+      searchParameters,
+    });
+
+    return response.json();
+  }
+
+  async upsert<T extends CreatePaymentInOptions = Record<string, unknown>>(
+    data: (
+      | GetModelCreatableFields<PaymentInModel>
+      | (GetModelUpdatableFields<PaymentInModel> & UpdateMeta<Entity.PaymentIn>)
+    )[],
+    options?: Subset<T, CreatePaymentInOptions>,
+  ): Promise<GetFindResult<PaymentInModel, T["expand"]>[]> {
+    const searchParameters = composeSearchParameters(options ?? {});
+
+    const response = await this.client.post(ENDPOINT_URL, {
+      body: data,
       searchParameters,
     });
 

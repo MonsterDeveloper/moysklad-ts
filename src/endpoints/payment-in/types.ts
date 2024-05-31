@@ -124,5 +124,13 @@ export interface GetPaymentInOptions {
   expand?: ExpandOptions<PaymentInModel>;
 }
 
+export interface UpdatePaymentInOptions {
+  expand?: ExpandOptions<PaymentInModel>;
+}
+
+export interface CreatePaymentInOptions {
+  expand?: ExpandOptions<PaymentInModel>;
+}
+
 export type FirstPaymentInOptions = Omit<ListPaymentInsOptions, "pagination">;
 export type AllPaymentInsOptions = Omit<ListPaymentInsOptions, "pagination">;
