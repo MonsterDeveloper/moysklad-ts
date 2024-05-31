@@ -13,6 +13,7 @@ import {
   WizardEndpoint,
   PaymentInEndpoint,
   PaymentOutEndpoint,
+  InvoiceOutEndpoint,
 } from "@/endpoints";
 
 /**
@@ -113,6 +114,13 @@ export class Moysklad {
    */
   public paymentOut: PaymentOutEndpoint;
 
+  /**
+   * Счета покупателям
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-schet-pokupatelu-scheta-pokupatelqm
+   */
+  public invoiceOut: InvoiceOutEndpoint;
+
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
     this.bonusTransaction = new BonusTransactionEndpoint(this.client);
@@ -127,6 +135,7 @@ export class Moysklad {
     this.wizard = new WizardEndpoint(this.client);
     this.paymentIn = new PaymentInEndpoint(this.client);
     this.paymentOut = new PaymentOutEndpoint(this.client);
+    this.invoiceOut = new InvoiceOutEndpoint(this.client);
   }
 }
 
