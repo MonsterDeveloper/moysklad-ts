@@ -20,3 +20,4 @@ export * from "./attribute";
 export * from "./price-type";
 export * from "./barcodes";
 export * from "./position-fields";
+export * from "./gtd";

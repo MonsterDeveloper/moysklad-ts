@@ -15,6 +15,7 @@ import {
   PaymentOutEndpoint,
   InvoiceOutEndpoint,
   EnterEndpoint,
+  SupplyEndpoint,
 } from "@/endpoints";
 
 /**
@@ -129,6 +130,13 @@ export class Moysklad {
    */
   public enter: EnterEndpoint;
 
+  /**
+   * Приёмки
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka-priemki
+   */
+  public supply: SupplyEndpoint;
+
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
     this.bonusTransaction = new BonusTransactionEndpoint(this.client);
@@ -145,6 +153,7 @@ export class Moysklad {
     this.paymentOut = new PaymentOutEndpoint(this.client);
     this.invoiceOut = new InvoiceOutEndpoint(this.client);
     this.enter = new EnterEndpoint(this.client);
+    this.supply = new SupplyEndpoint(this.client);
   }
 }
 

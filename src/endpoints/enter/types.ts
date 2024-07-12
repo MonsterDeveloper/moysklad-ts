@@ -16,6 +16,7 @@ import type {
   OrderOptions,
   PaginationOptions,
   StringFilter,
+  Gtd,
 } from "@/types";
 import type { GroupModel } from "../group";
 import type { OrganizationModel } from "../organization";
@@ -52,10 +53,7 @@ export interface EnterPosition extends Idable, Meta<Entity.EnterPosition> {
   /** Метаданные страны */
   country?: Meta<Entity.Country>; // TODO add country expand
   /** Грузовая таможенная декларация (ГТД) */
-  gtd?: {
-    /** Номер ГТД */
-    name: string;
-  };
+  gtd?: Gtd;
   /**
    * Накладные расходы
    *
@@ -85,7 +83,7 @@ export interface EnterPosition extends Idable, Meta<Entity.EnterPosition> {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-sklad-yachejki-sklada
    */
-  slot: Meta<Entity.Slot>; // TODO add slot expand
+  slot?: Meta<Entity.Slot>; // TODO add slot expand
   /**
    * Серийные номера
    *
