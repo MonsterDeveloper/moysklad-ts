@@ -54,6 +54,7 @@ export enum Entity {
   Slot = "slot",
   ExpenseItem = "expenseitem",
   InvoicePosition = "invoiceposition",
+  EnterPosition = "enterposition",
 }
 
 export type AssortmentEntity =

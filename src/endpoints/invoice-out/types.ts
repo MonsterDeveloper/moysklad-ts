@@ -140,7 +140,7 @@ export interface InvoiceOut extends Idable, Meta<Entity.InvoiceOut> {
   /** Сумма отгруженного */
   readonly shippedSum: number;
   /** Метаданные статуса счета */
-  state?: Meta<Entity.State>;
+  state?: Meta<Entity.State>; // TODO expand state
   /** Метаданные склада */
   store?: Meta<Entity.Store>;
   /** Сумма Счета в установленной валюте */
