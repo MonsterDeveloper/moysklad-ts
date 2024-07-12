@@ -66,4 +66,22 @@ export type AssortmentEntity =
   | Entity.Bundle
   | Entity.Variant;
 
-export type AssortmentModel = ProductModel | VariantModel; // TODO add ServiceModel, BundleModel
+type AssortmentFields = {
+  /** Остаток */
+  readonly stock: number;
+  /** Резерв */
+  readonly reserve: number;
+  /** Ожидание */
+  readonly inTransit: number;
+  /** Доступно */
+  readonly quantity: number;
+};
+
+/**
+ * Ассортимент
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-assortiment
+ */
+export type AssortmentModel =
+  | (ProductModel & { object: AssortmentFields })
+  | (VariantModel & { object: AssortmentFields }); // TODO add ServiceModel, BundleModel
