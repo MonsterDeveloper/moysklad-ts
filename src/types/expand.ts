@@ -14,7 +14,10 @@ export type ExpandOptions<M extends Model> = IsEmptyObject<
   M["expandable"]
 > extends false
   ? {
-      [key in keyof M["expandable"]]?: M["expandable"][key] extends Model
+      [key in keyof M["expandable"]]?:
+        key extends "assortment"
+        ? boolean
+        : M["expandable"][key] extends Model
         ? boolean | ExpandOptions<M["expandable"][key]>
         : never;
     }

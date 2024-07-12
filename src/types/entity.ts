@@ -1,3 +1,5 @@
+import type { ProductModel, VariantModel } from "@/endpoints";
+
 export enum Entity {
   Account = "account",
   Demand = "demand",
@@ -63,3 +65,5 @@ export type AssortmentEntity =
   | Entity.Service
   | Entity.Bundle
   | Entity.Variant;
+
+export type AssortmentModel = ProductModel | VariantModel; // TODO add ServiceModel, BundleModel

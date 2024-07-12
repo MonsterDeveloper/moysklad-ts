@@ -59,7 +59,9 @@ export type GetFindResult<M extends Model, E, F extends PositionFields | undefin
                         
                         // ℹ️ expand option is an object
                         // ⤵️ Recursively falling into a nested expand.
-                        ? GetFindResult<M["expandable"][K], E[K], F>
+                        ? M["object"][K] extends ListMeta<infer O>
+                          ? ListMeta<O> & { rows: GetFindResult<M["expandable"][K], E[K], F>[] }
+                        : GetFindResult<M["expandable"][K], E[K], F>
                         
                         // ℹ️ expand option is `true`
                         // ❔ Is the entity field a list ..

@@ -4,6 +4,7 @@ import type { GroupModel } from "@/endpoints/group";
 import type { OrganizationModel } from "@/endpoints/organization";
 import type {
   AssortmentEntity,
+  AssortmentModel,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -109,6 +110,9 @@ export interface SupplyPosition extends Idable, Meta<Entity.SupplyPosition> {
  */
 export interface SupplyPositionModel extends Model {
   object: SupplyPosition;
+  expandable: {
+    assortment: AssortmentModel;
+  };
 }
 
 /**
