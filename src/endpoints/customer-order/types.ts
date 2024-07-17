@@ -1,6 +1,7 @@
 import {
   type AccountModel,
   type AssortmentEntity,
+  type AssortmentModel,
   type Attribute,
   type BooleanFilter,
   type DateTime,
@@ -75,9 +76,16 @@ export interface CustomerOrderPosition
   vatEnabled: boolean;
 }
 
-/** Модель позиции заказа покупателя */
+/**
+ * Модель позиции заказа покупателя
+ *
+ * {@linkcode CustomerOrderPosition}
+ * */
 export interface CustomerOrderPositionModel extends Model {
   object: CustomerOrderPosition;
+  expandable: {
+    assortment: AssortmentModel;
+  };
 }
 
 export interface CustomerOrder extends Idable, Meta<Entity.CustomerOrder> {
