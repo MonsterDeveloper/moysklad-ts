@@ -1,4 +1,5 @@
 import {
+  type AccountModel,
   type Attribute,
   type BooleanFilter,
   type DateTime,
@@ -26,7 +27,7 @@ import type { EmployeeModel } from "../employee";
 export interface CustomerOrder extends Idable, Meta<Entity.CustomerOrder> {
   readonly accountId: string;
   agent: Meta<Entity.Counterparty>;
-  agentAccount?: Meta<Entity.Account>; // TODO expand agentAccount
+  agentAccount?: Meta<Entity.Account>;
   applicable: boolean;
   attributes?: Attribute[]; // TODO add attributes filters
   code?: string;
@@ -42,7 +43,7 @@ export interface CustomerOrder extends Idable, Meta<Entity.CustomerOrder> {
   moment: DateTime;
   name: string;
   organization: Meta<Entity.Organization>;
-  organizationAccount?: Meta<Entity.Account>; // TODO expand organizationAccount
+  organizationAccount?: Meta<Entity.Account>;
   owner?: Meta<Entity.Employee>;
   readonly payedSum: number;
   positions: unknown; // TODO add positions types & expand
@@ -93,6 +94,8 @@ export interface CustomerOrderModel extends Model {
     organization: OrganizationModel;
     owner: EmployeeModel;
     demands: DemandModel;
+    organizationAccount: AccountModel;
+    agentAccount: AccountModel;
   };
   filters: {
     id: IdFilter;

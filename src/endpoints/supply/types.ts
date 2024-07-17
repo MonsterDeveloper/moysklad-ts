@@ -3,6 +3,7 @@ import type { EmployeeModel } from "@/endpoints/employee";
 import type { GroupModel } from "@/endpoints/group";
 import type { OrganizationModel } from "@/endpoints/organization";
 import type {
+  AccountModel,
   AssortmentEntity,
   AssortmentModel,
   BooleanFilter,
@@ -230,6 +231,8 @@ export interface SupplyModel extends Model {
     organization: OrganizationModel;
     owner: EmployeeModel;
     positions: SupplyPositionModel;
+    agentAccount: AccountModel;
+    organizationAccount: AccountModel;
   };
   filters: {
     id: IdFilter;

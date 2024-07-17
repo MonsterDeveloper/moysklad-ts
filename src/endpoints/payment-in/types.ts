@@ -1,4 +1,5 @@
 import type {
+  AccountModel,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -57,10 +58,12 @@ export interface PaymentIn extends Idable, Meta<Entity.PaymentIn> {
 export interface PaymentInModel extends Model {
   object: PaymentIn;
   expandable: {
-    agent: CounterpartyModel; // TODO expand agentAccount, contract, files, organization account, project, salesChannel, state
+    agent: CounterpartyModel; // TODO expand contract, files, project, salesChannel, state
     group: GroupModel;
     organization: OrganizationModel;
     owner: EmployeeModel;
+    agentAccount: AccountModel;
+    organizationAccount: AccountModel;
   };
   filters: {
     id: IdFilter;

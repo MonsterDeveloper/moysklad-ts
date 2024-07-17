@@ -1,4 +1,5 @@
 import type {
+  AccountModel,
   AssortmentEntity,
   BooleanFilter,
   DateTime,
@@ -170,6 +171,8 @@ export interface InvoiceOutModel extends Model {
     organization: OrganizationModel;
     owner: EmployeeModel;
     positions: InvoiceOutPositionModel;
+    agentAccount: AccountModel;
+    organizationAccount: AccountModel;
   };
   filters: {
     id: IdFilter;

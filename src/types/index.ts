@@ -21,3 +21,4 @@ export * from "./price-type";
 export * from "./barcodes";
 export * from "./position-fields";
 export * from "./gtd";
+export * from "./account";

@@ -1,4 +1,5 @@
 import type {
+  AccountModel,
   AssortmentEntity,
   BooleanFilter,
   DateTime,
@@ -82,7 +83,7 @@ export interface DemandPositionModel extends Model {
 export interface Demand extends Idable, Meta<Entity.Demand> {
   readonly accountId: string;
   agent: Meta<Entity.Counterparty>;
-  agentAccount?: Meta<Entity.Account>; // TODO expand agentAccount
+  agentAccount?: Meta<Entity.Account>;
   applicable: boolean;
   attributes: unknown; // TODO add attributes types & filters
   code?: string;
@@ -96,7 +97,7 @@ export interface Demand extends Idable, Meta<Entity.Demand> {
   moment: DateTime;
   name: string;
   organization: Meta<Entity.Organization>;
-  organizationAccount?: Meta<Entity.Account>; // TODO expand organizationAccount
+  organizationAccount?: Meta<Entity.Account>;
   overhead?: DemandOverhead;
   owner: Meta<Entity.Employee>;
   readonly payedSum: number;
@@ -152,6 +153,8 @@ export interface DemandModel extends Model {
     organization: OrganizationModel;
     owner: EmployeeModel;
     positions: DemandPositionModel;
+    agentAccount: AccountModel;
+    organizationAccount: AccountModel;
   };
   filters: {
     assortment: IdFilter;

@@ -1,4 +1,5 @@
 import type {
+  AccountModel,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -107,10 +108,12 @@ export interface PaymentOut extends Idable, Meta<Entity.PaymentOut> {
 export interface PaymentOutModel extends Model {
   object: PaymentOut;
   expandable: {
-    agent: CounterpartyModel; // TODO expand agentAccount, contract, files, organization account, project, salesChannel, state
+    agent: CounterpartyModel; // TODO expand contract, files, project, salesChannel, state
     group: GroupModel;
     organization: OrganizationModel;
     owner: EmployeeModel;
+    agentAccount: AccountModel;
+    organizationAccount: AccountModel;
   };
   filters: {
     id: IdFilter;
