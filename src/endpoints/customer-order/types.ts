@@ -1,5 +1,6 @@
 import {
   type AccountModel,
+  type AssortmentEntity,
   type Attribute,
   type BooleanFilter,
   type DateTime,
@@ -10,6 +11,7 @@ import {
   type FilterOptions,
   type IdFilter,
   type Idable,
+  type ListMeta,
   type Meta,
   type Model,
   type NumberFilter,
@@ -23,6 +25,60 @@ import type { DemandModel } from "../demand";
 import type { GroupModel } from "../group";
 import type { OrganizationModel } from "../organization";
 import type { EmployeeModel } from "../employee";
+
+/**
+ * Позиция заказа покупателя.
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq-zakazy-pokupatelej
+ */
+export interface CustomerOrderPosition
+  extends Idable,
+    Meta<Entity.CustomerOrderPosition> {
+  /** ID учетной записи */
+  readonly accountId: string;
+
+  /** Метаданные товара/услуги/серии/модификации/комплекта, которую представляет собой позиция */
+  assortment: Meta<AssortmentEntity>;
+
+  /** Процент скидки или наценки. Наценка указывается отрицательным числом, т.е. -10 создаст наценку в 10% */
+  discount?: number;
+
+  /**
+   * Упаковка Товара.
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar-towary-atributy-wlozhennyh-suschnostej-upakowki-towara
+   */
+  pack?: unknown; // TODO add pack type;
+
+  /** Цена товара/услуги в копейках */
+  price: number;
+
+  /**
+   * Количество товаров/услуг данного вида в позиции.
+   *
+   * Если позиция - товар, у которого включен учет по серийным номерам, то значение в этом поле всегда будет равно количеству серийных номеров для данной позиции в документе. */
+  quantity: number;
+
+  /** Резерв данной позиции */
+  reserve?: number;
+
+  /** Доставлено */
+  readonly shipped: number;
+
+  /** Код системы налогообложения */
+  taxSystem?: TaxSystem;
+
+  /** НДС, которым облагается текущая позиция */
+  vat: number;
+
+  /** Включен ли НДС для позиции. С помощью этого флага для позиции можно выставлять НДС = 0 или НДС = "без НДС". (`vat` = `0`, `vatEnabled` = `false`) -> `vat` = "без НДС", (`vat` = `0`, `vatEnabled` = `true`) -> `vat` = 0%. */
+  vatEnabled: boolean;
+}
+
+/** Модель позиции заказа покупателя */
+export interface CustomerOrderPositionModel extends Model {
+  object: CustomerOrderPosition;
+}
 
 export interface CustomerOrder extends Idable, Meta<Entity.CustomerOrder> {
   readonly accountId: string;
@@ -46,7 +102,7 @@ export interface CustomerOrder extends Idable, Meta<Entity.CustomerOrder> {
   organizationAccount?: Meta<Entity.Account>;
   owner?: Meta<Entity.Employee>;
   readonly payedSum: number;
-  positions: unknown; // TODO add positions types & expand
+  positions: ListMeta<Entity.CustomerOrderPosition>;
   readonly printed: boolean;
   project?: Meta<Entity.Project>; // TODO expand project
   readonly published: boolean;
@@ -96,6 +152,7 @@ export interface CustomerOrderModel extends Model {
     demands: DemandModel;
     organizationAccount: AccountModel;
     agentAccount: AccountModel;
+    positions: CustomerOrderPositionModel;
   };
   filters: {
     id: IdFilter;
