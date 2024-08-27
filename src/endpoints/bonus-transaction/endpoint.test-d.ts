@@ -1,4 +1,4 @@
-import { ApiClient } from "@/api-client";
+import { ApiClient } from "../../api-client";
 import { assertType, describe, test } from "vitest";
 import { BonusTransactionEndpoint } from "./endpoint";
 

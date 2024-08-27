@@ -1,6 +1,6 @@
 import { BaseEndpoint } from "../base-endpoint";
 import type { CustomEntityModel } from "./types";
-import type { Entity, GetFindResult, ListResponse } from "@/types";
+import type { Entity, GetFindResult, ListResponse } from "../../types";
 
 const ENDPOINT_URL = "/entity/customentity";
 

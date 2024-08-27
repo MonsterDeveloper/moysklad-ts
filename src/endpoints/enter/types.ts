@@ -17,7 +17,7 @@ import type {
   PaginationOptions,
   StringFilter,
   Gtd,
-} from "@/types";
+} from "../../types";
 import type { GroupModel } from "../group";
 import type { OrganizationModel } from "../organization";
 import type { EmployeeModel } from "../employee";

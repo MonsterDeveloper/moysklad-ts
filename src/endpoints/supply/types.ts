@@ -1,7 +1,7 @@
-import type { CounterpartyModel } from "@/endpoints";
-import type { EmployeeModel } from "@/endpoints/employee";
-import type { GroupModel } from "@/endpoints/group";
-import type { OrganizationModel } from "@/endpoints/organization";
+import type { CounterpartyModel } from "../counterparty";
+import type { EmployeeModel } from "../employee";
+import type { GroupModel } from "../group";
+import type { OrganizationModel } from "../organization";
 import type {
   AccountModel,
   AssortmentEntity,
@@ -23,7 +23,7 @@ import type {
   OrderOptions,
   PaginationOptions,
   StringFilter,
-} from "@/types";
+} from "../../types";
 
 export enum SupplyOverheadDistribution {
   Weight = "weight",

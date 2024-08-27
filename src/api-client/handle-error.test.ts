@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { handleError } from "./handle-error";
-import { MoyskladApiError, MoyskladError } from "@/errors";
+import { MoyskladApiError, MoyskladError } from "../errors";
 
 describe("handleError", () => {
   it("should throw a MoyskladError if the response has no Content-Type header", async () => {

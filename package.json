@@ -4,7 +4,7 @@
   "description": "Полностью типизированный, современный и лёгкий клиент МойСклад JSON API",
   "sideEffects": false,
   "type": "module",
-  "packageManager": "bun@1.1.10",
+  "packageManager": "bun@1.1.26",
   "keywords": [
     "moysklad",
     "warehouse",

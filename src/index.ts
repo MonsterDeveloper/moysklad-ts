@@ -1,14 +1,14 @@
-export { Moysklad } from "@/moysklad";
+export { Moysklad } from "./moysklad";
 
 export type {
   ApiClientOptions,
   Auth,
   BasicAuth,
   TokenAuth,
-} from "@/api-client";
+} from "./api-client";
 
-export * from "@/types";
-export * from "@/endpoints";
-export * from "@/errors";
+export * from "./types";
+export * from "./endpoints";
+export * from "./errors";
 
-export { composeDateTime, parseDateTime } from "@/utils";
+export { composeDateTime, parseDateTime } from "./utils";

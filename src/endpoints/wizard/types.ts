@@ -3,7 +3,7 @@ import {
   type DateTime,
   Entity,
   type Meta,
-} from "@/types";
+} from "../../types";
 import type { SetRequired } from "type-fest";
 
 /**

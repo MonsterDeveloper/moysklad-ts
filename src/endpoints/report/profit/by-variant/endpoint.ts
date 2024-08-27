@@ -1,10 +1,10 @@
-import { BaseEndpoint } from "@/endpoints/base-endpoint";
+import { BaseEndpoint } from "../../../base-endpoint";
 import type {
   ByVariantProfitReport,
   ByVariantProfitReportListOptions,
 } from "./types";
-import type { Entity, ListResponse } from "@/types";
-import { composeSearchParameters } from "@/api-client";
+import type { Entity, ListResponse } from "../../../../types";
+import { composeSearchParameters } from "../../../../api-client";
 
 const ENDPOINT_URL = "/report/profit/byvariant";
 

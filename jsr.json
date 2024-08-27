@@ -1,0 +1,19 @@
+{
+  "$schema": "https://jsr.io/schema/config-file.v1.json",
+  "name": "@moysklad/moysklad-ts",
+  "version": "0.0.50",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "publish": {
+    "include": [
+      "LICENSE",
+      "README.md",
+      "package.json",
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "**/*.test.ts"
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-import type { ApiClient } from "@/api-client";
+import type { ApiClient } from "../api-client";
 
 export class BaseEndpoint {
   protected client: ApiClient;

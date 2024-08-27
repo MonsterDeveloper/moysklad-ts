@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ApiClient, type BasicAuth, type TokenAuth } from "./api-client";
 import { btoa } from "js-base64";
-import { MoyskladError } from "@/errors";
-import type { ListMetadata } from "@/types";
+import { MoyskladError } from "../errors";
+import type { ListMetadata } from "../types";
 
 const EXAMPLE_BASE_URL = "https://example.com/api";
 

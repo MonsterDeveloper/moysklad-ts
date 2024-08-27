@@ -9,7 +9,7 @@ import {
   type ListResponse,
   type Subset,
   type UpdateMeta,
-} from "@/types";
+} from "../../types";
 import { BaseEndpoint } from "../base-endpoint";
 import type {
   AllPaymentInsOptions,
@@ -20,7 +20,7 @@ import type {
   PaymentInModel,
   UpdatePaymentInOptions,
 } from "./types";
-import { composeSearchParameters } from "@/api-client";
+import { composeSearchParameters } from "../../api-client";
 
 const ENDPOINT_URL = "/entity/paymentin";
 

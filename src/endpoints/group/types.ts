@@ -1,4 +1,4 @@
-import type { Entity, Idable, Meta, Model } from "@/types";
+import type { Entity, Idable, Meta, Model } from "../../types";
 import type { EmptyObject } from "type-fest";
 
 export interface Group extends Idable, Meta<Entity.Group> {

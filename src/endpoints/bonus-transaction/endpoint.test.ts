@@ -1,8 +1,8 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ApiClient } from "@/api-client";
+import { ApiClient } from "../../api-client";
 import { BonusTransactionEndpoint } from "./endpoint";
-import { MediaType } from "@/types";
+import { MediaType } from "../../types";
 
 const ENDPOINT_URL = "/entity/bonustransaction";
 

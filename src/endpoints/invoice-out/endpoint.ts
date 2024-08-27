@@ -1,5 +1,5 @@
 import { BaseEndpoint } from "../base-endpoint";
-import { composeSearchParameters } from "@/api-client";
+import { composeSearchParameters } from "../../api-client";
 import {
   MediaType,
   type BatchDeleteResult,
@@ -11,7 +11,7 @@ import {
   type Subset,
   type UpdateMeta,
   type BatchGetResult,
-} from "@/types";
+} from "../../types";
 import type {
   AllInvoiceOutsOptions,
   InvoiceOutModel,

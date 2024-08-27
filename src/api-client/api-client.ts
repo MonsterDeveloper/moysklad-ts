@@ -6,8 +6,8 @@ import type {
   Entity,
   BatchGetResult,
   BatchGetOptions,
-} from "@/types";
-import { batchPromises } from "@/utils";
+} from "../types";
+import { batchPromises } from "../utils";
 
 /**
  * Опции для Basic авторизации
@@ -115,7 +115,7 @@ export class ApiClient {
   async request(
     endpoint: string,
     { searchParameters, ...options }: RequestOptions = {},
-  ) {
+  ): Promise<Response> {
     const url = this.buildUrl(endpoint);
 
     const response = await fetch(
@@ -150,7 +150,10 @@ export class ApiClient {
    *
    * {@linkcode request}
    * */
-  async get(url: string, options: RequestOptionsWithoutMethod = {}) {
+  async get(
+    url: string,
+    options: RequestOptionsWithoutMethod = {},
+  ): Promise<Response> {
     return this.request(url, { ...options, method: "GET" });
   }
 
@@ -159,7 +162,10 @@ export class ApiClient {
    *
    * {@linkcode request}
    */
-  async post(url: string, options: RequestOptionsWithoutMethod = {}) {
+  async post(
+    url: string,
+    options: RequestOptionsWithoutMethod = {},
+  ): Promise<Response> {
     return this.request(url, { ...options, method: "POST" });
   }
 
@@ -168,7 +174,10 @@ export class ApiClient {
    *
    * {@linkcode request}
    */
-  async put(url: string, options: RequestOptionsWithoutMethod = {}) {
+  async put(
+    url: string,
+    options: RequestOptionsWithoutMethod = {},
+  ): Promise<Response> {
     return this.request(url, { ...options, method: "PUT" });
   }
 
@@ -177,7 +186,10 @@ export class ApiClient {
    *
    * {@linkcode request}
    */
-  async delete(url: string, options: RequestOptionsWithoutMethod = {}) {
+  async delete(
+    url: string,
+    options: RequestOptionsWithoutMethod = {},
+  ): Promise<Response> {
     return this.request(url, { ...options, method: "DELETE" });
   }
 

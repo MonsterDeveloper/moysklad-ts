@@ -1,6 +1,6 @@
 /* c8 ignore start */
-import type { ApiClient } from "@/api-client";
-import { BaseEndpoint } from "@/endpoints/base-endpoint";
+import type { ApiClient } from "../../../api-client";
+import { BaseEndpoint } from "../../base-endpoint";
 import { ByVariantEndpoint } from "./by-variant";
 
 export class ProfitEndpoint extends BaseEndpoint {

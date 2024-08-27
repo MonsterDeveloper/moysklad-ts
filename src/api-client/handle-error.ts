@@ -1,4 +1,4 @@
-import { MoyskladApiError, MoyskladError } from "@/errors";
+import { MoyskladApiError, MoyskladError } from "../errors";
 
 export async function handleError(response: Response): Promise<never> {
   if (!response.headers.has("Content-Type"))

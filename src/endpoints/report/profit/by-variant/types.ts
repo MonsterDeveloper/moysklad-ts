@@ -9,7 +9,7 @@ import type {
   Metadata,
   Model,
   PaginationOptions,
-} from "@/types";
+} from "../../../../types";
 
 /**
  * Прибыльность по модификациям

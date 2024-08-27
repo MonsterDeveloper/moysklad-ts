@@ -8,7 +8,7 @@ import {
   type BatchDeleteResult,
   type GetModelCreatableFields,
   type GetModelUpdatableFields,
-} from "@/types";
+} from "../../types";
 import { BaseEndpoint } from "../base-endpoint";
 import type {
   AllCustomerOrdersOptions,
@@ -19,7 +19,7 @@ import type {
   ListCustomerOrdersOptions,
   UpdateCustomerOrderOptions,
 } from "./types";
-import { composeSearchParameters } from "@/api-client";
+import { composeSearchParameters } from "../../api-client";
 
 const ENDPOINT_URL = "/entity/customerorder";
 

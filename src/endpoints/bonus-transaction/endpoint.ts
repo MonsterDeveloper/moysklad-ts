@@ -9,7 +9,7 @@ import {
   type Subset,
   type UpdateMeta,
   type BatchGetResult,
-} from "@/types";
+} from "../../types";
 import type {
   AllBonusTransactionsOptions,
   BonusTransactionModel,
@@ -20,7 +20,7 @@ import type {
   UpdateBonusTransactionOptions,
 } from "./types";
 import { BaseEndpoint } from "../base-endpoint";
-import { composeSearchParameters } from "@/api-client";
+import { composeSearchParameters } from "../../api-client";
 
 const ENDPOINT_URL = "/entity/bonustransaction";
 

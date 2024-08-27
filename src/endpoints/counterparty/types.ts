@@ -14,7 +14,7 @@ import type {
   OrderOptions,
   PaginationOptions,
   StringFilter,
-} from "@/types";
+} from "../../types";
 import type { EmployeeModel } from "../employee";
 import type { GroupModel } from "../group";
 

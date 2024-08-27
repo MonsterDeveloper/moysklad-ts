@@ -1,6 +1,6 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
 import { StockEndpoint } from "./endpoint";
-import { ApiClient } from "@/api-client";
+import { ApiClient } from "../../../api-client";
 
 describe("StockEndpoint", () => {
   afterEach(() => {

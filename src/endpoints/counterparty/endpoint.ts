@@ -1,5 +1,5 @@
 import { BaseEndpoint } from "../base-endpoint";
-import { composeSearchParameters } from "@/api-client";
+import { composeSearchParameters } from "../../api-client";
 import type {
   AllCounterpartiesOptions,
   CounterpartyModel,
@@ -15,7 +15,7 @@ import type {
   GetModelUpdatableFields,
   ListResponse,
   Subset,
-} from "@/types";
+} from "../../types";
 
 const ENDPOINT_URL = "/entity/counterparty";
 

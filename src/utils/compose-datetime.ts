@@ -1,4 +1,4 @@
-import type { DateTime } from "@/types";
+import type { DateTime } from "../types";
 
 // Moysklad timezone (Moscow / UTC +3)
 const MOSCOW_TIMEZONE_MS = +3 * 60 * 60 * 1000;

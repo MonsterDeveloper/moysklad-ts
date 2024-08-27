@@ -17,7 +17,7 @@ import type {
   PriceType,
   StringFilter,
   TaxSystem,
-} from "@/types";
+} from "../../types";
 import type { CounterpartyModel } from "..";
 import type { GroupModel } from "../group";
 

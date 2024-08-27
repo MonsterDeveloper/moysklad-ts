@@ -20,7 +20,7 @@ import {
   type PaginationOptions,
   type StringFilter,
   type TaxSystem,
-} from "@/types";
+} from "../../types";
 import type { CounterpartyModel } from "../counterparty";
 import type { DemandModel } from "../demand";
 import type { GroupModel } from "../group";

@@ -1,4 +1,4 @@
-import type { DateTime } from "@/types";
+import type { DateTime } from "../types";
 
 // https://regex101.com/r/Bxq7dZ/2
 const MOYSKLAD_DATE_TIME_REGEX =

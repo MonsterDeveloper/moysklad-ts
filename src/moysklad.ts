@@ -1,5 +1,5 @@
 /* c8 ignore start */
-import { ApiClient, type ApiClientOptions } from "@/api-client";
+import { ApiClient, type ApiClientOptions } from "./api-client";
 import {
   BonusTransactionEndpoint,
   CounterpartyEndpoint,
@@ -16,7 +16,7 @@ import {
   InvoiceOutEndpoint,
   EnterEndpoint,
   SupplyEndpoint,
-} from "@/endpoints";
+} from "./endpoints";
 
 /**
  * Основной класс Moysklad

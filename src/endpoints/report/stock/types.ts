@@ -12,7 +12,7 @@ import type {
   OrderOptions,
   PaginationOptions,
   StringFilter,
-} from "@/types";
+} from "../../../types";
 
 /**
  * Атрибуты объекта отчёта

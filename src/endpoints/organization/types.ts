@@ -1,4 +1,4 @@
-import type { DateTime, Entity, Idable, Meta, Model } from "@/types";
+import type { DateTime, Entity, Idable, Meta, Model } from "../../types";
 import type { BonusProgramModel } from "../bonus-program";
 import type { GroupModel } from "../group";
 import type { EmployeeModel } from "../employee";

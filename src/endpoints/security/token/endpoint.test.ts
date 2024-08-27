@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ApiClient } from "@/api-client";
+import { ApiClient } from "../../../api-client";
 import { TokenEndpoint } from "./endpoint";
 
 describe("TokenEndpoint", () => {

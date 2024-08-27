@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ApiClient } from "@/api-client";
+import { ApiClient } from "../../api-client";
 import { CustomEntityEndpoint } from "./endpoint";
 
 const ENDPOINT_URL = "/entity/customentity";

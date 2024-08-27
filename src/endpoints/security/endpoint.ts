@@ -1,5 +1,5 @@
 /* c8 ignore start */
-import type { ApiClient } from "@/api-client";
+import type { ApiClient } from "../../api-client";
 import { BaseEndpoint } from "../base-endpoint";
 import { TokenEndpoint } from "./token";
 

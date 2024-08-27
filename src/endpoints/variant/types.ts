@@ -15,7 +15,7 @@ import type {
   PaginationOptions,
   PriceType,
   StringFilter,
-} from "@/types";
+} from "../../types";
 import type { ProductModel } from "..";
 
 export interface Variant extends Idable, Meta<Entity.Variant> {

@@ -1,4 +1,4 @@
-import type { Filter, OrderOption, PaginationOptions } from "@/types";
+import type { Filter, OrderOption, PaginationOptions } from "../types";
 
 function traverseExpand(expand: Record<string, unknown>, depth = 0) {
   if (depth > 2) {

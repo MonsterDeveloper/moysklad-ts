@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ApiClient } from "@/api-client";
+import { ApiClient } from "../../api-client";
 import { CounterpartyEndpoint } from "./endpoint";
 
 const ENDPOINT_URL = "/entity/counterparty";

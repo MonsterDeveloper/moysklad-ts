@@ -13,7 +13,7 @@ import type {
   StringFilter,
   DateTimeFilter,
   FilterOptions,
-} from "@/types";
+} from "../../types";
 import type { CounterpartyModel } from "../counterparty";
 import type { EmployeeModel } from "../employee";
 import type { GroupModel } from "../group";

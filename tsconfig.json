@@ -16,11 +16,6 @@
 		"module": "ESNext",
 		"noEmit": true,
 		"lib": ["ES2022", "DOM"],
-
-		"baseUrl": ".",
-		"paths": {
-      "@/*": ["src/*"],
-    },
 	},
 	"include": ["src", "*.d.ts", "src/**/*.json", "vite*.ts"]
 }

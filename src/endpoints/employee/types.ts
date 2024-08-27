@@ -1,4 +1,4 @@
-import type { DateTime, Entity, Idable, Meta, Model } from "@/types";
+import type { DateTime, Entity, Idable, Meta, Model } from "../../types";
 import type { GroupModel } from "../group";
 
 export interface Employee extends Idable, Meta<Entity.Employee> {

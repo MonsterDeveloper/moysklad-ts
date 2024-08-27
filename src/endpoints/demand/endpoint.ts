@@ -6,7 +6,7 @@ import {
   type ListResponse,
   type Subset,
   type BatchGetResult,
-} from "@/types";
+} from "../../types";
 import { BaseEndpoint } from "../base-endpoint";
 import type {
   AllDemandsOptions,
@@ -15,7 +15,7 @@ import type {
   GetDemandOptions,
   ListDemandsOptions,
 } from "./types";
-import { composeSearchParameters } from "@/api-client";
+import { composeSearchParameters } from "../../api-client";
 
 const ENDPOINT_URL = "/entity/demand";
 

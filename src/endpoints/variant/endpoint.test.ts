@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ApiClient } from "@/api-client";
+import { ApiClient } from "../../api-client";
 import { VariantEndpoint } from "./endpoint";
-import { MediaType } from "@/types";
+import { MediaType } from "../../types";
 
 const ENDPOINT_URL = "/entity/variant";
 const CLIENT_OPTIONS = { auth: { token: "" } };

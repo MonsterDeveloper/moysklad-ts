@@ -1,4 +1,4 @@
-import type { ProductModel, VariantModel } from "@/endpoints";
+import type { ProductModel, VariantModel } from "../endpoints";
 
 export enum Entity {
   Account = "account",
