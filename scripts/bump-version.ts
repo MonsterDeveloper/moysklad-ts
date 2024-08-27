@@ -30,8 +30,10 @@ if (bumpType !== "patch" && bumpType !== "minor" && bumpType !== "major") {
   process.exit(1);
 }
 
-const newVersion =
+const npmOutput =
   await $`npm version ${bumpType} --git-tag-version=false`.text();
+
+const newVersion = npmOutput.trim();
 
 if (!newVersion.startsWith("v")) {
   console.error(`Invalid NPM version output: ${newVersion}`);
@@ -40,7 +42,7 @@ if (!newVersion.startsWith("v")) {
 
 const newJsrJson = jsrJson.replace(
   /"version":\s*"[^"]+"/,
-  `"version": "${newVersion.slice(1, -1)}"`,
+  `"version": "${newVersion.slice(1)}"`,
 );
 
 await Bun.write(JSR_JSON_FILENAME, newJsrJson);
