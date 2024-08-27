@@ -1,10 +1,9 @@
 import { describe, expectTypeOf, it } from "vitest";
 import type { GetFindResult, IncludeFields } from "./result";
 import type { Model } from "./model";
-import type { EmptyObject, Simplify } from "type-fest";
+import type { EmptyObject, Simplify, SimplifyDeep } from "type-fest";
 import type { ListMeta, Meta } from "./metadata";
 import type { Entity } from "./entity";
-import type { SimplifyDeep } from "type-fest/source/merge-deep";
 import type { PositionStockData } from ".";
 
 describe("result", () => {
