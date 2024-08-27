@@ -36,7 +36,8 @@
     "lint": "eslint --ext .ts .",
     "typecheck": "tsc && vitest --typecheck.only --run",
     "update": "bunx npm-check-updates -ui --reject '*eslint*'",
-    "prepare": "husky"
+    "prepare": "husky",
+    "bump-version": "bun scripts/bump-version.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
