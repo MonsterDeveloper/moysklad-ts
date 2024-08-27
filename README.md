@@ -1,8 +1,9 @@
 # moysklad-ts
 [![npm](https://img.shields.io/npm/v/moysklad-ts)](https://npmjs.com/package/moysklad-ts)
-[![npm package minimized gzipped size](https://deno.bundlejs.com/?q=moysklad-ts&badge=detailed&badge-style=for-the-badge)](https://bundlejs.com/?q=moysklad-ts)
-[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/MonsterDeveloper/moysklad-ts/publish-to-npm.yml)](https://github.com/MonsterDeveloper/moysklad-ts/actions/workflows/publish-to-npm.yml)
-[![GitHub](https://img.shields.io/github/license/MonsterDeveloper/moysklad-ts)](https://github.com/MonsterDeveloper/moysklad-ts/blob/main/LICENSE)
+[![JSR](https://jsr.io/badges/@moysklad/moysklad-ts)](https://jsr.io/@moysklad/moysklad-ts)
+[![npm package minimized gzipped size](https://img.shields.io/bundlejs/size/moysklad-ts?exports=Moysklad)](https://bundlejs.com/?q=moysklad-ts&treeshake=%5B%7B+Moysklad+%7D%5D)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/MonsterDeveloper/moysklad-ts/publish.yml)](https://github.com/MonsterDeveloper/moysklad-ts/actions/workflows/publish.yml)
+[![GitHub License](https://img.shields.io/github/license/MonsterDeveloper/moysklad-ts)](https://github.com/MonsterDeveloper/moysklad-ts/blob/main/LICENSE)
 
 > ❗ Данная библиотека находится на стадии альфа-тестирования и ещё не готова к использованию в продакшене.
 
@@ -45,7 +46,13 @@ npm i moysklad-ts
   ```
 </details>
 
-Библиотека требует Node.js версии 18 и выше, либо другой соответствующей среды исполнения, в которой доступен [`fetch` API](https://developer.mozilla.org/en-US/docs/Web/API/fetch).
+#### JSR
+
+Библиотека также доступна на JSR: [@moysklad/moysklad-ts](https://jsr.io/@moysklad/moysklad-ts). Подробнее о том, как устанавливать пакеты из JSR, можно прочитать [в официальном гайде](https://jsr.io/docs/using-packages).
+
+#### Требования к среде исполнения (runtime)
+
+Библиотека требует Node.js версии 18 и выше, либо другой соответствующей среды исполнения, в которой доступен [`fetch` API](https://developer.mozilla.org/en-US/docs/Web/API/fetch) и [`btoa`](https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa) (если используете авторизацию по логину и паролю).
 
 ### Пример
 ```typescript
@@ -79,6 +86,8 @@ const demand = await moysklad.demand.first({
 
 Большинство методов интуитивно понятны и описаны с помощью JSDoc. Так что основной ресурс для изучения API - это [документация МойСклад](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api).
 
+Для полного референса по методам и типам данных удобно использовать [автоматически сгенерированную документацию на JSR](https://jsr.io/@moysklad/moysklad-ts/doc/~/Moysklad).
+
 ### Методы
 Все методы в классе `Moysklad` разделены на эндпоинты, которые соответствуют разделам API МойСклад (на английском).
 
@@ -99,7 +108,7 @@ const demand = await moysklad.demand.first({
 
 
 ## Доработки
-Пожалуйста, прочитайте [contributing guidelines](../../CONTRIBUTING.md) прежде чем начать работу над проектом. Спасибо!
+Пожалуйста, прочитайте [contributing guidelines](./CONTRIBUTING.md) прежде чем начать работу над проектом. Спасибо!
 
 ## Лицензия
-Проект находится под лицензией [GPL-3.0](../../LICENSE).
+Проект находится под лицензией [GPL-3.0](./LICENSE).
