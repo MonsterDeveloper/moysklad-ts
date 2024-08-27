@@ -19,9 +19,16 @@
   },
   "overrides": [
     {
-      "files": "*.test.ts",
+      "files": ["*.test.ts"],
       "rules": {
         "@typescript-eslint/no-unsafe-assignment": "off"
+      }
+    },
+    {
+      "files": ["scripts/**/*.ts"],
+      "rules": {
+        "no-console": "off",
+        "unicorn/no-process-exit": "off"
       }
     }
   ]
