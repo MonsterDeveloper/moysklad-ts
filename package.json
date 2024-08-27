@@ -70,7 +70,6 @@
     }
   },
   "dependencies": {
-    "js-base64": "^3.7.7",
-    "type-fest": "^4.18.3"
+    "type-fest": "^4.25.0"
   }
 }

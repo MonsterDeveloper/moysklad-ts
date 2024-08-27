@@ -1,5 +1,4 @@
 import { version } from "../../package.json" with { type: "json" };
-import { btoa } from "js-base64";
 import { handleError } from "./handle-error";
 import type {
   ListResponse,
