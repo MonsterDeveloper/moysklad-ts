@@ -2,7 +2,6 @@ import { defineConfig } from "vitest/config";
 import { fileURLToPath } from "node:url";
 import dts from "vite-plugin-dts";
 import tsconfigPaths from "vite-tsconfig-paths";
-import ts from "typescript";
 
 export default defineConfig({
   build: {
@@ -24,9 +23,6 @@ export default defineConfig({
     dts({
       entryRoot: "src",
       exclude: ["**/*.test.ts", "**/*.test-d.ts", "vite.config.ts", "scripts"],
-      compilerOptions: {
-        module: ts.ModuleKind.NodeNext,
-      },
       rollupTypes: true,
     }),
   ],
