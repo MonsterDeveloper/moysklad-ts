@@ -48,7 +48,7 @@ const newJsrJson = jsrJson.replace(
 await Bun.write(JSR_JSON_FILENAME, newJsrJson);
 
 await $`git add .`;
-await $`git commit -m "chore(repo): Bump library version to ${newVersion}"`;
+await $`git commit -m "chore: bump version to ${newVersion}"`;
 await $`git tag ${newVersion}`;
 await $`git push --tags`;
 
