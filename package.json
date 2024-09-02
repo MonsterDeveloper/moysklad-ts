@@ -37,9 +37,11 @@
     "typecheck": "tsc && vitest --typecheck.only --run",
     "update": "bunx npm-check-updates -ui --reject '*eslint*'",
     "prepare": "husky",
-    "bump-version": "bun scripts/bump-version.ts"
+    "bump-version": "bun scripts/bump-version.ts",
+    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.4",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/load": "^19.2.0",
@@ -65,9 +67,11 @@
   "files": [
     "dist"
   ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/moysklad-ts.js",
+      "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
   },

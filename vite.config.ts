@@ -2,6 +2,7 @@ import { defineConfig } from "vitest/config";
 import { fileURLToPath } from "node:url";
 import dts from "vite-plugin-dts";
 import tsconfigPaths from "vite-tsconfig-paths";
+import ts from "typescript";
 
 export default defineConfig({
   build: {
@@ -11,7 +12,7 @@ export default defineConfig({
     lib: {
       entry: fileURLToPath(new URL("src/index.ts", import.meta.url)),
       name: "moysklad",
-      fileName: "moysklad-ts",
+      fileName: "index",
       formats: ["es"],
     },
     rollupOptions: {
@@ -22,6 +23,11 @@ export default defineConfig({
     tsconfigPaths(),
     dts({
       entryRoot: "src",
+      exclude: ["**/*.test.ts", "**/*.test-d.ts", "vite.config.ts", "scripts"],
+      compilerOptions: {
+        module: ts.ModuleKind.NodeNext,
+      },
+      rollupTypes: true,
     }),
   ],
   test: {
