@@ -164,7 +164,7 @@ export interface CustomerOrderModel extends Model {
   };
   filters: {
     id: IdFilter;
-    namedFilter: IdFilter;
+    namedfilter: IdFilter;
     accountId: IdFilter;
     agent: IdFilter;
     applicable: BooleanFilter;
