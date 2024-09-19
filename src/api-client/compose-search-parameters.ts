@@ -129,6 +129,7 @@ export function composeSearchParameters({
   order,
   search,
   filter,
+  namedfilter,
   ...options
 }: {
   pagination?: PaginationOptions;
@@ -136,9 +137,12 @@ export function composeSearchParameters({
   order?: OrderOption<string> | OrderOption<string>[];
   search?: string;
   filter?: Record<string, Filter | undefined>;
+  namedfilter?: string;
 }) {
   const searchParameters = new URLSearchParams();
   const expandFields = expand && traverseExpand(expand);
+
+  if (namedfilter) searchParameters.append("namedfilter", namedfilter);
 
   if (typeof pagination?.limit === "number")
     searchParameters.append("limit", pagination.limit.toString());

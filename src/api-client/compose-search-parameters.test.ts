@@ -335,4 +335,14 @@ describe("composeSearchParameters", () => {
       expect(searchParameters?.get("number")).toBe("1");
     });
   });
+
+  describe("namedfilter", () => {
+    it("should add 'namedfilter' parameter with correct value if 'namedfilter' is a string", () => {
+      const searchParameters = composeSearchParameters({
+        namedfilter: "sample namedfilter",
+      });
+
+      expect(searchParameters?.get("namedfilter")).toBe("sample namedfilter");
+    });
+  });
 });

@@ -164,7 +164,6 @@ export interface CustomerOrderModel extends Model {
   };
   filters: {
     id: IdFilter;
-    namedfilter: IdFilter;
     accountId: IdFilter;
     agent: IdFilter;
     applicable: BooleanFilter;
@@ -214,6 +213,7 @@ export interface ListCustomerOrdersOptions {
   order?: OrderOptions<CustomerOrderModel>;
   search?: string;
   filter?: FilterOptions<CustomerOrderModel>;
+  namedfilter?: string;
 }
 
 export interface CreateCustomerOrderOptions {
