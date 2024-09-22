@@ -50,6 +50,7 @@ await Bun.write(JSR_JSON_FILENAME, newJsrJson);
 await $`git add .`;
 await $`git commit -m "chore: bump version to ${newVersion}"`;
 await $`git tag ${newVersion}`;
+await $`git push`;
 await $`git push --tags`;
 
 console.log(`Version bumped to ${newVersion} and pushed to git.`);
