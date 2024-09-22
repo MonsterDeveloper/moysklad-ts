@@ -16,6 +16,7 @@ import {
   InvoiceOutEndpoint,
   EnterEndpoint,
   SupplyEndpoint,
+  ProcessingPlanEndpoint,
 } from "./endpoints";
 
 /**
@@ -137,6 +138,13 @@ export class Moysklad {
    */
   public supply: SupplyEndpoint;
 
+  /**
+   * Техкарты
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-tehkarta-tehkarty
+   */
+  public processingPlan: ProcessingPlanEndpoint;
+
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
     this.bonusTransaction = new BonusTransactionEndpoint(this.client);
@@ -154,6 +162,7 @@ export class Moysklad {
     this.invoiceOut = new InvoiceOutEndpoint(this.client);
     this.enter = new EnterEndpoint(this.client);
     this.supply = new SupplyEndpoint(this.client);
+    this.processingPlan = new ProcessingPlanEndpoint(this.client);
   }
 }
 

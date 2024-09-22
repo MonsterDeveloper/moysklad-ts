@@ -19,3 +19,7 @@ export * from "./organization";
 export * from "./group";
 export * from "./report";
 export * from "./wizard";
+export * from "./processing-plan";
+export * from "./processing-plan-folder";
+export * from "./processing-process";
+export * from "./processing-stage";
