@@ -4,7 +4,7 @@
   "description": "Полностью типизированный, современный и лёгкий клиент МойСклад JSON API",
   "sideEffects": false,
   "type": "module",
-  "packageManager": "bun@1.1.26",
+  "packageManager": "bun@1.1.29",
   "keywords": [
     "moysklad",
     "warehouse",
@@ -42,29 +42,29 @@
     "knip": "knip"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.15.4",
-    "@commitlint/cli": "^19.4.1",
-    "@commitlint/config-conventional": "^19.4.1",
-    "@types/bun": "^1.1.8",
+    "@arethetypeswrong/cli": "^0.16.4",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@types/bun": "^1.1.10",
     "@typescript-eslint/eslint-plugin": "^6.12.0",
     "@typescript-eslint/parser": "^6.12.0",
-    "@vitest/coverage-v8": "^2.0.5",
-    "@vitest/ui": "^2.0.5",
+    "@vitest/coverage-v8": "^2.1.1",
+    "@vitest/ui": "^2.1.1",
     "ajv": "^8.17.1",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-sonarjs": "^0.23.0",
     "eslint-plugin-unicorn": "^49.0.0",
-    "husky": "^9.1.5",
-    "knip": "^5.29.1",
+    "husky": "^9.1.6",
+    "knip": "^5.30.5",
     "msw": "^1.3.2",
     "prettier": "^3.3.3",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.2",
-    "vite-plugin-dts": "^4.1.0",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
+    "vite-plugin-dts": "^4.2.2",
     "vite-tsconfig-paths": "^5.0.1",
-    "vitest": "^2.0.5"
+    "vitest": "^2.1.1"
   },
   "files": [
     "dist"
@@ -78,6 +78,6 @@
     }
   },
   "dependencies": {
-    "type-fest": "^4.26.0"
+    "type-fest": "^4.26.1"
   }
 }
