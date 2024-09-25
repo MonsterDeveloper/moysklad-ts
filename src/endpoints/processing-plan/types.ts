@@ -1,6 +1,7 @@
 import type {
   AssortmentEntity,
   AssortmentModel,
+  Attribute,
   DateTime,
   Entity,
   ExpandOptions,
@@ -172,6 +173,9 @@ export interface ProcessingPlan extends Idable, Meta<Entity.ProcessingPlan> {
 
   /** Общий доступ */
   shared: boolean;
+
+  /** Дополнительные поля */
+  attributes?: Attribute[];
 
   /** Момент последнего обновления техкарты */
   readonly updated: DateTime;
