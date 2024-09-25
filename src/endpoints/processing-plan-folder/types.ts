@@ -1,4 +1,4 @@
-import type { Entity, Idable, Meta, Model } from "../../types";
+import type { DateTime, Entity, Idable, Meta, Model } from "../../types";
 import type { EmployeeModel } from "../employee";
 import type { GroupModel } from "../group";
 
@@ -40,7 +40,7 @@ export interface ProcessingPlanFolder
   shared: boolean;
 
   /** Момент последнего обновления сущности */
-  readonly updated: string;
+  readonly updated: DateTime;
 }
 
 export interface ProcessingPlanFolderModel extends Model {

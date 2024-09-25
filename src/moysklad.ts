@@ -17,6 +17,7 @@ import {
   EnterEndpoint,
   SupplyEndpoint,
   ProcessingPlanEndpoint,
+  ProductionStageCompletionEndpoint,
 } from "./endpoints";
 
 /**
@@ -145,6 +146,13 @@ export class Moysklad {
    */
   public processingPlan: ProcessingPlanEndpoint;
 
+  /**
+   * Выполнения этапов производства
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-vypolnenie-atapa-proizwodstwa
+   */
+  public productionStageCompletion: ProductionStageCompletionEndpoint;
+
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
     this.bonusTransaction = new BonusTransactionEndpoint(this.client);
@@ -163,6 +171,9 @@ export class Moysklad {
     this.enter = new EnterEndpoint(this.client);
     this.supply = new SupplyEndpoint(this.client);
     this.processingPlan = new ProcessingPlanEndpoint(this.client);
+    this.productionStageCompletion = new ProductionStageCompletionEndpoint(
+      this.client,
+    );
   }
 }
 

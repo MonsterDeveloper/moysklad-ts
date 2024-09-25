@@ -135,6 +135,7 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
 
   /**
    * Изменить бонусную операцию.
+   *
    * @param id - id бонусной операции
    * @param data - данные для изменения бонусной операции
    * @param options - Опции для изменения бонусной операции {@linkcode UpdateBonusTransactionOptions}

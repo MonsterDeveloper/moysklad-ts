@@ -23,3 +23,4 @@ export * from "./processing-plan";
 export * from "./processing-plan-folder";
 export * from "./processing-process";
 export * from "./processing-stage";
+export * from "./production-stage-completion";

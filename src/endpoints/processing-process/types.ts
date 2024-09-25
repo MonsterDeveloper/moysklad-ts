@@ -1,4 +1,11 @@
-import type { Entity, Idable, Meta, Model, ListMeta } from "../../types";
+import type {
+  Entity,
+  Idable,
+  Meta,
+  Model,
+  ListMeta,
+  DateTime,
+} from "../../types";
 import type { EmployeeModel } from "../employee";
 import type { GroupModel } from "../group";
 import type { ProcessingStageModel } from "../processing-stage";
@@ -39,7 +46,7 @@ export interface ProcessingProcess
   shared: boolean;
 
   /** Момент последнего обновления сущности */
-  readonly updated: string;
+  readonly updated: DateTime;
 }
 
 export interface ProcessingProcessModel extends Model {
