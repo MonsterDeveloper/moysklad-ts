@@ -320,6 +320,40 @@ describe("composeSearchParameters", () => {
         "name~=hello;name=~world;quantity>=10;quantity<=20;isArchived=false",
       );
     });
+
+    it("should add 'filter' parameter for attributes filters", () => {
+      const attributeUrl =
+        "https://api.moysklad.ru/api/remap/1.2/entity/product/metadata/attributes/b83c12e7-42bf-11ec-0a80-08bb00000161";
+      const searchParameters = composeSearchParameters({
+        filter: {
+          [attributeUrl]: {
+            gte: 5,
+          },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(`${attributeUrl}>=5`);
+    });
+
+    it("should add 'filter' parameter for attributes filters and regular filters", () => {
+      const attributeUrl =
+        "https://api.moysklad.ru/api/remap/1.2/entity/product/metadata/attributes/b83c12e7-42bf-11ec-0a80-08bb00000161";
+
+      const searchParameters = composeSearchParameters({
+        filter: {
+          [attributeUrl]: {
+            gte: 5,
+          },
+          name: {
+            sw: "hello",
+          },
+        },
+      });
+
+      expect(searchParameters?.get("filter")).toBe(
+        `${attributeUrl}>=5;name~=hello`,
+      );
+    });
   });
 
   describe("rest options", () => {

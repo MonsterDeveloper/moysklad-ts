@@ -14,9 +14,6 @@ export default defineConfig({
       fileName: "index",
       formats: ["es"],
     },
-    rollupOptions: {
-      external: ["js-base64"],
-    },
   },
   plugins: [
     tsconfigPaths(),

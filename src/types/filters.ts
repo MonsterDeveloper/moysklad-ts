@@ -1,4 +1,4 @@
-import type { IsEmptyObject, Primitive } from "type-fest";
+import type { IsEmptyObject, IsNever, Primitive } from "type-fest";
 import type { DateTime } from "./datetime";
 import type { Model } from "./model";
 
@@ -118,5 +118,19 @@ export type Filter =
   | StringFilter
   | DateTimeFilter;
 
-export type FilterOptions<M extends Model> =
+type AddAttributesFilters<
+  M extends Model,
+  F,
+> = "attributes" extends keyof M["object"]
+  ? IsNever<F> extends false
+    ? F & { [attributeUrl: string]: Filter }
+    : { [attributeUrl: string]: Filter }
+  : F;
+
+type GetFiltersForModel<M extends Model> =
   IsEmptyObject<M["filters"]> extends true ? never : Partial<M["filters"]>;
+
+export type FilterOptions<M extends Model> = AddAttributesFilters<
+  M,
+  GetFiltersForModel<M>
+>;
