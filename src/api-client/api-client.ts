@@ -11,7 +11,7 @@ import { batchPromises } from "../utils";
 /**
  * Опции для Basic авторизации
  *
- * @link https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
  */
 export type BasicAuth = {
   /** Логин */
@@ -23,7 +23,7 @@ export type BasicAuth = {
 /**
  * Опции для авторизации по токену
  *
- * @link https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
  */
 export type TokenAuth = {
   /** Токен */
@@ -33,7 +33,7 @@ export type TokenAuth = {
 /**
  * Опции для авторизации
  *
- * @link https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
  */
 export type Auth = BasicAuth | TokenAuth;
 

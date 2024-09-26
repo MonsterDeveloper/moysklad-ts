@@ -1,3 +1,3 @@
-import { stock } from "./stock";
+import { stockAll, stockAllCurrent } from "./stock";
 
-export default [stock];
+export default [stockAll, stockAllCurrent];

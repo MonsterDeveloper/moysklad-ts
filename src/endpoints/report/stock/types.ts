@@ -1,6 +1,7 @@
 import type {
   AssortmentEntity,
   BooleanFilter,
+  DateTime,
   DateTimeFilter,
   Entity,
   EnumFilter,
@@ -17,7 +18,7 @@ import type {
 /**
  * Атрибуты объекта отчёта
  *
- * @link https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-rasshirennyj-otchet-ob-ostatkah-atributy-ob-ekta-otcheta
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-rasshirennyj-otchet-ob-ostatkah-atributy-ob-ekta-otcheta
  */
 export interface StockAll extends Meta<AssortmentEntity> {
   /** Артикул */
@@ -29,7 +30,7 @@ export interface StockAll extends Meta<AssortmentEntity> {
   /**
    * Группа Товара/Модификации/Cерии
    *
-   * @link https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-rasshirennyj-otchet-ob-ostatkah-gruppa
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-rasshirennyj-otchet-ob-ostatkah-gruppa
    */
   readonly folder: Meta<Entity.ProductFolder> & {
     /** Наименование группы */
@@ -58,7 +59,7 @@ export interface StockAll extends Meta<AssortmentEntity> {
   /**
    * Единица измерения
    *
-   * @link https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-rasshirennyj-otchet-ob-ostatkah-edinica-izmereniq
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-rasshirennyj-otchet-ob-ostatkah-edinica-izmereniq
    */
   readonly uom: Meta<Entity.Uom> & {
     /** Наименование единицы измерений */
@@ -161,7 +162,7 @@ export interface StockAllModel extends Model {
    * - `stock` - по остатку
    * - `sumTotal` - по сумме себестоимости
    *
-   * @link https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-rasshirennyj-otchet-ob-ostatkah-atributy-dostupnye-dlq-sortirowki
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-rasshirennyj-otchet-ob-ostatkah-atributy-dostupnye-dlq-sortirowki
    */
   orderableFields:
     | "avgStockDays"
@@ -197,4 +198,83 @@ export interface StockAllOptions {
      При использовании параметра устанавливается параметр группировки `groupBy=consignment`, переданные значения для groupBy будут проигнорированы.
    */
   includeRelated?: boolean;
+}
+
+/** Тип остатка, резерва, ожидания, которые необходимо рассчитать в кратком отчёте об остатках. */
+export enum StockAllCurrentStockType {
+  /** Физический остаток на складах, без учёта резерва и ожидания */
+  Stock = "stock",
+
+  /** Остаток на складах за вычетом резерва */
+  FreeStock = "freeStock",
+
+  /** Доступно. Учитывает резерв и ожидания */
+  Quantity = "quantity",
+
+  /** Резерв */
+  Reserve = "reserve",
+
+  /** Ожидание */
+  InTransit = "inTransit",
+}
+
+export type StockAllCurrentRow<T extends StockAllCurrentStockType> = {
+  /** ID ассортимента */
+  assortmentId: string;
+} & {
+  /** Расчитанный тип остатка */
+  [K in T]: number;
+};
+
+/**
+ * Краткий отчёт об остатках
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-kratkij-otchet-ob-ostatkah
+ */
+export type StockAllCurrent<T extends StockAllCurrentStockType> =
+  StockAllCurrentRow<T>[];
+
+export interface StockAllCurrentOptions<T extends StockAllCurrentStockType> {
+  /** Фильтры отчёта Текущие Остатки */
+  filter?: {
+    /** Выдать в отчёте только указанные товары, модификации и серии */
+    assortmentId?: IdFilter;
+
+    /** Выдать в отчёте только указанные склады */
+    storeId?: IdFilter;
+  };
+
+  /**
+   * Вывод нулевых остатков.
+   *
+   * Укажите `include: "zeroLines"`, чтобы вывести нулевые остатки. По умолчанию выводятся только результаты с ненулевым значением остатка.
+   */
+  include?: "zeroLines";
+
+  /**
+   * Получить остатки, которые изменились в интервале между временем указанным в параметре `changedSince` и текущим моментом.
+   *
+   * По умолчанию выводятся остатки на текущий момент. Остатки в ответе это фактический остаток на текущий момент времени на всех складах и с разбивкой по складам соответственно, не дельта за период, не остаток на момент времени changedSince, а фактический остаток по номенклатуре, у которой изменился остаток за интервал.
+   *
+   * Ограничения и рекомендации, накладываемые на параметр:
+   * - При использовании параметра `changedSince` всегда включен вывод нулевых остатков.
+   * - Максимальное значение параметра `changedSince` в прошлое от текущего момента не должно превышать 24 часа.
+   * - Минимальное значение параметра `changedSince` в прошлое от текущего момента не ограничено.
+   * - Параметр `changedSince` не может превышать текущий момент.
+   * - Небольшое перекрытие интервалов запросов поможет исключить потерю обновления остатков на границах интервалов (пример: запрос остатков каждые 30 минут за прошедшие 35 минут).
+   * - Рекомендуется проводить полную синхронизацию остатков без параметра `changedSince` раз в сутки и чаще, в зависимости от частоты изменения остатков.
+   *
+   * **Важно**: если за запрашиваемый интервал был удален или архивирован товар или склад, то будет выведен остаток равный 0. Стоит учитывать, что по `id` запросить этот товар или склад уже не получится.
+   */
+  changedSince?: DateTime;
+
+  /**
+   * Тип остатка, резерва, ожидания, которые необходимо рассчитать.
+   *
+   * На данный момент возможно получить только один тип.
+   *
+   * @default StockAllCurrentStockType.Stock
+   * {@linkcode StockAllCurrentStockType}
+   */
+  stockType?: T;
 }

@@ -14,7 +14,7 @@ import type {
 /**
  * Прибыльность по модификациям
  *
- * @link https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-pribyl-nost-poluchit-pribyl-nost-po-modifikaciqm
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-pribyl-nost-poluchit-pribyl-nost-po-modifikaciqm
  */
 export interface ByVariantProfitReport {
   /** Краткое представление Модификации, Услуги или Комплекта в отчете. */

@@ -9,7 +9,7 @@ export type PositionFields = "stock"[];
  *
  * При составлении запроса на получение списка операций нужно дополнительно передать параметр `limit` со значением, не превышающем 100.
  *
- * @link https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-ostatki-i-sebestoimost-w-poziciqh-dokumentow
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-ostatki-i-sebestoimost-w-poziciqh-dokumentow
  */
 export interface PositionStockData {
   /** Сумма себестоимости. Для возврата покупателя без основания и розничного возврата без основания будет отсутствовать. */

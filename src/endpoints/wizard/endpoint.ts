@@ -10,7 +10,7 @@ const ENDPOINT_URL = "/wizard";
 /**
  * Автозаполнение
  *
- * @link https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-awtozapolnenie
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-awtozapolnenie
  */
 export class WizardEndpoint extends BaseEndpoint {
   async execute<
