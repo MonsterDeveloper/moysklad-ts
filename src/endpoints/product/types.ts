@@ -17,11 +17,12 @@ import type {
   PriceType,
   StringFilter,
   TaxSystem,
+  TrackingType,
 } from "../../types";
 import type { CounterpartyModel } from "..";
 import type { GroupModel } from "../group";
 
-export enum PaymentItemType {
+export enum ProductPaymentItemType {
   Good = "GOOD",
   ExcisableGood = "EXCISABLE_GOOD",
   CompoundPaymentItem = "COMPOUND_PAYMENT_ITEM",
@@ -76,24 +77,6 @@ export type PpeType =
   | "2400003496103"
   | "2400003675805";
 
-export enum TrackingType {
-  BeerAlcohol = "BEER_ALCOHOL",
-  Electronics = "ELECTRONICS",
-  FoodSupplement = "FOOD_SUPPLEMENT",
-  LpClothes = "LP_CLOTHES",
-  LpLinens = "LP_LINENS",
-  Milk = "MILK",
-  Ncp = "NCP",
-  NotTracked = "NOT_TRACKED",
-  Otp = "OTP",
-  Perfumery = "PERFUMERY",
-  Sanitizer = "SANITIZER",
-  Shoes = "SHOES",
-  Tires = "TIRES",
-  Tobacco = "TOBACCO",
-  Water = "WATER",
-}
-
 export interface Product extends Idable, Meta<Entity.Product> {
   readonly accountId: string;
   alcoholic?: {
@@ -132,7 +115,7 @@ export interface Product extends Idable, Meta<Entity.Product> {
   }[];
   partialDisposal?: boolean;
   readonly pathName: string;
-  paymentItemType?: PaymentItemType;
+  paymentItemType?: ProductPaymentItemType;
   ppeType?: PpeType;
   productFolder?: Meta<Entity.ProductFolder>;
   salePrices?: {

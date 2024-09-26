@@ -49,24 +49,32 @@ export interface BonusTransaction
     Meta<Entity.BonusTransaction> {
   /** ID учетной записи */
   readonly accountId: string;
+
   /** Метаданные Контрагента, связанного с бонусной операцией */
   agent: Meta<Entity.Counterparty>;
+
   /** Отметка о проведении */
   applicable: boolean;
+
   /** Метаданные бонусной программы */
   bonusProgram?: Meta<Entity.BonusProgram>;
+
   /** Количество бонусных баллов */
   bonusValue?: number;
+
   /**
    * Категория бонусной операции.
    *
    * {@linkcode BonusTransactionCategoryType}
    * */
   readonly categoryType?: BonusTransactionCategoryType;
+
   /** Код Бонусной операции */
   code?: string;
+
   /** Момент создания Бонусной операции */
   created: DateTime;
+
   /**
    * Дата обработки операции.
    *
@@ -74,22 +82,30 @@ export interface BonusTransaction
    * Для возможности указания даты обработки в будущем должна быть включена тарифная опция "Расширенная бонусная программа".
    */
   executionDate?: DateTime;
+
   /** Внешний код Бонусной операции */
   externalCode: string;
+
   /** Отдел сотрудника */
   group: Meta<Entity.Group>;
   /** Время проведения бонусной операции */
   moment?: DateTime;
+
   /** Наименование Бонусной операции */
   name?: string;
+
   /** Метаданные юрлица */
   organization?: Meta<Entity.Organization>;
+
   /** Владелец (Сотрудник) */
   owner?: Meta<Entity.Employee>;
+
   /** Метаданные связанного документа бонусной операции */
   parentDocument?: Meta<never>;
+
   /** Общий доступ */
   shared: boolean;
+
   /**
    * Статус бонусной операции
    *
@@ -102,6 +118,7 @@ export interface BonusTransaction
    * {@linkcode BonusTransactionType}
    */
   transactionType: BonusTransactionType;
+
   /** Момент последнего обновления Бонусной операции */
   updated: DateTime;
 }
@@ -109,6 +126,7 @@ export interface BonusTransaction
 export interface BonusTransactionModel extends Model {
   /** Основная сущность бонусной операции {@linkcode BonusTransaction} */
   object: BonusTransaction;
+
   expandable: {
     agent: CounterpartyModel;
     owner: EmployeeModel;
@@ -116,6 +134,7 @@ export interface BonusTransactionModel extends Model {
     bonusProgram: BonusProgramModel;
     organization: OrganizationModel;
   };
+
   orderableFields:
     | "id"
     | "applicable"
@@ -130,6 +149,7 @@ export interface BonusTransactionModel extends Model {
     | "updated";
 
   requiredCreateFields: "agent" | "transactionType";
+
   filters: {
     accountId: IdFilter;
     agent: IdFilter;
@@ -165,6 +185,7 @@ export interface ListBonusTransactionsOptions {
    * ```
    */
   pagination?: PaginationOptions;
+
   /**
    * Замена ссылок объектами с помощью expand
    *
@@ -183,6 +204,7 @@ export interface ListBonusTransactionsOptions {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
   expand?: ExpandOptions<BonusTransactionModel>;
+
   /**
    * Опции сортировки
    *
@@ -206,12 +228,14 @@ export interface ListBonusTransactionsOptions {
    * ```
    */
   order?: OrderOptions<BonusTransactionModel>;
+
   /**
    * Контекстный поиск
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-kontextnyj-poisk
    */
   search?: string;
+
   /**
    * Фильтры
    *

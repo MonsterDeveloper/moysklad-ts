@@ -1,4 +1,10 @@
-import type { ProductModel, VariantModel } from "../endpoints";
+import type {
+  BundleModel,
+  ConsignmentModel,
+  ProductModel,
+  ServiceModel,
+  VariantModel,
+} from "../endpoints";
 
 export enum Entity {
   Account = "account",
@@ -20,6 +26,7 @@ export enum Entity {
   Product = "product",
   Service = "service",
   Bundle = "bundle",
+  BundleComponent = "bundlecomponent",
   Variant = "variant",
   Consignment = "consignment",
   ProcessingPlan = "processingplan",
@@ -93,4 +100,7 @@ type AssortmentFields = {
  */
 export type AssortmentModel =
   | (ProductModel & { object: AssortmentFields })
-  | (VariantModel & { object: AssortmentFields }); // TODO add ServiceModel, BundleModel
+  | (VariantModel & { object: AssortmentFields })
+  | (BundleModel & { object: AssortmentFields })
+  | (ConsignmentModel & { object: AssortmentFields })
+  | (ServiceModel & { object: AssortmentFields });

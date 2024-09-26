@@ -22,3 +22,4 @@ export * from "./barcodes";
 export * from "./position-fields";
 export * from "./gtd";
 export * from "./account";
+export * from "./tracking-type";
