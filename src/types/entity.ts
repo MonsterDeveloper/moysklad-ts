@@ -80,7 +80,8 @@ export type AssortmentEntity =
   | Entity.Product
   | Entity.Service
   | Entity.Bundle
-  | Entity.Variant;
+  | Entity.Variant
+  | Entity.Consignment;
 
 type AssortmentFields = {
   /** Остаток */
@@ -93,14 +94,28 @@ type AssortmentFields = {
   readonly quantity: number;
 };
 
+export type ProductAssortmentModel = ProductModel & {
+  object: AssortmentFields;
+};
+export type VariantAssortmentModel = VariantModel & {
+  object: AssortmentFields;
+};
+export type BundleAssortmentModel = BundleModel & { object: AssortmentFields };
+export type ConsignmentAssortmentModel = ConsignmentModel & {
+  object: AssortmentFields;
+};
+export type ServiceAssortmentModel = ServiceModel & {
+  object: AssortmentFields;
+};
+
 /**
  * Ассортимент
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-assortiment
  */
 export type AssortmentModel =
-  | (ProductModel & { object: AssortmentFields })
-  | (VariantModel & { object: AssortmentFields })
-  | (BundleModel & { object: AssortmentFields })
-  | (ConsignmentModel & { object: AssortmentFields })
-  | (ServiceModel & { object: AssortmentFields });
+  | ProductAssortmentModel
+  | VariantAssortmentModel
+  | BundleAssortmentModel
+  | ConsignmentAssortmentModel
+  | ServiceAssortmentModel;

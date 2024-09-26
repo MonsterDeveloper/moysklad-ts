@@ -11,4 +11,4 @@ export * from "./types";
 export * from "./endpoints";
 export * from "./errors";
 
-export { composeDateTime, parseDateTime } from "./utils";
+export { composeDateTime, parseDateTime, isAssortmentOfType } from "./utils";

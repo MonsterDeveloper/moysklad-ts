@@ -96,6 +96,7 @@ const demand = await moysklad.demand.first({
 ### Утилиты
 - `composeDateTime` - создаёт строку с датой в формате МойСклад
 - `parseDateTime` - парсит строку с датой из формата МойСклад
+- `isAssortmentOfType` - проверяет, является ли ассортимент определённого типа (услугой, товаром, и т.д.) и [сужает тип](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates).
 - `Moysklad.client.buildUrl` - создаёт URL для запроса к API МойСклад
 
 ### Опции инициализации
