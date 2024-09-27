@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ReadonlyKeysOf } from "type-fest";
-import type { UpdateMeta, Meta, Metadata } from "./metadata";
+import type { UpdateMeta, Meta, Metadata, ListMeta } from "./metadata";
 import type { Filter } from "./filters";
 import type { Attribute } from "./attribute";
 import type { Entity } from "./entity";
@@ -25,8 +25,19 @@ export type GetModelUpdatableFields<M extends Model> = {
   // itarate over non-readonly fields in model's object, excluding some Moysklad-specific readonly fields
   [Key in keyof M["object"] as Exclude<Key, ReadonlyKeysOf<M["object"]> | "meta" | "id" | "accountId">]?:
 
+    // value is a Meta array?
+    M["object"][Key] extends ListMeta<infer T>
+      // Model supports expand on this field?
+      ? Key extends keyof M["expandable"]
+        ? M["expandable"][Key] extends Model
+          // Recursively get the updatable fields of the expanded model
+          ? GetModelUpdatableFields<M["expandable"][Key]>[]
+          : never
+      // Model does not support expand on this field
+      : UpdateMeta<T>[]
+
     // value is a Meta object?
-    M["object"][Key] extends Meta<infer T>
+    : M["object"][Key] extends Meta<infer T>
       ? UpdateMeta<T> 
     // key is optional?
     : M["object"][Key] extends Meta<infer T> | undefined
