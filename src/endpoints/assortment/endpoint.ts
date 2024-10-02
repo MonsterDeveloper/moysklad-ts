@@ -31,7 +31,7 @@ export class AssortmentEndpoint extends BaseEndpoint {
    */
   async list<T extends ListAssortmentOptions = Record<string, unknown>>(
     options?: Subset<T, ListAssortmentOptions>,
-  ): Promise<ListResponse<AssortmentModel, Entity.Assortment>> {
+  ): Promise<ListResponse<AssortmentModel["object"], Entity.Assortment>> {
     const searchParameters = composeSearchParameters(options ?? {});
 
     const response = await this.client.get(ENDPOINT_URL, {
@@ -55,7 +55,7 @@ export class AssortmentEndpoint extends BaseEndpoint {
    */
   async all<T extends AllAssortmentOptions = Record<string, unknown>>(
     options?: Subset<T, AllAssortmentOptions>,
-  ): Promise<BatchGetResult<AssortmentModel, Entity.Assortment>> {
+  ): Promise<BatchGetResult<AssortmentModel["object"], Entity.Assortment>> {
     return this.client.batchGet(
       async (limit, offset) =>
         this.list({
@@ -81,7 +81,7 @@ export class AssortmentEndpoint extends BaseEndpoint {
    */
   async first<T extends FirstAssortmentOptions = Record<string, unknown>>(
     options?: Subset<T, FirstAssortmentOptions>,
-  ): Promise<ListResponse<AssortmentModel, Entity.Assortment>> {
+  ): Promise<ListResponse<AssortmentModel["object"], Entity.Assortment>> {
     return this.list({ ...options, pagination: { limit: 1 } });
   }
 
