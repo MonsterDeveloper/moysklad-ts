@@ -5,7 +5,7 @@ export interface ListAssortmentOptions {
   groupBy?: "consignment";
 
   filter?: {
-    barcode?: EqualityFilter<string>;
+    barcode?: EqualityFilter<string> | string | string[];
   };
 
   pagination?: PaginationOptions;
