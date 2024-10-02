@@ -7,6 +7,7 @@ import type {
 } from "../endpoints";
 
 export enum Entity {
+  Assortment = "assortment",
   Account = "account",
   Demand = "demand",
   DemandPosition = "demandposition",

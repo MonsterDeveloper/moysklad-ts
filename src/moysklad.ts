@@ -19,6 +19,7 @@ import {
   ProcessingPlanEndpoint,
   ProductionStageCompletionEndpoint,
   ProductionTaskEndpoint,
+  AssortmentEndpoint,
 } from "./endpoints";
 
 /**
@@ -161,6 +162,13 @@ export class Moysklad {
    */
   public productionTask: ProductionTaskEndpoint;
 
+  /**
+   * Ассортимент
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-assortiment
+   */
+  public assortment: AssortmentEndpoint;
+
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
     this.bonusTransaction = new BonusTransactionEndpoint(this.client);
@@ -183,6 +191,7 @@ export class Moysklad {
       this.client,
     );
     this.productionTask = new ProductionTaskEndpoint(this.client);
+    this.assortment = new AssortmentEndpoint(this.client);
   }
 }
 

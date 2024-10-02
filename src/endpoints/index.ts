@@ -28,3 +28,4 @@ export * from "./service";
 export * from "./bundle";
 export * from "./consignment";
 export * from "./production-task";
+export * from "./assortment";

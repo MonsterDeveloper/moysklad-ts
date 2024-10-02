@@ -310,6 +310,7 @@ export class BonusTransactionEndpoint extends BaseEndpoint {
 
   /**
    * Получить общее количество бонусных операций.
+   *
    * @returns Общее количество бонусных операций
    */
   async size(): Promise<number> {
