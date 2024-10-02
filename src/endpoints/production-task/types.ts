@@ -197,6 +197,8 @@ export interface ProductionTaskModel extends Model {
     products: ProductionTaskResultModel;
   };
 
+  requiredCreateFields: "organization";
+
   filters: {
     id: IdFilter;
     accountId: IdFilter;
