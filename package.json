@@ -1,6 +1,6 @@
 {
   "name": "moysklad-ts",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "description": "Полностью типизированный, современный и лёгкий клиент МойСклад JSON API",
   "sideEffects": false,
   "type": "module",
