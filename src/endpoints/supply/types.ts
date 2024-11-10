@@ -24,6 +24,7 @@ import type {
   PaginationOptions,
   StringFilter,
 } from "../../types";
+import type { PurchaseOrderModel } from "../purchase-order";
 
 export enum SupplyOverheadDistribution {
   Weight = "weight",
@@ -216,6 +217,12 @@ export interface Supply extends Idable, Meta<Entity.Supply> {
   vatIncluded?: boolean;
   /** Сумма НДС */
   vatSum: number;
+  /**
+   * Ссылка на связанный заказ поставщику в формате Метаданных
+   *
+   * {@linkcode PurchaseOrderModel}
+   */
+  purchaseOrder?: Meta<Entity.PurchaseOrder>;
 }
 
 /**
@@ -233,6 +240,7 @@ export interface SupplyModel extends Model {
     positions: SupplyPositionModel;
     agentAccount: AccountModel;
     organizationAccount: AccountModel;
+    purchaseOrder: PurchaseOrderModel;
   };
   filters: {
     id: IdFilter;
