@@ -45,6 +45,7 @@ export enum Entity {
   Store = "store",
   Organization = "organization",
   PurchaseOrder = "purchaseorder",
+  PurchaseOrderPosition = "purchaseorderposition",
   Supply = "supply",
   Processing = "processing",
   ProcessingPositionResult = "processingpositionresult",
