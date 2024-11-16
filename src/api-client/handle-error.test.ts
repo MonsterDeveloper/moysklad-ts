@@ -51,15 +51,17 @@ describe("handleError", () => {
 
   it("should throws a MoyskladApiError if the response is an array", async () => {
     const response = new Response(
-      JSON.stringify([{
-        errors: [
-          {
-            code: 123,
-            error: "Some error message",
-            moreInfo: "https://example.com",
-          },
-        ],
-      }]),
+      JSON.stringify([
+        {
+          errors: [
+            {
+              code: 123,
+              error: "Some error message",
+              moreInfo: "https://example.com",
+            },
+          ],
+        },
+      ]),
       {
         status: 400,
         headers: { "Content-Type": "application/json" },
