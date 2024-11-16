@@ -1,7 +1,7 @@
 import {
+  Entity,
   MediaType,
   type BatchDeleteResult,
-  type Entity,
   type GetFindResult,
   type ListResponse,
   type Subset,
@@ -93,6 +93,7 @@ export class DemandEndpoint extends BaseEndpoint {
       body: ids.map((id) => ({
         meta: {
           href: this.client.buildUrl(`${ENDPOINT_URL}/${id}`),
+          type: Entity.Demand,
           mediaType: MediaType.Json,
         },
       })),

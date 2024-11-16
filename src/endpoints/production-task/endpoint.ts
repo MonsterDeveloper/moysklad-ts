@@ -1,7 +1,7 @@
 import {
+  Entity,
   MediaType,
   type BatchDeleteResult,
-  type Entity,
   type GetFindResult,
   type GetModelCreatableFields,
   type GetModelUpdatableFields,
@@ -335,6 +335,7 @@ export class ProductionTaskEndpoint extends BaseEndpoint {
       body: ids.map((id) => ({
         meta: {
           href: this.client.buildUrl(`${ENDPOINT_URL}/${id}`),
+          type: Entity.ProductionTask,
           mediaType: MediaType.Json,
         },
       })),

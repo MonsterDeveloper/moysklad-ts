@@ -9,10 +9,10 @@ import type {
   UpdateProcessingPlanOptions,
 } from "./types";
 import {
+  Entity,
   MediaType,
   type BatchDeleteResult,
   type BatchGetResult,
-  type Entity,
   type GetFindResult,
   type GetModelCreatableFields,
   type GetModelUpdatableFields,
@@ -268,6 +268,7 @@ export class ProcessingPlanEndpoint extends BaseEndpoint {
       body: ids.map((id) => ({
         meta: {
           href: this.client.buildUrl(`${ENDPOINT_URL}/${id}`),
+          type: Entity.ProcessingPlan,
           mediaType: MediaType.Json,
         },
       })),

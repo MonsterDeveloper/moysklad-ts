@@ -1,8 +1,8 @@
 import {
+  Entity,
   MediaType,
   type BatchDeleteResult,
   type BatchGetResult,
-  type Entity,
   type GetFindResult,
   type GetModelCreatableFields,
   type GetModelUpdatableFields,
@@ -135,6 +135,7 @@ export class PaymentInEndpoint extends BaseEndpoint {
       body: ids.map((id) => ({
         meta: {
           href: this.client.buildUrl(`${ENDPOINT_URL}/${id}`),
+          type: Entity.PaymentIn,
           mediaType: MediaType.Json,
         },
       })),

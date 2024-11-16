@@ -119,6 +119,7 @@ export class ProductEndpoint extends BaseEndpoint {
       body: ids.map((id) => ({
         meta: {
           href: this.client.buildUrl(`${ENDPOINT_URL}/${id}`),
+          type: Entity.Product,
           mediaType: MediaType.Json,
         },
       })),
