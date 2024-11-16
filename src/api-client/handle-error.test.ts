@@ -49,6 +49,32 @@ describe("handleError", () => {
     );
   });
 
+  it("should throws a MoyskladApiError if the response is an array", async () => {
+    const response = new Response(
+      JSON.stringify([{
+        errors: [
+          {
+            code: 123,
+            error: "Some error message",
+            moreInfo: "https://example.com",
+          },
+        ],
+      }]),
+      {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+    await expect(handleError(response)).rejects.toThrow(
+      new MoyskladApiError(
+        "Some error message",
+        123,
+        "https://example.com",
+        response,
+      ),
+    );
+  });
+
   it("throws a MoyskladError when the response body is empty but Content-Type is application/json", async () => {
     const response = new Response("", {
       status: 400,
