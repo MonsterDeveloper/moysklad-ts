@@ -2,7 +2,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ApiClient } from "../../api-client";
 import { BonusTransactionEndpoint } from "./endpoint";
-import { MediaType } from "../../types";
+import { Entity, MediaType } from "../../types";
 
 const ENDPOINT_URL = "/entity/bonustransaction";
 
@@ -258,6 +258,7 @@ describe("BonusTransactionEndpoint", () => {
             ids.map((id) => ({
               meta: {
                 href: client.buildUrl(`${ENDPOINT_URL}/${id}`),
+                type: Entity.BonusTransaction,
                 mediaType: MediaType.Json,
               },
             })),

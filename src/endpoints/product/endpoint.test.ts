@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ApiClient } from "../../api-client";
 import { ProductEndpoint } from "./endpoint";
-import { MediaType } from "../../types";
+import { Entity, MediaType } from "../../types";
 
 const ENDPOINT_URL = "/entity/product";
 const CLIENT_OPTIONS = { auth: { token: "" } };
@@ -154,6 +154,7 @@ describe("ProductEndpoint", () => {
             ids.map((id) => ({
               meta: {
                 href: client.buildUrl(`${ENDPOINT_URL}/${id}`),
+                type: Entity.Product,
                 mediaType: MediaType.Json,
               },
             })),
