@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { describe, it, expect } from "vitest";
 import { handleError } from "./handle-error";
 import { MoyskladApiError, MoyskladError } from "../errors";
