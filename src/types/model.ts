@@ -42,9 +42,12 @@ export type GetModelUpdatableFields<M extends Model> = {
       // make it nullable
       ? UpdateMeta<T> | null
     
-    // value is an Attribute array?
-    : M["object"][Key] extends Attribute[]
-      ? (UpdateMeta<Entity.AttributeMetadata> & Pick<Attribute, "value">)[]
+    // value is an array?
+    : NonNullable<M["object"][Key]> extends Array<infer T>  
+      // value is an Attribute array?
+      ? T extends Attribute
+        ? (UpdateMeta<Entity.AttributeMetadata> & Pick<Attribute, "value">)[]
+        : T[]
 
       // key is optional?
       : undefined extends M["object"][Key]
