@@ -8,14 +8,14 @@ export class MoyskladError extends Error {
 }
 
 export class MoyskladApiError extends MoyskladError {
-  public code: number;
-  public moreInfo: string;
+  public code?: number;
+  public moreInfo?: string;
 
   constructor(
     message: string,
-    code: number,
-    moreInfo: string,
     response: Response,
+    code?: number,
+    moreInfo?: string,
   ) {
     super(message, response);
     this.code = code;
