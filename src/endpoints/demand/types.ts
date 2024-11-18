@@ -18,11 +18,13 @@ import type {
   PaginationOptions,
   PositionFields,
   StringFilter,
+  UpdateMeta,
 } from "../../types";
 import type { CounterpartyModel } from "../counterparty";
 import type { GroupModel } from "../group";
 import type { OrganizationModel } from "../organization";
 import type { EmployeeModel } from "../employee";
+import type { RequireExactlyOne } from "type-fest";
 
 export enum DemandOverheadDistribution {
   Weight = "weight",
@@ -215,5 +217,14 @@ export interface GetDemandOptions {
   fields?: PositionFields;
 }
 
+export interface UpsertDemandsOptions {
+  expand?: ExpandOptions<DemandModel>;
+}
+
 export type FirstDemandOptions = Omit<ListDemandsOptions, "pagination">;
 export type AllDemandsOptions = Omit<ListDemandsOptions, "pagination">;
+
+export type DemandTemplateData = RequireExactlyOne<{
+  customerOrder: UpdateMeta<Entity.CustomerOrder>;
+  invoiceOut: UpdateMeta<Entity.InvoiceOut>;
+}>;

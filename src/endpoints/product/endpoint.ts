@@ -8,6 +8,7 @@ import {
   type BatchDeleteResult,
   type GetModelUpdatableFields,
   type ModelCreateOrUpdateData,
+  type MatchArrayType,
 } from "../../types";
 import { BaseEndpoint } from "../base-endpoint";
 import type {
@@ -100,10 +101,15 @@ export class ProductEndpoint extends BaseEndpoint {
     return response.json();
   }
 
-  async upsert<T extends UpsertProductsOptions = Record<string, unknown>>(
-    data: ModelCreateOrUpdateData<ProductModel>,
-    options?: Subset<T, UpsertProductsOptions>,
-  ): Promise<GetFindResult<ProductModel, T["expand"]>> {
+  async upsert<
+    TData extends ModelCreateOrUpdateData<ProductModel>,
+    TOptions extends UpsertProductsOptions = Record<string, unknown>,
+  >(
+    data: TData,
+    options?: Subset<TOptions, UpsertProductsOptions>,
+  ): Promise<
+    MatchArrayType<TData, GetFindResult<ProductModel, TOptions["expand"]>>
+  > {
     const searchParameters = composeSearchParameters(options ?? {});
 
     const response = await this.client.post(ENDPOINT_URL, {

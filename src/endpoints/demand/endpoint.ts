@@ -6,14 +6,18 @@ import {
   type ListResponse,
   type Subset,
   type BatchGetResult,
+  type ModelCreateOrUpdateData,
+  type MatchArrayType,
 } from "../../types";
 import { BaseEndpoint } from "../base-endpoint";
 import type {
   AllDemandsOptions,
   DemandModel,
+  DemandTemplateData,
   FirstDemandOptions,
   GetDemandOptions,
   ListDemandsOptions,
+  UpsertDemandsOptions,
 } from "./types";
 import { composeSearchParameters } from "../../api-client";
 
@@ -104,5 +108,32 @@ export class DemandEndpoint extends BaseEndpoint {
 
   async trash(id: string): Promise<void> {
     await this.client.post(`${ENDPOINT_URL}/${id}/trash`);
+  }
+
+  async upsert<
+    TData extends ModelCreateOrUpdateData<DemandModel>,
+    TOptions extends UpsertDemandsOptions = Record<string, unknown>,
+  >(
+    data: TData,
+    options?: Subset<TOptions, UpsertDemandsOptions>,
+  ): Promise<
+    MatchArrayType<TData, GetFindResult<DemandModel, TOptions["expand"]>>
+  > {
+    const searchParameters = composeSearchParameters(options ?? {});
+
+    const response = await this.client.post(ENDPOINT_URL, {
+      body: data,
+      searchParameters,
+    });
+
+    return response.json();
+  }
+
+  async template(data: DemandTemplateData): Promise<DemandModel["object"]> {
+    const response = await this.client.put(`${ENDPOINT_URL}/new`, {
+      body: data,
+    });
+
+    return response.json();
   }
 }

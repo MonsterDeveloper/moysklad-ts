@@ -10,6 +10,7 @@ import {
   type Subset,
   type BatchGetResult,
   type ModelCreateOrUpdateData,
+  type MatchArrayType,
 } from "../../types";
 import type {
   AllSuppliesOptions,
@@ -81,10 +82,15 @@ export class SupplyEndpoint extends BaseEndpoint {
     return response.json();
   }
 
-  async upsert<T extends UpsertSuppliesOptions = Record<string, unknown>>(
-    data: ModelCreateOrUpdateData<SupplyModel>,
-    options?: Subset<T, UpsertSuppliesOptions>,
-  ): Promise<GetFindResult<SupplyModel, T["expand"]>[]> {
+  async upsert<
+    TData extends ModelCreateOrUpdateData<SupplyModel>,
+    TOptions extends UpsertSuppliesOptions = Record<string, unknown>,
+  >(
+    data: TData,
+    options?: Subset<TOptions, UpsertSuppliesOptions>,
+  ): Promise<
+    MatchArrayType<TData, GetFindResult<SupplyModel, TOptions["expand"]>>
+  > {
     const searchParameters = composeSearchParameters(options ?? {});
 
     const response = await this.client.post(ENDPOINT_URL, {
