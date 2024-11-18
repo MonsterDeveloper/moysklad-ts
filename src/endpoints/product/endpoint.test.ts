@@ -233,13 +233,13 @@ describe("ProductEndpoint", () => {
     });
   });
 
-  describe("create", () => {
+  describe("upsert", () => {
     it("should send a POST request with data", async () => {
       const fetchSpy = vi.spyOn(globalThis, "fetch");
       const client = new ApiClient({ auth: { token: "" } });
       const endpoint = new ProductEndpoint(client);
 
-      await endpoint.create({} as never);
+      await endpoint.upsert({} as never);
 
       expect(fetchSpy).toHaveBeenCalledWith(
         expect.stringContaining(ENDPOINT_URL),
@@ -255,7 +255,7 @@ describe("ProductEndpoint", () => {
       const client = new ApiClient({ auth: { token: "" } });
       const endpoint = new ProductEndpoint(client);
 
-      await endpoint.create({} as never, { expand: { owner: true } });
+      await endpoint.upsert({} as never, { expand: { owner: true } });
 
       expect(fetchSpy).toHaveBeenCalledWith(
         expect.stringContaining(`${ENDPOINT_URL}?limit=100&expand=owner`),
