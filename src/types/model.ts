@@ -24,14 +24,12 @@ export interface Model<T extends object = object> {
 export type GetModelUpdatableFields<M extends Model> = {
   // itarate over non-readonly fields in model's object, excluding some Moysklad-specific readonly fields
   [Key in keyof M["object"] as Exclude<Key, ReadonlyKeysOf<M["object"]> | "meta" | "id" | "accountId">]?:
-
-    // value is a Meta array?
     M["object"][Key] extends ListMeta<infer T>
       // Model supports expand on this field?
       ? Key extends keyof M["expandable"]
         ? M["expandable"][Key] extends Model
           // Recursively get the updatable fields of the expanded model
-          ? GetModelUpdatableFields<M["expandable"][Key]>[]
+          ? ({ rows: GetModelUpdatableFields<M["expandable"][Key]>[] }) | (GetModelUpdatableFields<M["expandable"][Key]>[])
           : never
       // Model does not support expand on this field
       : UpdateMeta<T>[]
@@ -45,7 +43,7 @@ export type GetModelUpdatableFields<M extends Model> = {
       ? UpdateMeta<T> | null
     
     // value is an Attribute array?
-    : Attribute[] extends M["object"][Key]
+    : M["object"][Key] extends Attribute[]
       ? (UpdateMeta<Entity.AttributeMetadata> & Pick<Attribute, "value">)[]
 
       // key is optional?

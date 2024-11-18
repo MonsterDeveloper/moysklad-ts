@@ -133,7 +133,9 @@ export class SupplyEndpoint extends BaseEndpoint {
     return response.json();
   }
 
-  async template(data: SupplyTemplateData): Promise<SupplyModel["object"]> {
+  async template(
+    data: SupplyTemplateData,
+  ): Promise<GetFindResult<SupplyModel, { positions: true }>> {
     const response = await this.client.put(`${ENDPOINT_URL}/new`, {
       body: data,
     });

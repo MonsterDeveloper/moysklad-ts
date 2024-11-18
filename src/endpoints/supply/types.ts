@@ -6,6 +6,7 @@ import type {
   AccountModel,
   AssortmentEntity,
   AssortmentModel,
+  Attribute,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -137,7 +138,7 @@ export interface Supply extends Idable, Meta<Entity.Supply> {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-rabota-s-dopolnitel-nymi-polqmi
    */
-  attributes?: unknown[]; // TODO add attributes
+  attributes?: Attribute[];
   /** Код Приемки */
   code?: string;
   /** Метаданные договора */
