@@ -5,21 +5,21 @@ import {
   MediaType,
   type BatchDeleteResult,
   type GetFindResult,
-  type GetModelCreatableFields,
   type GetModelUpdatableFields,
   type ListResponse,
   type Subset,
-  type UpdateMeta,
   type BatchGetResult,
+  type ModelCreateOrUpdateData,
 } from "../../types";
 import type {
   AllSuppliesOptions,
   SupplyModel,
-  CreateSupplyOptions,
   FirstSupplyOptions,
   GetSupplyOptions,
   ListSuppliesOptions,
+  UpsertSuppliesOptions,
   UpdateSupplyOptions,
+  SupplyTemplateData,
 } from "./types";
 
 const ENDPOINT_URL = "/entity/supply";
@@ -81,26 +81,9 @@ export class SupplyEndpoint extends BaseEndpoint {
     return response.json();
   }
 
-  async create<T extends CreateSupplyOptions = Record<string, unknown>>(
-    data: GetModelCreatableFields<SupplyModel>,
-    options?: Subset<T, CreateSupplyOptions>,
-  ): Promise<GetFindResult<SupplyModel, T["expand"]>> {
-    const searchParameters = composeSearchParameters(options ?? {});
-
-    const response = await this.client.post(ENDPOINT_URL, {
-      body: data,
-      searchParameters,
-    });
-
-    return response.json();
-  }
-
-  async upsert<T extends CreateSupplyOptions = Record<string, unknown>>(
-    data: (
-      | GetModelCreatableFields<SupplyModel>
-      | (GetModelUpdatableFields<SupplyModel> & UpdateMeta<Entity.Supply>)
-    )[],
-    options?: Subset<T, CreateSupplyOptions>,
+  async upsert<T extends UpsertSuppliesOptions = Record<string, unknown>>(
+    data: ModelCreateOrUpdateData<SupplyModel>,
+    options?: Subset<T, UpsertSuppliesOptions>,
   ): Promise<GetFindResult<SupplyModel, T["expand"]>[]> {
     const searchParameters = composeSearchParameters(options ?? {});
 
@@ -139,6 +122,14 @@ export class SupplyEndpoint extends BaseEndpoint {
           mediaType: MediaType.Json,
         },
       })),
+    });
+
+    return response.json();
+  }
+
+  async template(data: SupplyTemplateData): Promise<SupplyModel["object"]> {
+    const response = await this.client.put(`${ENDPOINT_URL}/new`, {
+      body: data,
     });
 
     return response.json();

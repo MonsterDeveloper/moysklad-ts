@@ -23,6 +23,7 @@ import type {
   OrderOptions,
   PaginationOptions,
   StringFilter,
+  UpdateMeta,
 } from "../../types";
 import type { PurchaseOrderModel } from "../purchase-order";
 
@@ -299,9 +300,13 @@ export interface UpdateSupplyOptions {
   expand?: ExpandOptions<SupplyModel>;
 }
 
-export interface CreateSupplyOptions {
+export interface UpsertSuppliesOptions {
   expand?: ExpandOptions<SupplyModel>;
 }
 
 export type FirstSupplyOptions = Omit<ListSuppliesOptions, "pagination">;
 export type AllSuppliesOptions = Omit<ListSuppliesOptions, "pagination">;
+
+export interface SupplyTemplateData {
+  purchaseOrder: UpdateMeta<Entity.PurchaseOrder>;
+}

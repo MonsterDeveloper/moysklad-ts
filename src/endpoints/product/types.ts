@@ -193,7 +193,7 @@ export interface ListProductsOptions {
   filter?: FilterOptions<ProductModel>;
 }
 
-export interface CreateProductOptions {
+export interface UpsertProductsOptions {
   expand?: ExpandOptions<ProductModel>;
 }
 

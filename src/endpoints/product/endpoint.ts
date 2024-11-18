@@ -12,7 +12,7 @@ import {
 import { BaseEndpoint } from "../base-endpoint";
 import type {
   ListProductsOptions,
-  CreateProductOptions,
+  UpsertProductsOptions,
   ProductModel,
   AllProductsOptions,
   FirstProductOptions,
@@ -100,9 +100,9 @@ export class ProductEndpoint extends BaseEndpoint {
     return response.json();
   }
 
-  async create<T extends CreateProductOptions = Record<string, unknown>>(
+  async upsert<T extends UpsertProductsOptions = Record<string, unknown>>(
     data: ModelCreateOrUpdateData<ProductModel>,
-    options?: Subset<T, CreateProductOptions>,
+    options?: Subset<T, UpsertProductsOptions>,
   ): Promise<GetFindResult<ProductModel, T["expand"]>> {
     const searchParameters = composeSearchParameters(options ?? {});
 
