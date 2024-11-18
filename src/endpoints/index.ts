@@ -30,3 +30,4 @@ export * from "./consignment";
 export * from "./production-task";
 export * from "./assortment";
 export * from "./purchase-order";
+export * from "./production-stage";

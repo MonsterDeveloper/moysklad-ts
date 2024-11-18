@@ -50,6 +50,7 @@ export enum Entity {
   Processing = "processing",
   ProcessingPositionResult = "processingpositionresult",
   ProcessingPositionMaterial = "processingpositionmaterial",
+  ProductionTaskMaterial = "productiontaskmaterial",
   ProcessingProcess = "processingprocess",
   ProcessingStage = "processingstage",
   ProcessingProcessPosition = "processingprocessposition",

@@ -21,6 +21,7 @@ import {
   ProductionTaskEndpoint,
   AssortmentEndpoint,
   PurchaseOrderEndpoint,
+  ProductionStageEndpoint,
 } from "./endpoints";
 
 /**
@@ -177,6 +178,13 @@ export class Moysklad {
    */
   public purchaseOrder: PurchaseOrderEndpoint;
 
+  /**
+   * Производственные этапы
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-proizwodstwennoe-zadanie-proizwodstwennye-atapy
+   */
+  public productionStage: ProductionStageEndpoint;
+
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
     this.bonusTransaction = new BonusTransactionEndpoint(this.client);
@@ -201,6 +209,7 @@ export class Moysklad {
     this.productionTask = new ProductionTaskEndpoint(this.client);
     this.assortment = new AssortmentEndpoint(this.client);
     this.purchaseOrder = new PurchaseOrderEndpoint(this.client);
+    this.productionStage = new ProductionStageEndpoint(this.client);
   }
 }
 
