@@ -134,7 +134,7 @@ export interface Demand extends Idable, Meta<Entity.Demand> {
   customerOrder?: Meta<Entity.CustomerOrder>; // TODO expand customerOrder
   factureOut?: Meta<Entity.FactureOut>; // TODO expand factureOut
   returns?: unknown[]; // TODO expand returns
-  payments?: (Meta<Entity.PaymentIn> | Meta<Entity.PaymentOut>)[]; // TODO expand payments
+  payments?: Meta<Entity.PaymentIn | Entity.PaymentOut>[]; // TODO expand payments
   invoicesOut?: Meta<Entity.InvoiceOut>[]; // TODO expand invoicesOut
 
   cargoName?: string;

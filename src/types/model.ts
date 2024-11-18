@@ -47,7 +47,9 @@ export type GetModelUpdatableFields<M extends Model> = {
       // value is an Attribute array?
       ? T extends Attribute
         ? (UpdateMeta<Entity.AttributeMetadata> & Pick<Attribute, "value">)[]
-        : T[]
+        : T extends Meta<infer U>
+          ? UpdateMeta<U>[]
+          : T[]
 
       // key is optional?
       : undefined extends M["object"][Key]

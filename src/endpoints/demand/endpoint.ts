@@ -129,7 +129,9 @@ export class DemandEndpoint extends BaseEndpoint {
     return response.json();
   }
 
-  async template(data: DemandTemplateData): Promise<DemandModel["object"]> {
+  async template(
+    data: DemandTemplateData,
+  ): Promise<GetFindResult<DemandModel, { positions: true }>> {
     const response = await this.client.put(`${ENDPOINT_URL}/new`, {
       body: data,
     });
