@@ -22,6 +22,7 @@ import {
   AssortmentEndpoint,
   PurchaseOrderEndpoint,
   ProductionStageEndpoint,
+  InventoryEndpoint,
 } from "./endpoints";
 
 /**
@@ -185,6 +186,13 @@ export class Moysklad {
    */
   public productionStage: ProductionStageEndpoint;
 
+  /**
+   * Инвентаризации
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-inwentarizaciq
+   */
+  public inventory: InventoryEndpoint;
+
   constructor(options: ApiClientOptions) {
     this.client = new ApiClient(options);
     this.bonusTransaction = new BonusTransactionEndpoint(this.client);
@@ -210,6 +218,7 @@ export class Moysklad {
     this.assortment = new AssortmentEndpoint(this.client);
     this.purchaseOrder = new PurchaseOrderEndpoint(this.client);
     this.productionStage = new ProductionStageEndpoint(this.client);
+    this.inventory = new InventoryEndpoint(this.client);
   }
 }
 

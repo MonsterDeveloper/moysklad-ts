@@ -81,6 +81,9 @@ export enum Entity {
   InvoicePosition = "invoiceposition",
   EnterPosition = "enterposition",
   SupplyPosition = "supplyposition",
+  Inventory = "inventory",
+  InventoryPosition = "inventoryposition",
+  Loss = "loss",
 }
 
 export type AssortmentEntity =
