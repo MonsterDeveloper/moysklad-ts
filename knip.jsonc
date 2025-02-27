@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": "src/index.ts",
-  "project": "src/**/*.ts",
-  "ignoreDependencies": ["ajv"], // Weird vite error
+  "entry": ["src/index.ts", "src/**/*.test.ts"],
+  "project": ["src/**/*.ts"],
+  "ignoreDependencies": ["ajv"], // Weird vite.config.ts error
   "ignoreBinaries": ["i"] // Knip false positive
 }

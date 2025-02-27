@@ -1,2 +1,2 @@
 export * from "./types";
-export { CounterpartyEndpoint } from "./endpoint";
+export type { CounterpartyEndpoint } from "./endpoint";

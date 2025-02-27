@@ -17,5 +17,5 @@
 		"noEmit": true,
 		"lib": ["ES2022", "DOM"],
 	},
-	"include": ["src", "*.d.ts", "src/**/*.json", "vite*.ts", "scripts", "test-utils"]
+	"include": ["src", "*.d.ts", "src/**/*.json", "vite*.ts", "scripts", "test-utils.ts"]
 }

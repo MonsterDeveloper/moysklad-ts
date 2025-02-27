@@ -1,2 +1,1 @@
-export * from "./types";
-export { AssortmentEndpoint } from "./endpoint";
+export * from "./assortment";

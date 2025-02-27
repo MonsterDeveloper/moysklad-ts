@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { ApiClient, type BasicAuth, type TokenAuth } from "./api-client";
 import { MoyskladError } from "../errors";
 import type { ListMetadata } from "../types";
+import { createFetchMock } from "../../test-utils";
 
 const EXAMPLE_BASE_URL = "https://example.com/api";
 
@@ -21,20 +22,20 @@ describe("ApiClient", () => {
   const body = { test: "test" };
 
   describe("request", () => {
-    it("should send a request with default Moysklad base URL", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a request with default Moysklad base URL", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: tokenAuth });
 
       await client.request("/");
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         "https://api.moysklad.ru/api/remap/1.2/",
         expect.any(Object),
       );
     });
 
-    it("should send a request with a custom base URL", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a request with a custom base URL", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({
         auth: tokenAuth,
         baseUrl: EXAMPLE_BASE_URL,
@@ -42,31 +43,31 @@ describe("ApiClient", () => {
 
       await client.request("/");
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         `${EXAMPLE_BASE_URL}/`,
         expect.any(Object),
       );
     });
 
-    it("should send a request to a full URL", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a request to a full URL", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: tokenAuth });
 
       await client.request(EXAMPLE_BASE_URL);
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         EXAMPLE_BASE_URL,
         expect.any(Object),
       );
     });
 
-    it("should send a request with basic auth", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a request with basic auth", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: basicAuth });
 
       await client.request("/");
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
           headers: expect.objectContaining({
@@ -78,13 +79,13 @@ describe("ApiClient", () => {
       );
     });
 
-    it("should send a request with token auth", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a request with token auth", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: tokenAuth });
 
       await client.request("/");
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
           headers: expect.objectContaining({
@@ -94,13 +95,13 @@ describe("ApiClient", () => {
       );
     });
 
-    it("should send a request with a custom user agent", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a request with a custom user agent", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: tokenAuth, userAgent });
 
       await client.request("/");
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
           headers: expect.objectContaining({
@@ -110,13 +111,13 @@ describe("ApiClient", () => {
       );
     });
 
-    it("should send a request with a JSON body", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a request with a JSON body", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: tokenAuth });
 
       await client.request("/", { method: "POST", body });
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
           body: JSON.stringify(body),
@@ -124,7 +125,7 @@ describe("ApiClient", () => {
       );
     });
 
-    it("should throw an error if a response is not OK", async () => {
+    it("throws an error if a response is not OK", async () => {
       const client = new ApiClient({
         auth: tokenAuth,
         baseUrl: "https://example.com",
@@ -133,15 +134,15 @@ describe("ApiClient", () => {
       await expect(client.request("/error")).rejects.toThrow(MoyskladError);
     });
 
-    it("should append search parameters to the URL", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("appends search parameters to the URL", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: tokenAuth });
 
       await client.request("/", {
         searchParameters: new URLSearchParams({ foo: "bar" }),
       });
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         "https://api.moysklad.ru/api/remap/1.2/?foo=bar",
         expect.any(Object),
       );
@@ -149,13 +150,13 @@ describe("ApiClient", () => {
   });
 
   describe("get", () => {
-    it("should send a GET request", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a GET request", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: tokenAuth });
 
       await client.get("/");
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
           method: "GET",
@@ -165,13 +166,13 @@ describe("ApiClient", () => {
   });
 
   describe("post", () => {
-    it("should send a POST request", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a POST request", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: tokenAuth });
 
       await client.post("/");
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
           method: "POST",
@@ -181,13 +182,13 @@ describe("ApiClient", () => {
   });
 
   describe("put", () => {
-    it("should send a PUT request", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a PUT request", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: tokenAuth });
 
       await client.put("/");
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
           method: "PUT",
@@ -197,13 +198,13 @@ describe("ApiClient", () => {
   });
 
   describe("delete", () => {
-    it("should send a DELETE request", async () => {
-      const fetchSpy = vi.spyOn(globalThis, "fetch");
+    it("sends a DELETE request", async () => {
+      const fetchMock = createFetchMock();
       const client = new ApiClient({ auth: tokenAuth });
 
       await client.delete("/");
 
-      expect(fetchSpy).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({
           method: "DELETE",
@@ -213,7 +214,7 @@ describe("ApiClient", () => {
   });
 
   describe("buildUrl", () => {
-    it("should build a URL with a string relative path", () => {
+    it("builds a URL with a string relative path", () => {
       const client = new ApiClient({ auth: { token: "" } });
 
       const url = client.buildUrl("/foo");
@@ -221,7 +222,7 @@ describe("ApiClient", () => {
       expect(url.toString()).toBe("https://api.moysklad.ru/api/remap/1.2/foo");
     });
 
-    it("should build a URL with a string array relative path", () => {
+    it("builds a URL with a string array relative path", () => {
       const client = new ApiClient({ auth: { token: "" } });
 
       const url = client.buildUrl(["/foo", "/bar"]);
@@ -231,7 +232,7 @@ describe("ApiClient", () => {
       );
     });
 
-    it("should build a URL with a string array absolute path", () => {
+    it("builds a URL with a string array absolute path", () => {
       const client = new ApiClient({ auth: { token: "" } });
 
       const url = client.buildUrl(["https://example.org", "foo", "bar"]);
@@ -239,7 +240,7 @@ describe("ApiClient", () => {
       expect(url.toString()).toBe("https://example.org/foo/bar");
     });
 
-    it("should build a URL with a full URL", () => {
+    it("builds a URL with a full URL", () => {
       const client = new ApiClient({ auth: { token: "" } });
 
       const url = client.buildUrl(`${EXAMPLE_BASE_URL}/foo`);
@@ -247,7 +248,7 @@ describe("ApiClient", () => {
       expect(url.toString()).toBe(`${EXAMPLE_BASE_URL}/foo`);
     });
 
-    it("should normalize a URL", () => {
+    it("normalizes a URL", () => {
       const client = new ApiClient({
         auth: { token: "" },
         baseUrl: EXAMPLE_BASE_URL,
@@ -271,7 +272,7 @@ describe("ApiClient", () => {
         context: {} as never,
       }));
 
-    it("should fetch all rows with default limit", async () => {
+    it("fetches all rows with default limit", async () => {
       const client = new ApiClient({ auth: { token: "" } });
       const fetcher = constructFetcher(bigData);
 
@@ -280,7 +281,7 @@ describe("ApiClient", () => {
       expect(result.rows).toEqual(bigData);
     });
 
-    it("should fetch all rows with expand limit", async () => {
+    it("fetches all rows with expand limit", async () => {
       const client = new ApiClient({ auth: { token: "" } });
 
       const fetcher = constructFetcher(bigData);
@@ -290,7 +291,7 @@ describe("ApiClient", () => {
       expect(result.rows).toEqual(bigData);
     });
 
-    it("should fetch all rows with custom limit", async () => {
+    it("fetches all rows with custom limit", async () => {
       const client = new ApiClient({
         auth: { token: "" },
         batchGetOptions: { limit: 150 },
@@ -303,7 +304,7 @@ describe("ApiClient", () => {
       expect(result.rows).toEqual(bigData);
     });
 
-    it("should fetch all rows if row count is less than limit", async () => {
+    it("fetches all rows if row count is less than limit", async () => {
       const client = new ApiClient({ auth: { token: "" } });
 
       const fetcher = constructFetcher(smallData);
@@ -313,7 +314,7 @@ describe("ApiClient", () => {
       expect(result.rows).toEqual(smallData);
     });
 
-    it("should return empty rows if no data", async () => {
+    it("returns empty rows if no data", async () => {
       const client = new ApiClient({ auth: { token: "" } });
 
       const fetcher = constructFetcher([]);

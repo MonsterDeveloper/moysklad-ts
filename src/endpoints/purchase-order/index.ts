@@ -1,2 +1,2 @@
 export * from "./types";
-export { PurchaseOrderEndpoint } from "./endpoint";
+export type { PurchaseOrderEndpoint } from "./purchase-order";

@@ -1,2 +1,2 @@
 export * from "./types";
-export { ProductionStageEndpoint } from "./endpoint";
+export type { ProductionStageEndpoint } from "./endpoint";

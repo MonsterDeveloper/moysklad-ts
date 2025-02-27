@@ -11,6 +11,7 @@ import customEntity from "./custom-entity";
 import product from "./product";
 import variant from "./variant";
 import report from "./report";
+import wizard from "./wizard";
 
 export default [
   rest.all(MOYSKLAD_BASE_URL, (_, response, context) => {
@@ -35,4 +36,5 @@ export default [
   ...product,
   ...variant,
   ...report,
+  ...wizard,
 ];
