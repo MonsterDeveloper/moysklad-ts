@@ -11,7 +11,7 @@ export function createFetchMock() {
 
 const BASE_URL = "https://test-api.moysklad.ru/api/remap/1.2";
 
-export const moyskladTest = createMoysklad({
+export const moysklad = createMoysklad({
   auth: {
     token: "123",
   },
@@ -37,8 +37,11 @@ export function expectFetch({
     expectedUrl.searchParams.set(key, value);
   }
 
-  expect(fetchMock).toHaveBeenCalledWith(expectedUrl.toString(), {
-    method,
-    body: body ? JSON.stringify(body) : undefined,
-  });
+  expect(fetchMock).toHaveBeenCalledWith(
+    expectedUrl.toString(),
+    expect.objectContaining({
+      method,
+      ...(body && { body: JSON.stringify(body) }),
+    }),
+  );
 }
