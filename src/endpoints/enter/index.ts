@@ -1,2 +1,2 @@
+export type { EnterEndpoint } from "./enter";
 export * from "./types";
-export { EnterEndpoint } from "./endpoint";

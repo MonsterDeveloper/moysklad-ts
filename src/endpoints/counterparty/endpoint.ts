@@ -1,5 +1,3 @@
-import { BaseEndpoint } from "../base-endpoint";
-import { composeSearchParameters } from "../../api-client";
 import type {
   AllCounterpartiesOptions,
   CounterpartyModel,
@@ -17,84 +15,132 @@ import type {
   Subset,
 } from "../../types";
 
-const ENDPOINT_URL = "/entity/counterparty";
-
-export class CounterpartyEndpoint extends BaseEndpoint {
-  async list<T extends ListCounterpartiesOptions = Record<string, unknown>>(
+/**
+ * Контрагенты
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent
+ */
+export interface CounterpartyEndpoint {
+  /**
+   * Получить список контрагентов.
+   *
+   * @param options - Опции для получения списка {@linkcode ListCounterpartiesOptions}
+   * @returns Объект с списком контрагентов
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-poluchit-kontragentow
+   *
+   * @example
+   * ```ts
+   * const { rows } = await moysklad.counterparty.list();
+   * ```
+   */
+  list<T extends ListCounterpartiesOptions = Record<string, unknown>>(
     options?: Subset<T, ListCounterpartiesOptions>,
   ): Promise<
     ListResponse<
       GetFindResult<CounterpartyModel, T["expand"]>,
       Entity.Counterparty
     >
-  > {
-    const searchParameters = composeSearchParameters(options ?? {});
+  >;
 
-    const response = await this.client.get(ENDPOINT_URL, {
-      searchParameters,
-    });
-    return response.json();
-  }
-
-  async all<T extends AllCounterpartiesOptions = Record<string, unknown>>(
+  /**
+   * Получить все контрагенты.
+   *
+   * @param options - Опции для получения всех контрагентов {@linkcode AllCounterpartiesOptions}
+   * @returns Объект с массивом контрагентов
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-poluchit-kontragentow
+   *
+   * @example
+   * ```ts
+   * const { rows } = await moysklad.counterparty.all();
+   * ```
+   */
+  all<T extends AllCounterpartiesOptions = Record<string, unknown>>(
     options?: Subset<T, AllCounterpartiesOptions>,
   ): Promise<
     BatchGetResult<
       GetFindResult<CounterpartyModel, T["expand"]>,
       Entity.Counterparty
     >
-  > {
-    return this.client.batchGet(
-      async (limit, offset) =>
-        this.list({
-          ...options,
-          pagination: { limit, offset },
-        }),
-      Boolean(options?.expand),
-    );
-  }
+  >;
 
-  async get<T extends GetCounterpartyOptions = Record<string, unknown>>(
+  /**
+   * Получить контрагента по id.
+   *
+   * @param id - id контрагента
+   * @param options - Опции для получения контрагента {@linkcode GetCounterpartyOptions}
+   * @returns Объект с контрагентом {@linkcode CounterpartyModel}
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-poluchit-kontragenta
+   *
+   * @example
+   * ```ts
+   * const counterparty = await moysklad.counterparty.get("5427bc76-b95f-11eb-0a80-04bb000cd583");
+   * ```
+   */
+  get<T extends GetCounterpartyOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetCounterpartyOptions>,
-  ): Promise<GetFindResult<CounterpartyModel, T["expand"]>> {
-    const searchParameters = composeSearchParameters(options ?? {});
+  ): Promise<GetFindResult<CounterpartyModel, T["expand"]>>;
 
-    const response = await this.client.get(`${ENDPOINT_URL}/${id}`, {
-      searchParameters,
-    });
-
-    return response.json();
-  }
-  async update<T extends UpdateCounterpartyOptions = Record<string, unknown>>(
+  /**
+   * Изменить контрагента.
+   *
+   * @param id - id контрагента
+   * @param data - данные для изменения контрагента
+   * @param options - Опции для изменения контрагента {@linkcode UpdateCounterpartyOptions}
+   * @returns Объект с обновленным контрагентом {@linkcode CounterpartyModel}
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-izmenit-kontragenta
+   *
+   * @example
+   * ```ts
+   * await moysklad.counterparty.update("5427bc76-b95f-11eb-0a80-04bb000cd583", {
+   *   name: "ООО Ромашка",
+   * });
+   * ```
+   */
+  update<T extends UpdateCounterpartyOptions = Record<string, unknown>>(
     id: string,
     data: GetModelUpdatableFields<CounterpartyModel>,
     options?: Subset<T, UpdateCounterpartyOptions>,
-  ): Promise<GetFindResult<CounterpartyModel, T["expand"]>> {
-    const searchParameters = composeSearchParameters(options ?? {});
+  ): Promise<GetFindResult<CounterpartyModel, T["expand"]>>;
 
-    const response = await this.client.put(`${ENDPOINT_URL}/${id}`, {
-      body: data,
-      searchParameters,
-    });
-
-    return response.json();
-  }
-
-  async first<T extends FirstCounterpartyOptions = Record<string, unknown>>(
+  /**
+   * Получить первого контрагента из списка.
+   *
+   * @param options - Опции для получения первого контрагента {@linkcode FirstCounterpartyOptions}
+   * @returns Объект с первым контрагентом
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-poluchit-kontragentow
+   *
+   * @example
+   * ```ts
+   * const { rows } = await moysklad.counterparty.first();
+   * const firstCounterparty = rows[0];
+   * ```
+   */
+  first<T extends FirstCounterpartyOptions = Record<string, unknown>>(
     options?: Subset<T, FirstCounterpartyOptions>,
   ): Promise<
     ListResponse<
       GetFindResult<CounterpartyModel, T["expand"]>,
       Entity.Counterparty
     >
-  > {
-    return this.list({ ...options, pagination: { limit: 1 } });
-  }
+  >;
 
-  async size(): Promise<number> {
-    const response = await this.list({ pagination: { limit: 0 } });
-
-    return response.meta.size;
-  }
+  /**
+   * Получить количество контрагентов.
+   *
+   * @returns Количество контрагентов
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-poluchit-kontragentow
+   *
+   * @example
+   * ```ts
+   * const count = await moysklad.counterparty.size();
+   * ```
+   */
+  size(): Promise<number>;
 }

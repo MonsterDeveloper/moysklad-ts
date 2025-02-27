@@ -1,2 +1,2 @@
-export { BonusTransactionEndpoint } from "./endpoint";
+export type { BonusTransactionEndpoint } from "./bonus-transaction";
 export * from "./types";

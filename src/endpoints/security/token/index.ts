@@ -1,1 +1,1 @@
-export { TokenEndpoint } from "./endpoint";
+export type { TokenEndpoint } from "./endpoint";

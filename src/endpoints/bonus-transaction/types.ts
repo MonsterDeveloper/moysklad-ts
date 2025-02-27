@@ -66,7 +66,7 @@ export interface BonusTransaction
    * Категория бонусной операции.
    *
    * {@linkcode BonusTransactionCategoryType}
-   * */
+   */
   readonly categoryType?: BonusTransactionCategoryType;
 
   /** Код Бонусной операции */
@@ -325,5 +325,9 @@ export interface CreateBonusTransactionOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
+  expand?: ExpandOptions<BonusTransactionModel>;
+}
+
+export interface UpsertBonusTransactionOptions {
   expand?: ExpandOptions<BonusTransactionModel>;
 }

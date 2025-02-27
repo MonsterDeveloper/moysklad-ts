@@ -1,2 +1,2 @@
-export { InvoiceOutEndpoint } from "./endpoint";
+export type { InvoiceOutEndpoint } from "./invoice-out";
 export * from "./types";

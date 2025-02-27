@@ -1,1 +1,1 @@
-export { SecurityEndpoint } from "./endpoint";
+export type { SecurityEndpoint } from "./endpoint";

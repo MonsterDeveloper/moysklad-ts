@@ -1,16 +1,11 @@
-/* c8 ignore start */
-import type { ApiClient } from "../../api-client";
-import { BaseEndpoint } from "../base-endpoint";
-import { TokenEndpoint } from "./token";
+import type { TokenEndpoint } from "./token";
 
-export class SecurityEndpoint extends BaseEndpoint {
-  public token: TokenEndpoint;
-
-  constructor(client: ApiClient) {
-    super(client);
-
-    this.token = new TokenEndpoint(client);
-  }
+/**
+ * Интерфейс для работы с безопасностью
+ */
+export interface SecurityEndpoint {
+  /**
+   * Токены безопасности
+   */
+  token: TokenEndpoint;
 }
-
-/* c8 ignore stop */

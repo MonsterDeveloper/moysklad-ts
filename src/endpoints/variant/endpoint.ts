@@ -4,13 +4,11 @@ import {
   type GetFindResult,
   type ListResponse,
   type Subset,
-  MediaType,
   type BatchDeleteResult,
   type GetModelCreatableFields,
   type GetModelUpdatableFields,
   type UpdateMeta,
 } from "../../types";
-import { BaseEndpoint } from "../base-endpoint";
 import type {
   ListVariantsOptions,
   CreateVariantOptions,
@@ -20,11 +18,13 @@ import type {
   GetVariantOptions,
   UpdateVariantOptions,
 } from "./types";
-import { composeSearchParameters } from "../../api-client";
 
-const ENDPOINT_URL = "/entity/variant";
-
-export class VariantEndpoint extends BaseEndpoint {
+/**
+ * Модификации
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq
+ */
+export interface VariantEndpoint {
   /**
    * Получить список модификаций.
    *
@@ -45,18 +45,11 @@ export class VariantEndpoint extends BaseEndpoint {
    * });
    * ```
    */
-  async list<T extends ListVariantsOptions = Record<string, unknown>>(
+  list<T extends ListVariantsOptions = Record<string, unknown>>(
     options?: Subset<T, ListVariantsOptions>,
   ): Promise<
     ListResponse<GetFindResult<VariantModel, T["expand"]>, Entity.Variant>
-  > {
-    const searchParameters = composeSearchParameters(options ?? {});
-
-    const response = await this.client.get(ENDPOINT_URL, {
-      searchParameters,
-    });
-    return response.json();
-  }
+  >;
 
   /**
    * Получить все модификации.
@@ -71,20 +64,11 @@ export class VariantEndpoint extends BaseEndpoint {
    * });
    * ```
    */
-  async all<T extends AllVariantsOptions = Record<string, unknown>>(
+  all<T extends AllVariantsOptions = Record<string, unknown>>(
     options?: Subset<T, AllVariantsOptions>,
   ): Promise<
     BatchGetResult<GetFindResult<VariantModel, T["expand"]>, Entity.Variant>
-  > {
-    return this.client.batchGet(
-      async (limit, offset) =>
-        this.list({
-          ...options,
-          pagination: { limit, offset },
-        }),
-      Boolean(options?.expand),
-    );
-  }
+  >;
 
   /**
    * Получить первую модификацию.
@@ -99,13 +83,11 @@ export class VariantEndpoint extends BaseEndpoint {
    * });
    * ```
    */
-  async first<T extends FirstVariantOptions = Record<string, unknown>>(
+  first<T extends FirstVariantOptions = Record<string, unknown>>(
     options?: Subset<T, FirstVariantOptions>,
   ): Promise<
     ListResponse<GetFindResult<VariantModel, T["expand"]>, Entity.Variant>
-  > {
-    return this.list({ ...options, pagination: { limit: 1 } });
-  }
+  >;
 
   /**
    * Получить модификацию по id.
@@ -121,29 +103,17 @@ export class VariantEndpoint extends BaseEndpoint {
    * const variant = await moysklad.variant.get("5427bc76-b95f-11eb-0a80-04bb000cd583");
    * ```
    */
-  async get<T extends GetVariantOptions = Record<string, unknown>>(
+  get<T extends GetVariantOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetVariantOptions>,
-  ): Promise<GetFindResult<VariantModel, T["expand"]>> {
-    const searchParameters = composeSearchParameters(options ?? {});
-
-    const response = await this.client.get(`${ENDPOINT_URL}/${id}`, {
-      searchParameters,
-    });
-
-    return response.json();
-  }
+  ): Promise<GetFindResult<VariantModel, T["expand"]>>;
 
   /**
    * Получить общее количество модификаций.
    *
    * @returns Общее количество модификаций
    */
-  async size(): Promise<number> {
-    const response = await this.list({ pagination: { limit: 0 } });
-
-    return response.meta.size;
-  }
+  size(): Promise<number>;
 
   /**
    * Удалить модификацию по id.
@@ -151,9 +121,7 @@ export class VariantEndpoint extends BaseEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq-udalit-modifikaciu
    */
-  async delete(id: string): Promise<void> {
-    await this.client.delete(`${ENDPOINT_URL}/${id}`);
-  }
+  delete(id: string): Promise<void>;
 
   /**
    * Изменить модификацию.
@@ -165,20 +133,11 @@ export class VariantEndpoint extends BaseEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq-izmenit-modifikaciu
    */
-  async update<T extends UpdateVariantOptions = Record<string, unknown>>(
+  update<T extends UpdateVariantOptions = Record<string, unknown>>(
     id: string,
     data: GetModelUpdatableFields<VariantModel>,
     options?: Subset<T, UpdateVariantOptions>,
-  ): Promise<GetFindResult<VariantModel, T["expand"]>> {
-    const searchParameters = composeSearchParameters(options ?? {});
-
-    const response = await this.client.put(`${ENDPOINT_URL}/${id}`, {
-      body: data,
-      searchParameters,
-    });
-
-    return response.json();
-  }
+  ): Promise<GetFindResult<VariantModel, T["expand"]>>;
 
   /**
    * Создать модификацию.
@@ -189,19 +148,10 @@ export class VariantEndpoint extends BaseEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq-sozdat-modifikaciu
    */
-  async create<T extends CreateVariantOptions = Record<string, unknown>>(
+  create<T extends CreateVariantOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<VariantModel>,
     options?: Subset<T, CreateVariantOptions>,
-  ): Promise<GetFindResult<VariantModel, T["expand"]>> {
-    const searchParameters = composeSearchParameters(options ?? {});
-
-    const response = await this.client.post(ENDPOINT_URL, {
-      body: data,
-      searchParameters,
-    });
-
-    return response.json();
-  }
+  ): Promise<GetFindResult<VariantModel, T["expand"]>>;
 
   /**
    * Массово удалить модификации.
@@ -211,19 +161,7 @@ export class VariantEndpoint extends BaseEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq-massowoe-udalenie-modifikacij
    */
-  async batchDelete(ids: string[]): Promise<BatchDeleteResult[]> {
-    const response = await this.client.post(`${ENDPOINT_URL}/delete`, {
-      body: ids.map((id) => ({
-        meta: {
-          href: this.client.buildUrl(`${ENDPOINT_URL}/${id}`),
-          type: Entity.Variant,
-          mediaType: MediaType.Json,
-        },
-      })),
-    });
-
-    return response.json();
-  }
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
 
   /**
    * Массово создать и обновить модификации.
@@ -234,22 +172,13 @@ export class VariantEndpoint extends BaseEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq-massowoe-sozdanie-i-obnowlenie-modifikacij
    */
-  async upsert<T extends CreateVariantOptions = Record<string, unknown>>(
+  upsert<T extends CreateVariantOptions = Record<string, unknown>>(
     data: (
       | GetModelCreatableFields<VariantModel>
       | (GetModelUpdatableFields<VariantModel> & UpdateMeta<Entity.Variant>)
     )[],
     options?: Subset<T, CreateVariantOptions>,
-  ): Promise<GetFindResult<VariantModel, T["expand"]>[]> {
-    const searchParameters = composeSearchParameters(options ?? {});
-
-    const response = await this.client.post(ENDPOINT_URL, {
-      body: data,
-      searchParameters,
-    });
-
-    return response.json();
-  }
+  ): Promise<GetFindResult<VariantModel, T["expand"]>[]>;
 
   /**
    * Поместить модификацию в корзину.
@@ -258,7 +187,5 @@ export class VariantEndpoint extends BaseEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq-pomestit-modifikaciu-w-korzinu
    */
-  async trash(id: string): Promise<void> {
-    await this.client.post(`${ENDPOINT_URL}/${id}/trash`);
-  }
+  trash(id: string): Promise<void>;
 }

@@ -1,8 +1,16 @@
 import type { Entity, Idable, Meta, Model } from "../../types";
 import type { EmptyObject } from "type-fest";
 
+/**
+ * Условия бонусных баллов
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-bonusnaq-programma-bonusnye-programmy
+ */
 export enum WelcomeBonusMode {
+  /** Приветственные баллы начисляются участиникам после регистрации в бонусной программе. */
   Registration = "REGISTRATION",
+
+  /** Приветственные баллы начисляются участиникам бонусной программы после совершения первой покупки. */
   FirstPurchase = "FIRST_PURCHASE",
 }
 
@@ -31,10 +39,20 @@ interface BonusProgramWithWelcomeBonuses extends BaseBonusProgram {
   welcomeBonusesValue: number;
 }
 
+/**
+ * Бонусная программа
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-bonusnaq-programma-bonusnye-programmy
+ */
 export type BonusProgram =
   | BonusProgramWithoutWelcomeBonuses
   | BonusProgramWithWelcomeBonuses;
 
+/**
+ * Модель бонусной программы
+ *
+ * {@linkcode BonusProgram}
+ */
 export interface BonusProgramModel extends Model {
   object: BonusProgram;
   expandable: EmptyObject;

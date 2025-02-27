@@ -1,9 +1,11 @@
-import { BaseEndpoint } from "../../base-endpoint";
-
-export class TokenEndpoint extends BaseEndpoint {
-  async create(): Promise<{ access_token: string }> {
-    const response = await this.client.post("/security/token");
-
-    return response.json();
-  }
+/**
+ * Интерфейс для работы с токенами безопасности
+ */
+export interface TokenEndpoint {
+  /**
+   * Создать новый токен доступа
+   *
+   * @returns Объект с токеном доступа
+   */
+  create(): Promise<{ access_token: string }>;
 }

@@ -14,12 +14,13 @@ import type {
   ListProductionStagesOptions,
   UpdateProductionStageOptions,
 } from "./types";
-import { BaseEndpoint } from "../base-endpoint";
-import { composeSearchParameters } from "../../api-client";
 
-const ENDPOINT_URL = "/entity/productionstage";
-
-export class ProductionStageEndpoint extends BaseEndpoint {
+/**
+ * Производственные этапы
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-proizwodstwennoe-zadanie-proizwodstwennye-atapy
+ */
+export interface ProductionStageEndpoint {
   /**
    * Получить массив производственных этапов.
    *
@@ -42,21 +43,14 @@ export class ProductionStageEndpoint extends BaseEndpoint {
    * });
    * ```
    */
-  async list<T extends ListProductionStagesOptions>(
+  list<T extends ListProductionStagesOptions>(
     options: Subset<T, ListProductionStagesOptions>,
   ): Promise<
     ListResponse<
       GetFindResult<ProductionStageModel, T["expand"]>,
       Entity.ProductionStage
     >
-  > {
-    const searchParameters = composeSearchParameters(options);
-
-    const response = await this.client.get(ENDPOINT_URL, {
-      searchParameters,
-    });
-    return response.json();
-  }
+  >;
 
   /**
    * Получить все производственные этапы.
@@ -75,23 +69,14 @@ export class ProductionStageEndpoint extends BaseEndpoint {
    * });
    * ```
    */
-  async all<T extends AllProductionStagesOptions>(
+  all<T extends AllProductionStagesOptions>(
     options: Subset<T, AllProductionStagesOptions>,
   ): Promise<
     BatchGetResult<
       GetFindResult<ProductionStageModel, T["expand"]>,
       Entity.ProductionStage
     >
-  > {
-    return this.client.batchGet(
-      async (limit, offset) =>
-        this.list({
-          ...options,
-          pagination: { limit, offset },
-        }),
-      Boolean(options.expand),
-    );
-  }
+  >;
 
   /**
    * Получить производственный этап по id.
@@ -107,18 +92,10 @@ export class ProductionStageEndpoint extends BaseEndpoint {
    * const stage = await moysklad.productionStage.get("5427bc76-b95f-11eb-0a80-04bb000cd583");
    * ```
    */
-  async get<T extends GetProductionStageOptions = Record<string, unknown>>(
+  get<T extends GetProductionStageOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetProductionStageOptions>,
-  ): Promise<GetFindResult<ProductionStageModel, T["expand"]>> {
-    const searchParameters = composeSearchParameters(options ?? {});
-
-    const response = await this.client.get(`${ENDPOINT_URL}/${id}`, {
-      searchParameters,
-    });
-
-    return response.json();
-  }
+  ): Promise<GetFindResult<ProductionStageModel, T["expand"]>>;
 
   /**
    * Изменить производственный этап.
@@ -138,22 +115,11 @@ export class ProductionStageEndpoint extends BaseEndpoint {
    * });
    * ```
    */
-  async update<
-    T extends UpdateProductionStageOptions = Record<string, unknown>,
-  >(
+  update<T extends UpdateProductionStageOptions = Record<string, unknown>>(
     id: string,
     data: GetModelUpdatableFields<ProductionStageModel>,
     options?: Subset<T, UpdateProductionStageOptions>,
-  ): Promise<GetFindResult<ProductionStageModel, T["expand"]>> {
-    const searchParameters = composeSearchParameters(options ?? {});
-
-    const response = await this.client.put(`${ENDPOINT_URL}/${id}`, {
-      body: data,
-      searchParameters,
-    });
-
-    return response.json();
-  }
+  ): Promise<GetFindResult<ProductionStageModel, T["expand"]>>;
 
   /**
    * Получить первый производственный этап.
@@ -172,16 +138,14 @@ export class ProductionStageEndpoint extends BaseEndpoint {
    * });
    * ```
    */
-  async first<T extends FirstProductionStageOptions>(
+  first<T extends FirstProductionStageOptions>(
     options: Subset<T, FirstProductionStageOptions>,
   ): Promise<
     ListResponse<
       GetFindResult<ProductionStageModel, T["expand"]>,
       Entity.ProductionStage
     >
-  > {
-    return this.list({ ...options, pagination: { limit: 1 } });
-  }
+  >;
 
   /**
    * Получить общее количество производственных этапов.
@@ -189,8 +153,5 @@ export class ProductionStageEndpoint extends BaseEndpoint {
    * @param options - Опции для получения количества производственных этапов {@linkcode FirstProductionStageOptions}
    * @returns Общее количество производственных этапов
    */
-  async size(options: FirstProductionStageOptions): Promise<number> {
-    const response = await this.list({ ...options, pagination: { limit: 0 } });
-    return response.meta.size;
-  }
+  size(options: FirstProductionStageOptions): Promise<number>;
 }

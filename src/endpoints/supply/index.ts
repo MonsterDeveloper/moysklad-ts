@@ -1,2 +1,2 @@
 export * from "./types";
-export { SupplyEndpoint } from "./endpoint";
+export type { SupplyEndpoint } from "./supply";
