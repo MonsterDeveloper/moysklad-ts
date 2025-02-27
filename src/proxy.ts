@@ -13,7 +13,7 @@ type ComposeSearchParametersOptions = Parameters<
   typeof composeSearchParameters
 >[0];
 
-export type Callback = (options: CallbackOptions) => unknown;
+type Callback = (options: CallbackOptions) => unknown;
 
 interface CallbackOptions {
   path: string[];
