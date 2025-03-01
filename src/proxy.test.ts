@@ -28,6 +28,8 @@ describe("createMoysklad", () => {
       expect(typeof moysklad.client.delete).toBe("function");
       expect(typeof moysklad.client.request).toBe("function");
       expect(typeof moysklad.client.buildUrl).toBe("function");
+
+      expect(moysklad.client.buildUrl("/test")).toBeInstanceOf(URL);
     });
 
     it("throws an error when accessing client property on nested paths", () => {
