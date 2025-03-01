@@ -21,7 +21,8 @@
     {
       "files": ["*.test.ts"],
       "rules": {
-        "@typescript-eslint/no-unsafe-assignment": "off"
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "sonarjs/no-duplicate-string": "off"
       }
     },
     {

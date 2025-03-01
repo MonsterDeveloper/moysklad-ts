@@ -199,3 +199,10 @@ export interface GetCounterpartyOptions {
 export interface UpdateCounterpartyOptions {
   expand?: ExpandOptions<CounterpartyModel>;
 }
+
+/**
+ * Опции для создания или обновления контрагента
+ */
+export interface UpsertCounterpartyOptions {
+  expand?: ExpandOptions<CounterpartyModel>;
+}
