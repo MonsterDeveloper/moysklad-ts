@@ -22,6 +22,7 @@ import type {
   SupplyEndpoint,
   VariantEndpoint,
   SecurityEndpoint,
+  SalesReturnEndpoint,
 } from "./endpoints";
 
 /** Клиент МойСклад */
@@ -186,4 +187,11 @@ export interface Moysklad {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq
    */
   variant: VariantEndpoint;
+
+  /**
+   * Возвраты покупателей
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-vozwrat-pokupatelq
+   */
+  salesReturn: SalesReturnEndpoint;
 }

@@ -32,3 +32,4 @@ export * from "./assortment";
 export * from "./purchase-order";
 export * from "./production-stage";
 export * from "./inventory";
+export * from "./sales-return";

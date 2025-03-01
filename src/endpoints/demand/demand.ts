@@ -64,7 +64,7 @@ export interface DemandEndpoint {
   ): Promise<
     BatchGetResult<
       GetFindResult<DemandModel, T["expand"], T["fields"]>,
-      Entity.BonusTransaction
+      Entity.Demand
     >
   >;
 
