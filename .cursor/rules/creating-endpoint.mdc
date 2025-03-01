@@ -1,0 +1,13 @@
+---
+description: Creating a new endpoint or adding types
+globs: 
+alwaysApply: false
+---
+You are creating a new Moysklad endpoint.
+
+You will be given the description of the data types and methods from the Moysklad documentation.
+
+Your goal is to create these types and methods in TypeScript.
+
+- For list methods, make sure to include my utility methods, such as `.all()`, `.size()`, and `.first()`.
+- Write extensive JSDoc for both methods and types, as per the [jsdoc.mdc](mdc:.cursor/rules/jsdoc.mdc) rule.
