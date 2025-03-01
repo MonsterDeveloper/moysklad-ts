@@ -39,13 +39,20 @@ const createProxy = (callback: Callback, path: string[]) => {
   return proxy;
 };
 
-/**
- * Создать клиент для работы с МойСклад
+/*
+ * Создать API клиент для работы с МойСклад
  *
- * @param options - Опции для запросов
- * @returns Экземпляр Moysklad
+ * @param options - Опции для запросов {@linkcode ApiClientOptions}
+ * @returns API клиент МойСклад
  *
- * {@linkcode ApiClientOptions}
+ * @example
+ * ```ts
+ * const moysklad = createMoysklad({
+ *   auth: {
+ *     token: "<Ключ доступа к API МойСклад>"
+ *   }
+ * });
+ * ```
  */
 export const createMoysklad = (options: ApiClientOptions): Moysklad => {
   const client = new ApiClient(options);
@@ -173,7 +180,7 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
 
     if (method === "batchDelete") {
       const ids = callbackOptions.args[0] as string[];
-      const entity = callbackOptions.path[0];
+      const entity = (callbackOptions.path[0] as string).toLowerCase();
 
       return client
         .post(`${path}/delete`, {

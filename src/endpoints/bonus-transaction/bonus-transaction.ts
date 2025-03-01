@@ -157,9 +157,32 @@ export interface BonusTransactionEndpoint {
    * @example
    * ```ts
    * const transaction = await moysklad.bonusTransaction.upsert({
-   *   id: "a7404397-83a7-11ed-0a80-0e9700500d7e",
+   *   meta: {
+   *     href: "https://api.moysklad.ru/api/remap/1.2/entity/bonustransaction/a7404397-83a7-11ed-0a80-0e9700500d7e",
+   *     type: Entity.BonusTransaction,
+   *     mediaType: MediaType.Json,
+   *   },
    *   bonusValue: 300
    * });
+   * ```
+   *
+   * @example
+   * ```ts
+   * const transactions = await moysklad.bonusTransaction.upsert([
+   *   // Создание
+   *   {
+   *     bonusValue: 100
+   *   },
+   *   // Обновление
+   *   {
+   *     meta: {
+   *       href: "https://api.moysklad.ru/api/remap/1.2/entity/bonustransaction/b8515408-94b8-12fe-1b91-1f8811600e8f",
+   *       type: Entity.BonusTransaction,
+   *       mediaType: MediaType.Json,
+   *     },
+   *     bonusValue: 200
+   *   }
+   * ]);
    * ```
    */
   upsert<
@@ -196,11 +219,11 @@ export interface BonusTransactionEndpoint {
    *
    * @example
    * ```ts
-   * await moysklad.bonusTransaction.deleteMany([
+   * await moysklad.bonusTransaction.batchDelete([
    *   "a7404397-83a7-11ed-0a80-0e9700500d7e",
    *   "b8515408-94b8-12fe-1b91-1f8811600e8f"
    * ]);
    * ```
    */
-  deleteMany(ids: string[]): Promise<void>;
+  batchDelete(ids: string[]): Promise<void>;
 }

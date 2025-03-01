@@ -5,6 +5,7 @@ import type {
   GetCounterpartyOptions,
   ListCounterpartiesOptions,
   UpdateCounterpartyOptions,
+  UpsertCounterpartyOptions,
 } from "./types";
 import type {
   BatchGetResult,
@@ -13,6 +14,8 @@ import type {
   GetModelUpdatableFields,
   ListResponse,
   Subset,
+  ModelCreateOrUpdateData,
+  MatchArrayType,
 } from "../../types";
 
 /**
@@ -143,4 +146,29 @@ export interface CounterpartyEndpoint {
    * ```
    */
   size(): Promise<number>;
+
+  /**
+   * Создать или обновить контрагента.
+   *
+   * @param data - Данные для создания или обновления контрагента
+   * @param options - Опции для создания или обновления контрагента {@linkcode UpsertCounterpartyOptions}
+   * @returns Созданный или обновленный контрагент (или массив контрагентов)
+   *
+   * @example
+   * ```ts
+   * const counterparty = await moysklad.counterparty.upsert({
+   *   id: "5427bc76-b95f-11eb-0a80-04bb000cd583",
+   *   name: "ООО Ромашка",
+   * });
+   * ```
+   */
+  upsert<
+    TData extends ModelCreateOrUpdateData<CounterpartyModel>,
+    TOptions extends UpsertCounterpartyOptions = Record<string, unknown>,
+  >(
+    data: TData,
+    options?: Subset<TOptions, UpsertCounterpartyOptions>,
+  ): Promise<
+    MatchArrayType<TData, GetFindResult<CounterpartyModel, TOptions["expand"]>>
+  >;
 }

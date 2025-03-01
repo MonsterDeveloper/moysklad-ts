@@ -10,7 +10,6 @@
 		"moduleDetection": "force",
 
 		"strict": true,
-		"noUncheckedIndexedAccess": true,
 
 		"moduleResolution": "Bundler",
 		"module": "ESNext",
