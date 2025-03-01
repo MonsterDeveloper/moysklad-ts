@@ -21,13 +21,17 @@ interface CallbackOptions {
   args: any[];
 }
 
-const createProxy = (callback: Callback, path: string[]) => {
+const createProxy = (client: ApiClient, callback: Callback, path: string[]) => {
   const proxy: unknown = new Proxy(() => {}, {
     get(_object, key) {
+      if (key === "client" && path.length === 0) {
+        return client;
+      }
+
       if (typeof key !== "string" || key === "then") {
         return;
       }
-      return createProxy(callback, [...path, key]);
+      return createProxy(client, callback, [...path, key]);
     },
     apply(_1, _2, arguments_) {
       return callback({
@@ -68,182 +72,183 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
   };
 
   // TODO refactor & simplify
-  // eslint-disable-next-line sonarjs/cognitive-complexity
-  return createProxy((callbackOptions) => {
-    const parts = [...callbackOptions.path];
+  return createProxy(
+    client,
+    // eslint-disable-next-line sonarjs/cognitive-complexity
+    (callbackOptions) => {
+      const parts = [...callbackOptions.path];
 
-    if (parts[0] === "client" && parts.length === 2) {
-      const function_ = Reflect.get(client, parts[1] as PropertyKey) as (
-        ...arguments_: unknown[]
-      ) => unknown;
-      return Reflect.apply(function_, client, callbackOptions.args);
-    }
+      let method;
+      let path;
 
-    let method;
-    let path;
-
-    if (parts[0] === "report" || parts[0] === "wizard") {
-      path = `/${parts.join("/").toLowerCase()}`;
-    } else {
-      method = parts.pop();
-      path = `/entity/${parts.join("/").toLowerCase()}`;
-    }
-
-    if (parts[0] === "wizard") {
-      const { action, ...body } = callbackOptions.args[0] as WizardOptions;
-      return client
-        .post(path, {
-          searchParameters: new URLSearchParams({
-            action,
-          }),
-          body,
-        })
-        .then((response) => response.json());
-    }
-
-    if (parts[0] === "report") {
-      const options = callbackOptions.args[0] as
-        | ComposeSearchParametersOptions
-        | undefined;
-
-      if (path === "/report/stock/allcurrent") {
-        path = "/report/stock/all/current";
+      if (parts[0] === "report" || parts[0] === "wizard") {
+        path = `/${parts.join("/").toLowerCase()}`;
+      } else {
+        method = parts.pop();
+        path = `/entity/${parts.join("/").toLowerCase()}`;
       }
 
-      return client
-        .get(path, {
-          searchParameters: composeSearchParameters(options ?? {}),
-        })
-        .then((response) => response.json());
-    }
+      if (parts[0] === "wizard") {
+        const { action, ...body } = callbackOptions.args[0] as WizardOptions;
+        return client
+          .post(path, {
+            searchParameters: new URLSearchParams({
+              action,
+            }),
+            body,
+          })
+          .then((response) => response.json());
+      }
 
-    if (method === "list") {
-      return list(
-        path,
-        callbackOptions.args[0] as ComposeSearchParametersOptions,
-      );
-    }
-
-    if (method === "all") {
-      return client.batchGet(
-        async (limit, offset) =>
-          list(path, {
-            ...(callbackOptions.args[0] as
-              | ComposeSearchParametersOptions
-              | undefined),
-            pagination: { limit, offset },
-          }),
-        Boolean(
-          (
-            callbackOptions.args[0] as
-              | ComposeSearchParametersOptions
-              | undefined
-          )?.expand,
-        ),
-      );
-    }
-
-    if (method === "first") {
-      return list(path, {
-        ...(callbackOptions.args[0] as
+      if (parts[0] === "report") {
+        const options = callbackOptions.args[0] as
           | ComposeSearchParametersOptions
-          | undefined),
-        pagination: { limit: 1 },
-      });
-    }
+          | undefined;
 
-    if (method === "size") {
-      return list(path, {
-        ...(callbackOptions.args[0] as
+        if (path === "/report/stock/allcurrent") {
+          path = "/report/stock/all/current";
+        }
+
+        return client
+          .get(path, {
+            searchParameters: composeSearchParameters(options ?? {}),
+          })
+          .then((response) => response.json());
+      }
+
+      if (method === "list") {
+        return list(
+          path,
+          callbackOptions.args[0] as ComposeSearchParametersOptions,
+        );
+      }
+
+      if (method === "all") {
+        return client.batchGet(
+          async (limit, offset) =>
+            list(path, {
+              ...(callbackOptions.args[0] as
+                | ComposeSearchParametersOptions
+                | undefined),
+              pagination: { limit, offset },
+            }),
+          Boolean(
+            (
+              callbackOptions.args[0] as
+                | ComposeSearchParametersOptions
+                | undefined
+            )?.expand,
+          ),
+        );
+      }
+
+      if (method === "first") {
+        return list(path, {
+          ...(callbackOptions.args[0] as
+            | ComposeSearchParametersOptions
+            | undefined),
+          pagination: { limit: 1 },
+        });
+      }
+
+      if (method === "size") {
+        return list(path, {
+          ...(callbackOptions.args[0] as
+            | ComposeSearchParametersOptions
+            | undefined),
+          pagination: { limit: 0 },
+        });
+      }
+
+      if (method === "get") {
+        const id = callbackOptions.args[0] as string;
+        const options = callbackOptions.args[1] as
           | ComposeSearchParametersOptions
-          | undefined),
-        pagination: { limit: 0 },
-      });
-    }
+          | undefined;
 
-    if (method === "get") {
-      const id = callbackOptions.args[0] as string;
-      const options = callbackOptions.args[1] as
-        | ComposeSearchParametersOptions
-        | undefined;
+        return client
+          .get(`${path}/${id}`, {
+            searchParameters: composeSearchParameters(options ?? {}),
+          })
+          .then((response) => response.json());
+      }
 
-      return client
-        .get(`${path}/${id}`, {
-          searchParameters: composeSearchParameters(options ?? {}),
-        })
-        .then((response) => response.json());
-    }
+      if (method === "delete") {
+        const id = callbackOptions.args[0] as string;
 
-    if (method === "delete") {
-      const id = callbackOptions.args[0] as string;
+        return client
+          .delete(`${path}/${id}`)
+          .then((response) => response.json());
+      }
 
-      return client.delete(`${path}/${id}`).then((response) => response.json());
-    }
+      if (method === "batchDelete") {
+        const ids = callbackOptions.args[0] as string[];
+        const entity = callbackOptions.path[0].toLowerCase();
 
-    if (method === "batchDelete") {
-      const ids = callbackOptions.args[0] as string[];
-      const entity = callbackOptions.path[0].toLowerCase();
+        return client
+          .post(`${path}/delete`, {
+            body: ids.map((id) => ({
+              meta: {
+                href: client.buildUrl(`${path}/${id}`),
+                type: entity,
+                mediaType: MediaType.Json,
+              },
+            })),
+          })
+          .then((response) => response.json());
+      }
 
-      return client
-        .post(`${path}/delete`, {
-          body: ids.map((id) => ({
-            meta: {
-              href: client.buildUrl(`${path}/${id}`),
-              type: entity,
-              mediaType: MediaType.Json,
-            },
-          })),
-        })
-        .then((response) => response.json());
-    }
+      if (method === "trash") {
+        const id = callbackOptions.args[0] as string;
 
-    if (method === "trash") {
-      const id = callbackOptions.args[0] as string;
+        return client
+          .post(`${path}/${id}/trash`)
+          .then((response) => response.json());
+      }
 
-      return client
-        .post(`${path}/${id}/trash`)
-        .then((response) => response.json());
-    }
+      if (method === "upsert" || method === "create") {
+        const data = callbackOptions.args[0] as object;
+        const options = callbackOptions.args[1] as
+          | ComposeSearchParametersOptions
+          | undefined;
 
-    if (method === "upsert" || method === "create") {
-      const data = callbackOptions.args[0] as object;
-      const options = callbackOptions.args[1] as
-        | ComposeSearchParametersOptions
-        | undefined;
+        return client
+          .post(path, {
+            body: data,
+            searchParameters: composeSearchParameters(options ?? {}),
+          })
+          .then((response) => response.json());
+      }
 
-      return client
-        .post(path, {
-          body: data,
-          searchParameters: composeSearchParameters(options ?? {}),
-        })
-        .then((response) => response.json());
-    }
+      if (method === "update") {
+        const id = callbackOptions.args[0] as string;
+        const data = callbackOptions.args[1] as object;
+        const options = callbackOptions.args[2] as
+          | ComposeSearchParametersOptions
+          | undefined;
 
-    if (method === "update") {
-      const id = callbackOptions.args[0] as string;
-      const data = callbackOptions.args[1] as object;
-      const options = callbackOptions.args[2] as
-        | ComposeSearchParametersOptions
-        | undefined;
+        return client
+          .put(`${path}/${id}`, {
+            body: data,
+            searchParameters: composeSearchParameters(options ?? {}),
+          })
+          .then((response) => response.json());
+      }
 
-      return client
-        .put(`${path}/${id}`, {
-          body: data,
-          searchParameters: composeSearchParameters(options ?? {}),
-        })
-        .then((response) => response.json());
-    }
+      if (method === "template") {
+        const data = callbackOptions.args[0] as object;
 
-    if (method === "template") {
-      const data = callbackOptions.args[0] as object;
+        return client
+          .put(`${path}/new`, {
+            body: data,
+          })
+          .then((response) => response.json());
+      }
 
-      return client
-        .put(`${path}/new`, {
-          body: data,
-        })
-        .then((response) => response.json());
-    }
-
-    throw new Error(`Invalid request path: ${callbackOptions.path.join("/")}`);
-  }, []) as Moysklad;
+      throw new Error(
+        `Invalid request path: ${callbackOptions.path.join("/")}`,
+      );
+    },
+    [],
+  ) as Moysklad;
 };
