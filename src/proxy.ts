@@ -67,6 +67,8 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
       .then((response) => response.json());
   };
 
+  // TODO refactor & simplify
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   return createProxy((callbackOptions) => {
     const parts = [...callbackOptions.path];
 
@@ -180,7 +182,7 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
 
     if (method === "batchDelete") {
       const ids = callbackOptions.args[0] as string[];
-      const entity = (callbackOptions.path[0] as string).toLowerCase();
+      const entity = callbackOptions.path[0].toLowerCase();
 
       return client
         .post(`${path}/delete`, {
