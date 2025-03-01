@@ -69,15 +69,7 @@ function processErrorsObject(
   { errors: [error] }: { errors: MoyskladApiErrorObject[] },
   response: Response,
 ): void {
-  throw new MoyskladApiError(
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    error!.error,
-    response,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    error!.code,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    error!.moreInfo,
-  );
+  throw new MoyskladApiError(error.error, response, error.code, error.moreInfo);
 }
 
 export async function handleError(response: Response): Promise<never> {
