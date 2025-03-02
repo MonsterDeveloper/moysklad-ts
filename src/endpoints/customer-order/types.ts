@@ -142,12 +142,12 @@ export interface CustomerOrder extends Idable, Meta<Entity.CustomerOrder> {
   vatIncluded: boolean;
   readonly vatSum: number;
 
-  purchaseOrders: unknown; // TODO add purchaseOrders types & expand
-  demands: Meta<Entity.Demand>[];
-  payments: unknown; // TODO add payments types & expand
-  invoicesOut: unknown; // TODO add invoicesOut types & expand
-  moves: unknown; // TODO add moves types & expand
-  prepayments: unknown; // TODO add prepayments types & expand
+  purchaseOrders?: unknown; // TODO add purchaseOrders types & expand
+  demands?: Meta<Entity.Demand>[];
+  payments?: unknown; // TODO add payments types & expand
+  invoicesOut?: unknown; // TODO add invoicesOut types & expand
+  moves?: unknown; // TODO add moves types & expand
+  prepayments?: unknown; // TODO add prepayments types & expand
 }
 
 export interface CustomerOrderModel extends Model {
