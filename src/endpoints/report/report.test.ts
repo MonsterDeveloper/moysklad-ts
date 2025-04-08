@@ -22,6 +22,86 @@ describe("report", () => {
     });
   });
 
+  describe("turnover", () => {
+    it("handles turnover all requests", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.report.turnover.all({
+        momentFrom: "0",
+        momentTo: "1",
+        groupBy: "variant",
+        filter: {
+          product: "https://api.moysklad.ru/api/remap/1.2/entity/product/00001",
+          store: "https://api.moysklad.ru/api/remap/1.2/entity/store/00002",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/report/turnover/all",
+        method: "GET",
+        searchParameters: {
+          momentFrom: "0",
+          momentTo: "1",
+          groupBy: "variant",
+          filter:
+            "product=https://api.moysklad.ru/api/remap/1.2/entity/product/00001;store=https://api.moysklad.ru/api/remap/1.2/entity/store/00002",
+        },
+      });
+    });
+
+    it("handles turnover by store requests", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.report.turnover.byStore({
+        momentFrom: "0",
+        momentTo: "1",
+        filter: {
+          product: "https://api.moysklad.ru/api/remap/1.2/entity/product/00001",
+          store: "https://api.moysklad.ru/api/remap/1.2/entity/store/00002",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/report/turnover/bystore",
+        method: "GET",
+        searchParameters: {
+          momentFrom: "0",
+          momentTo: "1",
+          filter:
+            "product=https://api.moysklad.ru/api/remap/1.2/entity/product/00001;store=https://api.moysklad.ru/api/remap/1.2/entity/store/00002",
+        },
+      });
+    });
+
+    it("handles turnover by operation requests", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.report.turnover.byOperation({
+        momentFrom: "0",
+        momentTo: "1",
+        filter: {
+          product: "https://api.moysklad.ru/api/remap/1.2/entity/product/00001",
+          withoutturnover: true,
+          type: "supply" as const,
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/report/turnover/byoperation",
+        method: "GET",
+        searchParameters: {
+          momentFrom: "0",
+          momentTo: "1",
+          filter:
+            "product=https://api.moysklad.ru/api/remap/1.2/entity/product/00001;withoutturnover=true;type=supply",
+        },
+      });
+    });
+  });
+
   describe("money", () => {
     it("handles money plot series requests", async () => {
       const fetchMock = createFetchMock();
