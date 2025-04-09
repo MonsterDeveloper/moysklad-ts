@@ -171,5 +171,26 @@ describe("report", () => {
         },
       });
     });
+
+    it("handles stock by store requests", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.report.stock.byStore({
+        filter: {
+          store: "https://api.moysklad.ru/api/remap/1.2/entity/store/00002",
+          product: "https://api.moysklad.ru/api/remap/1.2/entity/product/00001",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/report/stock/bystore",
+        method: "GET",
+        searchParameters: {
+          filter:
+            "store=https://api.moysklad.ru/api/remap/1.2/entity/store/00002;product=https://api.moysklad.ru/api/remap/1.2/entity/product/00001",
+        },
+      });
+    });
   });
 });

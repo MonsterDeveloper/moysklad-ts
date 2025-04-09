@@ -3,7 +3,6 @@ import type {
   BooleanFilter,
   DateTime,
   DateTimeFilter,
-  Entity,
   EnumFilter,
   FilterOptions,
   IdFilter,
@@ -15,6 +14,7 @@ import type {
   StringFilter,
   ListResponse,
 } from "../../types";
+import { Entity } from "../../types/entity";
 
 /**
  * Атрибуты объекта отчёта
@@ -298,4 +298,47 @@ export interface ReportStockEndpoint {
   >(
     options?: StockAllCurrentOptions<T>,
   ): Promise<StockAllCurrent<T>>;
+
+  /**
+   * Получить отчёт Остатки по складам.
+   *
+   * Эндпоинт предназначен для получения остатков по складам для товаров.
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-ostatki-po-skladam
+   *
+   * @param options Параметры запроса
+   * @returns Отчёт Остатки по складам
+   */
+  byStore(
+    options?: StockByStoreOptions,
+  ): Promise<ListResponse<StockByStore, Entity.StockByStore>>;
+}
+
+/**
+ * Атрибуты объекта отчёта Остатки по складам
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-ostatki-po-skladam-atributy-ob-ekta-otcheta
+ */
+export interface StockByStore {
+  /** Метаданные позиции, по которой выдается Остаток */
+  readonly meta: Meta<Entity>;
+  /** Остатки по складам */
+  readonly stockByStore: Array<{
+    /** Метаданные склада, по которому выводится Остаток */
+    readonly meta: Meta<Entity.Store>;
+    /** Наименование склада */
+    readonly name: string;
+    /** Остаток */
+    readonly stock: number;
+    /** Ожидание */
+    readonly inTransit: number;
+    /** Резерв */
+    readonly reserve: number;
+  }>;
+}
+
+export interface StockByStoreOptions {
+  pagination?: PaginationOptions;
+  filter?: FilterOptions<StockAllModel>;
+  order?: OrderOptions<StockAllModel>;
 }
