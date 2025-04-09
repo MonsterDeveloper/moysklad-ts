@@ -242,13 +242,13 @@ describe("report", () => {
         const fetchMock = createFetchMock();
 
         await moysklad.report.stock.byStore({
-          order: {
-            pathName: "asc",
-            name: "desc",
-            code: "asc",
-            productCode: "desc",
-            stockOnAllStores: "asc",
-          },
+          order: [
+            { field: "pathName", direction: "asc" },
+            { field: "name", direction: "desc" },
+            { field: "code", direction: "asc" },
+            { field: "productCode", direction: "desc" },
+            { field: "stockOnAllStores", direction: "asc" },
+          ],
         });
 
         expectFetch({

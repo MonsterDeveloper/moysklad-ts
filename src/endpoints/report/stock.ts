@@ -13,6 +13,7 @@ import type {
   PaginationOptions,
   StringFilter,
   ListResponse,
+  OrderOption,
 } from "../../types";
 import { Entity } from "../../types/entity";
 
@@ -368,18 +369,9 @@ export interface StockByStoreOptions {
     /** ссылка на модификация, по которой нужно произвести фильтрацию */
     variant?: IdFilter;
   };
-  order?: {
-    /** по группе товара */
-    pathName?: "asc" | "desc";
-    /** по наименованию */
-    name?: "asc" | "desc";
-    /** по коду */
-    code?: "asc" | "desc";
-    /** по артикулу */
-    productCode?: "asc" | "desc";
-    /** по количеству остатка на всех складах */
-    stockOnAllStores?: "asc" | "desc";
-  };
+  order?: OrderOption<
+    "pathName" | "name" | "code" | "productCode" | "stockOnAllStores"
+  >[];
   /**
    * Тип, по которому нужно сгруппировать выдачу.
    *
