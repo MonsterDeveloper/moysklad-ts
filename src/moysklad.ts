@@ -15,6 +15,7 @@ import type {
   DemandEndpoint,
   ProcessingPlanEndpoint,
   ProductEndpoint,
+  ProductFolderEndpoint,
   ProductionStageEndpoint,
   ProductionStageCompletionEndpoint,
   ProductionTaskEndpoint,
@@ -103,6 +104,13 @@ export interface Moysklad {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar
    */
   product: ProductEndpoint;
+
+  /**
+   * Группы товаров
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-gruppa-towarow
+   */
+  productFolder: ProductFolderEndpoint;
 
   /**
    * Техкарты
