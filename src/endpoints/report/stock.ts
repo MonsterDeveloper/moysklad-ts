@@ -320,9 +320,7 @@ export interface ReportStockEndpoint {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-ostatki-ostatki-po-skladam-atributy-ob-ekta-otcheta
  */
-export interface StockByStore {
-  /** Метаданные позиции, по которой выдается Остаток */
-  readonly meta: Meta<Entity>;
+export interface StockByStore extends Meta<AssortmentEntity> {
   /** Остатки по складам */
   readonly stockByStore: Array<{
     /** Метаданные склада, по которому выводится Остаток */
