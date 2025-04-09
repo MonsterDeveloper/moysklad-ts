@@ -369,7 +369,7 @@ export interface StockByStoreOptions {
   };
   order?: OrderOption<
     "pathName" | "name" | "code" | "productCode" | "stockOnAllStores"
-  >[];
+  >;
   /**
    * Тип, по которому нужно сгруппировать выдачу.
    *
