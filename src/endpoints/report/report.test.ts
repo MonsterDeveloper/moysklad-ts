@@ -172,25 +172,179 @@ describe("report", () => {
       });
     });
 
-    it("handles stock by store requests", async () => {
-      const fetchMock = createFetchMock();
+    describe("byStore", () => {
+      it("handles basic stock by store requests", async () => {
+        const fetchMock = createFetchMock();
 
-      await moysklad.report.stock.byStore({
-        filter: {
-          store: "https://api.moysklad.ru/api/remap/1.2/entity/store/00002",
-          product: "https://api.moysklad.ru/api/remap/1.2/entity/product/00001",
-        },
+        await moysklad.report.stock.byStore({
+          filter: {
+            store: "https://api.moysklad.ru/api/remap/1.2/entity/store/00002",
+            product:
+              "https://api.moysklad.ru/api/remap/1.2/entity/product/00001",
+          },
+        });
+
+        expectFetch({
+          fetchMock,
+          url: "/report/stock/bystore",
+          method: "GET",
+          searchParameters: {
+            filter:
+              "store=https://api.moysklad.ru/api/remap/1.2/entity/store/00002;product=https://api.moysklad.ru/api/remap/1.2/entity/product/00001",
+          },
+        });
       });
 
-      expectFetch({
-        fetchMock,
-        url: "/report/stock/bystore",
-        method: "GET",
-        searchParameters: {
-          filter:
-            "store=https://api.moysklad.ru/api/remap/1.2/entity/store/00002;product=https://api.moysklad.ru/api/remap/1.2/entity/product/00001",
-        },
+      it("handles stock by store requests with all filter options", async () => {
+        const fetchMock = createFetchMock();
+
+        await moysklad.report.stock.byStore({
+          filter: {
+            consignment:
+              "https://api.moysklad.ru/api/remap/1.2/entity/consignment/00003",
+            moment: "2024-01-01 00:00:00",
+            product:
+              "https://api.moysklad.ru/api/remap/1.2/entity/product/00001",
+            productFolder:
+              "https://api.moysklad.ru/api/remap/1.2/entity/productfolder/00004",
+            search: "test",
+            soldByWeight: true,
+            stockMode: "nonEmpty",
+            store: "https://api.moysklad.ru/api/remap/1.2/entity/store/00002",
+            supplier:
+              "https://api.moysklad.ru/api/remap/1.2/entity/counterparty/00005",
+            variant:
+              "https://api.moysklad.ru/api/remap/1.2/entity/variant/00006",
+          },
+        });
+
+        expectFetch({
+          fetchMock,
+          url: "/report/stock/bystore",
+          method: "GET",
+          searchParameters: {
+            filter:
+              "consignment=https://api.moysklad.ru/api/remap/1.2/entity/consignment/00003;" +
+              "moment=2024-01-01 00:00:00;" +
+              "product=https://api.moysklad.ru/api/remap/1.2/entity/product/00001;" +
+              "productFolder=https://api.moysklad.ru/api/remap/1.2/entity/productfolder/00004;" +
+              "search=test;" +
+              "soldByWeight=true;" +
+              "stockMode=nonEmpty;" +
+              "store=https://api.moysklad.ru/api/remap/1.2/entity/store/00002;" +
+              "supplier=https://api.moysklad.ru/api/remap/1.2/entity/counterparty/00005;" +
+              "variant=https://api.moysklad.ru/api/remap/1.2/entity/variant/00006",
+          },
+        });
       });
+
+      it("handles stock by store requests with sorting", async () => {
+        const fetchMock = createFetchMock();
+
+        await moysklad.report.stock.byStore({
+          order: {
+            pathName: "asc",
+            name: "desc",
+            code: "asc",
+            productCode: "desc",
+            stockOnAllStores: "asc",
+          },
+        });
+
+        expectFetch({
+          fetchMock,
+          url: "/report/stock/bystore",
+          method: "GET",
+          searchParameters: {
+            order:
+              "pathName,asc;name,desc;code,asc;productCode,desc;stockOnAllStores,asc",
+          },
+        });
+      });
+
+      it("handles stock by store requests with pagination", async () => {
+        const fetchMock = createFetchMock();
+
+        await moysklad.report.stock.byStore({
+          pagination: {
+            limit: 50,
+            offset: 100,
+          },
+        });
+
+        expectFetch({
+          fetchMock,
+          url: "/report/stock/bystore",
+          method: "GET",
+          searchParameters: {
+            limit: "50",
+            offset: "100",
+          },
+        });
+      });
+
+      it("handles stock by store requests with product grouping", async () => {
+        const fetchMock = createFetchMock();
+
+        await moysklad.report.stock.byStore({
+          groupBy: "product",
+        });
+
+        expectFetch({
+          fetchMock,
+          url: "/report/stock/bystore",
+          method: "GET",
+          searchParameters: {
+            groupBy: "product",
+          },
+        });
+      });
+
+      it("handles stock by store requests with consignment grouping", async () => {
+        const fetchMock = createFetchMock();
+
+        await moysklad.report.stock.byStore({
+          groupBy: "consignment",
+        });
+
+        expectFetch({
+          fetchMock,
+          url: "/report/stock/bystore",
+          method: "GET",
+          searchParameters: {
+            groupBy: "consignment",
+          },
+        });
+      });
+
+      it.each([
+        "all",
+        "positiveOnly",
+        "negativeOnly",
+        "empty",
+        "nonEmpty",
+        "underMinimum",
+      ] as const)(
+        "handles stock by store requests with stockMode=%s",
+        async (mode) => {
+          const fetchMock = createFetchMock();
+
+          await moysklad.report.stock.byStore({
+            filter: {
+              stockMode: mode,
+            },
+          });
+
+          expectFetch({
+            fetchMock,
+            url: "/report/stock/bystore",
+            method: "GET",
+            searchParameters: {
+              filter: `stockMode=${mode}`,
+            },
+          });
+        },
+      );
     });
   });
 });

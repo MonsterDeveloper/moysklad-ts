@@ -339,6 +339,53 @@ export interface StockByStore {
 
 export interface StockByStoreOptions {
   pagination?: PaginationOptions;
-  filter?: FilterOptions<StockAllModel>;
-  order?: OrderOptions<StockAllModel>;
+  filter?: {
+    /** ссылка на серию, по которой нужно произвести фильтрацию */
+    consignment?: IdFilter;
+    /** момент времени, на который нужно вывести остатки */
+    moment?: DateTimeFilter;
+    /** ссылка на товар, по которому нужно произвести фильтрацию */
+    product?: IdFilter;
+    /** ссылка на группу товаров, по которой нужно произвести фильтрацию */
+    productFolder?: IdFilter;
+    /** специальный параметр текстового поиска */
+    search?: StringFilter;
+    /** параметр для фильтрации по признаку весового товара */
+    soldByWeight?: BooleanFilter;
+    /** параметр для фильтрации по значению остатка */
+    stockMode?: EnumFilter<
+      | "all"
+      | "positiveOnly"
+      | "negativeOnly"
+      | "empty"
+      | "nonEmpty"
+      | "underMinimum"
+    >;
+    /** ссылка на склад, для которого нужно построить отчет */
+    store?: IdFilter;
+    /** параметр для фильтрации по поставщику */
+    supplier?: IdFilter;
+    /** ссылка на модификация, по которой нужно произвести фильтрацию */
+    variant?: IdFilter;
+  };
+  order?: {
+    /** по группе товара */
+    pathName?: "asc" | "desc";
+    /** по наименованию */
+    name?: "asc" | "desc";
+    /** по коду */
+    code?: "asc" | "desc";
+    /** по артикулу */
+    productCode?: "asc" | "desc";
+    /** по количеству остатка на всех складах */
+    stockOnAllStores?: "asc" | "desc";
+  };
+  /**
+   * Тип, по которому нужно сгруппировать выдачу.
+   *
+   * По умолчанию параметр groupBy имеет значение variant. Если вы хотите увидеть объекты типа consignment, или только объекты типа product, необходимо выставить соответствующее значение параметра.
+   *
+   * @default "variant"
+   */
+  groupBy?: "product" | "variant" | "consignment";
 }
