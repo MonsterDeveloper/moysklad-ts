@@ -1,6 +1,7 @@
 import type {
   AccountModel,
   AssortmentEntity,
+  AssortmentModel,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -80,6 +81,10 @@ export interface DemandPosition extends Idable, Meta<Entity.DemandPosition> {
 
 export interface DemandPositionModel extends Model {
   object: DemandPosition;
+
+  expandable: {
+    assortment: AssortmentModel;
+  }
 }
 
 export interface Demand extends Idable, Meta<Entity.Demand> {
