@@ -84,7 +84,7 @@ export interface DemandPositionModel extends Model {
 
   expandable: {
     assortment: AssortmentModel;
-  }
+  };
 }
 
 export interface Demand extends Idable, Meta<Entity.Demand> {
