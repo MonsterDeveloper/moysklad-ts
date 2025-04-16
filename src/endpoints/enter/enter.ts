@@ -8,6 +8,7 @@ import {
   type Subset,
   type UpdateMeta,
   type BatchGetResult,
+  type ListMeta,
 } from "../../types";
 import type {
   EnterModel,
@@ -185,7 +186,7 @@ export interface EnterEndpoint {
    * const size = await moysklad.enter.size();
    * ```
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.Enter>>;
 
   /**
    * Удалить оприходование.

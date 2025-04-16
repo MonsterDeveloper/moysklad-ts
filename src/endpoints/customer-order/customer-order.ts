@@ -8,6 +8,7 @@ import type {
   GetModelUpdatableFields,
   UpdateMeta,
   Entity,
+  ListMeta,
 } from "../../types";
 import type {
   AllCustomerOrdersOptions,
@@ -139,7 +140,7 @@ export interface CustomerOrderEndpoint {
    *
    * @returns Общее количество заказов покупателей
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.CustomerOrder>>;
 
   /**
    * Удалить заказ покупателя по id.

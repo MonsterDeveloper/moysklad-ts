@@ -7,6 +7,7 @@ import {
   type BatchGetResult,
   type ModelCreateOrUpdateData,
   type MatchArrayType,
+  type ListMeta,
 } from "../../types";
 import type {
   AllDemandsOptions,
@@ -117,7 +118,7 @@ export interface DemandEndpoint {
    * const count = await moysklad.demand.size();
    * ```
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.Demand>>;
 
   /**
    * Удалить отгрузку.

@@ -6,6 +6,8 @@ import type {
   Entity,
   ListResponse,
   Subset,
+  ListMeta,
+  AssortmentEntity,
 } from "../../types";
 
 export interface ListAssortmentOptions {
@@ -84,5 +86,5 @@ export interface AssortmentEndpoint {
    *
    * @returns Общее количество ассортимента
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<AssortmentEntity>>;
 }

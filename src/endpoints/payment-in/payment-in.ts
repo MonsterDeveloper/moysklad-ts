@@ -8,6 +8,7 @@ import type {
   ListResponse,
   Subset,
   UpdateMeta,
+  ListMeta,
 } from "../../types";
 import type {
   AllPaymentInsOptions,
@@ -127,7 +128,7 @@ export interface PaymentInEndpoint {
    *
    * @returns Количество входящих платежей
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.PaymentIn>>;
 
   /**
    * Удалить входящий платеж

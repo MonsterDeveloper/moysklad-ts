@@ -8,6 +8,7 @@ import type {
   ListResponse,
   Subset,
   UpdateMeta,
+  ListMeta,
 } from "../../types";
 import type {
   AllPurchaseOrdersOptions,
@@ -247,7 +248,7 @@ export interface PurchaseOrderEndpoint {
    *
    * @returns Общее количество заказов поставщикам
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.PurchaseOrder>>;
 
   /**
    * Удалить заказ поставщику по id.

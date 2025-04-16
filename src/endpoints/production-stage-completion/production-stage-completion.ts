@@ -8,6 +8,7 @@ import {
   type Subset,
   type UpdateMeta,
   type BatchGetResult,
+  type ListMeta,
 } from "../../types";
 import type {
   AllProductionStageCompletionOptions,
@@ -115,7 +116,7 @@ interface ProductionStageComletionMethods {
      *
      * @returns Общее количество материалов выполнения этапа производства
      */
-    size(): Promise<number>;
+    size(): Promise<ListMeta<Entity.ProductionStageCompletionMaterial>>;
   };
 
   products: {
@@ -185,7 +186,7 @@ interface ProductionStageComletionMethods {
      *
      * @returns Общее количество продуктов выполнения этапа производства
      */
-    size(): Promise<number>;
+    size(): Promise<ListMeta<Entity.ProductionStageCompletionResult>>;
   };
 }
 
@@ -308,7 +309,7 @@ export type ProductionStageCompletionEndpoint = {
    * Получить общее количество выполнений этапов производства.
    * @returns Общее количество выполнений этапов производства
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.ProductionStageCompletion>>;
 
   /**
    * Удалить выполнение этапа производства по id.

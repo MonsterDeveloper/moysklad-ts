@@ -8,6 +8,7 @@ import type {
   ListResponse,
   Subset,
   UpdateMeta,
+  ListMeta,
 } from "../../types";
 import type {
   AllProductionTasksOptions,
@@ -253,7 +254,7 @@ export interface ProductionTaskEndpoint {
    * Получить общее количество производственных заданий.
    * @returns Общее количество производственных заданий
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.ProductionTask>>;
 
   /**
    * Удалить производственное задание по id.

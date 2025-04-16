@@ -8,6 +8,7 @@ import type {
   BatchGetResult,
   ModelCreateOrUpdateData,
   MatchArrayType,
+  ListMeta,
 } from "../../types";
 import type {
   AllSuppliesOptions,
@@ -160,7 +161,7 @@ export interface SupplyEndpoint {
    * const count = await moysklad.supply.size();
    * ```
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.Supply>>;
 
   /**
    * Удалить приёмку

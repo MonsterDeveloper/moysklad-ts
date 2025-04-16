@@ -8,6 +8,7 @@ import {
   type GetModelCreatableFields,
   type GetModelUpdatableFields,
   type UpdateMeta,
+  type ListMeta,
 } from "../../types";
 import type {
   ListVariantsOptions,
@@ -113,7 +114,7 @@ export interface VariantEndpoint {
    *
    * @returns Общее количество модификаций
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.Variant>>;
 
   /**
    * Удалить модификацию по id.

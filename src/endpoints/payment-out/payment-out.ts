@@ -7,6 +7,7 @@ import type {
   ListResponse,
   ModelCreateOrUpdateData,
   Subset,
+  ListMeta,
 } from "../../types";
 import type {
   AllPaymentOutsOptions,
@@ -113,7 +114,7 @@ export interface PaymentOutEndpoint {
    * const size = await moysklad.paymentOut.size();
    * ```
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.PaymentOut>>;
 
   /**
    * Удалить исходящий платеж.

@@ -7,6 +7,7 @@ import {
   type BatchGetResult,
   type ModelCreateOrUpdateData,
   type MatchArrayType,
+  type ListMeta,
 } from "../../types";
 import type {
   AllSalesReturnsOptions,
@@ -117,7 +118,7 @@ export interface SalesReturnEndpoint {
    * const count = await moysklad.salesReturn.size();
    * ```
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.SalesReturn>>;
 
   /**
    * Удалить возврат покупателя.

@@ -16,6 +16,7 @@ import type {
   Subset,
   ModelCreateOrUpdateData,
   MatchArrayType,
+  ListMeta,
 } from "../../types";
 
 /**
@@ -145,7 +146,7 @@ export interface CounterpartyEndpoint {
    * const count = await moysklad.counterparty.size();
    * ```
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.Counterparty>>;
 
   /**
    * Создать или обновить контрагента.

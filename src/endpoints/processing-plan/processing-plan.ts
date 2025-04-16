@@ -16,6 +16,7 @@ import type {
   Subset,
   UpdateMeta,
   Entity,
+  ListMeta,
 } from "../../types";
 
 /**
@@ -154,7 +155,7 @@ export interface ProcessingPlanEndpoint {
    *
    * @returns Общее количество техкарт
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.ProcessingPlan>>;
 
   /**
    * Создать техкарту.

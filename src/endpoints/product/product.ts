@@ -8,6 +8,7 @@ import type {
   MatchArrayType,
   ModelCreateOrUpdateData,
   Subset,
+  ListMeta,
 } from "../../types";
 import type {
   AllProductsOptions,
@@ -89,7 +90,7 @@ export interface ProductEndpoint {
    *
    * @returns Количество товаров
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.Product>>;
 
   /**
    * Удалить товар.

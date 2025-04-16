@@ -8,6 +8,7 @@ import {
   type UpdateMeta,
   type BatchGetResult,
   Entity,
+  type ListMeta,
 } from "../../types";
 import type {
   AllInvoiceOutsOptions,
@@ -195,7 +196,7 @@ export interface InvoiceOutEndpoint {
    * const count = await moysklad.invoiceOut.size();
    * ```
    */
-  size(): Promise<number>;
+  size(): Promise<ListMeta<Entity.InvoiceOut>>;
 
   /**
    * Удалить счет покупателю.
