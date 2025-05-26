@@ -90,7 +90,11 @@ export type GetFindResult<M extends Model, E, F extends PositionFields | undefin
             }
           > &
             // ℹ️ Merge other model fields except expanded fields
-            Omit<M["object"], ConditionalKeys<E, true | object>>
+            IncludeFields<
+              Omit<M["object"], ConditionalKeys<E, true | object>>,
+              M,
+              F
+            >
         
         // 🚫 expand not defined
         : IncludeFields<M["object"], M, F>;

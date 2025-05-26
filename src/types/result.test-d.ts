@@ -201,5 +201,84 @@ describe("result", () => {
         stock: PositionStockData;
       }>();
     });
+
+    it("should handle nested expand with position fields", () => {
+      interface AssortmentModel extends Model {
+        object: {
+          assortmentName: string;
+        };
+      }
+
+      interface DemandPosition {
+        quantity: number;
+        assortment: Meta<Entity.Assortment>;
+        stock?: undefined;
+      }
+      interface DemandPositionModel extends Model {
+        object: DemandPosition;
+        expandable: {
+          assortment: AssortmentModel;
+        };
+      }
+      interface DemandModel extends Model {
+        object: {
+          positions: ListMeta<Entity.DemandPosition>;
+        };
+        expandable: {
+          positions: DemandPositionModel;
+        };
+      }
+
+      type NestedResult = GetFindResult<
+        DemandModel,
+        { positions: { assortment: true } },
+        ["stock"]
+      >["positions"]["rows"][number];
+
+      expectTypeOf<Simplify<NestedResult>>().toEqualTypeOf<{
+        quantity: number;
+        assortment: AssortmentModel["object"];
+        stock: PositionStockData;
+      }>();
+    });
+
+    it("should keep stock undefined when fields are not provided in nested expand", () => {
+      interface AssortmentModel extends Model {
+        object: {
+          assortmentName: string;
+        };
+      }
+
+      interface DemandPosition {
+        quantity: number;
+        assortment: Meta<Entity.Assortment>;
+        stock?: undefined;
+      }
+      interface DemandPositionModel extends Model {
+        object: DemandPosition;
+        expandable: {
+          assortment: AssortmentModel;
+        };
+      }
+      interface DemandModel extends Model {
+        object: {
+          positions: ListMeta<Entity.DemandPosition>;
+        };
+        expandable: {
+          positions: DemandPositionModel;
+        };
+      }
+
+      type NestedResultNoStock = GetFindResult<
+        DemandModel,
+        { positions: { assortment: true } }
+      >["positions"]["rows"][number];
+
+      expectTypeOf<Simplify<NestedResultNoStock>>().toEqualTypeOf<{
+        quantity: number;
+        assortment: AssortmentModel["object"];
+        stock?: undefined;
+      }>();
+    });
   });
 });
