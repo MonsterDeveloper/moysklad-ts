@@ -11,3 +11,8 @@ Your goal is to create these types and methods in TypeScript.
 
 - For list methods, make sure to include my utility methods, such as `.all()`, `.size()`, and `.first()`.
 - Write extensive JSDoc for both methods and types, as per the [jsdoc.mdc](mdc:.cursor/rules/jsdoc.mdc) rule.
+- All endpoints are located under src/endpoints/{endpoint-name}. Inside the folder with the name of the endpoint (lowercase), the following files are included:
+  - index.ts: re-exports the endpoint interface and * from types.ts
+  - {endpoint-name}.ts: contains the interface type
+  - types.ts: contains the models, options, etc for the endpoint.
+- After you've created the endpoint, define it in the main interface [moysklad.ts](mdc:src/moysklad.ts)

@@ -7,6 +7,7 @@ export * from "./customer-order";
 export * from "./demand";
 export * from "./employee";
 export * from "./enter";
+export * from "./facture-out";
 export * from "./group";
 export * from "./inventory";
 export * from "./invoice-out";

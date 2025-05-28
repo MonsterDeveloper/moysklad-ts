@@ -8,6 +8,7 @@ import type {
   CustomEntityEndpoint,
   EnterEndpoint,
   CustomerOrderEndpoint,
+  FactureOutEndpoint,
   PaymentInEndpoint,
   PaymentOutEndpoint,
   InvoiceOutEndpoint,
@@ -83,6 +84,13 @@ export interface Moysklad {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-otgruzka
    */
   demand: DemandEndpoint;
+
+  /**
+   * Счета-фактуры выданные
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-schet-faktura-wydannyj
+   */
+  factureOut: FactureOutEndpoint;
 
   /**
    * Приёмки
