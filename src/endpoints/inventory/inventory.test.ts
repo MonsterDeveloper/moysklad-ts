@@ -512,4 +512,41 @@ describe("inventory", () => {
       });
     });
   });
+
+  describe("size", () => {
+    it("makes a request", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.inventory.size();
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/inventory",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          limit: "0",
+        }),
+      });
+    });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.inventory.size({
+        filter: {
+          name: "Test Inventory",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/inventory",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Inventory",
+          limit: "0",
+        }),
+      });
+    });
+  });
 });

@@ -1,4 +1,4 @@
-import { describe, it } from "vitest";
+import { describe, it, expect } from "vitest";
 import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
 
 describe("assortment", () => {
@@ -237,6 +237,26 @@ describe("assortment", () => {
         searchParameters: {
           limit: "0",
         },
+      });
+    });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.assortment.size({
+        filter: {
+          barcode: "barcode",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/assortment",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "barcode=barcode",
+          limit: "0",
+        }),
       });
     });
   });

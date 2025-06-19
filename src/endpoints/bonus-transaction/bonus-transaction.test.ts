@@ -1,4 +1,4 @@
-import { describe, it } from "vitest";
+import { describe, it, expect } from "vitest";
 import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
 import { BonusTransactionType } from "./types";
 import { Entity } from "../../types/entity";
@@ -527,6 +527,45 @@ describe("bonusTransaction", () => {
             mediaType: MediaType.Json,
           },
         })),
+      });
+    });
+  });
+
+  describe("size", () => {
+    it("makes a request", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.bonusTransaction.size();
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/bonustransaction",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          limit: "0",
+        }),
+      });
+    });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.bonusTransaction.size({
+        filter: {
+          moment: {
+            lte: "2025-01-01",
+          },
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/bonustransaction",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "moment<=2025-01-01",
+          limit: "0",
+        }),
       });
     });
   });

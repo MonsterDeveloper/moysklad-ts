@@ -8,6 +8,7 @@ import type {
   BatchGetResult,
   ModelCreateOrUpdateData,
   MatchArrayType,
+  ListMeta,
 } from "../../types";
 import type {
   BonusTransactionModel,
@@ -17,6 +18,7 @@ import type {
   ListBonusTransactionsOptions,
   UpdateBonusTransactionOptions,
   UpsertBonusTransactionOptions,
+  AllBonusTransactionsOptions,
 } from "./types";
 
 /**
@@ -66,6 +68,21 @@ export interface BonusTransactionEndpoint {
       Entity.BonusTransaction
     >
   >;
+
+  /**
+   * Получить количество бонусных операций.
+   *
+   * @param options - Опции для получения списка {@linkcode AllBonusTransactionsOptions}
+   * @returns Количество бонусных операций
+   *
+   * @example
+   * ```ts
+   * const count = await moysklad.bonusTransaction.size();
+   * ```
+   */
+  size(
+    options?: AllBonusTransactionsOptions,
+  ): Promise<ListMeta<Entity.BonusTransaction>>;
 
   /**
    * Получить первую бонусную операцию, соответствующую фильтру

@@ -186,7 +186,7 @@ export interface EnterEndpoint {
    * const size = await moysklad.enter.size();
    * ```
    */
-  size(): Promise<ListMeta<Entity.Enter>>;
+  size(options?: AllEntersOptions): Promise<ListMeta<Entity.Enter>>;
 
   /**
    * Удалить оприходование.

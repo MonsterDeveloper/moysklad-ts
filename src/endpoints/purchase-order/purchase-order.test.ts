@@ -246,6 +246,26 @@ describe("purchaseOrder", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.purchaseOrder.size({
+        filter: {
+          name: "Test Purchase Order",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/purchaseorder",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Purchase Order",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

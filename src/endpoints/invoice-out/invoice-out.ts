@@ -196,7 +196,7 @@ export interface InvoiceOutEndpoint {
    * const count = await moysklad.invoiceOut.size();
    * ```
    */
-  size(): Promise<ListMeta<Entity.InvoiceOut>>;
+  size(options?: AllInvoiceOutsOptions): Promise<ListMeta<Entity.InvoiceOut>>;
 
   /**
    * Удалить счет покупателю.

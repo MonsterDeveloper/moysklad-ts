@@ -140,7 +140,9 @@ export interface CustomerOrderEndpoint {
    *
    * @returns Общее количество заказов покупателей
    */
-  size(): Promise<ListMeta<Entity.CustomerOrder>>;
+  size(
+    options?: AllCustomerOrdersOptions,
+  ): Promise<ListMeta<Entity.CustomerOrder>>;
 
   /**
    * Удалить заказ покупателя по id.

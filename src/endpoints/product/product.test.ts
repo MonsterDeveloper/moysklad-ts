@@ -246,6 +246,26 @@ describe("product", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.product.size({
+        filter: {
+          name: "Test Product",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/product",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Product",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

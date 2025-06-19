@@ -246,6 +246,26 @@ describe("supply", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.supply.size({
+        filter: {
+          name: "Test Supply",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/supply",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Supply",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

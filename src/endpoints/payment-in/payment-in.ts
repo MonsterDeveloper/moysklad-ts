@@ -128,7 +128,7 @@ export interface PaymentInEndpoint {
    *
    * @returns Количество входящих платежей
    */
-  size(): Promise<ListMeta<Entity.PaymentIn>>;
+  size(options?: AllPaymentInsOptions): Promise<ListMeta<Entity.PaymentIn>>;
 
   /**
    * Удалить входящий платеж

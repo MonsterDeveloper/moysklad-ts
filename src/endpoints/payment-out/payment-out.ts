@@ -114,7 +114,7 @@ export interface PaymentOutEndpoint {
    * const size = await moysklad.paymentOut.size();
    * ```
    */
-  size(): Promise<ListMeta<Entity.PaymentOut>>;
+  size(options?: AllPaymentOutsOptions): Promise<ListMeta<Entity.PaymentOut>>;
 
   /**
    * Удалить исходящий платеж.

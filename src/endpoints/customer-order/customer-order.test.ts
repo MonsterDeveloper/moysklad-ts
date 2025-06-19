@@ -246,6 +246,26 @@ describe("customerOrder", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.customerOrder.size({
+        filter: {
+          name: "Test Customer Order",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/customerorder",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Customer Order",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

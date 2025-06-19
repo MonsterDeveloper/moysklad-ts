@@ -161,7 +161,7 @@ export interface SupplyEndpoint {
    * const count = await moysklad.supply.size();
    * ```
    */
-  size(): Promise<ListMeta<Entity.Supply>>;
+  size(options?: AllSuppliesOptions): Promise<ListMeta<Entity.Supply>>;
 
   /**
    * Удалить приёмку

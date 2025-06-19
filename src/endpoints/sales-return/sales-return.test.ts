@@ -246,6 +246,26 @@ describe("salesReturn", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.salesReturn.size({
+        filter: {
+          name: "Test Sales Return",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/salesreturn",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Sales Return",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

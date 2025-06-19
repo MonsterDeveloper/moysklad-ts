@@ -116,7 +116,9 @@ interface ProductionStageComletionMethods {
      *
      * @returns Общее количество материалов выполнения этапа производства
      */
-    size(): Promise<ListMeta<Entity.ProductionStageCompletionMaterial>>;
+    size(
+      options?: AllProductionStageCompletionOptions,
+    ): Promise<ListMeta<Entity.ProductionStageCompletionMaterial>>;
   };
 
   products: {
@@ -186,7 +188,9 @@ interface ProductionStageComletionMethods {
      *
      * @returns Общее количество продуктов выполнения этапа производства
      */
-    size(): Promise<ListMeta<Entity.ProductionStageCompletionResult>>;
+    size(
+      options?: AllProductionStageCompletionOptions,
+    ): Promise<ListMeta<Entity.ProductionStageCompletionResult>>;
   };
 }
 
@@ -309,7 +313,9 @@ export type ProductionStageCompletionEndpoint = {
    * Получить общее количество выполнений этапов производства.
    * @returns Общее количество выполнений этапов производства
    */
-  size(): Promise<ListMeta<Entity.ProductionStageCompletion>>;
+  size(
+    options?: AllProductionStageCompletionOptions,
+  ): Promise<ListMeta<Entity.ProductionStageCompletion>>;
 
   /**
    * Удалить выполнение этапа производства по id.

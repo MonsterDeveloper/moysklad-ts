@@ -246,6 +246,26 @@ describe("invoiceOut", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.invoiceOut.size({
+        filter: {
+          name: "Test Invoice Out",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/invoiceout",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Invoice Out",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

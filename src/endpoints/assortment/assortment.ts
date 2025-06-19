@@ -86,5 +86,5 @@ export interface AssortmentEndpoint {
    *
    * @returns Общее количество ассортимента
    */
-  size(): Promise<ListMeta<AssortmentEntity>>;
+  size(options?: AllAssortmentOptions): Promise<ListMeta<AssortmentEntity>>;
 }

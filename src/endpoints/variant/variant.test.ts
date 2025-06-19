@@ -244,6 +244,26 @@ describe("variant", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.variant.size({
+        filter: {
+          name: "Test Variant",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/variant",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Variant",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

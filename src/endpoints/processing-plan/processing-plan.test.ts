@@ -231,6 +231,26 @@ describe("processingPlan", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.processingPlan.size({
+        filter: {
+          name: "Test Processing Plan",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/processingplan",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Processing Plan",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

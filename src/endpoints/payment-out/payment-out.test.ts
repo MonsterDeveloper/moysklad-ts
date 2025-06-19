@@ -245,6 +245,26 @@ describe("paymentOut", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.paymentOut.size({
+        filter: {
+          name: "Test Payment Out",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/paymentout",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Payment Out",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

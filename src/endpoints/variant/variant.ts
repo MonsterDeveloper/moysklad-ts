@@ -114,7 +114,7 @@ export interface VariantEndpoint {
    *
    * @returns Общее количество модификаций
    */
-  size(): Promise<ListMeta<Entity.Variant>>;
+  size(options?: AllVariantsOptions): Promise<ListMeta<Entity.Variant>>;
 
   /**
    * Удалить модификацию по id.

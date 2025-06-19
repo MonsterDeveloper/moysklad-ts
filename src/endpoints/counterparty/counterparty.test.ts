@@ -312,7 +312,7 @@ describe("counterparty", () => {
 
   describe("size", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock();
 
       await moysklad.counterparty.size();
 
@@ -320,9 +320,29 @@ describe("counterparty", () => {
         fetchMock,
         url: "/entity/counterparty",
         method: "GET",
-        searchParameters: {
+        searchParameters: expect.objectContaining({
           limit: "0",
+        }),
+      });
+    });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.counterparty.size({
+        filter: {
+          name: "Test Counterparty",
         },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/counterparty",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Counterparty",
+          limit: "0",
+        }),
       });
     });
   });

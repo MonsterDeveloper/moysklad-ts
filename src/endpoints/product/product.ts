@@ -90,7 +90,7 @@ export interface ProductEndpoint {
    *
    * @returns Количество товаров
    */
-  size(): Promise<ListMeta<Entity.Product>>;
+  size(options?: AllProductsOptions): Promise<ListMeta<Entity.Product>>;
 
   /**
    * Удалить товар.

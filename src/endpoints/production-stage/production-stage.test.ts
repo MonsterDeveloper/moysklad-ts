@@ -307,8 +307,8 @@ describe("productionStage", () => {
         url: "/entity/productionstage",
         method: "GET",
         searchParameters: expect.objectContaining({
-          limit: "0",
           filter: "productionTask=5427bc76-b95f-11eb-0a80-04bb000cd583",
+          limit: "0",
         }),
       });
     });
@@ -328,9 +328,9 @@ describe("productionStage", () => {
         url: "/entity/productionstage",
         method: "GET",
         searchParameters: expect.objectContaining({
-          limit: "0",
           filter:
             "productionTask=5427bc76-b95f-11eb-0a80-04bb000cd583;stage=5427bc76-b95f-11eb-0a80-04bb000cd584",
+          limit: "0",
         }),
       });
     });

@@ -118,7 +118,7 @@ export interface DemandEndpoint {
    * const count = await moysklad.demand.size();
    * ```
    */
-  size(): Promise<ListMeta<Entity.Demand>>;
+  size(options?: AllDemandsOptions): Promise<ListMeta<Entity.Demand>>;
 
   /**
    * Удалить отгрузку.

@@ -146,7 +146,9 @@ export interface CounterpartyEndpoint {
    * const count = await moysklad.counterparty.size();
    * ```
    */
-  size(): Promise<ListMeta<Entity.Counterparty>>;
+  size(
+    options?: AllCounterpartiesOptions,
+  ): Promise<ListMeta<Entity.Counterparty>>;
 
   /**
    * Создать или обновить контрагента.

@@ -246,6 +246,26 @@ describe("enter", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.enter.size({
+        filter: {
+          name: "Test Enter",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/enter",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Enter",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

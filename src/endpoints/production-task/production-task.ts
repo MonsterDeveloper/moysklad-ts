@@ -254,7 +254,9 @@ export interface ProductionTaskEndpoint {
    * Получить общее количество производственных заданий.
    * @returns Общее количество производственных заданий
    */
-  size(): Promise<ListMeta<Entity.ProductionTask>>;
+  size(
+    options?: AllProductionTasksOptions,
+  ): Promise<ListMeta<Entity.ProductionTask>>;
 
   /**
    * Удалить производственное задание по id.

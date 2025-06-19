@@ -118,7 +118,7 @@ export interface SalesReturnEndpoint {
    * const count = await moysklad.salesReturn.size();
    * ```
    */
-  size(): Promise<ListMeta<Entity.SalesReturn>>;
+  size(options?: AllSalesReturnsOptions): Promise<ListMeta<Entity.SalesReturn>>;
 
   /**
    * Удалить возврат покупателя.

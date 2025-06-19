@@ -210,6 +210,26 @@ describe("productionStageCompletion", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.productionStageCompletion.size({
+        filter: {
+          moment: "2023-01-01",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/productionstagecompletion",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "moment=2023-01-01",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {
@@ -703,6 +723,27 @@ describe("productionStageCompletion", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+
+      await moysklad.productionStageCompletion[completionId].materials.size({
+        filter: {
+          moment: "2025-01-01",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: `/entity/productionstagecompletion/${completionId}/materials`,
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "moment=2025-01-01",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("results.list", () => {
@@ -867,6 +908,27 @@ describe("productionStageCompletion", () => {
         url: `/entity/productionstagecompletion/${completionId}/products`,
         method: "GET",
         searchParameters: expect.objectContaining({
+          limit: "0",
+        }),
+      });
+    });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+
+      await moysklad.productionStageCompletion[completionId].products.size({
+        filter: {
+          moment: "2025-01-01",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: `/entity/productionstagecompletion/${completionId}/products`,
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "moment=2025-01-01",
           limit: "0",
         }),
       });

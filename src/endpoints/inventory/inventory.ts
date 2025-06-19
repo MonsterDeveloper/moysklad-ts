@@ -8,6 +8,7 @@ import type {
   BatchGetResult,
   BatchDeleteResult,
   UpdateMeta,
+  ListMeta,
 } from "../../types";
 import type {
   InventoryModel,
@@ -50,6 +51,19 @@ export interface InventoryEndpoint {
   ): Promise<
     BatchGetResult<GetFindResult<InventoryModel, T["expand"]>, Entity.Inventory>
   >;
+
+  /**
+   * Получить количество инвентаризаций.
+   *
+   * @param options - Опции для получения списка {@linkcode AllInventoryOptions}
+   * @returns Количество инвентаризаций
+   *
+   * @example
+   * ```ts
+   * const count = await moysklad.inventory.size();
+   * ```
+   */
+  size(options?: AllInventoryOptions): Promise<ListMeta<Entity.Inventory>>;
 
   /**
    * Получить первую инвентаризацию.

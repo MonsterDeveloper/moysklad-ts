@@ -118,7 +118,7 @@ export interface FactureOutEndpoint {
    * const count = await moysklad.factureOut.size();
    * ```
    */
-  size(): Promise<ListMeta<Entity.FactureOut>>;
+  size(options?: AllFactureOutsOptions): Promise<ListMeta<Entity.FactureOut>>;
 
   /**
    * Удалить счет-фактуру выданный.

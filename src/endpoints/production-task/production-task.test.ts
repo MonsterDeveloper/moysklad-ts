@@ -229,6 +229,26 @@ describe("productionTask", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.productionTask.size({
+        filter: {
+          name: "Test Production Task",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/productiontask",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Production Task",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {

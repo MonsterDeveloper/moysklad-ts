@@ -248,7 +248,9 @@ export interface PurchaseOrderEndpoint {
    *
    * @returns Общее количество заказов поставщикам
    */
-  size(): Promise<ListMeta<Entity.PurchaseOrder>>;
+  size(
+    options?: AllPurchaseOrdersOptions,
+  ): Promise<ListMeta<Entity.PurchaseOrder>>;
 
   /**
    * Удалить заказ поставщику по id.

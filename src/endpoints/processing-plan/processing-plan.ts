@@ -155,7 +155,9 @@ export interface ProcessingPlanEndpoint {
    *
    * @returns Общее количество техкарт
    */
-  size(): Promise<ListMeta<Entity.ProcessingPlan>>;
+  size(
+    options?: AllProcessingPlansOptions,
+  ): Promise<ListMeta<Entity.ProcessingPlan>>;
 
   /**
    * Создать техкарту.

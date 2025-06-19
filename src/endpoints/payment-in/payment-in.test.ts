@@ -245,6 +245,26 @@ describe("paymentIn", () => {
         }),
       });
     });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.paymentIn.size({
+        filter: {
+          name: "Test Payment In",
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/paymentin",
+        method: "GET",
+        searchParameters: expect.objectContaining({
+          filter: "name=Test Payment In",
+          limit: "0",
+        }),
+      });
+    });
   });
 
   describe("delete", () => {
