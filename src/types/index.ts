@@ -24,3 +24,4 @@ export * from "./gtd";
 export * from "./account";
 export * from "./tracking-type";
 export * from "./match-array-type";
+export * from "./audit";

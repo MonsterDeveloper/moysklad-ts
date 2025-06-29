@@ -9,6 +9,8 @@ import type {
   ModelCreateOrUpdateData,
   Subset,
   ListMeta,
+  GetAuditByEntityOptions,
+  AuditEvent,
 } from "../../types";
 import type {
   AllProductsOptions,
@@ -156,4 +158,20 @@ export interface ProductEndpoint {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar-towar-w-korzinu
    */
   trash(id: string): Promise<void>;
+
+  /**
+   * Получить события аудита для товара.
+   *
+   * {@linkcode AuditEvent}
+   *
+   * @param id - ID товара
+   * @param options - Опции для получения событий аудита
+   * @returns Список событий аудита
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/audit/#audit-audit-poluchit-sobytiq-po-suschnosti
+   */
+  audit(
+    id: string,
+    options?: GetAuditByEntityOptions,
+  ): Promise<ListResponse<AuditEvent, Entity.AuditEvent>>;
 }

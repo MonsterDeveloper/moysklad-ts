@@ -245,6 +245,19 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
           .then((response) => response.json());
       }
 
+      if (method === "audit") {
+        const id = callbackOptions.args[0] as string;
+        const options = callbackOptions.args[1] as
+          | ComposeSearchParametersOptions
+          | undefined;
+
+        return client
+          .get(`${path}/${id}/audit`, {
+            searchParameters: composeSearchParameters(options ?? {}),
+          })
+          .then((response) => response.json());
+      }
+
       throw new Error(
         `Invalid request path: ${callbackOptions.path.join("/")}`,
       );

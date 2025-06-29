@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
 import { Entity } from "../../types/entity";
 import { MediaType } from "../../types/media-type";
+import { AuditEventType, AuditEventSource } from "../../types/audit";
 
 describe("product", () => {
   describe("list", () => {
@@ -432,6 +433,83 @@ describe("product", () => {
         fetchMock,
         url: `/entity/product/${id}/trash`,
         method: "POST",
+      });
+    });
+  });
+
+  describe("audit", () => {
+    it("makes a request without options", async () => {
+      const fetchMock = createFetchMock();
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+
+      await moysklad.product.audit(id);
+
+      expectFetch({
+        fetchMock,
+        url: `/entity/product/${id}/audit`,
+        method: "GET",
+      });
+    });
+
+    it("makes a request with filter options", async () => {
+      const fetchMock = createFetchMock();
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+
+      await moysklad.product.audit(id, {
+        filter: {
+          eventType: AuditEventType.Create,
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: `/entity/product/${id}/audit`,
+        method: "GET",
+        searchParameters: {
+          filter: "eventType=create",
+        },
+      });
+    });
+
+    it("makes a request with pagination options", async () => {
+      const fetchMock = createFetchMock();
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+
+      await moysklad.product.audit(id, {
+        pagination: {
+          limit: 50,
+          offset: 10,
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: `/entity/product/${id}/audit`,
+        method: "GET",
+        searchParameters: {
+          limit: "50",
+          offset: "10",
+        },
+      });
+    });
+
+    it("makes a request with source filter", async () => {
+      const fetchMock = createFetchMock();
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+
+      await moysklad.product.audit(id, {
+        filter: {
+          source: AuditEventSource.JsonApi,
+        },
+      });
+
+      expectFetch({
+        fetchMock,
+        url: `/entity/product/${id}/audit`,
+        method: "GET",
+        searchParameters: {
+          filter: "source=jsonapi",
+        },
       });
     });
   });

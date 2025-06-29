@@ -8,6 +8,7 @@ import type {
 
 export enum Entity {
   Assortment = "assortment",
+  AuditEvent = "auditevent",
   Account = "account",
   Demand = "demand",
   DemandPosition = "demandposition",
