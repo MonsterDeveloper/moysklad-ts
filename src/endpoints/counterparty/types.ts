@@ -39,12 +39,22 @@ interface BaseCounterparty extends Idable, Meta<Entity.Counterparty> {
     apartment?: string;
     city?: string;
     comment?: string;
-    // TODO add country
-    country?: Meta<never>;
+    country?: Meta<Entity.Country>;
     house?: string;
     postalCode?: string;
-    // TODO add region
-    region?: Meta<never>;
+    region?: Meta<Entity.Region>;
+    street?: string;
+  };
+  legalAddress?: string;
+  legalAddressFull?: {
+    addInfo?: string;
+    apartment?: string;
+    city?: string;
+    comment?: string;
+    country?: Meta<Entity.Country>;
+    house?: string;
+    postalCode?: string;
+    region?: Meta<Entity.Region>;
     street?: string;
   };
   archived: boolean;
@@ -87,7 +97,6 @@ export interface LegalCounterparty extends BaseCounterparty {
   companyType: CounterpartyCompanyType.Legal;
   inn?: string;
   kpp?: string;
-  legalAddress?: string;
   legalTitle?: string;
   ogrn?: string;
   okpo?: string;
@@ -98,7 +107,6 @@ export interface EntrepreneurCounterparty extends BaseCounterparty {
   certificateDate?: DateTime;
   certificateNumber?: string;
   inn?: string;
-  legalAddress?: string;
   legalFirstName?: string;
   legalLastName?: string;
   legalMiddleName?: string;
@@ -111,7 +119,6 @@ export interface IndividualCounterparty extends BaseCounterparty {
   companyType: CounterpartyCompanyType.Individual;
   birthDate?: DateTime;
   inn?: string;
-  legalAddress?: string;
   legalFirstName?: string;
   legalLastName?: string;
   legalMiddleName?: string;
