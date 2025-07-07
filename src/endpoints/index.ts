@@ -20,6 +20,7 @@ export * from "./production-stage";
 export * from "./production-stage-completion";
 export * from "./production-task";
 export * from "./purchase-order";
+export * from "./region";
 export * from "./report";
 export * from "./sales-return";
 export * from "./security";

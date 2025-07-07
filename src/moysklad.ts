@@ -21,6 +21,7 @@ import type {
   ProductionStageCompletionEndpoint,
   ProductionTaskEndpoint,
   PurchaseOrderEndpoint,
+  RegionEndpoint,
   SupplyEndpoint,
   VariantEndpoint,
   SecurityEndpoint,
@@ -168,6 +169,15 @@ export interface Moysklad {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-postawschiku
    */
   purchaseOrder: PurchaseOrderEndpoint;
+
+  /**
+   * Регионы
+   *
+   * Справочник регионов России. Данный справочник предназначен только для чтения.
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-region
+   */
+  region: RegionEndpoint;
 
   /**
    * Производственные этапы
