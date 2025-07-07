@@ -21,6 +21,9 @@ export interface Account extends Idable, Meta<Entity.Account> {
   /** БИК */
   bic?: string;
 
+  /** Корреспондентский счет */
+  correspondentAccount?: string;
+
   /** Является ли счет основным */
   isDefault: boolean;
 

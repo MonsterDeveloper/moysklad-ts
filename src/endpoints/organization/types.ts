@@ -17,14 +17,26 @@ interface BaseOrganization extends Idable, Meta<Entity.Organization> {
     apartment?: string;
     city?: string;
     comment?: string;
-    // TODO add country
-    country?: Meta<never>;
+    country?: Meta<Entity.Country>;
     house?: string;
     postalCode?: string;
-    // TODO add region
-    region?: Meta<never>;
+    region?: Meta<Entity.Region>;
     street?: string;
   };
+  legalAddress?: string;
+  legalAddressFull?: {
+    addInfo?: string;
+    apartment?: string;
+    city?: string;
+    comment?: string;
+    country?: Meta<Entity.Country>;
+    house?: string;
+    postalCode?: string;
+    region?: Meta<Entity.Region>;
+    street?: string;
+  };
+  phone?: string;
+  email?: string;
   archived: boolean;
   readonly bonusPoints?: number;
   bonusProgram?: Meta<Entity.BonusProgram>;
@@ -46,7 +58,6 @@ interface BaseOrganization extends Idable, Meta<Entity.Organization> {
 export interface LegalOrganization extends BaseOrganization {
   companyType: OrganizationCompanyType.Legal;
   legalTitle?: string;
-  legalAddress?: string;
   inn?: string;
   kpp?: string;
   ogrn?: string;
@@ -58,7 +69,6 @@ export interface EntrepreneurOrganization extends BaseOrganization {
   certificateDate?: DateTime;
   certificateNumber?: string;
   inn?: string;
-  legalAddress?: string;
   legalFirstName?: string;
   legalLastName?: string;
   legalMiddleName?: string;
@@ -70,7 +80,6 @@ export interface EntrepreneurOrganization extends BaseOrganization {
 export interface IndividualOrganization extends BaseOrganization {
   companyType: OrganizationCompanyType.Individual;
   inn?: string;
-  legalAddress?: string;
   legalFirstName?: string;
   legalLastName?: string;
   legalMiddleName?: string;
