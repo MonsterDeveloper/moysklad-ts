@@ -29,3 +29,4 @@ export * from "./wizard";
 export * from "./consignment";
 export * from "./bundle";
 export * from "./service";
+export * from "./organization";
