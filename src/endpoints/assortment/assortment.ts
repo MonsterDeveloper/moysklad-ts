@@ -8,14 +8,154 @@ import type {
   Subset,
   ListMeta,
   AssortmentEntity,
+  StringFilter,
+  BooleanFilter,
+  NumberFilter,
+  IdFilter,
+  DateTimeFilter,
 } from "../../types";
+
+/**
+ * Режим фильтрации по остаткам
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-assortiment-atributy-dostupnye-dlq-fil-tracii-dostupnye-znacheniq-dlq-stockmode
+ */
+export enum StockMode {
+  /** Любое значение остатка */
+  All = "all",
+  /** Положительный остаток */
+  PositiveOnly = "positiveOnly",
+  /** Отрицательный остаток */
+  NegativeOnly = "negativeOnly",
+  /** Нулевой остаток */
+  Empty = "empty",
+  /** Ненулевой остаток */
+  NonEmpty = "nonEmpty",
+  /** Остаток ниже неснижаемого остатка */
+  UnderMinimum = "underMinimum",
+}
+
+/**
+ * Режим фильтрации по доступности
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-assortiment-atributy-dostupnye-dlq-fil-tracii-dostupnye-znacheniq-dlq-quantitymode
+ */
+export enum QuantityMode {
+  /** Любое значение остатка */
+  All = "all",
+  /** Положительный остаток */
+  PositiveOnly = "positiveOnly",
+  /** Отрицательный остаток */
+  NegativeOnly = "negativeOnly",
+  /** Нулевой остаток */
+  Empty = "empty",
+  /** Ненулевой остаток */
+  NonEmpty = "nonEmpty",
+  /** Остаток ниже неснижаемого остатка */
+  UnderMinimum = "underMinimum",
+}
+
+/**
+ * Тип сущности для фильтрации ассортимента
+ */
+export enum AssortmentEntityType {
+  /** Товар */
+  Product = "product",
+  /** Услуга */
+  Service = "service",
+  /** Комплект */
+  Bundle = "bundle",
+  /** Модификация */
+  Variant = "variant",
+  /** Серия */
+  Consignment = "consignment",
+}
 
 export interface ListAssortmentOptions {
   /** Получить вместе с сериями. */
   groupBy?: "consignment";
 
   filter?: {
+    /** Фильтрация по коду вида алкогольной продукции */
+    "alcoholic.type"?: NumberFilter;
+
+    /** Фильтрация по признаку архивности товаров */
+    archived?: BooleanFilter;
+
+    /** Фильтрация по артикулам товаров и комплектов */
+    article?: StringFilter;
+
+    /** Фильтрация по штрихкодам сущностей */
     barcode?: EqualityFilter<string> | string | string[];
+
+    /** Фильтрация по кодам сущностей */
+    code?: StringFilter;
+
+    /** Фильтрация по описаниям сущностей */
+    description?: StringFilter;
+
+    /** Фильтрация по внешним кодам сущностей */
+    externalCode?: StringFilter;
+
+    /** Фильтрация по владельцу-отделу */
+    group?: EqualityFilter<string> | string | string[];
+
+    /** Фильтрация по идентификаторам сущностей */
+    id?: IdFilter;
+
+    /** Фильтрация по использованию серийных номеров */
+    isSerialTrackable?: BooleanFilter;
+
+    /** Фильтрация по наименованиям сущностей */
+    name?: StringFilter;
+
+    /** Фильтрация по владельцу-сотруднику */
+    owner?: EqualityFilter<string> | string | string[];
+
+    /** Фильтрация по наименованию групп товаров */
+    pathname?: StringFilter;
+
+    /** Фильтрация по группам товаров */
+    productFolder?: EqualityFilter<string> | string | string[];
+
+    /** Фильтрация по значению доступно */
+    quantityMode?: QuantityMode;
+
+    /** Префиксный поиск по строковым полям */
+    search?: EqualityFilter<string> | string;
+
+    /** Фильтрация по признаку общего доступа */
+    shared?: BooleanFilter;
+
+    /** Фильтрация по значению остатка */
+    stockMode?: StockMode;
+
+    /** Момент времени, на который нужно вывести остатки */
+    stockMoment?: DateTimeFilter;
+
+    /** Фильтрация по складам */
+    stockStore?: EqualityFilter<string> | string | string[];
+
+    /** Фильтрация по поставщикам */
+    supplier?: EqualityFilter<string> | string | string[];
+
+    /** Фильтрация по типу сущности */
+    type?:
+      | EqualityFilter<AssortmentEntityType>
+      | AssortmentEntityType
+      | AssortmentEntityType[];
+
+    /** Фильтрация по времени последнего обновления */
+    updated?: DateTimeFilter;
+
+    /** Фильтрация по автору последнего обновления */
+    updatedBy?: EqualityFilter<string> | string | string[];
+
+    /** Фильтрация по признаку весового товара */
+    weighed?: BooleanFilter;
+
+    /** Параметр учета вложенных подгрупп */
+    withSubFolders?: boolean;
   };
 
   pagination?: PaginationOptions;
