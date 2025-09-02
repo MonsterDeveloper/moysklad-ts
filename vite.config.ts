@@ -12,7 +12,7 @@ export default defineConfig({
       entry: fileURLToPath(new URL("src/index.ts", import.meta.url)),
       name: "moysklad",
       fileName: "index",
-      formats: ["es"],
+      formats: ["es", "cjs"],
     },
   },
   plugins: [
