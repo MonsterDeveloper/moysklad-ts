@@ -16,7 +16,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-oboroty-oboroty-po-towaram-struktura-ob-ekta-pokazateli-onperiodstart-onperiodend-income-outcome
  */
-interface TurnoverMetrics {
+export interface TurnoverMetrics {
   /** Сумма себестоимости в копейках */
   sum: number;
   /** Количество единиц товара */
@@ -28,7 +28,7 @@ interface TurnoverMetrics {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety-otchet-oboroty-oboroty-po-towaram-struktura-ob-ekta-assortment
  */
-interface TurnoverAssortment {
+export interface TurnoverAssortment {
   /** Метаданные Товара или Модификации */
   meta: Metadata<AssortmentEntity>;
   /** Наименование Товара или Модификации */

@@ -13,3 +13,4 @@ export interface ReportEndpoint {
 export * from "./profit";
 export * from "./stock";
 export * from "./money";
+export * from "./turnover";
