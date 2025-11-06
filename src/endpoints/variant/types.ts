@@ -2,7 +2,6 @@ import type {
   ArchivedFilter,
   Attribute,
   Barcodes,
-  BooleanFilter,
   DateTime,
   DateTimeFilter,
   Entity,
