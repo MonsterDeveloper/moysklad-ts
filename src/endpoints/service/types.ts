@@ -1,4 +1,5 @@
 import type {
+  ArchivedFilter,
   Attribute,
   Barcodes,
   BooleanFilter,
@@ -189,7 +190,7 @@ export interface ServiceModel extends Model {
   filters: {
     id: IdFilter;
     accountId: IdFilter;
-    archived: BooleanFilter;
+    archived: ArchivedFilter;
     barcodes: StringFilter;
     code: StringFilter;
     description: StringFilter;

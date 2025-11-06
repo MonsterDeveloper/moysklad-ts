@@ -1,4 +1,5 @@
 import type {
+  ArchivedFilter,
   AssortmentEntity,
   BooleanFilter,
   DateTime,
@@ -167,7 +168,7 @@ export interface TurnoverReportModel extends Model {
     /** параметр для фильтрации "Показывать товары без движения" */
     withoutturnover: BooleanFilter;
     /** параметр для фильтрации "Показывать архивные" */
-    archived: BooleanFilter;
+    archived: ArchivedFilter;
   };
 }
 

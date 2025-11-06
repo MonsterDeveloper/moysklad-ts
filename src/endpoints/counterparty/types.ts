@@ -1,4 +1,5 @@
 import type {
+  ArchivedFilter,
   Attribute,
   BooleanFilter,
   DateTime,
@@ -145,7 +146,7 @@ export interface CounterpartyModel extends Model {
   filters: {
     accountId: IdFilter;
     actualAddress: StringFilter;
-    archived: BooleanFilter;
+    archived: ArchivedFilter;
     // TODO filters for attributes
     code: StringFilter;
     companyType: EnumFilter<CounterpartyCompanyType>;

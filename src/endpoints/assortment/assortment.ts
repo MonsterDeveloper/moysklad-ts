@@ -1,4 +1,5 @@
 import type {
+  ArchivedFilter,
   EqualityFilter,
   PaginationOptions,
   AssortmentModel,
@@ -80,7 +81,7 @@ export interface ListAssortmentOptions {
     "alcoholic.type"?: NumberFilter;
 
     /** Фильтрация по признаку архивности товаров */
-    archived?: BooleanFilter;
+    archived?: ArchivedFilter;
 
     /** Фильтрация по артикулам товаров и комплектов */
     article?: StringFilter;

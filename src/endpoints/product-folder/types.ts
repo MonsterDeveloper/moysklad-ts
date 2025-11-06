@@ -1,4 +1,5 @@
 import type {
+  ArchivedFilter,
   DateTime,
   Entity,
   ExpandOptions,
@@ -101,7 +102,7 @@ export interface ProductFolderModel extends Model {
 
   filters: {
     accountId: IdFilter;
-    archived: BooleanFilter;
+    archived: ArchivedFilter;
     code: StringFilter;
     description: StringFilter;
     externalCode: StringFilter;

@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { assertType, describe, expectTypeOf, it } from "vitest";
 import type {
+  ArchivedFilter,
   BooleanFilter,
   EnumFilter,
   EqualityFilter,
@@ -152,6 +153,61 @@ describe("filters", () => {
 
     it("should accept is not null filter", () => {
       assertType(booleanFilter({ archived: { isNotNull: true } }));
+    });
+  });
+
+  describe("ArchivedFilter", () => {
+    const archivedFilter = (filter: Record<string, ArchivedFilter>) => {};
+
+    it("should accept a boolean", () => {
+      assertType(archivedFilter({ archived: true }));
+      assertType(archivedFilter({ archived: false }));
+    });
+
+    it("should accept equals filter", () => {
+      assertType(archivedFilter({ archived: { eq: true } }));
+    });
+
+    it("should accept not equals filter", () => {
+      assertType(archivedFilter({ archived: { ne: true } }));
+    });
+
+    it("should accept is null filter", () => {
+      assertType(archivedFilter({ archived: { isNull: true } }));
+    });
+
+    it("should accept is not null filter", () => {
+      assertType(archivedFilter({ archived: { isNotNull: true } }));
+    });
+
+    it("should accept [true, false] array", () => {
+      assertType(archivedFilter({ archived: [true, false] }));
+    });
+
+    it("should accept [false, true] array", () => {
+      assertType(archivedFilter({ archived: [false, true] }));
+    });
+
+    it("should reject invalid array lengths", () => {
+      assertType(
+        // @ts-expect-error wrong array length
+        archivedFilter({ archived: [true] }),
+      );
+      assertType(
+        // @ts-expect-error wrong array length
+        archivedFilter({ archived: [true, false, true] }),
+      );
+    });
+
+    it("should reject non-boolean array values", () => {
+      assertType(
+        // @ts-expect-error wrong array value types
+        archivedFilter({ archived: [1, 2] }),
+      );
+      assertType(
+        // @ts-expect-error wrong array value types
+        archivedFilter({ archived: ["true", "false"] }),
+      );
     });
   });
 

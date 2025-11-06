@@ -1,4 +1,5 @@
 import type {
+  ArchivedFilter,
   AssortmentEntity,
   AssortmentModel,
   Attribute,
@@ -241,7 +242,7 @@ export interface BundleModel extends Model {
   filters: {
     id: IdFilter;
     accountId: IdFilter;
-    archived: BooleanFilter;
+    archived: ArchivedFilter;
     article: StringFilter;
     code: StringFilter;
     description: StringFilter;

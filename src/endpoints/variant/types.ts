@@ -1,4 +1,5 @@
 import type {
+  ArchivedFilter,
   Attribute,
   Barcodes,
   BooleanFilter,
@@ -61,7 +62,7 @@ export interface VariantModel extends Model {
   filters: {
     id: IdFilter;
     accountId: IdFilter;
-    archived: BooleanFilter;
+    archived: ArchivedFilter;
     barcodes: StringFilter;
     code: StringFilter;
     description: StringFilter;

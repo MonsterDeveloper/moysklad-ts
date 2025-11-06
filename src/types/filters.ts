@@ -82,6 +82,12 @@ export type EnumFilter<T extends Primitive> =
 
 export type BooleanFilter = Partial<EqualityFilter<boolean>> | boolean;
 
+/**
+ * Archived filter that supports boolean values, boolean filter operators,
+ * and an array of both [true, false] to include both archived and non-archived items.
+ */
+export type ArchivedFilter = BooleanFilter | [boolean, boolean];
+
 export type NumberFilter =
   | Partial<
       EqualityFilter<number> &
@@ -114,6 +120,7 @@ export type DateTimeFilter =
 export type Filter =
   | IdFilter
   | BooleanFilter
+  | ArchivedFilter
   | NumberFilter
   | StringFilter
   | DateTimeFilter;

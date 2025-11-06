@@ -1,4 +1,5 @@
 import type {
+  ArchivedFilter,
   Attribute,
   Barcodes,
   BooleanFilter,
@@ -150,7 +151,7 @@ export interface ProductModel extends Model {
   filters: {
     id: IdFilter;
     accountId: IdFilter;
-    archived: BooleanFilter;
+    archived: ArchivedFilter;
     article: StringFilter;
     barcodes: StringFilter;
     code: StringFilter;

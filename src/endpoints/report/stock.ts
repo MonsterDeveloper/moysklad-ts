@@ -1,4 +1,5 @@
 import type {
+  ArchivedFilter,
   AssortmentEntity,
   BooleanFilter,
   DateTime,
@@ -73,7 +74,7 @@ export interface StockAllModel extends Model {
   object: StockAll;
   filters: {
     /** параметр для фильтрации по архивности товаров. Возможные значения: `true`, `false`. Для выдачи как архивных, так и не архивных товаров нужно передать сразу два значения true и false. */
-    archived: BooleanFilter;
+    archived: ArchivedFilter;
     /** параметр для фильтрации по нескольким сериям. Значение параметра - ссылка на серию, которая должна быть включена в выборку или исключена из нее. Можно передать несколько значений. Данный параметр фильтрации можно комбинировать с параметрами `product` и `variant`. */
     consignment: IdFilter;
     /** параметр для фильтрации по значению ожидания. Если передать `true`, в выборку попадут только товары с ожиданием. */
