@@ -150,7 +150,11 @@ export interface ProductionTask extends Idable, Meta<Entity.ProductionTask> {
   /** Напечатан ли документ */
   readonly printed: boolean;
 
-  /** Метаданные Позиций производственного задания */
+  /**
+   * Метаданные Позиций производственного задания
+   *
+   * Для поля `productionRows` недоступен `expand` вложенных полей.
+   */
   productionRows: ListMeta<Entity.ProductionRow>;
 
   /** Дата окончания производства */
@@ -179,6 +183,9 @@ export interface ProductionTask extends Idable, Meta<Entity.ProductionTask> {
 
   /** Момент последнего обновления Производственного задания */
   readonly updated: DateTime;
+
+  /** Массив ссылок на связанные заказы покупателей в формате Метаданных */
+  customerOrders?: Meta<Entity.CustomerOrder>[];
 }
 
 /**

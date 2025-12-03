@@ -44,3 +44,6 @@ dist/
 # opencommit
 .husky/prepare-commit-msg
 .opencommit-commitlint
+
+*.vitest-temp.json
+vite.config.ts.timestamp-*
