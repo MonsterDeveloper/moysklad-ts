@@ -13,11 +13,15 @@ import {
   type IdFilter,
   type Idable,
   type ListMeta,
+  type ListMetadata,
+  type MediaType,
   type Meta,
+  type Metadata,
   type Model,
   type NumberFilter,
   type OrderOptions,
   type PaginationOptions,
+  type State,
   type StringFilter,
   type TaxSystem,
 } from "../../types";
@@ -236,3 +240,27 @@ export type AllCustomerOrdersOptions = Omit<
   ListCustomerOrdersOptions,
   "pagination"
 >;
+
+/**
+ * Метаданные заказов покупателей.
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq-metadannye-zakazow-pokupatelej
+ */
+export interface CustomerOrderMetadata {
+  /** Метаданные */
+  meta: {
+    href: string;
+    mediaType: MediaType;
+  };
+
+  /** Дополнительные поля */
+  attributes: {
+    meta: ListMetadata<Entity.AttributeMetadata>;
+  };
+
+  /** Массив статусов заказов покупателей */
+  states: State[];
+
+  /** Создавать новые заказы покупателей с меткой "Общий" */
+  createShared: boolean;
+}

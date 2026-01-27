@@ -13,6 +13,7 @@ import type {
 import type {
   AllCustomerOrdersOptions,
   CreateCustomerOrderOptions,
+  CustomerOrderMetadata,
   CustomerOrderModel,
   FirstCustomerOrderOptions,
   GetCustomerOrderOptions,
@@ -295,4 +296,19 @@ export interface CustomerOrderEndpoint {
     )[],
     options?: Subset<T, CreateCustomerOrderOptions>,
   ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>[]>;
+
+  /**
+   * Получить метаданные заказов покупателей.
+   *
+   * @returns Метаданные заказов покупателей {@linkcode CustomerOrderMetadata}
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq-metadannye-zakazow-pokupatelej
+   *
+   * @example
+   * ```ts
+   * const metadata = await moysklad.customerOrder.metadata();
+   * console.log(metadata.states); // массив статусов
+   * ```
+   */
+  metadata(): Promise<CustomerOrderMetadata>;
 }
