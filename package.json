@@ -37,7 +37,8 @@
     "prepare": "husky",
     "bump-version": "bun scripts/bump-version.ts",
     "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
-    "knip": "knip"
+    "knip": "knip",
+    "upgrade-bun": "bun scripts/upgrade-bun.ts"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.4",

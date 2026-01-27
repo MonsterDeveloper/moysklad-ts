@@ -258,6 +258,12 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
           .then((response) => response.json());
       }
 
+      if (method === "metadata") {
+        return client
+          .get(`${path}/metadata`)
+          .then((response) => response.json());
+      }
+
       throw new Error(
         `Invalid request path: ${callbackOptions.path.join("/")}`,
       );

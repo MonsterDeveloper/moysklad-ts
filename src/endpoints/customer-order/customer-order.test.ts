@@ -578,4 +578,18 @@ describe("customerOrder", () => {
       });
     });
   });
+
+  describe("metadata", () => {
+    it("makes a request", async () => {
+      const fetchMock = createFetchMock();
+
+      await moysklad.customerOrder.metadata();
+
+      expectFetch({
+        fetchMock,
+        url: "/entity/customerorder/metadata",
+        method: "GET",
+      });
+    });
+  });
 });
