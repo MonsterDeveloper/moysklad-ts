@@ -20,6 +20,7 @@ import type {
   PaginationOptions,
   PositionFields,
   ProjectModel,
+  StateModel,
   StoreModel,
   StringFilter,
   UpdateMeta,
@@ -129,7 +130,7 @@ export interface Demand extends Idable, Meta<Entity.Demand> {
     region?: Meta<Entity.Region>
     street?: string
   }
-  state?: Meta<Entity.State> // TODO expand state
+  state?: Meta<Entity.State>
   store: Meta<Entity.Store>
   readonly sum: number
   syncId?: string
@@ -166,6 +167,7 @@ export interface DemandModel extends Model {
     organizationAccount: AccountModel
     store: StoreModel
     project: ProjectModel
+    state: StateModel
   }
   filters: {
     assortment: IdFilter

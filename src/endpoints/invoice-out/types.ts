@@ -17,6 +17,7 @@ import type {
   OrderOptions,
   PaginationOptions,
   PositionFields,
+  StateModel,
   StringFilter,
 } from "../../types"
 import type { CounterpartyModel } from "../counterparty"
@@ -141,7 +142,7 @@ export interface InvoiceOut extends Idable, Meta<Entity.InvoiceOut> {
   /** Сумма отгруженного */
   readonly shippedSum: number
   /** Метаданные статуса счета */
-  state?: Meta<Entity.State> // TODO expand state
+  state?: Meta<Entity.State>
   /** Метаданные склада */
   store?: Meta<Entity.Store>
   /** Сумма Счета в установленной валюте */
@@ -173,6 +174,7 @@ export interface InvoiceOutModel extends Model {
     positions: InvoiceOutPositionModel
     agentAccount: AccountModel
     organizationAccount: AccountModel
+    state: StateModel
   }
   filters: {
     id: IdFilter

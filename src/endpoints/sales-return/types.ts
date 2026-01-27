@@ -19,6 +19,7 @@ import type {
   PaginationOptions,
   PositionFields,
   ProjectModel,
+  StateModel,
   StoreModel,
   StringFilter,
   UpdateMeta,
@@ -187,7 +188,7 @@ export interface SalesReturn extends Idable, Meta<Entity.SalesReturn> {
   shared: boolean
 
   /** Метаданные статуса Возврата Покупателя */
-  state?: Meta<Entity.State> // TODO expand state
+  state?: Meta<Entity.State>
 
   /** Метаданные склада */
   store: Meta<Entity.Store>
@@ -241,6 +242,7 @@ export interface SalesReturnModel extends Model {
     organizationAccount: AccountModel
     store: StoreModel
     project: ProjectModel
+    state: StateModel
   }
   filters: {
     id: IdFilter

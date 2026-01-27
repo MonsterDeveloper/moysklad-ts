@@ -14,6 +14,8 @@ import type {
   NumberFilter,
   OrderOptions,
   PaginationOptions,
+  ProjectModel,
+  StateModel,
   StringFilter,
 } from "../../types"
 import type { CounterpartyModel } from "../counterparty"
@@ -108,12 +110,15 @@ export interface PaymentOut extends Idable, Meta<Entity.PaymentOut> {
 export interface PaymentOutModel extends Model {
   object: PaymentOut
   expandable: {
-    agent: CounterpartyModel // TODO expand contract, files, project, salesChannel, state
+    agent: CounterpartyModel
     group: GroupModel
     organization: OrganizationModel
     owner: EmployeeModel
     agentAccount: AccountModel
     organizationAccount: AccountModel
+    state: StateModel
+    project: ProjectModel
+    // TODO: expand contract, files, salesChannel
   }
   filters: {
     id: IdFilter

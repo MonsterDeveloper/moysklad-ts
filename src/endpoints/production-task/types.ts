@@ -15,6 +15,7 @@ import type {
   Model,
   OrderOptions,
   PaginationOptions,
+  StateModel,
   StoreModel,
   StringFilter,
 } from "../../types"
@@ -180,7 +181,7 @@ export interface ProductionTask extends Idable, Meta<Entity.ProductionTask> {
   shared: boolean
 
   /** Метаданные статуса Производственного задания */
-  state?: Meta<Entity.State> // TODO add state expand
+  state?: Meta<Entity.State>
 
   /** Момент последнего обновления Производственного задания */
   readonly updated: DateTime
@@ -205,6 +206,7 @@ export interface ProductionTaskModel extends Model {
     products: ProductionTaskResultModel
     materialsStore: StoreModel
     productsStore: StoreModel
+    state: StateModel
   }
 
   requiredCreateFields: "organization"

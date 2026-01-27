@@ -14,6 +14,8 @@ import type {
   NumberFilter,
   OrderOptions,
   PaginationOptions,
+  ProjectModel,
+  StateModel,
   StringFilter,
 } from "../../types"
 import type { CounterpartyModel } from "../counterparty"
@@ -152,7 +154,9 @@ export interface PaymentInModel extends Model {
     owner: EmployeeModel
     agentAccount: AccountModel
     organizationAccount: AccountModel
-    // TODO: expand contract, factureOut, files, project, salesChannel, state
+    state: StateModel
+    project: ProjectModel
+    // TODO: expand contract, factureOut, files, salesChannel
   }
   filters: {
     id: IdFilter

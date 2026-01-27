@@ -14,6 +14,7 @@ import type {
   OrderOptions,
   PaginationOptions,
   PositionFields,
+  StateModel,
   StringFilter,
   UpdateMeta,
 } from "../../types"
@@ -89,7 +90,7 @@ export interface FactureOut extends Idable, Meta<Entity.FactureOut> {
   shared: boolean
 
   /** Метаданные статуса выданного Счета-фактуры */
-  state?: Meta<Entity.State> // TODO expand state
+  state?: Meta<Entity.State>
 
   /** Идентификатор государственного контракта, договора (соглашения) */
   stateContractId?: string
@@ -134,6 +135,7 @@ export interface FactureOutModel extends Model {
     group: GroupModel
     organization: OrganizationModel
     owner: EmployeeModel
+    state: StateModel
   }
   filters: {
     id: IdFilter

@@ -14,6 +14,7 @@ import type {
   Model,
   OrderOptions,
   PaginationOptions,
+  StateModel,
   StringFilter,
 } from "../../types"
 import type { EmployeeModel } from "../employee"
@@ -87,8 +88,7 @@ interface BaseCounterparty extends Idable, Meta<Entity.Counterparty> {
   priceType?: unknown
   readonly salesAmount: number
   shared: boolean
-  // TODO expand state
-  state?: unknown
+  state?: Meta<Entity.State>
   syncId?: string
   tags?: string[]
   readonly updated: DateTime
@@ -142,6 +142,7 @@ export interface CounterpartyModel extends Model {
   expandable: {
     owner: EmployeeModel
     group: GroupModel
+    state: StateModel
   }
   filters: {
     accountId: IdFilter
@@ -162,7 +163,7 @@ export interface CounterpartyModel extends Model {
     owner: IdFilter
     priceType: IdFilter
     shared: BooleanFilter
-    // TODO filters for state
+    state: IdFilter
     syncId: IdFilter
     tags: StringFilter
     updated: DateTimeFilter

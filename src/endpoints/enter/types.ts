@@ -16,6 +16,7 @@ import type {
   NumberFilter,
   OrderOptions,
   PaginationOptions,
+  StateModel,
   StringFilter,
 } from "../../types"
 import type { EmployeeModel } from "../employee"
@@ -164,7 +165,7 @@ export interface Enter extends Idable, Meta<Entity.Enter> {
   /** Общий доступ */
   shared: boolean
   /** Метаданные статуса оприходования */
-  state?: Meta<Entity.State> // TODO expand state
+  state?: Meta<Entity.State>
   /** Метаданные склада */
   store: Meta<Entity.Store>
   /** Сумма оприходования в копейках */
@@ -190,6 +191,7 @@ export interface EnterModel extends Model {
     organization: OrganizationModel
     owner: EmployeeModel
     positions: EnterPositionModel
+    state: StateModel
   }
   filters: {
     id: IdFilter

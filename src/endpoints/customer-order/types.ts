@@ -22,6 +22,7 @@ import type {
   PaginationOptions,
   ProjectModel,
   State,
+  StateModel,
   StoreModel,
   StringFilter,
   TaxSystem,
@@ -137,7 +138,7 @@ export interface CustomerOrder extends Idable, Meta<Entity.CustomerOrder> {
   }
 
   readonly shippedSum: number
-  state?: Meta<Entity.State> // TODO expand state
+  state?: Meta<Entity.State>
   store?: Meta<Entity.Store>
   readonly sum: number
   syncId?: string
@@ -168,6 +169,7 @@ export interface CustomerOrderModel extends Model {
     positions: CustomerOrderPositionModel
     store: StoreModel
     project: ProjectModel
+    state: StateModel
   }
   filters: {
     id: IdFilter
