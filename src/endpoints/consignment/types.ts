@@ -11,7 +11,7 @@ import type {
   Meta,
   Model,
   StringFilter,
-} from "../../types";
+} from "../../types"
 
 /**
  * Серия
@@ -20,41 +20,41 @@ import type {
  */
 export interface Consignment extends Idable, Meta<Entity.Consignment> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Доп. поля */
-  attributes?: Attribute[];
+  attributes?: Attribute[]
 
   /** Ассортимент */
-  assortment: Meta<AssortmentEntity>;
+  assortment: Meta<AssortmentEntity>
 
   /** Штрихкоды */
-  barcodes?: Barcodes;
+  barcodes?: Barcodes
 
   /** Код */
-  code?: string;
+  code?: string
 
   /** Описание */
-  description?: string;
+  description?: string
 
   /** Внешний код серии */
-  externalCode?: string;
+  externalCode?: string
 
   /* Изображение товара, к которому относится данная серия */
-  image?: Meta<Entity.Image>;
+  image?: Meta<Entity.Image>
 
   /** Метка Серии */
-  label: string;
+  label: string
 
   /**
    * Наименование Серии.
    *
    * "Собирается" и отображается как "Наименование товара / Метка Серии"
    */
-  readonly name: string;
+  readonly name: string
 
   /** Момент последнего изменения */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 }
 
 /**
@@ -63,22 +63,22 @@ export interface Consignment extends Idable, Meta<Entity.Consignment> {
  * {@linkcode Consignment}
  */
 export interface ConsignmentModel extends Model {
-  object: Consignment;
+  object: Consignment
 
   expandable: {
-    assortment: AssortmentModel;
-  };
+    assortment: AssortmentModel
+  }
 
-  requiredFields: "label" | "assortment";
+  requiredFields: "label" | "assortment"
 
   filters: {
-    id: IdFilter;
-    accountId: IdFilter;
-    barcodes: StringFilter;
-    code: StringFilter;
-    description: StringFilter;
-    externalCode: StringFilter;
-    name: StringFilter;
-    updated: DateTimeFilter;
-  };
+    id: IdFilter
+    accountId: IdFilter
+    barcodes: StringFilter
+    code: StringFilter
+    description: StringFilter
+    externalCode: StringFilter
+    name: StringFilter
+    updated: DateTimeFilter
+  }
 }

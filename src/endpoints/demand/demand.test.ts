@@ -1,31 +1,31 @@
-import { describe, it, expect } from "vitest";
-import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
-import { Entity } from "../../types/entity";
-import { MediaType } from "../../types/media-type";
+import { describe, expect, it } from "vitest"
+import { createFetchMock, expectFetch, moysklad } from "../../../test-utils"
+import { Entity } from "../../types/entity"
+import { MediaType } from "../../types/media-type"
 
 describe("demand", () => {
   describe("list", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.demand.list();
+      await moysklad.demand.list()
 
       expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with pagination options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.demand.list({
         pagination: {
           limit: 100,
           offset: 50,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -35,18 +35,18 @@ describe("demand", () => {
           limit: "100",
           offset: "50",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.demand.list({
         filter: {
           applicable: true,
           name: "Test Demand",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -55,18 +55,18 @@ describe("demand", () => {
         searchParameters: {
           filter: "applicable=true;name=Test Demand",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.demand.list({
         expand: {
           agent: true,
           organization: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -76,15 +76,15 @@ describe("demand", () => {
           expand: "agent,organization",
           limit: expect.any(String),
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with order options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.demand.list({
         order: { field: "moment", direction: "desc" },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -93,15 +93,15 @@ describe("demand", () => {
         searchParameters: {
           order: "moment,desc",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with search option", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.demand.list({
         search: "test demand",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -110,15 +110,15 @@ describe("demand", () => {
         searchParameters: {
           search: "test demand",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("all", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
-      await moysklad.demand.all();
+      await moysklad.demand.all()
 
       expectFetch({
         fetchMock,
@@ -127,11 +127,11 @@ describe("demand", () => {
         searchParameters: expect.objectContaining({
           limit: expect.any(String),
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.demand.all({
         filter: {
@@ -140,7 +140,7 @@ describe("demand", () => {
         expand: {
           agent: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -150,15 +150,15 @@ describe("demand", () => {
           filter: "applicable=true",
           expand: "agent",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("first", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.demand.first();
+      await moysklad.demand.first()
 
       expectFetch({
         fetchMock,
@@ -167,18 +167,18 @@ describe("demand", () => {
         searchParameters: {
           limit: "1",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.demand.first({
         filter: {
           applicable: true,
         },
         search: "test",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -189,27 +189,27 @@ describe("demand", () => {
           filter: "applicable=true",
           search: "test",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("get", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "a7404318-550f-11e8-56c0-000800000006";
+      const fetchMock = createFetchMock()
+      const id = "a7404318-550f-11e8-56c0-000800000006"
 
-      await moysklad.demand.get(id);
+      await moysklad.demand.get(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/demand/${id}`,
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "a7404318-550f-11e8-56c0-000800000006";
+      const fetchMock = createFetchMock()
+      const id = "a7404318-550f-11e8-56c0-000800000006"
 
       await moysklad.demand.get(id, {
         expand: {
@@ -217,7 +217,7 @@ describe("demand", () => {
           organization: true,
           positions: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -227,15 +227,15 @@ describe("demand", () => {
           expand: "agent,organization,positions",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("size", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.demand.size();
+      await moysklad.demand.size()
 
       expectFetch({
         fetchMock,
@@ -244,34 +244,34 @@ describe("demand", () => {
         searchParameters: expect.objectContaining({
           limit: "0",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("delete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
-      const id = "a7404318-550f-11e8-56c0-000800000006";
+      const fetchMock = createFetchMock()
+      const id = "a7404318-550f-11e8-56c0-000800000006"
 
-      await moysklad.demand.delete(id);
+      await moysklad.demand.delete(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/demand/${id}`,
         method: "DELETE",
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("batchDelete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const ids = [
         "a7404318-550f-11e8-56c0-000800000006",
         "a7404318-550f-11e8-56c0-000800000007",
-      ];
+      ]
 
-      await moysklad.demand.batchDelete(ids);
+      await moysklad.demand.batchDelete(ids)
 
       expectFetch({
         fetchMock,
@@ -284,28 +284,28 @@ describe("demand", () => {
             mediaType: MediaType.Json,
           },
         })),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("trash", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
-      const id = "a7404318-550f-11e8-56c0-000800000006";
+      const fetchMock = createFetchMock()
+      const id = "a7404318-550f-11e8-56c0-000800000006"
 
-      await moysklad.demand.trash(id);
+      await moysklad.demand.trash(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/demand/${id}/trash`,
         method: "POST",
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("upsert", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         organization: {
           meta: {
@@ -346,20 +346,20 @@ describe("demand", () => {
             type: Entity.Store,
           },
         },
-      } as const;
+      } as const
 
-      await moysklad.demand.upsert(data);
+      await moysklad.demand.upsert(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         organization: {
           meta: {
@@ -401,14 +401,14 @@ describe("demand", () => {
           },
         },
         name: "New Demand",
-      } as const;
+      } as const
 
       await moysklad.demand.upsert(data, {
         expand: {
           agent: true,
           organization: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -419,13 +419,13 @@ describe("demand", () => {
           expand: "agent,organization",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("template", () => {
     it("makes a request with customerOrder", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         customerOrder: {
           meta: {
@@ -440,20 +440,20 @@ describe("demand", () => {
             type: Entity.CustomerOrder,
           },
         },
-      } as const;
+      } as const
 
-      await moysklad.demand.template(data);
+      await moysklad.demand.template(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/demand/new",
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with invoiceOut", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         invoiceOut: {
           meta: {
@@ -468,16 +468,16 @@ describe("demand", () => {
             type: Entity.InvoiceOut,
           },
         },
-      } as const;
+      } as const
 
-      await moysklad.demand.template(data);
+      await moysklad.demand.template(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/demand/new",
         method: "PUT",
         body: data,
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})

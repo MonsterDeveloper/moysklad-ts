@@ -1,5 +1,5 @@
-import type { CustomEntityModel } from "./types";
-import type { Entity, GetFindResult, ListResponse } from "../../types";
+import type { Entity, GetFindResult, ListResponse } from "../../types"
+import type { CustomEntityModel } from "./types"
 
 /**
  * Пользовательские справочники
@@ -19,5 +19,5 @@ export interface CustomEntityEndpoint {
     id: string,
   ): Promise<
     ListResponse<GetFindResult<CustomEntityModel, false>, Entity.CustomEntity>
-  >;
+  >
 }

@@ -1,31 +1,31 @@
-import { describe, it, expect } from "vitest";
-import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
-import { Entity } from "../../types/entity";
-import { MediaType } from "../../types/media-type";
+import { describe, expect, it } from "vitest"
+import { createFetchMock, expectFetch, moysklad } from "../../../test-utils"
+import { Entity } from "../../types/entity"
+import { MediaType } from "../../types/media-type"
 
 describe("inventory", () => {
   describe("list", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.inventory.list();
+      await moysklad.inventory.list()
 
       expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with pagination options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.inventory.list({
         pagination: {
           limit: 100,
           offset: 50,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -35,18 +35,18 @@ describe("inventory", () => {
           limit: "100",
           offset: "50",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.inventory.list({
         filter: {
           name: "Test Inventory",
           store: "5427bc76-b95f-11eb-0a80-04bb000cd583",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -56,18 +56,18 @@ describe("inventory", () => {
           filter:
             "name=Test Inventory;store=5427bc76-b95f-11eb-0a80-04bb000cd583",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.inventory.list({
         expand: {
           organization: true,
           positions: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -77,15 +77,15 @@ describe("inventory", () => {
           expand: "organization,positions",
           limit: expect.any(String),
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with order options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.inventory.list({
         order: { field: "moment", direction: "desc" },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -94,15 +94,15 @@ describe("inventory", () => {
         searchParameters: {
           order: "moment,desc",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with search option", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.inventory.list({
         search: "test inventory",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -111,15 +111,15 @@ describe("inventory", () => {
         searchParameters: {
           search: "test inventory",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("all", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
-      await moysklad.inventory.all();
+      await moysklad.inventory.all()
 
       expectFetch({
         fetchMock,
@@ -128,11 +128,11 @@ describe("inventory", () => {
         searchParameters: expect.objectContaining({
           limit: expect.any(String),
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.inventory.all({
         filter: {
@@ -141,7 +141,7 @@ describe("inventory", () => {
         expand: {
           organization: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -151,15 +151,15 @@ describe("inventory", () => {
           filter: "store=5427bc76-b95f-11eb-0a80-04bb000cd583",
           expand: "organization",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("first", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.inventory.first();
+      await moysklad.inventory.first()
 
       expectFetch({
         fetchMock,
@@ -168,18 +168,18 @@ describe("inventory", () => {
         searchParameters: {
           limit: "1",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.inventory.first({
         filter: {
           store: "5427bc76-b95f-11eb-0a80-04bb000cd583",
         },
         search: "test",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -190,27 +190,27 @@ describe("inventory", () => {
           filter: "store=5427bc76-b95f-11eb-0a80-04bb000cd583",
           search: "test",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("get", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.inventory.get(id);
+      await moysklad.inventory.get(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/inventory/${id}`,
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.inventory.get(id, {
         expand: {
@@ -218,7 +218,7 @@ describe("inventory", () => {
           positions: true,
           enters: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -228,42 +228,42 @@ describe("inventory", () => {
           expand: "organization,positions,enters",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("update", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Updated Inventory",
         description: "New description",
-      };
+      }
 
-      await moysklad.inventory.update(id, data);
+      await moysklad.inventory.update(id, data)
 
       expectFetch({
         fetchMock,
         url: `/entity/inventory/${id}`,
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Updated Inventory",
         description: "New description",
-      };
+      }
 
       await moysklad.inventory.update(id, data, {
         expand: {
           organization: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -274,13 +274,13 @@ describe("inventory", () => {
           expand: "organization",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("create", () => {
     it("makes a request with required fields", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         organization: {
           meta: {
@@ -308,20 +308,20 @@ describe("inventory", () => {
             type: Entity.Store,
           },
         },
-      } as const;
+      } as const
 
-      await moysklad.inventory.create(data);
+      await moysklad.inventory.create(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         organization: {
           meta: {
@@ -350,14 +350,14 @@ describe("inventory", () => {
           },
         },
         name: "New Inventory",
-      } as const;
+      } as const
 
       await moysklad.inventory.create(data, {
         expand: {
           organization: true,
           positions: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -368,13 +368,13 @@ describe("inventory", () => {
           expand: "organization,positions",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("upsert", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         // Create new inventory
         {
@@ -421,20 +421,20 @@ describe("inventory", () => {
           },
           description: "Updated description",
         },
-      ];
+      ]
 
-      await moysklad.inventory.upsert(data as never);
+      await moysklad.inventory.upsert(data as never)
 
       expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         // Create new inventory
         {
@@ -466,14 +466,14 @@ describe("inventory", () => {
           },
           name: "New Inventory",
         },
-      ];
+      ]
 
       await moysklad.inventory.upsert(data as never, {
         expand: {
           organization: true,
           positions: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -484,19 +484,19 @@ describe("inventory", () => {
           expand: "organization,positions",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("batchDelete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const ids = [
         "5427bc76-b95f-11eb-0a80-04bb000cd583",
         "5427bc76-b95f-11eb-0a80-04bb000cd584",
-      ];
+      ]
 
-      await moysklad.inventory.batchDelete(ids);
+      await moysklad.inventory.batchDelete(ids)
 
       expectFetch({
         fetchMock,
@@ -509,15 +509,15 @@ describe("inventory", () => {
             mediaType: MediaType.Json,
           },
         })),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("size", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.inventory.size();
+      await moysklad.inventory.size()
 
       expectFetch({
         fetchMock,
@@ -526,17 +526,17 @@ describe("inventory", () => {
         searchParameters: expect.objectContaining({
           limit: "0",
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.inventory.size({
         filter: {
           name: "Test Inventory",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -546,7 +546,7 @@ describe("inventory", () => {
           filter: "name=Test Inventory",
           limit: "0",
         }),
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})

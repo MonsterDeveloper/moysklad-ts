@@ -10,7 +10,7 @@ import type {
   Metadata,
   Model,
   PaginationOptions,
-} from "../../types";
+} from "../../types"
 
 /**
  * Прибыльность по модификациям
@@ -21,78 +21,78 @@ export interface ByVariantProfitReport {
   /** Краткое представление Модификации, Услуги или Комплекта в отчете. */
   assortment: {
     /** Метаданные Модификации, Услуги или Комплекта */
-    meta: Metadata<AssortmentEntity>;
+    meta: Metadata<AssortmentEntity>
     /** Наименование сущности */
-    name: string;
+    name: string
     /** Код сущности */
-    code: string;
+    code: string
     /** Артикул Модификации или Комплекта */
-    article?: string;
+    article?: string
     /** Изображение Модификации */
-    image?: unknown; // TODO add image type
+    image?: unknown // TODO add image type
     /** Единица измерения */
     uom: {
-      meta: Metadata<Entity.Uom>;
-      name: string;
-    };
-  };
+      meta: Metadata<Entity.Uom>
+      name: string
+    }
+  }
   /** Рентабельность */
-  margin: number;
+  margin: number
   /** Прибыль */
-  profit: number;
+  profit: number
   /** Себестоимость возвратов в копейках */
-  returnCost: number;
+  returnCost: number
   /** Сумма себестоимостей возвратов в копейках */
-  returnCostSum: number;
+  returnCostSum: number
   /** Цена возвратов */
-  returnPrice: number;
+  returnPrice: number
   /** Возвращенное количество */
-  returnQuantity: number;
+  returnQuantity: number
   /** Сумма возвратов */
-  returnSum: number;
+  returnSum: number
   /** Себестоимость в копейках */
-  sellCost: number;
+  sellCost: number
   /** Сумма себестоимостей продаж в копейках */
-  sellCostSum: number;
+  sellCostSum: number
   /** Цена продаж (средняя) */
-  sellPrice: number;
+  sellPrice: number
   /** Проданное количество */
-  sellQuantity: number;
+  sellQuantity: number
   /** Сумма продаж */
-  sellSum: number;
+  sellSum: number
 }
 
 export interface ByVariantProfitReportModel extends Model {
-  object: ByVariantProfitReport;
+  object: ByVariantProfitReport
   filters: {
     /** ссылка на товар, услугу, комплект, модификацию или серию, по которой нужно произвести фильтрацию. Можно передать несколько значений. Одновременная фильтрация по `product` и `productFolder` не поддерживается. */
-    product: IdFilter;
+    product: IdFilter
     /** параметр для фильтрации по нескольким группам товаров. Значение параметра - ссылка на группу товаров, которая должна быть включена в выборку или исключена из нее. Можно передать несколько значений. Одновременная фильтрация по `product` и `productFolder` не поддерживается. */
-    productFolder: IdFilter;
+    productFolder: IdFilter
     /** параметр учета вложенных подгрупп. Работает только при наличии фильтра по `productFolder`. По умолчанию `true`, выводятся товары из дочерних подгрупп фильтруемой группы / групп товаров. При передаче `false` выводятся только товары из фильтруемой группы / групп, без учета подгрупп. */
-    withSubFolders: BooleanFilter;
+    withSubFolders: BooleanFilter
     /** строка с названием группы контрагентов, по которой нужно произвести фильтрацию. */
-    agentTag: EqualityFilter<string>;
+    agentTag: EqualityFilter<string>
     /** ссылка на контрагента, по которому нужно произвести фильтрацию. */
-    counterparty: IdFilter;
+    counterparty: IdFilter
     /** ссылка на юрлицо, по которому нужно произвести фильтрацию. */
-    organization: IdFilter;
+    organization: IdFilter
     /** ссылка на склад, по которому нужно произвести фильтрацию. */
-    store: IdFilter;
+    store: IdFilter
     /** ссылка на проект, по которому нужно произвести фильтрацию. */
-    project: IdFilter;
+    project: IdFilter
     /** ссылка на точку продаж, по которой нужно произвести фильтрацию. */
-    retailStore: IdFilter;
+    retailStore: IdFilter
     /** параметр для фильтрации по поставщику. Значение параметра - ссылка на контрагента или организацию. В выборку будут включены товары с указанным поставщиком. */
-    supplier: IdFilter;
+    supplier: IdFilter
     /** ссылка на канал продаж, по которому нужно провести фильтрацию. Допустимо повторное использование фильтра, когда требуется фильтрация по нескольким каналам продаж. */
-    salesChannel: IdFilter;
-  };
+    salesChannel: IdFilter
+  }
 }
 
 export interface ByVariantProfitReportListOptions {
-  pagination?: PaginationOptions;
-  filter?: FilterOptions<ByVariantProfitReportModel>;
+  pagination?: PaginationOptions
+  filter?: FilterOptions<ByVariantProfitReportModel>
   /**
    * При отсутствии параметров `momentFrom` и `momentTo` отображаются отчеты за последний месяц.
    *
@@ -100,7 +100,7 @@ export interface ByVariantProfitReportListOptions {
    *
    * При отсутствии параметра `momentTo` и указании параметра `momentFrom` отображаются отчеты с `momentFrom` по текущий день.
    */
-  momentFrom?: DateTime;
+  momentFrom?: DateTime
   /**
    * При отсутствии параметров `momentFrom` и `momentTo` отображаются отчеты за последний месяц.
    *
@@ -108,11 +108,11 @@ export interface ByVariantProfitReportListOptions {
    *
    * При отсутствии параметра `momentTo` и указании параметра `momentFrom` отображаются отчеты с `momentFrom` по текущий день.
    */
-  momentTo?: DateTime;
+  momentTo?: DateTime
 }
 
 export interface ReportProfitEndpoint {
   byVariant: (
     options?: ByVariantProfitReportListOptions,
-  ) => Promise<ListResponse<ByVariantProfitReport, Entity.SalesByVariant>>;
+  ) => Promise<ListResponse<ByVariantProfitReport, Entity.SalesByVariant>>
 }

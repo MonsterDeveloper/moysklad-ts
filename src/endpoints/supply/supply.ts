@@ -1,25 +1,25 @@
 import type {
-  Entity,
   BatchDeleteResult,
+  BatchGetResult,
+  Entity,
   GetFindResult,
   GetModelUpdatableFields,
-  ListResponse,
-  Subset,
-  BatchGetResult,
-  ModelCreateOrUpdateData,
-  MatchArrayType,
   ListMeta,
-} from "../../types";
+  ListResponse,
+  MatchArrayType,
+  ModelCreateOrUpdateData,
+  Subset,
+} from "../../types"
 import type {
   AllSuppliesOptions,
-  SupplyModel,
   FirstSupplyOptions,
   GetSupplyOptions,
   ListSuppliesOptions,
-  UpsertSuppliesOptions,
-  UpdateSupplyOptions,
+  SupplyModel,
   SupplyTemplateData,
-} from "./types";
+  UpdateSupplyOptions,
+  UpsertSuppliesOptions,
+} from "./types"
 
 /**
  * Приёмки
@@ -44,7 +44,7 @@ export interface SupplyEndpoint {
     options?: Subset<T, ListSuppliesOptions>,
   ): Promise<
     ListResponse<GetFindResult<SupplyModel, T["expand"]>, Entity.Supply>
-  >;
+  >
 
   /**
    * Получить все приёмки
@@ -61,7 +61,7 @@ export interface SupplyEndpoint {
     options?: Subset<T, AllSuppliesOptions>,
   ): Promise<
     BatchGetResult<GetFindResult<SupplyModel, T["expand"]>, Entity.Supply>
-  >;
+  >
 
   /**
    * Получить приёмку по ID
@@ -80,7 +80,7 @@ export interface SupplyEndpoint {
   get<T extends GetSupplyOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetSupplyOptions>,
-  ): Promise<GetFindResult<SupplyModel, T["expand"]>>;
+  ): Promise<GetFindResult<SupplyModel, T["expand"]>>
 
   /**
    * Обновить приёмку
@@ -104,7 +104,7 @@ export interface SupplyEndpoint {
     id: string,
     data: GetModelUpdatableFields<SupplyModel>,
     options?: Subset<T, UpdateSupplyOptions>,
-  ): Promise<GetFindResult<SupplyModel, T["expand"]>>;
+  ): Promise<GetFindResult<SupplyModel, T["expand"]>>
 
   /**
    * Создать или обновить приёмку
@@ -132,7 +132,7 @@ export interface SupplyEndpoint {
     options?: Subset<TOptions, UpsertSuppliesOptions>,
   ): Promise<
     MatchArrayType<TData, GetFindResult<SupplyModel, TOptions["expand"]>>
-  >;
+  >
 
   /**
    * Получить первую приёмку, соответствующую фильтру
@@ -149,7 +149,7 @@ export interface SupplyEndpoint {
     options?: Subset<T, FirstSupplyOptions>,
   ): Promise<
     ListResponse<GetFindResult<SupplyModel, T["expand"]>, Entity.Supply>
-  >;
+  >
 
   /**
    * Получить количество приёмок
@@ -161,7 +161,7 @@ export interface SupplyEndpoint {
    * const count = await moysklad.supply.size();
    * ```
    */
-  size(options?: AllSuppliesOptions): Promise<ListMeta<Entity.Supply>>;
+  size(options?: AllSuppliesOptions): Promise<ListMeta<Entity.Supply>>
 
   /**
    * Удалить приёмку
@@ -175,7 +175,7 @@ export interface SupplyEndpoint {
    * await moysklad.supply.delete("a7404397-83a7-11ed-0a80-0e9700500d7e");
    * ```
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Удалить несколько приёмок
@@ -190,7 +190,7 @@ export interface SupplyEndpoint {
    * ]);
    * ```
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 
   /**
    * Создать шаблон приёмки на основе заказа поставщику
@@ -209,5 +209,5 @@ export interface SupplyEndpoint {
    */
   template(
     data: SupplyTemplateData,
-  ): Promise<GetFindResult<SupplyModel, { positions: true }>>;
+  ): Promise<GetFindResult<SupplyModel, { positions: true }>>
 }

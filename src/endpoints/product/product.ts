@@ -1,17 +1,17 @@
 import type {
+  AuditEvent,
   BatchDeleteResult,
   BatchGetResult,
   Entity,
+  GetAuditByEntityOptions,
   GetFindResult,
   GetModelUpdatableFields,
+  ListMeta,
   ListResponse,
   MatchArrayType,
   ModelCreateOrUpdateData,
   Subset,
-  ListMeta,
-  GetAuditByEntityOptions,
-  AuditEvent,
-} from "../../types";
+} from "../../types"
 import type {
   AllProductsOptions,
   FirstProductOptions,
@@ -20,7 +20,7 @@ import type {
   ProductModel,
   UpdateProductOptions,
   UpsertProductsOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Товары
@@ -40,7 +40,7 @@ export interface ProductEndpoint {
     options?: Subset<T, ListProductsOptions>,
   ): Promise<
     ListResponse<GetFindResult<ProductModel, T["expand"]>, Entity.Product>
-  >;
+  >
 
   /**
    * Получить все товары.
@@ -57,7 +57,7 @@ export interface ProductEndpoint {
       GetFindResult<ProductModel, T["expand"]>,
       Entity.BonusTransaction
     >
-  >;
+  >
 
   /**
    * Получить первый товар из списка.
@@ -71,7 +71,7 @@ export interface ProductEndpoint {
     options?: Subset<T, FirstProductOptions>,
   ): Promise<
     ListResponse<GetFindResult<ProductModel, T["expand"]>, Entity.Product>
-  >;
+  >
 
   /**
    * Получить товар по ID.
@@ -85,14 +85,14 @@ export interface ProductEndpoint {
   get<T extends GetProductOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetProductOptions>,
-  ): Promise<GetFindResult<ProductModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductModel, T["expand"]>>
 
   /**
    * Получить размер списка товаров.
    *
    * @returns Количество товаров
    */
-  size(options?: AllProductsOptions): Promise<ListMeta<Entity.Product>>;
+  size(options?: AllProductsOptions): Promise<ListMeta<Entity.Product>>
 
   /**
    * Удалить товар.
@@ -102,7 +102,7 @@ export interface ProductEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar-udalit-towar
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Обновить товар.
@@ -118,7 +118,7 @@ export interface ProductEndpoint {
     id: string,
     data: GetModelUpdatableFields<ProductModel>,
     options?: Subset<T, UpdateProductOptions>,
-  ): Promise<GetFindResult<ProductModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductModel, T["expand"]>>
 
   /**
    * Создать или обновить товар.
@@ -137,7 +137,7 @@ export interface ProductEndpoint {
     options?: Subset<TOptions, UpsertProductsOptions>,
   ): Promise<
     MatchArrayType<TData, GetFindResult<ProductModel, TOptions["expand"]>>
-  >;
+  >
 
   /**
    * Массовое удаление товаров.
@@ -147,7 +147,7 @@ export interface ProductEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar-massowoe-udalenie-towarow
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 
   /**
    * Переместить товар в корзину.
@@ -157,7 +157,7 @@ export interface ProductEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar-towar-w-korzinu
    */
-  trash(id: string): Promise<void>;
+  trash(id: string): Promise<void>
 
   /**
    * Получить события аудита для товара.
@@ -173,5 +173,5 @@ export interface ProductEndpoint {
   audit(
     id: string,
     options?: GetAuditByEntityOptions,
-  ): Promise<ListResponse<AuditEvent, Entity.AuditEvent>>;
+  ): Promise<ListResponse<AuditEvent, Entity.AuditEvent>>
 }

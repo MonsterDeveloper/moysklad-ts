@@ -7,7 +7,7 @@ import type {
   ProductAssortmentModel,
   ServiceAssortmentModel,
   VariantAssortmentModel,
-} from "../types";
+} from "../types"
 
 type GetAssortmentObject<T extends AssortmentEntity> = T extends Entity.Variant
   ? VariantAssortmentModel["object"]
@@ -19,7 +19,7 @@ type GetAssortmentObject<T extends AssortmentEntity> = T extends Entity.Variant
         ? ConsignmentAssortmentModel["object"]
         : T extends Entity.Service
           ? ServiceAssortmentModel["object"]
-          : never;
+          : never
 
 /**
  * Проверяет, является ли ассортимент определенного типа.
@@ -41,5 +41,5 @@ export function isAssortmentOfType<T extends AssortmentEntity>(
   assortment: AssortmentModel["object"],
   entity: T,
 ): assortment is GetAssortmentObject<T> {
-  return assortment.meta.type === entity;
+  return assortment.meta.type === entity
 }

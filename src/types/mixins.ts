@@ -1,3 +1,3 @@
 export interface Idable {
-  readonly id: string;
+  readonly id: string
 }

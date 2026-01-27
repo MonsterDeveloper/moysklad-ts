@@ -1,19 +1,19 @@
-import {
+import type {
+  BatchGetResult,
   Entity,
-  type GetFindResult,
-  type GetModelUpdatableFields,
-  type ListResponse,
-  type Subset,
-  type BatchGetResult,
-} from "../../types";
+  GetFindResult,
+  GetModelUpdatableFields,
+  ListResponse,
+  Subset,
+} from "../../types"
 import type {
   AllProductionStagesOptions,
-  ProductionStageModel,
   FirstProductionStageOptions,
   GetProductionStageOptions,
   ListProductionStagesOptions,
+  ProductionStageModel,
   UpdateProductionStageOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Производственные этапы
@@ -50,7 +50,7 @@ export interface ProductionStageEndpoint {
       GetFindResult<ProductionStageModel, T["expand"]>,
       Entity.ProductionStage
     >
-  >;
+  >
 
   /**
    * Получить все производственные этапы.
@@ -76,7 +76,7 @@ export interface ProductionStageEndpoint {
       GetFindResult<ProductionStageModel, T["expand"]>,
       Entity.ProductionStage
     >
-  >;
+  >
 
   /**
    * Получить производственный этап по id.
@@ -95,7 +95,7 @@ export interface ProductionStageEndpoint {
   get<T extends GetProductionStageOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetProductionStageOptions>,
-  ): Promise<GetFindResult<ProductionStageModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductionStageModel, T["expand"]>>
 
   /**
    * Изменить производственный этап.
@@ -119,7 +119,7 @@ export interface ProductionStageEndpoint {
     id: string,
     data: GetModelUpdatableFields<ProductionStageModel>,
     options?: Subset<T, UpdateProductionStageOptions>,
-  ): Promise<GetFindResult<ProductionStageModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductionStageModel, T["expand"]>>
 
   /**
    * Получить первый производственный этап.
@@ -145,7 +145,7 @@ export interface ProductionStageEndpoint {
       GetFindResult<ProductionStageModel, T["expand"]>,
       Entity.ProductionStage
     >
-  >;
+  >
 
   /**
    * Получить общее количество производственных этапов.
@@ -153,5 +153,5 @@ export interface ProductionStageEndpoint {
    * @param options - Опции для получения количества производственных этапов {@linkcode FirstProductionStageOptions}
    * @returns Общее количество производственных этапов
    */
-  size(options: FirstProductionStageOptions): Promise<number>;
+  size(options: FirstProductionStageOptions): Promise<number>
 }

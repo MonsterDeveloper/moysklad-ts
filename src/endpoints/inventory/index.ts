@@ -1,2 +1,2 @@
-export type { InventoryEndpoint } from "./inventory";
-export * from "./types";
+export type { InventoryEndpoint } from "./inventory"
+export * from "./types"

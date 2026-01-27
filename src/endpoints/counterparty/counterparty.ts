@@ -1,4 +1,15 @@
 import type {
+  BatchGetResult,
+  Entity,
+  GetFindResult,
+  GetModelUpdatableFields,
+  ListMeta,
+  ListResponse,
+  MatchArrayType,
+  ModelCreateOrUpdateData,
+  Subset,
+} from "../../types"
+import type {
   AllCounterpartiesOptions,
   CounterpartyModel,
   FirstCounterpartyOptions,
@@ -6,18 +17,7 @@ import type {
   ListCounterpartiesOptions,
   UpdateCounterpartyOptions,
   UpsertCounterpartyOptions,
-} from "./types";
-import type {
-  BatchGetResult,
-  Entity,
-  GetFindResult,
-  GetModelUpdatableFields,
-  ListResponse,
-  Subset,
-  ModelCreateOrUpdateData,
-  MatchArrayType,
-  ListMeta,
-} from "../../types";
+} from "./types"
 
 /**
  * Контрагенты
@@ -45,7 +45,7 @@ export interface CounterpartyEndpoint {
       GetFindResult<CounterpartyModel, T["expand"]>,
       Entity.Counterparty
     >
-  >;
+  >
 
   /**
    * Получить все контрагенты.
@@ -67,7 +67,7 @@ export interface CounterpartyEndpoint {
       GetFindResult<CounterpartyModel, T["expand"]>,
       Entity.Counterparty
     >
-  >;
+  >
 
   /**
    * Получить контрагента по id.
@@ -86,7 +86,7 @@ export interface CounterpartyEndpoint {
   get<T extends GetCounterpartyOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetCounterpartyOptions>,
-  ): Promise<GetFindResult<CounterpartyModel, T["expand"]>>;
+  ): Promise<GetFindResult<CounterpartyModel, T["expand"]>>
 
   /**
    * Изменить контрагента.
@@ -109,7 +109,7 @@ export interface CounterpartyEndpoint {
     id: string,
     data: GetModelUpdatableFields<CounterpartyModel>,
     options?: Subset<T, UpdateCounterpartyOptions>,
-  ): Promise<GetFindResult<CounterpartyModel, T["expand"]>>;
+  ): Promise<GetFindResult<CounterpartyModel, T["expand"]>>
 
   /**
    * Получить первого контрагента из списка.
@@ -132,7 +132,7 @@ export interface CounterpartyEndpoint {
       GetFindResult<CounterpartyModel, T["expand"]>,
       Entity.Counterparty
     >
-  >;
+  >
 
   /**
    * Получить количество контрагентов.
@@ -148,7 +148,7 @@ export interface CounterpartyEndpoint {
    */
   size(
     options?: AllCounterpartiesOptions,
-  ): Promise<ListMeta<Entity.Counterparty>>;
+  ): Promise<ListMeta<Entity.Counterparty>>
 
   /**
    * Создать или обновить контрагента.
@@ -173,5 +173,5 @@ export interface CounterpartyEndpoint {
     options?: Subset<TOptions, UpsertCounterpartyOptions>,
   ): Promise<
     MatchArrayType<TData, GetFindResult<CounterpartyModel, TOptions["expand"]>>
-  >;
+  >
 }

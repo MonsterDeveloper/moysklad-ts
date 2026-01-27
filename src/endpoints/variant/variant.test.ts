@@ -1,32 +1,32 @@
-import { describe, it, expect } from "vitest";
-import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
-import { Entity } from "../../types/entity";
-import { MediaType } from "../../types/media-type";
-import { AttributeType } from "../../types/attribute";
+import { describe, expect, it } from "vitest"
+import { createFetchMock, expectFetch, moysklad } from "../../../test-utils"
+import { AttributeType } from "../../types/attribute"
+import { Entity } from "../../types/entity"
+import { MediaType } from "../../types/media-type"
 
 describe("variant", () => {
   describe("list", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.variant.list();
+      await moysklad.variant.list()
 
       expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with pagination options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.variant.list({
         pagination: {
           limit: 100,
           offset: 50,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -36,18 +36,18 @@ describe("variant", () => {
           limit: "100",
           offset: "50",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.variant.list({
         filter: {
           archived: false,
           name: "Test Variant",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -56,17 +56,17 @@ describe("variant", () => {
         searchParameters: {
           filter: "archived=false;name=Test Variant",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.variant.list({
         expand: {
           product: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -76,15 +76,15 @@ describe("variant", () => {
           expand: "product",
           limit: expect.any(String),
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with order options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.variant.list({
         order: { field: "name", direction: "desc" },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -93,15 +93,15 @@ describe("variant", () => {
         searchParameters: {
           order: "name,desc",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with search option", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.variant.list({
         search: "test variant",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -110,15 +110,15 @@ describe("variant", () => {
         searchParameters: {
           search: "test variant",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("all", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
-      await moysklad.variant.all();
+      await moysklad.variant.all()
 
       expectFetch({
         fetchMock,
@@ -127,11 +127,11 @@ describe("variant", () => {
         searchParameters: expect.objectContaining({
           limit: expect.any(String),
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.variant.all({
         filter: {
@@ -140,7 +140,7 @@ describe("variant", () => {
         expand: {
           product: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -150,15 +150,15 @@ describe("variant", () => {
           filter: "archived=false",
           expand: "product",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("first", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.variant.first();
+      await moysklad.variant.first()
 
       expectFetch({
         fetchMock,
@@ -167,18 +167,18 @@ describe("variant", () => {
         searchParameters: {
           limit: "1",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.variant.first({
         filter: {
           archived: false,
         },
         search: "test",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -189,33 +189,33 @@ describe("variant", () => {
           filter: "archived=false",
           search: "test",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("get", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.variant.get(id);
+      await moysklad.variant.get(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/variant/${id}`,
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.variant.get(id, {
         expand: {
           product: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -225,15 +225,15 @@ describe("variant", () => {
           expand: "product",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("size", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.variant.size();
+      await moysklad.variant.size()
 
       expectFetch({
         fetchMock,
@@ -242,17 +242,17 @@ describe("variant", () => {
         searchParameters: expect.objectContaining({
           limit: "0",
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.variant.size({
         filter: {
           name: "Test Variant",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -262,57 +262,57 @@ describe("variant", () => {
           filter: "name=Test Variant",
           limit: "0",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("delete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.variant.delete(id);
+      await moysklad.variant.delete(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/variant/${id}`,
         method: "DELETE",
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("update", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Updated Variant",
         description: "New description",
-      };
+      }
 
-      await moysklad.variant.update(id, data);
+      await moysklad.variant.update(id, data)
 
       expectFetch({
         fetchMock,
         url: `/entity/variant/${id}`,
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Updated Variant",
         description: "New description",
-      };
+      }
 
       await moysklad.variant.update(id, data, {
         expand: {
           product: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -323,13 +323,13 @@ describe("variant", () => {
           expand: "product",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("create", () => {
     it("makes a request with required fields", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         product: {
           meta: {
@@ -364,20 +364,20 @@ describe("variant", () => {
             },
           },
         ],
-      };
+      }
 
-      await moysklad.variant.create(data);
+      await moysklad.variant.create(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         product: {
           meta: {
@@ -412,13 +412,13 @@ describe("variant", () => {
           },
         ],
         name: "New Variant",
-      };
+      }
 
       await moysklad.variant.create(data as never, {
         expand: {
           product: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -429,19 +429,19 @@ describe("variant", () => {
           expand: "product",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("batchDelete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const ids = [
         "5427bc76-b95f-11eb-0a80-04bb000cd583",
         "5427bc76-b95f-11eb-0a80-04bb000cd584",
-      ];
+      ]
 
-      await moysklad.variant.batchDelete(ids);
+      await moysklad.variant.batchDelete(ids)
 
       expectFetch({
         fetchMock,
@@ -454,28 +454,28 @@ describe("variant", () => {
             mediaType: MediaType.Json,
           },
         })),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("trash", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.variant.trash(id);
+      await moysklad.variant.trash(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/variant/${id}/trash`,
         method: "POST",
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("upsert", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         // Create new variant
         {
@@ -528,20 +528,20 @@ describe("variant", () => {
           },
           description: "Updated description",
         },
-      ];
+      ]
 
-      await moysklad.variant.upsert(data as never);
+      await moysklad.variant.upsert(data as never)
 
       expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         // Create new variant
         {
@@ -579,13 +579,13 @@ describe("variant", () => {
           ],
           name: "New Variant",
         },
-      ];
+      ]
 
       await moysklad.variant.upsert(data as never, {
         expand: {
           product: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -596,7 +596,7 @@ describe("variant", () => {
           expand: "product",
           limit: expect.any(String),
         },
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})

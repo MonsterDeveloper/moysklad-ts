@@ -4,7 +4,7 @@ import type {
   ProductModel,
   ServiceModel,
   VariantModel,
-} from "../endpoints";
+} from "../endpoints"
 
 export enum Entity {
   Assortment = "assortment",
@@ -101,32 +101,32 @@ export type AssortmentEntity =
   | Entity.Service
   | Entity.Bundle
   | Entity.Variant
-  | Entity.Consignment;
+  | Entity.Consignment
 
 type AssortmentFields = {
   /** Остаток */
-  readonly stock: number;
+  readonly stock: number
   /** Резерв */
-  readonly reserve: number;
+  readonly reserve: number
   /** Ожидание */
-  readonly inTransit: number;
+  readonly inTransit: number
   /** Доступно */
-  readonly quantity: number;
-};
+  readonly quantity: number
+}
 
 export type ProductAssortmentModel = ProductModel & {
-  object: AssortmentFields;
-};
+  object: AssortmentFields
+}
 export type VariantAssortmentModel = VariantModel & {
-  object: AssortmentFields;
-};
-export type BundleAssortmentModel = BundleModel & { object: AssortmentFields };
+  object: AssortmentFields
+}
+export type BundleAssortmentModel = BundleModel & { object: AssortmentFields }
 export type ConsignmentAssortmentModel = ConsignmentModel & {
-  object: AssortmentFields;
-};
+  object: AssortmentFields
+}
 export type ServiceAssortmentModel = ServiceModel & {
-  object: AssortmentFields;
-};
+  object: AssortmentFields
+}
 
 /**
  * Ассортимент
@@ -138,4 +138,4 @@ export type AssortmentModel =
   | VariantAssortmentModel
   | BundleAssortmentModel
   | ConsignmentAssortmentModel
-  | ServiceAssortmentModel;
+  | ServiceAssortmentModel

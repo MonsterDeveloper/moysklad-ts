@@ -10,7 +10,7 @@ import type {
   Metadata,
   Model,
   PaginationOptions,
-} from "../../types";
+} from "../../types"
 
 /**
  * Показатели оборотов (начало/конец периода, приход/расход)
@@ -19,9 +19,9 @@ import type {
  */
 export interface TurnoverMetrics {
   /** Сумма себестоимости в копейках */
-  sum: number;
+  sum: number
   /** Количество единиц товара */
-  quantity: number;
+  quantity: number
 }
 
 /**
@@ -31,25 +31,25 @@ export interface TurnoverMetrics {
  */
 export interface TurnoverAssortment {
   /** Метаданные Товара или Модификации */
-  meta: Metadata<AssortmentEntity>;
+  meta: Metadata<AssortmentEntity>
   /** Наименование Товара или Модификации */
-  name: string;
+  name: string
   /** Код Товара */
-  code?: string;
+  code?: string
   /** Артикул Товара */
-  article?: string;
+  article?: string
   /** Изображение Товара или Модификации */
-  image?: unknown; // TODO add image type
+  image?: unknown // TODO add image type
   /** Группа Товара или Модификации */
   productFolder?: {
-    meta: Metadata<Entity.ProductFolder>;
-    name: string;
-  };
+    meta: Metadata<Entity.ProductFolder>
+    name: string
+  }
   /** Единица измерения */
   uom?: {
-    meta: Metadata<Entity.Uom>;
-    name: string;
-  };
+    meta: Metadata<Entity.Uom>
+    name: string
+  }
 }
 
 /**
@@ -59,15 +59,15 @@ export interface TurnoverAssortment {
  */
 export interface TurnoverReport {
   /** Краткое представление Товара или Модификации в отчете */
-  assortment: TurnoverAssortment;
+  assortment: TurnoverAssortment
   /** Показатели на начало периода */
-  onPeriodStart: TurnoverMetrics;
+  onPeriodStart: TurnoverMetrics
   /** Показатели на конец периода */
-  onPeriodEnd: TurnoverMetrics;
+  onPeriodEnd: TurnoverMetrics
   /** Показатели прихода в течение периода отчета */
-  income: TurnoverMetrics;
+  income: TurnoverMetrics
   /** Показатели расхода в течение периода отчета */
-  outcome: TurnoverMetrics;
+  outcome: TurnoverMetrics
 }
 
 /**
@@ -77,23 +77,23 @@ export interface TurnoverReport {
  */
 export interface TurnoverByStoreReport {
   /** Краткое представление Товара или Модификации в отчете */
-  assortment: TurnoverAssortment;
+  assortment: TurnoverAssortment
   /** Детализация оборотов по складам */
   stockByStore: Array<{
     /** Склад */
     store: {
-      meta: Metadata<Entity.Store>;
-      name: string;
-    };
+      meta: Metadata<Entity.Store>
+      name: string
+    }
     /** Показатели на начало периода */
-    onPeriodStart: TurnoverMetrics;
+    onPeriodStart: TurnoverMetrics
     /** Показатели на конец периода */
-    onPeriodEnd: TurnoverMetrics;
+    onPeriodEnd: TurnoverMetrics
     /** Показатели прихода в течение периода отчета */
-    income: TurnoverMetrics;
+    income: TurnoverMetrics
     /** Показатели расхода в течение периода отчета */
-    outcome: TurnoverMetrics;
-  }>;
+    outcome: TurnoverMetrics
+  }>
 }
 
 /**
@@ -103,52 +103,52 @@ export interface TurnoverByStoreReport {
  */
 export interface TurnoverByOperationReport {
   /** Краткое представление Товара или Модификации в отчете */
-  assortment: TurnoverAssortment;
+  assortment: TurnoverAssortment
   /** Склад */
   store: {
-    meta: Metadata<Entity.Store>;
-    name: string;
-  };
+    meta: Metadata<Entity.Store>
+    name: string
+  }
   /** Документ, связанный с Товаром */
   operation: {
-    meta: Metadata<Entity>;
-    name: string;
-    description?: string;
-    moment: DateTime;
+    meta: Metadata<Entity>
+    name: string
+    description?: string
+    moment: DateTime
     agent?: {
-      meta: Metadata<Entity.Counterparty>;
-      name: string;
-    };
-  };
+      meta: Metadata<Entity.Counterparty>
+      name: string
+    }
+  }
   /** Количество товара в документе */
-  quantity: number;
+  quantity: number
   /** Себестоимость товара в копейках в документе */
-  cost: number;
+  cost: number
   /** Сумма себестоимостей в копейках */
-  sum: number;
+  sum: number
 }
 
 export interface TurnoverReportModel extends Model {
-  object: TurnoverReport;
+  object: TurnoverReport
   filters: {
     /** ссылка на контрагента, по которому нужно произвести фильтрацию */
-    agent: IdFilter;
+    agent: IdFilter
     /** строка с названием группы контрагентов, по которой нужно произвести фильтрацию */
-    agentTag: IdFilter;
+    agentTag: IdFilter
     /** ссылка на договор, по которому нужно произвести фильтрацию */
-    contract: IdFilter;
+    contract: IdFilter
     /** ссылка на юрлицо, по которому нужно произвести фильтрацию */
-    organization: IdFilter;
+    organization: IdFilter
     /** ссылка на товар, по которому нужно произвести фильтрацию */
-    product: IdFilter;
+    product: IdFilter
     /** ссылка на проект, по которому нужно произвести фильтрацию */
-    project: IdFilter;
+    project: IdFilter
     /** ссылка на точку продаж, по которой нужно произвести фильтрацию */
-    retailStore: IdFilter;
+    retailStore: IdFilter
     /** ссылка на склад, по которому нужно произвести фильтрацию */
-    store: IdFilter;
+    store: IdFilter
     /** параметр для фильтрации по поставщику */
-    supplier: IdFilter;
+    supplier: IdFilter
     /** тип документа */
     type:
       | "supply"
@@ -161,20 +161,20 @@ export interface TurnoverReportModel extends Model {
       | "processing"
       | "retaildemand"
       | "retailsalesreturn"
-      | "productionstagecompletion";
+      | "productionstagecompletion"
 
     /** ссылка на модификацию, по которой нужно произвести фильтрацию */
-    variant: IdFilter;
+    variant: IdFilter
     /** параметр для фильтрации "Показывать товары без движения" */
-    withoutturnover: BooleanFilter;
+    withoutturnover: BooleanFilter
     /** параметр для фильтрации "Показывать архивные" */
-    archived: ArchivedFilter;
-  };
+    archived: ArchivedFilter
+  }
 }
 
 export interface TurnoverReportListOptions {
-  pagination?: PaginationOptions;
-  filter?: FilterOptions<TurnoverReportModel>;
+  pagination?: PaginationOptions
+  filter?: FilterOptions<TurnoverReportModel>
   /**
    * При отсутствии параметров `momentFrom` и `momentTo` отображаются отчеты за последний месяц.
    *
@@ -182,7 +182,7 @@ export interface TurnoverReportListOptions {
    *
    * При отсутствии параметра `momentTo` и указании параметра `momentFrom` отображаются отчеты с `momentFrom` по текущий день.
    */
-  momentFrom?: DateTime;
+  momentFrom?: DateTime
   /**
    * При отсутствии параметров `momentFrom` и `momentTo` отображаются отчеты за последний месяц.
    *
@@ -190,16 +190,16 @@ export interface TurnoverReportListOptions {
    *
    * При отсутствии параметра `momentTo` и указании параметра `momentFrom` отображаются отчеты с `momentFrom` по текущий день.
    */
-  momentTo?: DateTime;
+  momentTo?: DateTime
   /**
    * Тип, по которому нужно сгруппировать выдачу.
    * По умолчанию параметр groupBy имеет значение product.
    */
-  groupBy?: "product" | "variant";
+  groupBy?: "product" | "variant"
 }
 
 export interface TurnoverByStoreReportListOptions {
-  filter?: FilterOptions<TurnoverReportModel>;
+  filter?: FilterOptions<TurnoverReportModel>
   /**
    * При отсутствии параметров `momentFrom` и `momentTo` отображаются отчеты за последний месяц.
    *
@@ -207,7 +207,7 @@ export interface TurnoverByStoreReportListOptions {
    *
    * При отсутствии параметра `momentTo` и указании параметра `momentFrom` отображаются отчеты с `momentFrom` по текущий день.
    */
-  momentFrom?: DateTime;
+  momentFrom?: DateTime
   /**
    * При отсутствии параметров `momentFrom` и `momentTo` отображаются отчеты за последний месяц.
    *
@@ -215,36 +215,36 @@ export interface TurnoverByStoreReportListOptions {
    *
    * При отсутствии параметра `momentTo` и указании параметра `momentFrom` отображаются отчеты с `momentFrom` по текущий день.
    */
-  momentTo?: DateTime;
+  momentTo?: DateTime
 }
 
 export interface TurnoverByOperationReportListOptions {
-  filter?: FilterOptions<TurnoverReportModel>;
+  filter?: FilterOptions<TurnoverReportModel>
   /**
    * Начало периода отчета
    */
-  momentFrom: DateTime;
+  momentFrom: DateTime
   /**
    * Конец периода отчета
    */
-  momentTo: DateTime;
+  momentTo: DateTime
 }
 
 export interface ReportTurnoverEndpoint {
   /** Обороты по товарам */
   all: (
     options?: TurnoverReportListOptions,
-  ) => Promise<ListResponse<TurnoverReport, Entity.TurnoverAll>>;
+  ) => Promise<ListResponse<TurnoverReport, Entity.TurnoverAll>>
 
   /** Обороты по товару с детализацией по складам */
   byStore: (
     options?: TurnoverByStoreReportListOptions,
-  ) => Promise<ListResponse<TurnoverByStoreReport, Entity.TurnoverByStore>>;
+  ) => Promise<ListResponse<TurnoverByStoreReport, Entity.TurnoverByStore>>
 
   /** Обороты по товару с детализацией по документам */
   byOperation: (
     options: TurnoverByOperationReportListOptions,
   ) => Promise<
     ListResponse<TurnoverByOperationReport, Entity.TurnoverByOperation>
-  >;
+  >
 }

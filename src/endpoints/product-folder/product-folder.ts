@@ -1,23 +1,23 @@
 import type {
+  BatchGetResult,
   Entity,
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
   ListResponse,
-  Subset,
-  BatchGetResult,
-  ModelCreateOrUpdateData,
   MatchArrayType,
-} from "../../types";
+  ModelCreateOrUpdateData,
+  Subset,
+} from "../../types"
 import type {
-  ProductFolderModel,
   CreateProductFolderOptions,
   FirstProductFolderOptions,
   GetProductFolderOptions,
   ListProductFoldersOptions,
+  ProductFolderModel,
   UpdateProductFolderOptions,
   UpsertProductFolderOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Группы товаров
@@ -45,7 +45,7 @@ export interface ProductFolderEndpoint {
       GetFindResult<ProductFolderModel, T["expand"]>,
       Entity.ProductFolder
     >
-  >;
+  >
 
   /**
    * Получить все группы товаров
@@ -65,7 +65,7 @@ export interface ProductFolderEndpoint {
       GetFindResult<ProductFolderModel, T["expand"]>,
       Entity.ProductFolder
     >
-  >;
+  >
 
   /**
    * Получить первую группу товаров, соответствующую фильтру
@@ -80,7 +80,7 @@ export interface ProductFolderEndpoint {
    */
   first<T extends FirstProductFolderOptions = Record<string, unknown>>(
     options?: Subset<T, FirstProductFolderOptions>,
-  ): Promise<GetFindResult<ProductFolderModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductFolderModel, T["expand"]>>
 
   /**
    * Получить группу товаров по ID
@@ -99,7 +99,7 @@ export interface ProductFolderEndpoint {
   get<T extends GetProductFolderOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetProductFolderOptions>,
-  ): Promise<GetFindResult<ProductFolderModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductFolderModel, T["expand"]>>
 
   /**
    * Создать новую группу товаров
@@ -122,7 +122,7 @@ export interface ProductFolderEndpoint {
   create<T extends CreateProductFolderOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<ProductFolderModel>,
     options?: Subset<T, CreateProductFolderOptions>,
-  ): Promise<GetFindResult<ProductFolderModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductFolderModel, T["expand"]>>
 
   /**
    * Обновить группу товаров
@@ -146,7 +146,7 @@ export interface ProductFolderEndpoint {
     id: string,
     data: GetModelUpdatableFields<ProductFolderModel>,
     options?: Subset<T, UpdateProductFolderOptions>,
-  ): Promise<GetFindResult<ProductFolderModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductFolderModel, T["expand"]>>
 
   /**
    * Создать или обновить группу товаров
@@ -194,7 +194,7 @@ export interface ProductFolderEndpoint {
     options?: Subset<TOptions, UpsertProductFolderOptions>,
   ): Promise<
     MatchArrayType<TData, GetFindResult<ProductFolderModel, TOptions["expand"]>>
-  >;
+  >
 
   /**
    * Удалить группу товаров
@@ -208,7 +208,7 @@ export interface ProductFolderEndpoint {
    * await moysklad.productFolder.delete("a7404397-83a7-11ed-0a80-0e9700500d7e");
    * ```
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Удалить несколько групп товаров
@@ -223,5 +223,5 @@ export interface ProductFolderEndpoint {
    * ]);
    * ```
    */
-  batchDelete(ids: string[]): Promise<void>;
+  batchDelete(ids: string[]): Promise<void>
 }

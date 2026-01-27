@@ -8,8 +8,8 @@ import type {
   Entity,
   ExpandOptions,
   FilterOptions,
-  IdFilter,
   Idable,
+  IdFilter,
   ListMeta,
   Meta,
   Metadata,
@@ -20,11 +20,11 @@ import type {
   PositionFields,
   StringFilter,
   UpdateMeta,
-} from "../../types";
-import type { CounterpartyModel } from "../counterparty";
-import type { GroupModel } from "../group";
-import type { OrganizationModel } from "../organization";
-import type { EmployeeModel } from "../employee";
+} from "../../types"
+import type { CounterpartyModel } from "../counterparty"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
+import type { OrganizationModel } from "../organization"
 
 /**
  * Позиция Возврата покупателя
@@ -33,42 +33,42 @@ import type { EmployeeModel } from "../employee";
  */
 export interface SalesReturnPosition extends Idable, Meta<Entity.SalesReturn> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Метаданные товара/услуги/серии/модификации, которую представляет собой позиция */
-  assortment: Meta<AssortmentEntity>;
+  assortment: Meta<AssortmentEntity>
 
   /**
    * Себестоимость
    *
    * Выводится, если документ был создан без основания
    */
-  cost?: number;
+  cost?: number
 
   /** Метаданные Страны */
-  country?: Meta<Entity.Country>;
+  country?: Meta<Entity.Country>
 
   /** Процент скидки или наценки. Наценка указывается отрицательным числом, т.е. -10 создаст наценку в 10% */
-  discount?: number;
+  discount?: number
 
   /** ГТД */
-  gtd?: unknown; // TODO add GTD type
+  gtd?: unknown // TODO add GTD type
 
   /** Упаковка Товара */
-  pack?: unknown; // TODO add pack type
+  pack?: unknown // TODO add pack type
 
   /** Цена товара/услуги в копейках */
-  price: number;
+  price: number
 
   /**
    * Количество товаров/услуг данного вида в позиции.
    *
    * Если позиция - товар, у которого включен учет по серийным номерам, то значение в этом поле всегда будет равно количеству серийных номеров для данной позиции в документе.
    */
-  quantity: number;
+  quantity: number
 
   /** Ячейка на складе */
-  slot?: Meta<Entity.Slot>;
+  slot?: Meta<Entity.Slot>
 
   /**
    * Серийные номера.
@@ -76,10 +76,10 @@ export interface SalesReturnPosition extends Idable, Meta<Entity.SalesReturn> {
    * Значение данного атрибута игнорируется, если товар позиции не находится на серийном учете.
    * В ином случае количество товаров в позиции будет равно количеству серийных номеров, переданных в значении атрибута.
    */
-  things?: string[];
+  things?: string[]
 
   /** НДС, которым облагается текущая позиция */
-  vat: number;
+  vat: number
 
   /**
    * Включен ли НДС для позиции.
@@ -87,14 +87,14 @@ export interface SalesReturnPosition extends Idable, Meta<Entity.SalesReturn> {
    * С помощью этого флага для позиции можно выставлять НДС = 0 или НДС = "без НДС".
    * (vat = 0, vatEnabled = false) -> vat = "без НДС", (vat = 0, vatEnabled = true) -> vat = 0%.
    */
-  vatEnabled: boolean;
+  vatEnabled: boolean
 }
 
 /**
  * Модель позиции Возврата покупателя
  */
 export interface SalesReturnPositionModel extends Model {
-  object: SalesReturnPosition;
+  object: SalesReturnPosition
 }
 
 /**
@@ -104,168 +104,168 @@ export interface SalesReturnPositionModel extends Model {
  */
 export interface SalesReturn extends Idable, Meta<Entity.SalesReturn> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Метаданные контрагента */
-  agent: Meta<Entity.Counterparty>;
+  agent: Meta<Entity.Counterparty>
 
   /** Метаданные счета контрагента */
-  agentAccount?: Meta<Entity.Account>;
+  agentAccount?: Meta<Entity.Account>
 
   /** Отметка о проведении */
-  applicable: boolean;
+  applicable: boolean
 
   /** Коллекция метаданных доп. полей */
-  attributes?: unknown[]; // TODO add attributes types & filters
+  attributes?: unknown[] // TODO add attributes types & filters
 
   /** Код Возврата Покупателя */
-  code?: string;
+  code?: string
 
   /** Метаданные договора */
-  contract?: Meta<Entity.Contract>; // TODO expand contract
+  contract?: Meta<Entity.Contract> // TODO expand contract
 
   /** Дата создания */
-  readonly created: DateTime;
+  readonly created: DateTime
 
   /** Момент последнего удаления Возврата Покупателя */
-  readonly deleted?: DateTime;
+  readonly deleted?: DateTime
 
   /** Комментарий Возврата Покупателя */
-  description?: string;
+  description?: string
 
   /** Внешний код Возврата Покупателя */
-  externalCode: string;
+  externalCode: string
 
   /** Метаданные массива Файлов (Максимальное количество файлов - 100) */
-  files: unknown[]; // TODO add files types & expand
+  files: unknown[] // TODO add files types & expand
 
   /** Отдел сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /** ID Возврата Покупателя */
-  readonly id: string;
+  readonly id: string
 
   /** Метаданные Возврата Покупателя */
-  readonly meta: Metadata<Entity.SalesReturn>;
+  readonly meta: Metadata<Entity.SalesReturn>
 
   /** Дата документа */
-  moment: DateTime;
+  moment: DateTime
 
   /** Наименование Возврата Покупателя */
-  name: string;
+  name: string
 
   /** Метаданные юрлица */
-  organization: Meta<Entity.Organization>;
+  organization: Meta<Entity.Organization>
 
   /** Метаданные счета юрлица */
-  organizationAccount?: Meta<Entity.Account>;
+  organizationAccount?: Meta<Entity.Account>
 
   /** Владелец (Сотрудник) */
-  owner?: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>
 
   /** Метаданные позиций Возврата Покупателя */
-  positions: ListMeta<Entity.SalesReturn>; // Using Entity.SalesReturn as a fallback
+  positions: ListMeta<Entity.SalesReturn> // Using Entity.SalesReturn as a fallback
 
   /** Напечатан ли документ */
-  readonly printed: boolean;
+  readonly printed: boolean
 
   /** Метаданные проекта */
-  project?: Meta<Entity.Project>; // TODO expand project
+  project?: Meta<Entity.Project> // TODO expand project
 
   /** Опубликован ли документ */
-  readonly published: boolean;
+  readonly published: boolean
 
   /** Валюта */
-  rate: DocumentRate;
+  rate: DocumentRate
 
   /** Метаданные канала продаж */
-  salesChannel?: Meta<Entity.SalesChannel>; // TODO expand salesChannel
+  salesChannel?: Meta<Entity.SalesChannel> // TODO expand salesChannel
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** Метаданные статуса Возврата Покупателя */
-  state?: Meta<Entity.State>; // TODO expand state
+  state?: Meta<Entity.State> // TODO expand state
 
   /** Метаданные склада */
-  store: Meta<Entity.Store>; // TODO expand store
+  store: Meta<Entity.Store> // TODO expand store
 
   /** Сумма Возврата Покупателя в копейках */
-  readonly sum: number;
+  readonly sum: number
 
   /** ID синхронизации. После заполнения недоступен для изменения */
-  syncId?: string;
+  syncId?: string
 
   /** Момент последнего обновления Возврата Покупателя */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 
   /** Учитывается ли НДС */
-  vatEnabled: boolean;
+  vatEnabled: boolean
 
   /** Включен ли НДС в цену */
-  vatIncluded?: boolean;
+  vatIncluded?: boolean
 
   /** Сумма НДС */
-  vatSum?: number;
+  vatSum?: number
 
   /** Ссылка на отгрузку, по которой произошел возврат */
-  demand?: Meta<Entity.Demand>;
+  demand?: Meta<Entity.Demand>
 
   /** Массив ссылок на связанные списания */
-  losses?: Meta<Entity.Loss>[];
+  losses?: Meta<Entity.Loss>[]
 
   /** Массив ссылок на связанные платежи */
-  payments?: Meta<Entity.PaymentIn | Entity.PaymentOut>[];
+  payments?: Meta<Entity.PaymentIn | Entity.PaymentOut>[]
 
   /** Сумма исходящих платежей по возврату покупателя */
-  readonly payedSum?: number;
+  readonly payedSum?: number
 
   /** Ссылка на Счет-фактуру выданный, с которым связан этот возврат */
-  factureOut?: Meta<Entity.FactureOut>;
+  factureOut?: Meta<Entity.FactureOut>
 }
 
 /**
  * Модель Возврата покупателя
  */
 export interface SalesReturnModel extends Model {
-  object: SalesReturn;
+  object: SalesReturn
   expandable: {
-    agent: CounterpartyModel;
-    group: GroupModel;
-    organization: OrganizationModel;
-    owner: EmployeeModel;
-    positions: SalesReturnPositionModel;
-    agentAccount: AccountModel;
-    organizationAccount: AccountModel;
-  };
+    agent: CounterpartyModel
+    group: GroupModel
+    organization: OrganizationModel
+    owner: EmployeeModel
+    positions: SalesReturnPositionModel
+    agentAccount: AccountModel
+    organizationAccount: AccountModel
+  }
   filters: {
-    id: IdFilter;
-    accountId: IdFilter;
-    agent: IdFilter;
-    applicable: BooleanFilter;
-    code: StringFilter;
-    contract: IdFilter;
-    created: DateTimeFilter;
-    deleted: DateTimeFilter;
-    description: StringFilter;
-    externalCode: StringFilter;
-    group: IdFilter;
-    moment: DateTimeFilter;
-    name: StringFilter;
-    organization: IdFilter;
-    owner: IdFilter;
-    printed: BooleanFilter;
-    project: IdFilter;
-    published: BooleanFilter;
-    salesChannel: IdFilter;
-    shared: BooleanFilter;
-    state: IdFilter;
-    store: IdFilter;
-    sum: NumberFilter;
-    syncId: IdFilter;
-    updated: DateTimeFilter;
-    isDeleted: BooleanFilter;
-  };
+    id: IdFilter
+    accountId: IdFilter
+    agent: IdFilter
+    applicable: BooleanFilter
+    code: StringFilter
+    contract: IdFilter
+    created: DateTimeFilter
+    deleted: DateTimeFilter
+    description: StringFilter
+    externalCode: StringFilter
+    group: IdFilter
+    moment: DateTimeFilter
+    name: StringFilter
+    organization: IdFilter
+    owner: IdFilter
+    printed: BooleanFilter
+    project: IdFilter
+    published: BooleanFilter
+    salesChannel: IdFilter
+    shared: BooleanFilter
+    state: IdFilter
+    store: IdFilter
+    sum: NumberFilter
+    syncId: IdFilter
+    updated: DateTimeFilter
+    isDeleted: BooleanFilter
+  }
   orderableFields:
     | "id"
     | "syncId"
@@ -277,35 +277,35 @@ export interface SalesReturnModel extends Model {
     | "moment"
     | "applicable"
     | "sum"
-    | "created";
-  requiredCreateFields: "agent" | "organization" | "store";
+    | "created"
+  requiredCreateFields: "agent" | "organization" | "store"
 }
 
 /**
  * Опции для получения списка Возвратов покупателей
  */
 export interface ListSalesReturnsOptions {
-  pagination?: PaginationOptions;
-  fields?: PositionFields;
-  expand?: ExpandOptions<SalesReturnModel>;
-  order?: OrderOptions<SalesReturnModel>;
-  search?: string;
-  filter?: FilterOptions<SalesReturnModel>;
+  pagination?: PaginationOptions
+  fields?: PositionFields
+  expand?: ExpandOptions<SalesReturnModel>
+  order?: OrderOptions<SalesReturnModel>
+  search?: string
+  filter?: FilterOptions<SalesReturnModel>
 }
 
 /**
  * Опции для получения Возврата покупателя
  */
 export interface GetSalesReturnOptions {
-  expand?: ExpandOptions<SalesReturnModel>;
-  fields?: PositionFields;
+  expand?: ExpandOptions<SalesReturnModel>
+  fields?: PositionFields
 }
 
 /**
  * Опции для создания/обновления Возвратов покупателей
  */
 export interface UpsertSalesReturnsOptions {
-  expand?: ExpandOptions<SalesReturnModel>;
+  expand?: ExpandOptions<SalesReturnModel>
 }
 
 /**
@@ -314,19 +314,16 @@ export interface UpsertSalesReturnsOptions {
 export type FirstSalesReturnOptions = Omit<
   ListSalesReturnsOptions,
   "pagination"
->;
+>
 
 /**
  * Опции для получения всех Возвратов покупателей
  */
-export type AllSalesReturnsOptions = Omit<
-  ListSalesReturnsOptions,
-  "pagination"
->;
+export type AllSalesReturnsOptions = Omit<ListSalesReturnsOptions, "pagination">
 
 /**
  * Данные для создания Возврата покупателя на основе шаблона
  */
 export type SalesReturnTemplateData = {
-  demand: UpdateMeta<Entity.Demand>;
-};
+  demand: UpdateMeta<Entity.Demand>
+}

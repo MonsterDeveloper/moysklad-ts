@@ -16,9 +16,9 @@ import type {
   StringFilter,
   TaxSystem,
   TrackingType,
-} from "../../types";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
+} from "../../types"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
 
 /**
  * Признак предмета расчёта комплекта
@@ -46,13 +46,13 @@ export enum BundlePaymentItemType {
  */
 export interface BundleComponent extends Idable, Meta<Entity.BundleComponent> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Метаданные товара/услуги/серии, которую представляет собой компонент */
-  assortment: Meta<AssortmentEntity>;
+  assortment: Meta<AssortmentEntity>
 
   /** Количество товаров/услуг данного вида в компоненте */
-  readonly quantity: number;
+  readonly quantity: number
 }
 
 /**
@@ -61,11 +61,11 @@ export interface BundleComponent extends Idable, Meta<Entity.BundleComponent> {
  * {@linkcode BundleComponent}
  */
 export interface BundleComponentModel extends Model {
-  object: BundleComponent;
+  object: BundleComponent
 
   expandable: {
-    assortment: AssortmentModel;
-  };
+    assortment: AssortmentModel
+  }
 }
 
 /**
@@ -75,41 +75,41 @@ export interface BundleComponentModel extends Model {
  */
 export interface Bundle extends Idable, Meta<Entity.Bundle> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Добавлен ли Комплект в архив */
-  archived: boolean;
+  archived: boolean
 
   /** Артикул */
-  article?: string;
+  article?: string
 
   /** Коллекция доп. полей */
-  attributes?: Attribute[];
+  attributes?: Attribute[]
 
   /**
    * Штрихкоды Комплекта
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-komplekt-komplekty-komponenty-komplekta-shtrihkody
    */
-  barcodes?: Barcodes;
+  barcodes?: Barcodes
 
   /** Код Комплекта */
-  code?: string;
+  code?: string
 
   /** Массив компонентов Комплекта */
-  components: ListMeta<Entity.BundleComponent>;
+  components: ListMeta<Entity.BundleComponent>
 
   /** Метаданные Страны */
-  country?: Meta<Entity.Country>; // TODO add country expand
+  country?: Meta<Entity.Country> // TODO add country expand
 
   /** Описание Комплекта */
-  description?: string;
+  description?: string
 
   /** Признак запрета скидок */
-  discountProhibited: boolean;
+  discountProhibited: boolean
 
   /** Реальный НДС % */
-  readonly effectiveVat?: number;
+  readonly effectiveVat?: number
 
   /**
    * Дополнительный признак для определения разграничения реального НДС.
@@ -117,19 +117,19 @@ export interface Bundle extends Idable, Meta<Entity.Bundle> {
    * - (`effectiveVat` = `0`, `effectiveVatEnabled` = `false`) -> "без НДС"
    * - (`effectiveVat` = `0`, `effectiveVatEnabled` = `true`) -> `0%`
    */
-  readonly effectiveVatEnabled?: boolean;
+  readonly effectiveVatEnabled?: boolean
 
   /** Внешний код Комплекта */
-  externalCode: string;
+  externalCode: string
 
   /** Метаданные массива Файлов */
-  files?: unknown[]; // TODO add files type & expand
+  files?: unknown[] // TODO add files type & expand
 
   /** Метаданные отдела сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /** Массив метаданных Изображений */
-  images?: unknown[]; // TODO add images type & expand
+  images?: unknown[] // TODO add images type & expand
 
   /**
    * Минимальная цена
@@ -137,12 +137,12 @@ export interface Bundle extends Idable, Meta<Entity.Bundle> {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-komplekt-komplekty-atributy-wlozhennyh-suschnostej-minimal-naq-cena
    */
   minPrice?: {
-    value: number;
-    currency: Meta<Entity.Currency>;
-  };
+    value: number
+    currency: Meta<Entity.Currency>
+  }
 
   /** Наименование Комплекта */
-  name: string;
+  name: string
 
   /**
    * Дополнительные расходы
@@ -150,79 +150,79 @@ export interface Bundle extends Idable, Meta<Entity.Bundle> {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-komplekt-komplekty-atributy-wlozhennyh-suschnostej-dopolnitel-nye-rashody
    */
   overhead?: {
-    value: number;
-    currency: Meta<Entity.Currency>;
-  };
+    value: number
+    currency: Meta<Entity.Currency>
+  }
 
   /** Метаданные владельца (Сотрудника) */
-  owner?: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>
 
   /** Управление состоянием частичного выбытия маркированного товара */
-  partialDisposal?: boolean;
+  partialDisposal?: boolean
 
   /** Наименование группы, в которую входит Комплект */
-  readonly pathName?: string;
+  readonly pathName?: string
 
   /**
    * Признак предмета расчета
    *
    * {@linkcode BundlePaymentItemType}
    */
-  paymentItemType?: BundlePaymentItemType;
+  paymentItemType?: BundlePaymentItemType
 
   /** Метаданные группы Комплекта */
-  productFolder?: Meta<Entity.ProductFolder>; // TODO add productFolder expand
+  productFolder?: Meta<Entity.ProductFolder> // TODO add productFolder expand
 
   /** Цены продажи */
   salePrices?: {
-    value: number;
-    currency: Meta<Entity.Currency>;
-    priceType: Meta<Entity.PriceType>;
-  }[];
+    value: number
+    currency: Meta<Entity.Currency>
+    priceType: Meta<Entity.PriceType>
+  }[]
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** ID синхронизации */
-  readonly syncId?: string;
+  readonly syncId?: string
 
   /**
    * Код системы налогообложения
    *
    * {@linkcode TaxSystem}
    */
-  taxSystem?: TaxSystem;
+  taxSystem?: TaxSystem
 
   /** Код ТН ВЭД */
-  tnved?: string;
+  tnved?: string
 
   /**
    * Тип маркируемой продукции
    *
    * {@linkcode TrackingType}
    */
-  trackingType?: TrackingType;
+  trackingType?: TrackingType
 
   /** Единицы измерения */
-  uom?: Meta<Entity.Uom>; // TODO add uom expand
+  uom?: Meta<Entity.Uom> // TODO add uom expand
 
   /** Момент последнего обновления сущности */
-  readonly updated: string;
+  readonly updated: string
 
   /** Используется ли ставка НДС родительской группы */
-  useParentVat: boolean;
+  useParentVat: boolean
 
   /** НДС % */
-  vat?: number;
+  vat?: number
 
   /** Включен ли НДС для товара */
-  vatEnabled?: boolean;
+  vatEnabled?: boolean
 
   /** Объем */
-  volume?: number;
+  volume?: number
 
   /** Вес */
-  weight?: number;
+  weight?: number
 }
 
 /**
@@ -231,30 +231,30 @@ export interface Bundle extends Idable, Meta<Entity.Bundle> {
  * {@linkcode Bundle}
  */
 export interface BundleModel extends Model {
-  object: Bundle;
+  object: Bundle
 
   expandable: {
-    group: GroupModel;
-    owner: EmployeeModel;
-    components: BundleComponentModel;
-  };
+    group: GroupModel
+    owner: EmployeeModel
+    components: BundleComponentModel
+  }
 
   filters: {
-    id: IdFilter;
-    accountId: IdFilter;
-    archived: ArchivedFilter;
-    article: StringFilter;
-    code: StringFilter;
-    description: StringFilter;
-    externalCode: StringFilter;
-    group: IdFilter;
-    name: StringFilter;
-    owner: IdFilter;
-    pathName: StringFilter;
-    shared: BooleanFilter;
-    syncId: IdFilter;
-    updated: DateTimeFilter;
-    volume: NumberFilter;
-    weight: NumberFilter;
-  };
+    id: IdFilter
+    accountId: IdFilter
+    archived: ArchivedFilter
+    article: StringFilter
+    code: StringFilter
+    description: StringFilter
+    externalCode: StringFilter
+    group: IdFilter
+    name: StringFilter
+    owner: IdFilter
+    pathName: StringFilter
+    shared: BooleanFilter
+    syncId: IdFilter
+    updated: DateTimeFilter
+    volume: NumberFilter
+    weight: NumberFilter
+  }
 }

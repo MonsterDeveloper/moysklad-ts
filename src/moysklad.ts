@@ -1,32 +1,32 @@
-import type { ApiClient } from "./api-client";
+import type { ApiClient } from "./api-client"
 import type {
-  WizardEndpoint,
-  ReportEndpoint,
   AssortmentEndpoint,
   BonusTransactionEndpoint,
   CounterpartyEndpoint,
   CustomEntityEndpoint,
-  EnterEndpoint,
   CustomerOrderEndpoint,
+  DemandEndpoint,
+  EnterEndpoint,
   FactureOutEndpoint,
+  InventoryEndpoint,
+  InvoiceOutEndpoint,
   PaymentInEndpoint,
   PaymentOutEndpoint,
-  InvoiceOutEndpoint,
-  InventoryEndpoint,
-  DemandEndpoint,
   ProcessingPlanEndpoint,
   ProductEndpoint,
   ProductFolderEndpoint,
-  ProductionStageEndpoint,
   ProductionStageCompletionEndpoint,
+  ProductionStageEndpoint,
   ProductionTaskEndpoint,
   PurchaseOrderEndpoint,
   RegionEndpoint,
+  ReportEndpoint,
+  SalesReturnEndpoint,
+  SecurityEndpoint,
   SupplyEndpoint,
   VariantEndpoint,
-  SecurityEndpoint,
-  SalesReturnEndpoint,
-} from "./endpoints";
+  WizardEndpoint,
+} from "./endpoints"
 
 /** Клиент МойСклад */
 export interface Moysklad {
@@ -35,140 +35,140 @@ export interface Moysklad {
    *
    * {@linkcode ApiClient}
    */
-  client: ApiClient;
+  client: ApiClient
 
   /**
    * Бонусные операции
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-bonusnaq-operaciq
    */
-  bonusTransaction: BonusTransactionEndpoint;
+  bonusTransaction: BonusTransactionEndpoint
 
   /**
    * Безопасность (токены)
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
    */
-  security: SecurityEndpoint;
+  security: SecurityEndpoint
 
   /**
    * Контрагенты
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent
    */
-  counterparty: CounterpartyEndpoint;
+  counterparty: CounterpartyEndpoint
 
   /**
    * Пользовательские справочники
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-pol-zowatel-skij-sprawochnik
    */
-  customEntity: CustomEntityEndpoint;
+  customEntity: CustomEntityEndpoint
 
   /**
    * Ассортимент
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-assortiment
    */
-  assortment: AssortmentEndpoint;
+  assortment: AssortmentEndpoint
 
   /**
    * Заказы покупателей
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq
    */
-  customerOrder: CustomerOrderEndpoint;
+  customerOrder: CustomerOrderEndpoint
 
   /**
    * Отгрузки
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-otgruzka
    */
-  demand: DemandEndpoint;
+  demand: DemandEndpoint
 
   /**
    * Счета-фактуры выданные
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-schet-faktura-wydannyj
    */
-  factureOut: FactureOutEndpoint;
+  factureOut: FactureOutEndpoint
 
   /**
    * Приёмки
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka-priemki
    */
-  supply: SupplyEndpoint;
+  supply: SupplyEndpoint
 
   /**
    * Оприходования
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-oprihodowanie
    */
-  enter: EnterEndpoint;
+  enter: EnterEndpoint
 
   /**
    * Товары
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar
    */
-  product: ProductEndpoint;
+  product: ProductEndpoint
 
   /**
    * Группы товаров
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-gruppa-towarow
    */
-  productFolder: ProductFolderEndpoint;
+  productFolder: ProductFolderEndpoint
 
   /**
    * Техкарты
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-tehkarta-tehkarty
    */
-  processingPlan: ProcessingPlanEndpoint;
+  processingPlan: ProcessingPlanEndpoint
 
   /**
    * Входящие платежи
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-vhodqschij-platezh
    */
-  paymentIn: PaymentInEndpoint;
+  paymentIn: PaymentInEndpoint
 
   /**
    * Исходящие платежи
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-ishodqschij-platezh-ishodqschie-platezhi
    */
-  paymentOut: PaymentOutEndpoint;
+  paymentOut: PaymentOutEndpoint
 
   /**
    * Счета покупателям
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-schet-pokupatelu-scheta-pokupatelqm
    */
-  invoiceOut: InvoiceOutEndpoint;
+  invoiceOut: InvoiceOutEndpoint
 
   /**
    * Автозаполнение
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-awtozapolnenie
    */
-  wizard: WizardEndpoint;
+  wizard: WizardEndpoint
 
   /**
    * Отчёты
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/reports/#otchety
    */
-  report: ReportEndpoint;
+  report: ReportEndpoint
 
   /**
    * Заказ поставщику
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-postawschiku
    */
-  purchaseOrder: PurchaseOrderEndpoint;
+  purchaseOrder: PurchaseOrderEndpoint
 
   /**
    * Регионы
@@ -177,47 +177,47 @@ export interface Moysklad {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-region
    */
-  region: RegionEndpoint;
+  region: RegionEndpoint
 
   /**
    * Производственные этапы
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-proizwodstwennoe-zadanie-proizwodstwennye-atapy
    */
-  productionStage: ProductionStageEndpoint;
+  productionStage: ProductionStageEndpoint
 
   /**
    * Выполнения этапов производства
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-vypolnenie-atapa-proizwodstwa
    */
-  productionStageCompletion: ProductionStageCompletionEndpoint;
+  productionStageCompletion: ProductionStageCompletionEndpoint
 
   /**
    * Инвентаризации
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-inwentarizaciq
    */
-  inventory: InventoryEndpoint;
+  inventory: InventoryEndpoint
 
   /**
    * Производственные задания
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-proizwodstwennoe-zadanie
    */
-  productionTask: ProductionTaskEndpoint;
+  productionTask: ProductionTaskEndpoint
 
   /**
    * Модификации
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq
    */
-  variant: VariantEndpoint;
+  variant: VariantEndpoint
 
   /**
    * Возвраты покупателей
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-vozwrat-pokupatelq
    */
-  salesReturn: SalesReturnEndpoint;
+  salesReturn: SalesReturnEndpoint
 }

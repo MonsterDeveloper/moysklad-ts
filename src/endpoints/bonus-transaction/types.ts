@@ -1,24 +1,24 @@
 import type {
+  BooleanFilter,
   DateTime,
+  DateTimeFilter,
   Entity,
   ExpandOptions,
+  FilterOptions,
   Idable,
+  IdFilter,
   Meta,
+  Model,
+  NumberFilter,
   OrderOptions,
   PaginationOptions,
-  Model,
-  IdFilter,
-  BooleanFilter,
-  NumberFilter,
   StringFilter,
-  DateTimeFilter,
-  FilterOptions,
-} from "../../types";
-import type { CounterpartyModel } from "../counterparty";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
-import type { BonusProgramModel } from "../bonus-program";
-import type { OrganizationModel } from "../organization";
+} from "../../types"
+import type { BonusProgramModel } from "../bonus-program"
+import type { CounterpartyModel } from "../counterparty"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
+import type { OrganizationModel } from "../organization"
 
 /** Категория бонусной операции */
 export enum BonusTransactionCategoryType {
@@ -48,32 +48,32 @@ export interface BonusTransaction
   extends Idable,
     Meta<Entity.BonusTransaction> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Метаданные Контрагента, связанного с бонусной операцией */
-  agent: Meta<Entity.Counterparty>;
+  agent: Meta<Entity.Counterparty>
 
   /** Отметка о проведении */
-  applicable: boolean;
+  applicable: boolean
 
   /** Метаданные бонусной программы */
-  bonusProgram?: Meta<Entity.BonusProgram>;
+  bonusProgram?: Meta<Entity.BonusProgram>
 
   /** Количество бонусных баллов */
-  bonusValue?: number;
+  bonusValue?: number
 
   /**
    * Категория бонусной операции.
    *
    * {@linkcode BonusTransactionCategoryType}
    */
-  readonly categoryType?: BonusTransactionCategoryType;
+  readonly categoryType?: BonusTransactionCategoryType
 
   /** Код Бонусной операции */
-  code?: string;
+  code?: string
 
   /** Момент создания Бонусной операции */
-  created: DateTime;
+  created: DateTime
 
   /**
    * Дата обработки операции.
@@ -81,59 +81,59 @@ export interface BonusTransaction
    * При создании или редактировании бонусной операции начисления данный атрибут позволяет указать дату обработки операции. Если атрибут не указан, то операция будет обработана сразу, без задержки.
    * Для возможности указания даты обработки в будущем должна быть включена тарифная опция "Расширенная бонусная программа".
    */
-  executionDate?: DateTime;
+  executionDate?: DateTime
 
   /** Внешний код Бонусной операции */
-  externalCode: string;
+  externalCode: string
 
   /** Отдел сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
   /** Время проведения бонусной операции */
-  moment?: DateTime;
+  moment?: DateTime
 
   /** Наименование Бонусной операции */
-  name?: string;
+  name?: string
 
   /** Метаданные юрлица */
-  organization?: Meta<Entity.Organization>;
+  organization?: Meta<Entity.Organization>
 
   /** Владелец (Сотрудник) */
-  owner?: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>
 
   /** Метаданные связанного документа бонусной операции */
-  parentDocument?: Meta<never>;
+  parentDocument?: Meta<never>
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /**
    * Статус бонусной операции
    *
    * {@linkcode BonusTransactionStatus}
    */
-  readonly transactionStatus?: BonusTransactionStatus;
+  readonly transactionStatus?: BonusTransactionStatus
   /**
    * Тип бонусной операции
    *
    * {@linkcode BonusTransactionType}
    */
-  transactionType: BonusTransactionType;
+  transactionType: BonusTransactionType
 
   /** Момент последнего обновления Бонусной операции */
-  updated: DateTime;
+  updated: DateTime
 }
 
 export interface BonusTransactionModel extends Model {
   /** Основная сущность бонусной операции {@linkcode BonusTransaction} */
-  object: BonusTransaction;
+  object: BonusTransaction
 
   expandable: {
-    agent: CounterpartyModel;
-    owner: EmployeeModel;
-    group: GroupModel;
-    bonusProgram: BonusProgramModel;
-    organization: OrganizationModel;
-  };
+    agent: CounterpartyModel
+    owner: EmployeeModel
+    group: GroupModel
+    bonusProgram: BonusProgramModel
+    organization: OrganizationModel
+  }
 
   orderableFields:
     | "id"
@@ -146,29 +146,29 @@ export interface BonusTransactionModel extends Model {
     | "moment"
     | "name"
     | "shared"
-    | "updated";
+    | "updated"
 
-  requiredCreateFields: "agent" | "transactionType";
+  requiredCreateFields: "agent" | "transactionType"
 
   filters: {
-    accountId: IdFilter;
-    agent: IdFilter;
-    applicable: BooleanFilter;
-    bonusProgram: IdFilter;
-    bonusValue: NumberFilter;
-    code: StringFilter;
-    created: DateTimeFilter;
-    externalCode: StringFilter;
-    group: IdFilter;
-    id: IdFilter;
-    moment: DateTimeFilter;
-    name: StringFilter;
-    organization: IdFilter;
-    owner: IdFilter;
-    shared: BooleanFilter;
-    updated: DateTimeFilter;
-    updatedBy: IdFilter;
-  };
+    accountId: IdFilter
+    agent: IdFilter
+    applicable: BooleanFilter
+    bonusProgram: IdFilter
+    bonusValue: NumberFilter
+    code: StringFilter
+    created: DateTimeFilter
+    externalCode: StringFilter
+    group: IdFilter
+    id: IdFilter
+    moment: DateTimeFilter
+    name: StringFilter
+    organization: IdFilter
+    owner: IdFilter
+    shared: BooleanFilter
+    updated: DateTimeFilter
+    updatedBy: IdFilter
+  }
 }
 
 export interface ListBonusTransactionsOptions {
@@ -184,7 +184,7 @@ export interface ListBonusTransactionsOptions {
    * })
    * ```
    */
-  pagination?: PaginationOptions;
+  pagination?: PaginationOptions
 
   /**
    * Замена ссылок объектами с помощью expand
@@ -203,7 +203,7 @@ export interface ListBonusTransactionsOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<BonusTransactionModel>;
+  expand?: ExpandOptions<BonusTransactionModel>
 
   /**
    * Опции сортировки
@@ -227,14 +227,14 @@ export interface ListBonusTransactionsOptions {
    * })
    * ```
    */
-  order?: OrderOptions<BonusTransactionModel>;
+  order?: OrderOptions<BonusTransactionModel>
 
   /**
    * Контекстный поиск
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-kontextnyj-poisk
    */
-  search?: string;
+  search?: string
 
   /**
    * Фильтры
@@ -252,18 +252,18 @@ export interface ListBonusTransactionsOptions {
    * });
    * ```
    */
-  filter?: FilterOptions<BonusTransactionModel>;
+  filter?: FilterOptions<BonusTransactionModel>
 }
 
 export type AllBonusTransactionsOptions = Omit<
   ListBonusTransactionsOptions,
   "pagination"
->;
+>
 
 export type FirstBonusTransactionOptions = Omit<
   ListBonusTransactionsOptions,
   "pagination"
->;
+>
 
 export interface GetBonusTransactionOptions {
   /**
@@ -283,7 +283,7 @@ export interface GetBonusTransactionOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<BonusTransactionModel>;
+  expand?: ExpandOptions<BonusTransactionModel>
 }
 
 export interface UpdateBonusTransactionOptions {
@@ -304,7 +304,7 @@ export interface UpdateBonusTransactionOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<BonusTransactionModel>;
+  expand?: ExpandOptions<BonusTransactionModel>
 }
 
 export interface CreateBonusTransactionOptions {
@@ -325,9 +325,9 @@ export interface CreateBonusTransactionOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<BonusTransactionModel>;
+  expand?: ExpandOptions<BonusTransactionModel>
 }
 
 export interface UpsertBonusTransactionOptions {
-  expand?: ExpandOptions<BonusTransactionModel>;
+  expand?: ExpandOptions<BonusTransactionModel>
 }

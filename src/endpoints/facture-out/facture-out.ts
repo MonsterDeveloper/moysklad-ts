@@ -1,14 +1,14 @@
-import {
+import type {
+  BatchDeleteResult,
+  BatchGetResult,
   Entity,
-  type BatchDeleteResult,
-  type GetFindResult,
-  type ListResponse,
-  type Subset,
-  type BatchGetResult,
-  type ModelCreateOrUpdateData,
-  type MatchArrayType,
-  type ListMeta,
-} from "../../types";
+  GetFindResult,
+  ListMeta,
+  ListResponse,
+  MatchArrayType,
+  ModelCreateOrUpdateData,
+  Subset,
+} from "../../types"
 import type {
   AllFactureOutsOptions,
   FactureOutModel,
@@ -17,7 +17,7 @@ import type {
   GetFactureOutOptions,
   ListFactureOutsOptions,
   UpsertFactureOutsOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Счета-фактуры выданные
@@ -45,7 +45,7 @@ export interface FactureOutEndpoint {
       GetFindResult<FactureOutModel, T["expand"], T["fields"]>,
       Entity.FactureOut
     >
-  >;
+  >
 
   /**
    * Получить все счета-фактуры выданные с учетом пагинации.
@@ -67,7 +67,7 @@ export interface FactureOutEndpoint {
       GetFindResult<FactureOutModel, T["expand"], T["fields"]>,
       Entity.FactureOut
     >
-  >;
+  >
 
   /**
    * Получить счет-фактуру выданный по ID.
@@ -86,7 +86,7 @@ export interface FactureOutEndpoint {
   get<T extends GetFactureOutOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetFactureOutOptions>,
-  ): Promise<GetFindResult<FactureOutModel, T["expand"], T["fields"]>>;
+  ): Promise<GetFindResult<FactureOutModel, T["expand"], T["fields"]>>
 
   /**
    * Получить первый счет-фактуру выданный из списка.
@@ -106,7 +106,7 @@ export interface FactureOutEndpoint {
       GetFindResult<FactureOutModel, T["expand"], T["fields"]>,
       Entity.FactureOut
     >
-  >;
+  >
 
   /**
    * Получить количество счетов-фактур выданных.
@@ -118,7 +118,7 @@ export interface FactureOutEndpoint {
    * const count = await moysklad.factureOut.size();
    * ```
    */
-  size(options?: AllFactureOutsOptions): Promise<ListMeta<Entity.FactureOut>>;
+  size(options?: AllFactureOutsOptions): Promise<ListMeta<Entity.FactureOut>>
 
   /**
    * Удалить счет-фактуру выданный.
@@ -133,7 +133,7 @@ export interface FactureOutEndpoint {
    * await moysklad.factureOut.delete("99d41b01-aa8a-11e6-8af5-581e0000007e");
    * ```
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Удалить несколько счетов-фактур выданных.
@@ -148,7 +148,7 @@ export interface FactureOutEndpoint {
    * await moysklad.factureOut.batchDelete(["99d41b01-aa8a-11e6-8af5-581e0000007e", "99d41b01-aa8a-11e6-8af5-581e0000007f"]);
    * ```
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 
   /**
    * Переместить счет-фактуру выданный в корзину.
@@ -161,7 +161,7 @@ export interface FactureOutEndpoint {
    * await moysklad.factureOut.trash("99d41b01-aa8a-11e6-8af5-581e0000007e");
    * ```
    */
-  trash(id: string): Promise<void>;
+  trash(id: string): Promise<void>
 
   /**
    * Создать или обновить счет-фактуру выданный.
@@ -196,7 +196,7 @@ export interface FactureOutEndpoint {
     options?: Subset<TOptions, UpsertFactureOutsOptions>,
   ): Promise<
     MatchArrayType<TData, GetFindResult<FactureOutModel, TOptions["expand"]>>
-  >;
+  >
 
   /**
    * Получить шаблон счета-фактуры выданного на основе отгрузки, возврата поставщику или входящего платежа.
@@ -223,5 +223,5 @@ export interface FactureOutEndpoint {
    */
   template(
     data: FactureOutTemplateData,
-  ): Promise<GetFindResult<FactureOutModel, undefined>>;
+  ): Promise<GetFindResult<FactureOutModel, undefined>>
 }

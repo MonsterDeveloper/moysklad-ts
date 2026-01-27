@@ -1,22 +1,22 @@
 import type {
   ArchivedFilter,
+  BooleanFilter,
   DateTime,
+  DateTimeFilter,
   Entity,
   ExpandOptions,
+  FilterOptions,
   Idable,
+  IdFilter,
   Meta,
+  Model,
   OrderOptions,
   PaginationOptions,
-  Model,
-  IdFilter,
-  BooleanFilter,
   StringFilter,
-  DateTimeFilter,
-  FilterOptions,
   TaxSystem,
-} from "../../types";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
+} from "../../types"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
 
 /**
  * Группа товаров
@@ -25,69 +25,69 @@ import type { GroupModel } from "../group";
  */
 export interface ProductFolder extends Idable, Meta<Entity.ProductFolder> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Добавлена ли Группа товаров в архив */
-  readonly archived: boolean;
+  readonly archived: boolean
 
   /** Код Группы товаров */
-  code?: string;
+  code?: string
 
   /** Описание Группы товаров */
-  description?: string;
+  description?: string
 
   /** Реальный НДС % */
-  readonly effectiveVat?: number;
+  readonly effectiveVat?: number
 
   /** Дополнительный признак для определения разграничения реального НДС = 0 или "без НДС". (effectiveVat = 0, effectiveVatEnabled = false) -> "без НДС", (effectiveVat = 0, effectiveVatEnabled = true) -> 0%. */
-  readonly effectiveVatEnabled?: boolean;
+  readonly effectiveVatEnabled?: boolean
 
   /** Внешний код Группы товаров */
-  externalCode: string;
+  externalCode: string
 
   /** Метаданные отдела сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /** Наименование Группы товаров */
-  name: string;
+  name: string
 
   /** Метаданные владельца (Сотрудника) */
-  owner?: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>
 
   /** Наименование Группы товаров, в которую входит данная Группа товаров */
-  readonly pathName: string;
+  readonly pathName: string
 
   /** Ссылка на Группу товаров, в которую входит данная Группа товаров, в формате Метаданных */
-  productFolder?: Meta<Entity.ProductFolder>;
+  productFolder?: Meta<Entity.ProductFolder>
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** Код системы налогообложения */
-  taxSystem?: TaxSystem;
+  taxSystem?: TaxSystem
 
   /** Момент последнего обновления сущности */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 
   /** Используется ли ставка НДС родительской группы. Если true для единицы ассортимента будет применена ставка, установленная для родительской группы. */
-  useParentVat: boolean;
+  useParentVat: boolean
 
   /** НДС % */
-  vat?: number;
+  vat?: number
 
   /** Включен ли НДС для группы. С помощью этого флага для группы можно выставлять НДС = 0 или НДС = "без НДС". (vat = 0, vatEnabled = false) -> vat = "без НДС", (vat = 0, vatEnabled = true) -> vat = 0%. */
-  vatEnabled?: boolean;
+  vatEnabled?: boolean
 }
 
 export interface ProductFolderModel extends Model {
   /** Основная сущность группы товаров {@linkcode ProductFolder} */
-  object: ProductFolder;
+  object: ProductFolder
 
   expandable: {
-    owner: EmployeeModel;
-    group: GroupModel;
-    productFolder: ProductFolderModel;
-  };
+    owner: EmployeeModel
+    group: GroupModel
+    productFolder: ProductFolderModel
+  }
 
   orderableFields:
     | "id"
@@ -96,25 +96,25 @@ export interface ProductFolderModel extends Model {
     | "name"
     | "updated"
     | "archived"
-    | "pathName";
+    | "pathName"
 
-  requiredCreateFields: "name";
+  requiredCreateFields: "name"
 
   filters: {
-    accountId: IdFilter;
-    archived: ArchivedFilter;
-    code: StringFilter;
-    description: StringFilter;
-    externalCode: StringFilter;
-    group: IdFilter;
-    id: IdFilter;
-    name: StringFilter;
-    owner: IdFilter;
-    pathName: StringFilter;
-    shared: BooleanFilter;
-    updated: DateTimeFilter;
-    updatedBy: IdFilter;
-  };
+    accountId: IdFilter
+    archived: ArchivedFilter
+    code: StringFilter
+    description: StringFilter
+    externalCode: StringFilter
+    group: IdFilter
+    id: IdFilter
+    name: StringFilter
+    owner: IdFilter
+    pathName: StringFilter
+    shared: BooleanFilter
+    updated: DateTimeFilter
+    updatedBy: IdFilter
+  }
 }
 
 export interface ListProductFoldersOptions {
@@ -130,7 +130,7 @@ export interface ListProductFoldersOptions {
    * })
    * ```
    */
-  pagination?: PaginationOptions;
+  pagination?: PaginationOptions
 
   /**
    * Замена ссылок объектами с помощью expand
@@ -149,7 +149,7 @@ export interface ListProductFoldersOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<ProductFolderModel>;
+  expand?: ExpandOptions<ProductFolderModel>
 
   /**
    * Опции сортировки
@@ -173,14 +173,14 @@ export interface ListProductFoldersOptions {
    * })
    * ```
    */
-  order?: OrderOptions<ProductFolderModel>;
+  order?: OrderOptions<ProductFolderModel>
 
   /**
    * Контекстный поиск
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-kontextnyj-poisk
    */
-  search?: string;
+  search?: string
 
   /**
    * Фильтры
@@ -198,18 +198,18 @@ export interface ListProductFoldersOptions {
    * });
    * ```
    */
-  filter?: FilterOptions<ProductFolderModel>;
+  filter?: FilterOptions<ProductFolderModel>
 }
 
 export type AllProductFoldersOptions = Omit<
   ListProductFoldersOptions,
   "pagination"
->;
+>
 
 export type FirstProductFolderOptions = Omit<
   ListProductFoldersOptions,
   "pagination"
->;
+>
 
 export interface GetProductFolderOptions {
   /**
@@ -229,7 +229,7 @@ export interface GetProductFolderOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<ProductFolderModel>;
+  expand?: ExpandOptions<ProductFolderModel>
 }
 
 export interface UpdateProductFolderOptions {
@@ -250,7 +250,7 @@ export interface UpdateProductFolderOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<ProductFolderModel>;
+  expand?: ExpandOptions<ProductFolderModel>
 }
 
 export interface CreateProductFolderOptions {
@@ -271,9 +271,9 @@ export interface CreateProductFolderOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<ProductFolderModel>;
+  expand?: ExpandOptions<ProductFolderModel>
 }
 
 export interface UpsertProductFolderOptions {
-  expand?: ExpandOptions<ProductFolderModel>;
+  expand?: ExpandOptions<ProductFolderModel>
 }

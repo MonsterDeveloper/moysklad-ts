@@ -13,9 +13,9 @@ import type {
   PriceType,
   StringFilter,
   TaxSystem,
-} from "../../types";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
+} from "../../types"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
 
 /**
  * Признак предмета расчёта услуги.
@@ -46,20 +46,20 @@ export enum ServicePaymentItemType {
  */
 export interface Service extends Idable, Meta<Entity.Service> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Добавлена ли Услуга в архив */
-  archived: boolean;
+  archived: boolean
 
   /** Коллекция доп. полей */
-  attributes?: Attribute[];
+  attributes?: Attribute[]
 
   /**
    * Штрихкоды Услуги
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-usluga-uslugi-metadannye-uslug-shtrihkody
    * */
-  barcodes?: Barcodes;
+  barcodes?: Barcodes
 
   /**
    * Закупочная цена
@@ -67,21 +67,21 @@ export interface Service extends Idable, Meta<Entity.Service> {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-usluga-uslugi-metadannye-uslug-zakupochnaq-cena
    */
   buyPrice?: {
-    value: number;
-    currency: Meta<Entity.Currency>;
-  };
+    value: number
+    currency: Meta<Entity.Currency>
+  }
 
   /** Код Услуги */
-  code?: string;
+  code?: string
 
   /** Описание Услуги */
-  description?: string;
+  description?: string
 
   /** Признак запрета скидок */
-  discountProhibited: boolean;
+  discountProhibited: boolean
 
   /** Реальный НДС % */
-  readonly effectiveVat?: number;
+  readonly effectiveVat?: number
 
   /**
    * Дополнительный признак для определения разграничения реального НДС.
@@ -89,10 +89,10 @@ export interface Service extends Idable, Meta<Entity.Service> {
    * - (`effectiveVat` = `0`, `effectiveVatEnabled` = `false`) -> "без НДС"
    * - (`effectiveVat` = `0`, `effectiveVatEnabled` = `true`) -> `0%`
    */
-  readonly effectiveVatEnabled?: boolean;
+  readonly effectiveVatEnabled?: boolean
 
   /** Внешний код Услуги */
-  externalCode: string;
+  externalCode: string
 
   /**
    * Метаданные массива Файлов.
@@ -101,10 +101,10 @@ export interface Service extends Idable, Meta<Entity.Service> {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-fajly
    */
-  files?: unknown[]; // TODO add files types & expand
+  files?: unknown[] // TODO add files types & expand
 
   /** Метаданные отдела сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /**
    * Минимальная цена.
@@ -112,28 +112,28 @@ export interface Service extends Idable, Meta<Entity.Service> {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-usluga-uslugi-metadannye-uslug-minimal-naq-cena
    */
   minPrice?: {
-    value: number;
-    currency: Meta<Entity.Currency>;
-  };
+    value: number
+    currency: Meta<Entity.Currency>
+  }
 
   /** Наименование Услуги */
-  name: string;
+  name: string
 
   /** Метаданные владельца (Сотрудника) */
-  owner?: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>
 
   /**
    * Наименование группы, в которую входит Услуга
    *
    * Атрибут `pathName` сам по себе является атрибутом только для чтения, однако его можно изменить с помощью обновления атрибута `productFolder`.
    */
-  readonly pathName?: string;
+  readonly pathName?: string
 
   /** Признак предмета расчета */
-  paymentItemType?: ServicePaymentItemType;
+  paymentItemType?: ServicePaymentItemType
 
   /** Метаданные группы */
-  productFolder?: Meta<Entity.ProductFolder>; // TODO add product folder expand
+  productFolder?: Meta<Entity.ProductFolder> // TODO add product folder expand
 
   /**
    * Цены продажи
@@ -141,31 +141,31 @@ export interface Service extends Idable, Meta<Entity.Service> {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-usluga-uslugi-metadannye-uslug-ceny-prodazhi
    */
   salePrices?: {
-    value: number;
-    currency: Meta<Entity.Currency>;
-    priceType: PriceType;
-  }[];
+    value: number
+    currency: Meta<Entity.Currency>
+    priceType: PriceType
+  }[]
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** ID синхронизации */
-  readonly syncId?: string;
+  readonly syncId?: string
 
   /** Код системы налогообложения */
-  taxSystem?: TaxSystem;
+  taxSystem?: TaxSystem
 
   /** Единицы измерения */
-  uom?: Meta<Entity.Uom>; // TODO add uom expand
+  uom?: Meta<Entity.Uom> // TODO add uom expand
 
   /** Момент последнего обновления сущности */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 
   /** Используется ли ставка НДС родительской группы */
-  useParentVat: boolean;
+  useParentVat: boolean
 
   /** НДС % */
-  vat?: number;
+  vat?: number
 
   /**
    * Включен ли НДС для услуги
@@ -174,33 +174,33 @@ export interface Service extends Idable, Meta<Entity.Service> {
    * - (`vat` = 0, `vatEnabled` = false) -> `vat` = "без НДС"
    * - (`vat` = 0, `vatEnabled` = true) -> `vat` = 0%
    */
-  vatEnabled?: boolean;
+  vatEnabled?: boolean
 }
 
 export interface ServiceModel extends Model {
-  object: Service;
+  object: Service
 
   expandable: {
-    group: GroupModel;
-    owner: EmployeeModel;
-  };
+    group: GroupModel
+    owner: EmployeeModel
+  }
 
-  requiredCreateFields: "name";
+  requiredCreateFields: "name"
 
   filters: {
-    id: IdFilter;
-    accountId: IdFilter;
-    archived: ArchivedFilter;
-    barcodes: StringFilter;
-    code: StringFilter;
-    description: StringFilter;
-    externalCode: StringFilter;
-    group: IdFilter;
-    name: StringFilter;
-    owner: IdFilter;
-    pathName: StringFilter;
-    shared: BooleanFilter;
-    syncId: IdFilter;
-    updated: DateTimeFilter;
-  };
+    id: IdFilter
+    accountId: IdFilter
+    archived: ArchivedFilter
+    barcodes: StringFilter
+    code: StringFilter
+    description: StringFilter
+    externalCode: StringFilter
+    group: IdFilter
+    name: StringFilter
+    owner: IdFilter
+    pathName: StringFilter
+    shared: BooleanFilter
+    syncId: IdFilter
+    updated: DateTimeFilter
+  }
 }

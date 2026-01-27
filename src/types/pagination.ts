@@ -6,10 +6,10 @@ export interface PaginationOptions {
    * Максимальное количество элементов, которое вернется в одной странице. Мин 1, макс 1000.
    * @default 1000
    */
-  limit?: number;
+  limit?: number
   /**
    * Количество элементов, которые нужно пропустить перед началом сбора результирующего набора.
    * @default 0
    */
-  offset?: number;
+  offset?: number
 }

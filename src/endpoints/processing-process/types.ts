@@ -1,14 +1,14 @@
 import type {
+  DateTime,
   Entity,
   Idable,
+  ListMeta,
   Meta,
   Model,
-  ListMeta,
-  DateTime,
-} from "../../types";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
-import type { ProcessingStageModel } from "../processing-stage";
+} from "../../types"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
+import type { ProcessingStageModel } from "../processing-stage"
 
 /**
  * Техпроцесс
@@ -19,42 +19,42 @@ export interface ProcessingProcess
   extends Idable,
     Meta<Entity.ProcessingProcess> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Добавлен ли Техпроцесс в архив */
-  archived: boolean;
+  archived: boolean
 
   /** Комментарий Техпроцесса */
-  description?: string;
+  description?: string
 
   /** Внешний код Техпроцесса */
-  externalCode: string;
+  externalCode: string
 
   /** Отдел сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /** Наименование Техпроцесса */
-  name: string;
+  name: string
 
   /** Владелец (Сотрудник) */
-  owner: Meta<Entity.Employee>;
+  owner: Meta<Entity.Employee>
 
   /** Метаданные позиций Техпроцесса */
-  positions: ListMeta<Entity.ProcessingProcessPosition>;
+  positions: ListMeta<Entity.ProcessingProcessPosition>
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** Момент последнего обновления сущности */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 }
 
 export interface ProcessingProcessModel extends Model {
-  object: ProcessingProcess;
+  object: ProcessingProcess
   expandable: {
-    group: GroupModel;
-    owner: EmployeeModel;
-  };
+    group: GroupModel
+    owner: EmployeeModel
+  }
 }
 
 /**
@@ -66,15 +66,15 @@ export interface ProcessingProcessPosition
   extends Idable,
     Meta<Entity.ProcessingProcessPosition> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Метаданные этапа, который представляет собой позиция */
-  processingstage: Meta<Entity.ProcessingStage>;
+  processingstage: Meta<Entity.ProcessingStage>
 }
 
 export interface ProcessingProcessPositionModel extends Model {
-  object: ProcessingProcessPosition;
+  object: ProcessingProcessPosition
   expandable: {
-    processingstage: ProcessingStageModel;
-  };
+    processingstage: ProcessingStageModel
+  }
 }

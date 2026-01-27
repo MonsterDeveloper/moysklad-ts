@@ -13,9 +13,9 @@ import type {
   Model,
   OrderOptions,
   PaginationOptions,
-} from "../../types";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
+} from "../../types"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
 
 /**
  * Выполнение этапа производства
@@ -26,101 +26,101 @@ export interface ProductionStageCompletion
   extends Idable,
     Meta<Entity.ProductionStageCompletion> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Дата создания */
-  readonly created: DateTime;
+  readonly created: DateTime
 
   /** Внешний код Выполнения этапа производства */
-  externalCode: string;
+  externalCode: string
 
   /** Отдел сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /** Оплата труда за единицу объема производства */
-  labourUnitCost: number;
+  labourUnitCost: number
 
   /** Нормо-часы единицы объема производства */
-  standardHourUnit: number;
+  standardHourUnit: number
 
   /** Метаданные Материалов выполнения этапа производства */
-  materials?: ListMeta<AssortmentEntity>;
+  materials?: ListMeta<AssortmentEntity>
 
   /** Дата документа */
-  moment: DateTime;
+  moment: DateTime
 
   /** Наименование Выполнения этапа производства */
-  name: string;
+  name: string
 
   /** Владелец (Сотрудник) */
-  owner?: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>
 
   /** Исполнитель (Сотрудник) */
-  performer?: Meta<Entity.Employee>;
+  performer?: Meta<Entity.Employee>
 
   /** Затраты на единицу объема производства */
-  processingUnitCost: number;
+  processingUnitCost: number
 
   /** Производственный этап */
-  readonly productionStage: Meta<Entity.ProductionStage>;
+  readonly productionStage: Meta<Entity.ProductionStage>
 
   /** Объем производства */
-  productionVolume: number;
+  productionVolume: number
 
   /** Метаданные Продуктов выполнения этапа производства */
-  products?: ListMeta<AssortmentEntity>;
+  products?: ListMeta<AssortmentEntity>
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** Момент последнего обновления Выполнения этапа производства */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 }
 
 export interface ProductionStageCompletionModel extends Model {
-  object: ProductionStageCompletion;
+  object: ProductionStageCompletion
   expandable: {
-    group: GroupModel;
-    materials: AssortmentModel;
-    owner: EmployeeModel;
-    performer: EmployeeModel;
+    group: GroupModel
+    materials: AssortmentModel
+    owner: EmployeeModel
+    performer: EmployeeModel
     // productionStage: ProductionStageModel;
-    products: AssortmentModel;
-  };
+    products: AssortmentModel
+  }
   filters: {
-    id: IdFilter;
-    moment: DateTimeFilter;
-  };
-  requiredCreateFields: "productionStage" | "productionVolume";
+    id: IdFilter
+    moment: DateTimeFilter
+  }
+  requiredCreateFields: "productionStage" | "productionVolume"
 }
 
 export interface ListProductionStageCompletionsOptions {
-  pagination?: PaginationOptions;
-  expand?: ExpandOptions<ProductionStageCompletionModel>;
-  order?: OrderOptions<ProductionStageCompletionModel>;
-  filter?: FilterOptions<ProductionStageCompletionModel>;
+  pagination?: PaginationOptions
+  expand?: ExpandOptions<ProductionStageCompletionModel>
+  order?: OrderOptions<ProductionStageCompletionModel>
+  filter?: FilterOptions<ProductionStageCompletionModel>
 }
 
 export interface CreateProductionStageCompletionOptions {
-  expand?: ExpandOptions<ProductionStageCompletionModel>;
+  expand?: ExpandOptions<ProductionStageCompletionModel>
 }
 
 export interface UpdateProductionStageCompletionOptions {
-  expand?: ExpandOptions<ProductionStageCompletionModel>;
+  expand?: ExpandOptions<ProductionStageCompletionModel>
 }
 
 export interface GetProductionStageCompletionOptions {
-  expand?: ExpandOptions<ProductionStageCompletionModel>;
+  expand?: ExpandOptions<ProductionStageCompletionModel>
 }
 
 export type FirstProductionStageCompletionOptions = Omit<
   ListProductionStageCompletionsOptions,
   "pagination"
->;
+>
 export type AllProductionStageCompletionOptions = Omit<
   ListProductionStageCompletionsOptions,
   "pagination"
->;
+>
 
 /**
  * Материал выполнения этапа производства
@@ -131,46 +131,46 @@ export interface ProductionStageCompletionMaterial
   extends Idable,
     Meta<Entity.ProductionStageCompletionMaterial> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Израсходованное количество */
-  consumedQuantity: number;
+  consumedQuantity: number
 
   /** Метаданные ассортимента */
-  assortment: Meta<AssortmentEntity>;
+  assortment: Meta<AssortmentEntity>
 
   /** Серийные номера (только для товаров с серийным учетом) */
-  things?: string[];
+  things?: string[]
 }
 export interface ProductionStageCompletionMaterialModel extends Model {
-  object: ProductionStageCompletionMaterial;
+  object: ProductionStageCompletionMaterial
   expandable: {
-    assortment: AssortmentModel;
-  };
-  requiredCreateFields: "consumedQuantity" | "assortment";
+    assortment: AssortmentModel
+  }
+  requiredCreateFields: "consumedQuantity" | "assortment"
 }
 
 export interface ListProductionStageCompletionMaterialsOptions {
-  pagination?: PaginationOptions;
-  expand?: ExpandOptions<ProductionStageCompletionMaterialModel>;
+  pagination?: PaginationOptions
+  expand?: ExpandOptions<ProductionStageCompletionMaterialModel>
 }
 
 export interface CreateProductionStageCompletionMaterialOptions {
-  expand?: ExpandOptions<ProductionStageCompletionMaterialModel>;
+  expand?: ExpandOptions<ProductionStageCompletionMaterialModel>
 }
 
 export interface UpdateProductionStageCompletionMaterialOptions {
-  expand?: ExpandOptions<ProductionStageCompletionMaterialModel>;
+  expand?: ExpandOptions<ProductionStageCompletionMaterialModel>
 }
 
 export type FirstProductionStageCompletionMaterialOptions = Omit<
   ListProductionStageCompletionMaterialsOptions,
   "pagination"
->;
+>
 export type AllProductionStageCompletionMaterialOptions = Omit<
   ListProductionStageCompletionMaterialsOptions,
   "pagination"
->;
+>
 
 /**
  * Продукт выполнения этапа производства
@@ -181,38 +181,38 @@ export interface ProductionStageCompletionResult
   extends Idable,
     Meta<Entity.ProductionStageCompletionResult> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Произведённое количество */
-  producedQuantity: number;
+  producedQuantity: number
 
   /** Метаданные ассортимента */
-  readonly assortment: Meta<AssortmentEntity>;
+  readonly assortment: Meta<AssortmentEntity>
 
   /** Серийные номера (только для товаров с серийным учетом) */
-  things?: string[];
+  things?: string[]
 }
 
 export interface ProductionStageCompletionResultModel extends Model {
-  object: ProductionStageCompletionResult;
+  object: ProductionStageCompletionResult
   expandable: {
-    assortment: AssortmentModel;
-  };
+    assortment: AssortmentModel
+  }
 }
 
 export interface ListProductionStageCompletionResultsOptions {
-  pagination?: PaginationOptions;
-  expand?: ExpandOptions<ProductionStageCompletionResultModel>;
+  pagination?: PaginationOptions
+  expand?: ExpandOptions<ProductionStageCompletionResultModel>
 }
 export interface UpdateProductionStageCompletionResultOptions {
-  expand?: ExpandOptions<ProductionStageCompletionResultModel>;
+  expand?: ExpandOptions<ProductionStageCompletionResultModel>
 }
 
 export type FirstProductionStageCompletionResultOptions = Omit<
   ListProductionStageCompletionResultsOptions,
   "pagination"
->;
+>
 export type AllProductionStageCompletionResultOptions = Omit<
   ListProductionStageCompletionResultsOptions,
   "pagination"
->;
+>

@@ -1,14 +1,14 @@
-import {
+import type {
+  BatchDeleteResult,
+  BatchGetResult,
   Entity,
-  type BatchDeleteResult,
-  type GetFindResult,
-  type ListResponse,
-  type Subset,
-  type BatchGetResult,
-  type ModelCreateOrUpdateData,
-  type MatchArrayType,
-  type ListMeta,
-} from "../../types";
+  GetFindResult,
+  ListMeta,
+  ListResponse,
+  MatchArrayType,
+  ModelCreateOrUpdateData,
+  Subset,
+} from "../../types"
 import type {
   AllDemandsOptions,
   DemandModel,
@@ -17,7 +17,7 @@ import type {
   GetDemandOptions,
   ListDemandsOptions,
   UpsertDemandsOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Отгрузки
@@ -45,7 +45,7 @@ export interface DemandEndpoint {
       GetFindResult<DemandModel, T["expand"], T["fields"]>,
       Entity.Demand
     >
-  >;
+  >
 
   /**
    * Получить все отгрузки с учетом пагинации.
@@ -67,7 +67,7 @@ export interface DemandEndpoint {
       GetFindResult<DemandModel, T["expand"], T["fields"]>,
       Entity.Demand
     >
-  >;
+  >
 
   /**
    * Получить отгрузку по ID.
@@ -86,7 +86,7 @@ export interface DemandEndpoint {
   get<T extends GetDemandOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetDemandOptions>,
-  ): Promise<GetFindResult<DemandModel, T["expand"], T["fields"]>>;
+  ): Promise<GetFindResult<DemandModel, T["expand"], T["fields"]>>
 
   /**
    * Получить первую отгрузку из списка.
@@ -106,7 +106,7 @@ export interface DemandEndpoint {
       GetFindResult<DemandModel, T["expand"], T["fields"]>,
       Entity.Demand
     >
-  >;
+  >
 
   /**
    * Получить количество отгрузок.
@@ -118,7 +118,7 @@ export interface DemandEndpoint {
    * const count = await moysklad.demand.size();
    * ```
    */
-  size(options?: AllDemandsOptions): Promise<ListMeta<Entity.Demand>>;
+  size(options?: AllDemandsOptions): Promise<ListMeta<Entity.Demand>>
 
   /**
    * Удалить отгрузку.
@@ -133,7 +133,7 @@ export interface DemandEndpoint {
    * await moysklad.demand.delete("a7404318-550f-11e8-56c0-000800000006");
    * ```
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Удалить несколько отгрузок.
@@ -148,7 +148,7 @@ export interface DemandEndpoint {
    * await moysklad.demand.batchDelete(["a7404318-550f-11e8-56c0-000800000006", "a7404318-550f-11e8-56c0-000800000007"]);
    * ```
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 
   /**
    * Переместить отгрузку в корзину.
@@ -161,7 +161,7 @@ export interface DemandEndpoint {
    * await moysklad.demand.trash("a7404318-550f-11e8-56c0-000800000006");
    * ```
    */
-  trash(id: string): Promise<void>;
+  trash(id: string): Promise<void>
 
   /**
    * Создать или обновить отгрузку.
@@ -190,7 +190,7 @@ export interface DemandEndpoint {
     options?: Subset<TOptions, UpsertDemandsOptions>,
   ): Promise<
     MatchArrayType<TData, GetFindResult<DemandModel, TOptions["expand"]>>
-  >;
+  >
 
   /**
    * Получить шаблон отгрузки на основе заказа покупателя или счета покупателю.
@@ -209,5 +209,5 @@ export interface DemandEndpoint {
    */
   template(
     data: DemandTemplateData,
-  ): Promise<GetFindResult<DemandModel, { positions: true }>>;
+  ): Promise<GetFindResult<DemandModel, { positions: true }>>
 }

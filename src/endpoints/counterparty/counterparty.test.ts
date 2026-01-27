@@ -1,23 +1,23 @@
-import { describe, it, expect } from "vitest";
-import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
-import { CounterpartyCompanyType, IndividualCounterpartySex } from "./types";
+import { describe, expect, it } from "vitest"
+import { createFetchMock, expectFetch, moysklad } from "../../../test-utils"
+import { CounterpartyCompanyType, IndividualCounterpartySex } from "./types"
 
 describe("counterparty", () => {
   describe("list", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
-      await moysklad.counterparty.list();
+      await moysklad.counterparty.list()
 
       expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.counterparty.list({
         pagination: { limit: 10, offset: 0 },
@@ -28,7 +28,7 @@ describe("counterparty", () => {
           companyType: CounterpartyCompanyType.Legal,
           archived: false,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -42,18 +42,18 @@ describe("counterparty", () => {
           search: "ООО Ромашка",
           filter: "companyType=legal;archived=false",
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with multiple order fields", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.counterparty.list({
         order: [
           { field: "name", direction: "asc" },
           { field: "created", direction: "desc" },
         ],
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -62,15 +62,15 @@ describe("counterparty", () => {
         searchParameters: {
           order: "name,asc;created,desc",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with string order field", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.counterparty.list({
         order: "name",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -79,26 +79,26 @@ describe("counterparty", () => {
         searchParameters: {
           order: "name",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("all", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
-      await moysklad.counterparty.all();
+      await moysklad.counterparty.all()
 
       // Check that the URL contains the expected path and parameters
-      const firstCallUrl = fetchMock.mock.calls[0]?.[0] as string;
-      expect(firstCallUrl).toContain("/entity/counterparty?limit=");
+      const firstCallUrl = fetchMock.mock.calls[0]?.[0] as string
+      expect(firstCallUrl).toContain("/entity/counterparty?limit=")
       expect(fetchMock.mock.calls[0]?.[1]).toMatchObject({
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.counterparty.all({
         expand: { owner: true },
@@ -107,44 +107,44 @@ describe("counterparty", () => {
         filter: {
           companyType: CounterpartyCompanyType.Legal,
         },
-      });
+      })
 
       // Check that the URL contains the expected path
-      const firstCallUrl = fetchMock.mock.calls[0]?.[0] as string;
-      expect(firstCallUrl).toContain("/entity/counterparty?");
+      const firstCallUrl = fetchMock.mock.calls[0]?.[0] as string
+      expect(firstCallUrl).toContain("/entity/counterparty?")
       expect(fetchMock.mock.calls[0]?.[1]).toMatchObject({
         method: "GET",
-      });
+      })
 
-      const callUrl = new URL(firstCallUrl);
-      expect(callUrl.searchParams.get("expand")).toBe("owner");
-      expect(callUrl.searchParams.get("order")).toBe("name,asc");
-      expect(callUrl.searchParams.get("search")).toBe("ООО Ромашка");
-      expect(callUrl.searchParams.get("filter")).toBe("companyType=legal");
-    });
-  });
+      const callUrl = new URL(firstCallUrl)
+      expect(callUrl.searchParams.get("expand")).toBe("owner")
+      expect(callUrl.searchParams.get("order")).toBe("name,asc")
+      expect(callUrl.searchParams.get("search")).toBe("ООО Ромашка")
+      expect(callUrl.searchParams.get("filter")).toBe("companyType=legal")
+    })
+  })
 
   describe("get", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.counterparty.get(id);
+      await moysklad.counterparty.get(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.counterparty.get(id, {
         expand: { owner: true, group: true },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -153,40 +153,40 @@ describe("counterparty", () => {
         searchParameters: expect.objectContaining({
           expand: "owner,group",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("update", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "ООО Ромашка",
         description: "Новое описание",
-      };
+      }
 
-      await moysklad.counterparty.update(id, data);
+      await moysklad.counterparty.update(id, data)
 
       expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "ООО Ромашка",
         description: "Новое описание",
-      };
+      }
 
       await moysklad.counterparty.update(id, data, {
         expand: { owner: true },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -196,12 +196,12 @@ describe("counterparty", () => {
         searchParameters: expect.objectContaining({
           expand: "owner",
         }),
-      });
-    });
+      })
+    })
 
     it("updates a legal counterparty", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "ООО Ромашка",
         companyType: CounterpartyCompanyType.Legal,
@@ -209,21 +209,21 @@ describe("counterparty", () => {
         kpp: "773601001",
         legalAddress: "г. Москва, ул. Ленина, д. 1",
         legalTitle: "Общество с ограниченной ответственностью 'Ромашка'",
-      };
+      }
 
-      await moysklad.counterparty.update(id, data);
+      await moysklad.counterparty.update(id, data)
 
       expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("updates an entrepreneur counterparty", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "ИП Иванов",
         companyType: CounterpartyCompanyType.Entrepreneur,
@@ -232,21 +232,21 @@ describe("counterparty", () => {
         legalLastName: "Иванов",
         legalMiddleName: "Иванович",
         ogrnip: "123456789012345",
-      };
+      }
 
-      await moysklad.counterparty.update(id, data);
+      await moysklad.counterparty.update(id, data)
 
       expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("updates an individual counterparty", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Петров П.П.",
         companyType: CounterpartyCompanyType.Individual,
@@ -254,24 +254,24 @@ describe("counterparty", () => {
         legalLastName: "Петров",
         legalMiddleName: "Петрович",
         sex: IndividualCounterpartySex.Male,
-      };
+      }
 
-      await moysklad.counterparty.update(id, data);
+      await moysklad.counterparty.update(id, data)
 
       expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "PUT",
         body: data,
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("first", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
-      await moysklad.counterparty.first();
+      await moysklad.counterparty.first()
 
       expectFetch({
         fetchMock,
@@ -280,11 +280,11 @@ describe("counterparty", () => {
         searchParameters: {
           limit: "1",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.counterparty.first({
         expand: { owner: true },
@@ -293,7 +293,7 @@ describe("counterparty", () => {
         filter: {
           companyType: CounterpartyCompanyType.Legal,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -306,15 +306,15 @@ describe("counterparty", () => {
           search: "ООО Ромашка",
           filter: "companyType=legal",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("size", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.counterparty.size();
+      await moysklad.counterparty.size()
 
       expectFetch({
         fetchMock,
@@ -323,17 +323,17 @@ describe("counterparty", () => {
         searchParameters: expect.objectContaining({
           limit: "0",
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.counterparty.size({
         filter: {
           name: "Test Counterparty",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -343,60 +343,60 @@ describe("counterparty", () => {
           filter: "name=Test Counterparty",
           limit: "0",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("upsert", () => {
     it("creates a new counterparty", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         name: "ООО Ромашка",
         companyType: CounterpartyCompanyType.Legal,
         inn: "7736570901",
         kpp: "773601001",
-      };
+      }
 
-      await moysklad.counterparty.upsert(data);
+      await moysklad.counterparty.upsert(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("updates an existing counterparty", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         id: "5427bc76-b95f-11eb-0a80-04bb000cd583",
         name: "ООО Ромашка",
         companyType: CounterpartyCompanyType.Legal,
         inn: "7736570901",
         kpp: "773601001",
-      };
+      }
 
-      await moysklad.counterparty.upsert(data);
+      await moysklad.counterparty.upsert(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         name: "ООО Ромашка",
         companyType: CounterpartyCompanyType.Legal,
-      };
+      }
 
       await moysklad.counterparty.upsert(data, {
         expand: { owner: true },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -406,11 +406,11 @@ describe("counterparty", () => {
         searchParameters: expect.objectContaining({
           expand: "owner",
         }),
-      });
-    });
+      })
+    })
 
     it("handles array of counterparties", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         {
           name: "ООО Ромашка",
@@ -420,20 +420,20 @@ describe("counterparty", () => {
           name: "ИП Иванов",
           companyType: CounterpartyCompanyType.Entrepreneur,
         },
-      ];
+      ]
 
-      await moysklad.counterparty.upsert(data);
+      await moysklad.counterparty.upsert(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("creates a legal counterparty with full data", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         name: "ООО Ромашка",
         companyType: CounterpartyCompanyType.Legal,
@@ -452,20 +452,20 @@ describe("counterparty", () => {
         externalCode: "supplier-001-external",
         archived: false,
         tags: ["поставщик", "канцтовары"],
-      };
+      }
 
-      await moysklad.counterparty.upsert(data);
+      await moysklad.counterparty.upsert(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("creates an entrepreneur counterparty with full data", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         name: "ИП Иванов",
         companyType: CounterpartyCompanyType.Entrepreneur,
@@ -480,20 +480,20 @@ describe("counterparty", () => {
         certificateDate: "2020-01-01",
         email: "ivanov@example.com",
         phone: "+7 (495) 987-65-43",
-      };
+      }
 
-      await moysklad.counterparty.upsert(data);
+      await moysklad.counterparty.upsert(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("creates an individual counterparty with full data", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         name: "Петров П.П.",
         companyType: CounterpartyCompanyType.Individual,
@@ -506,16 +506,16 @@ describe("counterparty", () => {
         inn: "123456789012",
         phone: "+7 (495) 111-22-33",
         email: "petrov@example.com",
-      };
+      }
 
-      await moysklad.counterparty.upsert(data);
+      await moysklad.counterparty.upsert(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
         body: data,
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})

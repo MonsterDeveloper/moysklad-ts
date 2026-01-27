@@ -1,16 +1,13 @@
-export type { Moysklad } from "./moysklad";
-
 export type {
   ApiClientOptions,
   Auth,
   BasicAuth,
   TokenAuth,
-} from "./api-client";
+} from "./api-client"
+export * from "./endpoints"
+export * from "./errors"
+export type { Moysklad } from "./moysklad"
+export { createMoysklad } from "./proxy"
+export * from "./types"
 
-export * from "./types";
-export * from "./endpoints";
-export * from "./errors";
-
-export { createMoysklad } from "./proxy";
-
-export { composeDateTime, parseDateTime, isAssortmentOfType } from "./utils";
+export { composeDateTime, isAssortmentOfType, parseDateTime } from "./utils"

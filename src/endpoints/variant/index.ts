@@ -1,2 +1,2 @@
-export * from "./types";
-export type { VariantEndpoint } from "./variant";
+export * from "./types"
+export type { VariantEndpoint } from "./variant"

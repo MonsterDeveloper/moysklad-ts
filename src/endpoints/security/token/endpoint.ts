@@ -7,5 +7,5 @@ export interface TokenEndpoint {
    *
    * @returns Объект с токеном доступа
    */
-  create(): Promise<{ access_token: string }>;
+  create(): Promise<{ access_token: string }>
 }

@@ -1,20 +1,20 @@
 import type {
   ArchivedFilter,
-  EqualityFilter,
-  PaginationOptions,
+  AssortmentEntity,
   AssortmentModel,
   BatchGetResult,
-  Entity,
-  ListResponse,
-  Subset,
-  ListMeta,
-  AssortmentEntity,
-  StringFilter,
   BooleanFilter,
-  NumberFilter,
-  IdFilter,
   DateTimeFilter,
-} from "../../types";
+  Entity,
+  EqualityFilter,
+  IdFilter,
+  ListMeta,
+  ListResponse,
+  NumberFilter,
+  PaginationOptions,
+  StringFilter,
+  Subset,
+} from "../../types"
 
 /**
  * Режим фильтрации по остаткам
@@ -74,96 +74,96 @@ export enum AssortmentEntityType {
 
 export interface ListAssortmentOptions {
   /** Получить вместе с сериями. */
-  groupBy?: "consignment";
+  groupBy?: "consignment"
 
   filter?: {
     /** Фильтрация по коду вида алкогольной продукции */
-    "alcoholic.type"?: NumberFilter;
+    "alcoholic.type"?: NumberFilter
 
     /** Фильтрация по признаку архивности товаров */
-    archived?: ArchivedFilter;
+    archived?: ArchivedFilter
 
     /** Фильтрация по артикулам товаров и комплектов */
-    article?: StringFilter;
+    article?: StringFilter
 
     /** Фильтрация по штрихкодам сущностей */
-    barcode?: EqualityFilter<string> | string | string[];
+    barcode?: EqualityFilter<string> | string | string[]
 
     /** Фильтрация по кодам сущностей */
-    code?: StringFilter;
+    code?: StringFilter
 
     /** Фильтрация по описаниям сущностей */
-    description?: StringFilter;
+    description?: StringFilter
 
     /** Фильтрация по внешним кодам сущностей */
-    externalCode?: StringFilter;
+    externalCode?: StringFilter
 
     /** Фильтрация по владельцу-отделу */
-    group?: EqualityFilter<string> | string | string[];
+    group?: EqualityFilter<string> | string | string[]
 
     /** Фильтрация по идентификаторам сущностей */
-    id?: IdFilter;
+    id?: IdFilter
 
     /** Фильтрация по использованию серийных номеров */
-    isSerialTrackable?: BooleanFilter;
+    isSerialTrackable?: BooleanFilter
 
     /** Фильтрация по наименованиям сущностей */
-    name?: StringFilter;
+    name?: StringFilter
 
     /** Фильтрация по владельцу-сотруднику */
-    owner?: EqualityFilter<string> | string | string[];
+    owner?: EqualityFilter<string> | string | string[]
 
     /** Фильтрация по наименованию групп товаров */
-    pathname?: StringFilter;
+    pathname?: StringFilter
 
     /** Фильтрация по группам товаров */
-    productFolder?: EqualityFilter<string> | string | string[];
+    productFolder?: EqualityFilter<string> | string | string[]
 
     /** Фильтрация по значению доступно */
-    quantityMode?: QuantityMode;
+    quantityMode?: QuantityMode
 
     /** Префиксный поиск по строковым полям */
-    search?: EqualityFilter<string> | string;
+    search?: EqualityFilter<string> | string
 
     /** Фильтрация по признаку общего доступа */
-    shared?: BooleanFilter;
+    shared?: BooleanFilter
 
     /** Фильтрация по значению остатка */
-    stockMode?: StockMode;
+    stockMode?: StockMode
 
     /** Момент времени, на который нужно вывести остатки */
-    stockMoment?: DateTimeFilter;
+    stockMoment?: DateTimeFilter
 
     /** Фильтрация по складам */
-    stockStore?: EqualityFilter<string> | string | string[];
+    stockStore?: EqualityFilter<string> | string | string[]
 
     /** Фильтрация по поставщикам */
-    supplier?: EqualityFilter<string> | string | string[];
+    supplier?: EqualityFilter<string> | string | string[]
 
     /** Фильтрация по типу сущности */
     type?:
       | EqualityFilter<AssortmentEntityType>
       | AssortmentEntityType
-      | AssortmentEntityType[];
+      | AssortmentEntityType[]
 
     /** Фильтрация по времени последнего обновления */
-    updated?: DateTimeFilter;
+    updated?: DateTimeFilter
 
     /** Фильтрация по автору последнего обновления */
-    updatedBy?: EqualityFilter<string> | string | string[];
+    updatedBy?: EqualityFilter<string> | string | string[]
 
     /** Фильтрация по признаку весового товара */
-    weighed?: BooleanFilter;
+    weighed?: BooleanFilter
 
     /** Параметр учета вложенных подгрупп */
-    withSubFolders?: boolean;
-  };
+    withSubFolders?: boolean
+  }
 
-  pagination?: PaginationOptions;
+  pagination?: PaginationOptions
 }
 
-export type AllAssortmentOptions = Omit<ListAssortmentOptions, "pagination">;
-export type FirstAssortmentOptions = Omit<ListAssortmentOptions, "pagination">;
+export type AllAssortmentOptions = Omit<ListAssortmentOptions, "pagination">
+export type FirstAssortmentOptions = Omit<ListAssortmentOptions, "pagination">
 
 /**
  * Ассортимент
@@ -186,7 +186,7 @@ export interface AssortmentEndpoint {
    */
   list<T extends ListAssortmentOptions>(
     options?: Subset<T, ListAssortmentOptions>,
-  ): Promise<ListResponse<AssortmentModel["object"], Entity.Assortment>>;
+  ): Promise<ListResponse<AssortmentModel["object"], Entity.Assortment>>
 
   /**
    * Получить все товары, комплекты, услуги и модификации.
@@ -203,7 +203,7 @@ export interface AssortmentEndpoint {
    */
   all<T extends AllAssortmentOptions>(
     options?: Subset<T, AllAssortmentOptions>,
-  ): Promise<BatchGetResult<AssortmentModel["object"], Entity.Assortment>>;
+  ): Promise<BatchGetResult<AssortmentModel["object"], Entity.Assortment>>
 
   /**
    * Получить первую позицию в списке.
@@ -220,12 +220,12 @@ export interface AssortmentEndpoint {
    */
   first<T extends FirstAssortmentOptions>(
     options?: Subset<T, FirstAssortmentOptions>,
-  ): Promise<ListResponse<AssortmentModel["object"], Entity.Assortment>>;
+  ): Promise<ListResponse<AssortmentModel["object"], Entity.Assortment>>
 
   /**
    * Получить общее количество ассортимента.
    *
    * @returns Общее количество ассортимента
    */
-  size(options?: AllAssortmentOptions): Promise<ListMeta<AssortmentEntity>>;
+  size(options?: AllAssortmentOptions): Promise<ListMeta<AssortmentEntity>>
 }

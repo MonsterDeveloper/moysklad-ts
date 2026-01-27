@@ -5,11 +5,11 @@ import type {
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
+  ListMeta,
   ListResponse,
   Subset,
   UpdateMeta,
-  ListMeta,
-} from "../../types";
+} from "../../types"
 import type {
   AllProductionTasksOptions,
   CreateProductionTaskOptions,
@@ -18,7 +18,7 @@ import type {
   ListProductionTasksOptions,
   ProductionTaskModel,
   UpdateProductionTaskOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Производственные задания
@@ -67,7 +67,7 @@ export interface ProductionTaskEndpoint {
       GetFindResult<ProductionTaskModel, T["expand"]>,
       Entity.ProductionTask
     >
-  >;
+  >
 
   /**
    * Получить все производственные задания.
@@ -89,7 +89,7 @@ export interface ProductionTaskEndpoint {
       GetFindResult<ProductionTaskModel, T["expand"]>,
       Entity.ProductionTask
     >
-  >;
+  >
 
   /**
    * Получить производственное задание по id.
@@ -108,7 +108,7 @@ export interface ProductionTaskEndpoint {
   get<T extends GetProductionTaskOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetProductionTaskOptions>,
-  ): Promise<GetFindResult<ProductionTaskModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductionTaskModel, T["expand"]>>
 
   /**
    * Изменить производственное задание.
@@ -139,7 +139,7 @@ export interface ProductionTaskEndpoint {
     id: string,
     data: GetModelUpdatableFields<ProductionTaskModel>,
     options?: Subset<T, UpdateProductionTaskOptions>,
-  ): Promise<GetFindResult<ProductionTaskModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductionTaskModel, T["expand"]>>
 
   /**
    * Создать производственное задание.
@@ -167,7 +167,7 @@ export interface ProductionTaskEndpoint {
   create<T extends CreateProductionTaskOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<ProductionTaskModel>,
     options?: Subset<T, CreateProductionTaskOptions>,
-  ): Promise<GetFindResult<ProductionTaskModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProductionTaskModel, T["expand"]>>
 
   /**
    * Массово создать и обновить производственные задания
@@ -223,7 +223,7 @@ export interface ProductionTaskEndpoint {
           UpdateMeta<Entity.ProductionTask>)
     )[],
     options?: Subset<T, CreateProductionTaskOptions>,
-  ): Promise<GetFindResult<ProductionTaskModel, T["expand"]>[]>;
+  ): Promise<GetFindResult<ProductionTaskModel, T["expand"]>[]>
 
   /**
    * Получить первое производственное задание.
@@ -248,7 +248,7 @@ export interface ProductionTaskEndpoint {
       GetFindResult<ProductionTaskModel, T["expand"]>,
       Entity.ProductionTask
     >
-  >;
+  >
 
   /**
    * Получить общее количество производственных заданий.
@@ -256,7 +256,7 @@ export interface ProductionTaskEndpoint {
    */
   size(
     options?: AllProductionTasksOptions,
-  ): Promise<ListMeta<Entity.ProductionTask>>;
+  ): Promise<ListMeta<Entity.ProductionTask>>
 
   /**
    * Удалить производственное задание по id.
@@ -264,7 +264,7 @@ export interface ProductionTaskEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-proizwodstwennoe-zadanie-udalit-proizwodstwennoe-zadanie
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Массово удалить производственные задания.
@@ -274,5 +274,5 @@ export interface ProductionTaskEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-proizwodstwennoe-zadanie-massowoe-udalenie-proizwodstwennyh-zadanij
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 }

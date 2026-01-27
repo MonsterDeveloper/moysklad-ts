@@ -8,13 +8,15 @@ export async function* batchPromises(
   tasks: (() => Promise<unknown>)[],
   concurrencyLimit: number,
 ) {
-  if (tasks.length === 0) return [];
+  if (tasks.length === 0) {
+    return []
+  }
 
-  for (let index = 0; index < tasks.length; index = index + concurrencyLimit) {
-    const batch = tasks.slice(index, index + concurrencyLimit);
+  for (let index = 0; index < tasks.length; index += concurrencyLimit) {
+    const batch = tasks.slice(index, index + concurrencyLimit)
 
-    const result = await Promise.all(batch.map((task) => task()));
+    const result = await Promise.all(batch.map((task) => task()))
 
-    yield result;
+    yield result
   }
 }

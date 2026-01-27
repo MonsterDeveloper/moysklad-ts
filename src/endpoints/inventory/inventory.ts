@@ -1,24 +1,24 @@
 import type {
+  BatchDeleteResult,
+  BatchGetResult,
   Entity,
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
+  ListMeta,
   ListResponse,
   Subset,
-  BatchGetResult,
-  BatchDeleteResult,
   UpdateMeta,
-  ListMeta,
-} from "../../types";
+} from "../../types"
 import type {
-  InventoryModel,
+  AllInventoryOptions,
   CreateInventoryOptions,
   FirstInventoryOptions,
   GetInventoryOptions,
+  InventoryModel,
   ListInventoryOptions,
   UpdateInventoryOptions,
-  AllInventoryOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Инвентаризации
@@ -38,7 +38,7 @@ export interface InventoryEndpoint {
     options?: Subset<T, ListInventoryOptions>,
   ): Promise<
     ListResponse<GetFindResult<InventoryModel, T["expand"]>, Entity.Inventory>
-  >;
+  >
 
   /**
    * Получить все инвентаризации.
@@ -50,7 +50,7 @@ export interface InventoryEndpoint {
     options?: Subset<T, AllInventoryOptions>,
   ): Promise<
     BatchGetResult<GetFindResult<InventoryModel, T["expand"]>, Entity.Inventory>
-  >;
+  >
 
   /**
    * Получить количество инвентаризаций.
@@ -63,7 +63,7 @@ export interface InventoryEndpoint {
    * const count = await moysklad.inventory.size();
    * ```
    */
-  size(options?: AllInventoryOptions): Promise<ListMeta<Entity.Inventory>>;
+  size(options?: AllInventoryOptions): Promise<ListMeta<Entity.Inventory>>
 
   /**
    * Получить первую инвентаризацию.
@@ -75,7 +75,7 @@ export interface InventoryEndpoint {
     options?: Subset<T, FirstInventoryOptions>,
   ): Promise<
     ListResponse<GetFindResult<InventoryModel, T["expand"]>, Entity.Inventory>
-  >;
+  >
 
   /**
    * Получить инвентаризацию по id.
@@ -87,7 +87,7 @@ export interface InventoryEndpoint {
   get<T extends GetInventoryOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetInventoryOptions>,
-  ): Promise<GetFindResult<InventoryModel, T["expand"]>>;
+  ): Promise<GetFindResult<InventoryModel, T["expand"]>>
 
   /**
    * Создать инвентаризацию.
@@ -99,7 +99,7 @@ export interface InventoryEndpoint {
   create<T extends CreateInventoryOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<InventoryModel>,
     options?: Subset<T, CreateInventoryOptions>,
-  ): Promise<GetFindResult<InventoryModel, T["expand"]>>;
+  ): Promise<GetFindResult<InventoryModel, T["expand"]>>
 
   /**
    * Обновить инвентаризацию.
@@ -113,7 +113,7 @@ export interface InventoryEndpoint {
     id: string,
     data: GetModelUpdatableFields<InventoryModel>,
     options?: Subset<T, UpdateInventoryOptions>,
-  ): Promise<GetFindResult<InventoryModel, T["expand"]>>;
+  ): Promise<GetFindResult<InventoryModel, T["expand"]>>
 
   /**
    * Массово создать или обновить инвентаризации.
@@ -128,7 +128,7 @@ export interface InventoryEndpoint {
       | (GetModelUpdatableFields<InventoryModel> & UpdateMeta<Entity.Inventory>)
     )[],
     options?: Subset<T, CreateInventoryOptions>,
-  ): Promise<GetFindResult<InventoryModel, T["expand"]>[]>;
+  ): Promise<GetFindResult<InventoryModel, T["expand"]>[]>
 
   /**
    * Массово удалить инвентаризации.
@@ -136,5 +136,5 @@ export interface InventoryEndpoint {
    * @param ids - массив id инвентаризаций
    * @returns Массив с результатами удаления инвентаризаций
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 }

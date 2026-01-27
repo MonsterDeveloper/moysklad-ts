@@ -1,2 +1,2 @@
-export type { RegionEndpoint } from "./region";
-export * from "./types";
+export type { RegionEndpoint } from "./region"
+export * from "./types"

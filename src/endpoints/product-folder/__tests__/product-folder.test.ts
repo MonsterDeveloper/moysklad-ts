@@ -1,31 +1,31 @@
-import { describe, it } from "vitest";
-import { moysklad, createFetchMock, expectFetch } from "../../../../test-utils";
-import { Entity } from "../../../types";
-import { TaxSystem } from "../../../types/tax-system";
+import { describe, it } from "vitest"
+import { createFetchMock, expectFetch, moysklad } from "../../../../test-utils"
+import { Entity } from "../../../types"
+import { TaxSystem } from "../../../types/tax-system"
 
 describe("product folder", () => {
   describe("list", () => {
     it("retrieves list of product folders", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.productFolder.list();
+      await moysklad.productFolder.list()
 
       expectFetch({
         fetchMock,
         url: "/entity/productfolder",
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("retrieves list of product folders with options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.productFolder.list({
         pagination: {
           limit: 50,
           offset: 10,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -35,17 +35,17 @@ describe("product folder", () => {
           limit: "50",
           offset: "10",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("create", () => {
     it("creates minimal product folder", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.productFolder.create({
         name: "Овощи",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -54,11 +54,11 @@ describe("product folder", () => {
         body: {
           name: "Овощи",
         },
-      });
-    });
+      })
+    })
 
     it("creates product folder with all fields", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.productFolder.create({
         name: "Фрукты",
@@ -68,7 +68,7 @@ describe("product folder", () => {
         vatEnabled: true,
         useParentVat: false,
         taxSystem: TaxSystem.General,
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -83,36 +83,36 @@ describe("product folder", () => {
           useParentVat: false,
           taxSystem: "GENERAL_TAX_SYSTEM",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("get", () => {
     it("retrieves product folder by id", async () => {
-      const fetchMock = createFetchMock();
-      const id = "7944ef04-f831-11e5-7a69-971500188b19";
+      const fetchMock = createFetchMock()
+      const id = "7944ef04-f831-11e5-7a69-971500188b19"
 
-      await moysklad.productFolder.get(id);
+      await moysklad.productFolder.get(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/productfolder/${id}`,
         method: "GET",
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("update", () => {
     it("updates product folder", async () => {
-      const fetchMock = createFetchMock();
-      const id = "7944ef04-f831-11e5-7a69-971500188b19";
+      const fetchMock = createFetchMock()
+      const id = "7944ef04-f831-11e5-7a69-971500188b19"
 
       await moysklad.productFolder.update(id, {
         name: "Группа Овощи",
         code: "vegetableFolderCode",
         externalCode: "extVegCode",
         vat: 5,
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -124,32 +124,32 @@ describe("product folder", () => {
           externalCode: "extVegCode",
           vat: 5,
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("delete", () => {
     it("deletes single product folder", async () => {
-      const fetchMock = createFetchMock();
-      const id = "7944ef04-f831-11e5-7a69-971500188b19";
+      const fetchMock = createFetchMock()
+      const id = "7944ef04-f831-11e5-7a69-971500188b19"
 
-      await moysklad.productFolder.delete(id);
+      await moysklad.productFolder.delete(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/productfolder/${id}`,
         method: "DELETE",
-      });
-    });
+      })
+    })
 
     it("deletes multiple product folders", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const ids = [
         "7944ef04-f831-11e5-7a69-971500188b1",
         "7944ef04-f831-11e5-7a69-971500188b2",
-      ];
+      ]
 
-      await moysklad.productFolder.batchDelete(ids);
+      await moysklad.productFolder.batchDelete(ids)
 
       expectFetch({
         fetchMock,
@@ -162,17 +162,17 @@ describe("product folder", () => {
             mediaType: "application/json",
           },
         })),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("upsert", () => {
     it("creates new product folder", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.productFolder.upsert({
         name: "Овощи",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -181,12 +181,12 @@ describe("product folder", () => {
         body: {
           name: "Овощи",
         },
-      });
-    });
+      })
+    })
 
     it("updates existing product folder", async () => {
-      const fetchMock = createFetchMock();
-      const id = "7944ef04-f831-11e5-7a69-971500188b19";
+      const fetchMock = createFetchMock()
+      const id = "7944ef04-f831-11e5-7a69-971500188b19"
 
       await moysklad.productFolder.upsert({
         meta: {
@@ -195,7 +195,7 @@ describe("product folder", () => {
           mediaType: "application/json",
         },
         name: "Группа Овощи",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -209,12 +209,12 @@ describe("product folder", () => {
           },
           name: "Группа Овощи",
         },
-      });
-    });
+      })
+    })
 
     it("creates and updates multiple product folders", async () => {
-      const fetchMock = createFetchMock();
-      const id = "7944ef04-f831-11e5-7a69-971500188b19";
+      const fetchMock = createFetchMock()
+      const id = "7944ef04-f831-11e5-7a69-971500188b19"
 
       await moysklad.productFolder.upsert([
         {
@@ -231,7 +231,7 @@ describe("product folder", () => {
           externalCode: "extVegCode",
           vat: 5,
         },
-      ]);
+      ])
 
       expectFetch({
         fetchMock,
@@ -253,7 +253,7 @@ describe("product folder", () => {
             vat: 5,
           },
         ],
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})

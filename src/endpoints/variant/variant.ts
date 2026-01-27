@@ -1,24 +1,24 @@
-import {
-  Entity,
-  type BatchGetResult,
-  type GetFindResult,
-  type ListResponse,
-  type Subset,
-  type BatchDeleteResult,
-  type GetModelCreatableFields,
-  type GetModelUpdatableFields,
-  type UpdateMeta,
-  type ListMeta,
-} from "../../types";
 import type {
-  ListVariantsOptions,
-  CreateVariantOptions,
-  VariantModel,
+  BatchDeleteResult,
+  BatchGetResult,
+  Entity,
+  GetFindResult,
+  GetModelCreatableFields,
+  GetModelUpdatableFields,
+  ListMeta,
+  ListResponse,
+  Subset,
+  UpdateMeta,
+} from "../../types"
+import type {
   AllVariantsOptions,
+  CreateVariantOptions,
   FirstVariantOptions,
   GetVariantOptions,
+  ListVariantsOptions,
   UpdateVariantOptions,
-} from "./types";
+  VariantModel,
+} from "./types"
 
 /**
  * Модификации
@@ -50,7 +50,7 @@ export interface VariantEndpoint {
     options?: Subset<T, ListVariantsOptions>,
   ): Promise<
     ListResponse<GetFindResult<VariantModel, T["expand"]>, Entity.Variant>
-  >;
+  >
 
   /**
    * Получить все модификации.
@@ -69,7 +69,7 @@ export interface VariantEndpoint {
     options?: Subset<T, AllVariantsOptions>,
   ): Promise<
     BatchGetResult<GetFindResult<VariantModel, T["expand"]>, Entity.Variant>
-  >;
+  >
 
   /**
    * Получить первую модификацию.
@@ -88,7 +88,7 @@ export interface VariantEndpoint {
     options?: Subset<T, FirstVariantOptions>,
   ): Promise<
     ListResponse<GetFindResult<VariantModel, T["expand"]>, Entity.Variant>
-  >;
+  >
 
   /**
    * Получить модификацию по id.
@@ -107,14 +107,14 @@ export interface VariantEndpoint {
   get<T extends GetVariantOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetVariantOptions>,
-  ): Promise<GetFindResult<VariantModel, T["expand"]>>;
+  ): Promise<GetFindResult<VariantModel, T["expand"]>>
 
   /**
    * Получить общее количество модификаций.
    *
    * @returns Общее количество модификаций
    */
-  size(options?: AllVariantsOptions): Promise<ListMeta<Entity.Variant>>;
+  size(options?: AllVariantsOptions): Promise<ListMeta<Entity.Variant>>
 
   /**
    * Удалить модификацию по id.
@@ -122,7 +122,7 @@ export interface VariantEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq-udalit-modifikaciu
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Изменить модификацию.
@@ -138,7 +138,7 @@ export interface VariantEndpoint {
     id: string,
     data: GetModelUpdatableFields<VariantModel>,
     options?: Subset<T, UpdateVariantOptions>,
-  ): Promise<GetFindResult<VariantModel, T["expand"]>>;
+  ): Promise<GetFindResult<VariantModel, T["expand"]>>
 
   /**
    * Создать модификацию.
@@ -152,7 +152,7 @@ export interface VariantEndpoint {
   create<T extends CreateVariantOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<VariantModel>,
     options?: Subset<T, CreateVariantOptions>,
-  ): Promise<GetFindResult<VariantModel, T["expand"]>>;
+  ): Promise<GetFindResult<VariantModel, T["expand"]>>
 
   /**
    * Массово удалить модификации.
@@ -162,7 +162,7 @@ export interface VariantEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq-massowoe-udalenie-modifikacij
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 
   /**
    * Массово создать и обновить модификации.
@@ -179,7 +179,7 @@ export interface VariantEndpoint {
       | (GetModelUpdatableFields<VariantModel> & UpdateMeta<Entity.Variant>)
     )[],
     options?: Subset<T, CreateVariantOptions>,
-  ): Promise<GetFindResult<VariantModel, T["expand"]>[]>;
+  ): Promise<GetFindResult<VariantModel, T["expand"]>[]>
 
   /**
    * Поместить модификацию в корзину.
@@ -188,5 +188,5 @@ export interface VariantEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-modifikaciq-pomestit-modifikaciu-w-korzinu
    */
-  trash(id: string): Promise<void>;
+  trash(id: string): Promise<void>
 }

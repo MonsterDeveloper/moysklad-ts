@@ -6,14 +6,7 @@
     ".": "./src/index.ts"
   },
   "publish": {
-    "include": [
-      "LICENSE",
-      "README.md",
-      "package.json",
-      "src/**/*.ts"
-    ],
-    "exclude": [
-      "**/*.test.ts"
-    ]
+    "include": ["LICENSE", "README.md", "package.json", "src/**/*.ts"],
+    "exclude": ["**/*.test.ts"]
   }
 }

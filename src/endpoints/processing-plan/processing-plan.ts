@@ -1,23 +1,23 @@
 import type {
-  AllProcessingPlansOptions,
-  ProcessingPlanModel,
-  FirstProcessingPlanOptions,
-  GetProcessingPlanOptions,
-  ListProcessingPlansOptions,
-  UpdateProcessingPlanOptions,
-} from "./types";
-import type {
   BatchDeleteResult,
   BatchGetResult,
+  Entity,
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
+  ListMeta,
   ListResponse,
   Subset,
   UpdateMeta,
-  Entity,
-  ListMeta,
-} from "../../types";
+} from "../../types"
+import type {
+  AllProcessingPlansOptions,
+  FirstProcessingPlanOptions,
+  GetProcessingPlanOptions,
+  ListProcessingPlansOptions,
+  ProcessingPlanModel,
+  UpdateProcessingPlanOptions,
+} from "./types"
 
 /**
  * Техкарты
@@ -66,7 +66,7 @@ export interface ProcessingPlanEndpoint {
       GetFindResult<ProcessingPlanModel, T["expand"]>,
       Entity.ProcessingPlan
     >
-  >;
+  >
 
   /**
    * Получить все техкарты.
@@ -88,7 +88,7 @@ export interface ProcessingPlanEndpoint {
       GetFindResult<ProcessingPlanModel, T["expand"]>,
       Entity.ProcessingPlan
     >
-  >;
+  >
 
   /**
    * Получить техкарту по id.
@@ -107,7 +107,7 @@ export interface ProcessingPlanEndpoint {
   get<T extends GetProcessingPlanOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetProcessingPlanOptions>,
-  ): Promise<GetFindResult<ProcessingPlanModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProcessingPlanModel, T["expand"]>>
 
   /**
    * Изменить техкарту.
@@ -123,7 +123,7 @@ export interface ProcessingPlanEndpoint {
     id: string,
     data: GetModelUpdatableFields<ProcessingPlanModel>,
     options?: Subset<T, UpdateProcessingPlanOptions>,
-  ): Promise<GetFindResult<ProcessingPlanModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProcessingPlanModel, T["expand"]>>
 
   /**
    * Получить первую техкарту.
@@ -148,7 +148,7 @@ export interface ProcessingPlanEndpoint {
       GetFindResult<ProcessingPlanModel, T["expand"]>,
       Entity.ProcessingPlan
     >
-  >;
+  >
 
   /**
    * Получить общее количество техкарт.
@@ -157,7 +157,7 @@ export interface ProcessingPlanEndpoint {
    */
   size(
     options?: AllProcessingPlansOptions,
-  ): Promise<ListMeta<Entity.ProcessingPlan>>;
+  ): Promise<ListMeta<Entity.ProcessingPlan>>
 
   /**
    * Создать техкарту.
@@ -171,7 +171,7 @@ export interface ProcessingPlanEndpoint {
   create<T extends UpdateProcessingPlanOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<ProcessingPlanModel>,
     options?: Subset<T, UpdateProcessingPlanOptions>,
-  ): Promise<GetFindResult<ProcessingPlanModel, T["expand"]>>;
+  ): Promise<GetFindResult<ProcessingPlanModel, T["expand"]>>
 
   /**
    * Массово создать и обновить техкарты.
@@ -189,7 +189,7 @@ export interface ProcessingPlanEndpoint {
           UpdateMeta<Entity.ProcessingPlan>)
     )[],
     options?: Subset<T, UpdateProcessingPlanOptions>,
-  ): Promise<GetFindResult<ProcessingPlanModel, T["expand"]>[]>;
+  ): Promise<GetFindResult<ProcessingPlanModel, T["expand"]>[]>
 
   /**
    * Удалить техкарту по id.
@@ -197,7 +197,7 @@ export interface ProcessingPlanEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-tehkarta-udalit-tehkartu
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Массово удалить техкарты.
@@ -207,5 +207,5 @@ export interface ProcessingPlanEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-tehkarta-massowoe-udalenie-tehkart
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 }

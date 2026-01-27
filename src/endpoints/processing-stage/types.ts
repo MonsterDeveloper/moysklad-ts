@@ -5,9 +5,9 @@ import type {
   ListMeta,
   Meta,
   Model,
-} from "../../types";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
+} from "../../types"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
 
 /**
  * Этап производства
@@ -16,46 +16,46 @@ import type { GroupModel } from "../group";
  */
 export interface ProcessingStage extends Idable, Meta<Entity.ProcessingStage> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Признак доступности назначения на этап любого сотрудника */
-  allPerformers: boolean;
+  allPerformers: boolean
 
   /** Добавлен ли Этап в архив */
-  archived: boolean;
+  archived: boolean
 
   /** Комментарий Этапа */
-  description?: string;
+  description?: string
 
   /** Внешний код ЭтапаВнешний код Этапа */
-  externalCode: string;
+  externalCode: string
 
   /** Отдел сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /** Метаданные склада материалов */
-  materialStore: Meta<Entity.Store>;
+  materialStore: Meta<Entity.Store>
 
   /** Наименование Этапа */
-  name: string;
+  name: string
 
   /** Владелец (Сотрудник) */
-  owner: Meta<Entity.Employee>;
+  owner: Meta<Entity.Employee>
 
   /** Метаданные возможных исполнителей */
-  performers: ListMeta<Entity.Employee>;
+  performers: ListMeta<Entity.Employee>
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** Момент последнего обновления этапа */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 }
 
 export interface ProcessingStageModel extends Model {
-  object: ProcessingStage;
+  object: ProcessingStage
   expandable: {
-    group: GroupModel;
-    owner: EmployeeModel;
-  };
+    group: GroupModel
+    owner: EmployeeModel
+  }
 }

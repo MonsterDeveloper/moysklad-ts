@@ -1,24 +1,24 @@
-import {
-  Entity,
-  type BatchDeleteResult,
-  type GetFindResult,
-  type GetModelCreatableFields,
-  type GetModelUpdatableFields,
-  type ListResponse,
-  type Subset,
-  type UpdateMeta,
-  type BatchGetResult,
-  type ListMeta,
-} from "../../types";
 import type {
-  EnterModel,
-  ListEntersOptions,
+  BatchDeleteResult,
+  BatchGetResult,
+  Entity,
+  GetFindResult,
+  GetModelCreatableFields,
+  GetModelUpdatableFields,
+  ListMeta,
+  ListResponse,
+  Subset,
+  UpdateMeta,
+} from "../../types"
+import type {
+  AllEntersOptions,
   CreateEnterOptions,
-  UpdateEnterOptions,
+  EnterModel,
   FirstEnterOptions,
   GetEnterOptions,
-  AllEntersOptions,
-} from "./types";
+  ListEntersOptions,
+  UpdateEnterOptions,
+} from "./types"
 
 /**
  * Оприходования
@@ -41,9 +41,7 @@ export interface EnterEndpoint {
    */
   list<T extends ListEntersOptions = Record<string, unknown>>(
     options?: Subset<T, ListEntersOptions>,
-  ): Promise<
-    ListResponse<GetFindResult<EnterModel, T["expand"]>, Entity.Enter>
-  >;
+  ): Promise<ListResponse<GetFindResult<EnterModel, T["expand"]>, Entity.Enter>>
 
   /**
    * Получить все оприходования с пагинацией.
@@ -62,7 +60,7 @@ export interface EnterEndpoint {
     options?: Subset<T, AllEntersOptions>,
   ): Promise<
     BatchGetResult<GetFindResult<EnterModel, T["expand"]>, Entity.Enter>
-  >;
+  >
 
   /**
    * Получить оприходование по ID.
@@ -81,7 +79,7 @@ export interface EnterEndpoint {
   get<T extends GetEnterOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetEnterOptions>,
-  ): Promise<GetFindResult<EnterModel, T["expand"]>>;
+  ): Promise<GetFindResult<EnterModel, T["expand"]>>
 
   /**
    * Обновить оприходование.
@@ -105,7 +103,7 @@ export interface EnterEndpoint {
     id: string,
     data: GetModelUpdatableFields<EnterModel>,
     options?: Subset<T, UpdateEnterOptions>,
-  ): Promise<GetFindResult<EnterModel, T["expand"]>>;
+  ): Promise<GetFindResult<EnterModel, T["expand"]>>
 
   /**
    * Создать оприходование.
@@ -127,7 +125,7 @@ export interface EnterEndpoint {
   create<T extends CreateEnterOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<EnterModel>,
     options?: Subset<T, CreateEnterOptions>,
-  ): Promise<GetFindResult<EnterModel, T["expand"]>>;
+  ): Promise<GetFindResult<EnterModel, T["expand"]>>
 
   /**
    * Создать или обновить оприходование.
@@ -154,7 +152,7 @@ export interface EnterEndpoint {
       | (GetModelUpdatableFields<EnterModel> & UpdateMeta<Entity.Enter>)
     )[],
     options?: Subset<T, CreateEnterOptions>,
-  ): Promise<GetFindResult<EnterModel, T["expand"]>[]>;
+  ): Promise<GetFindResult<EnterModel, T["expand"]>[]>
 
   /**
    * Получить первое оприходование из списка.
@@ -172,9 +170,7 @@ export interface EnterEndpoint {
    */
   first<T extends FirstEnterOptions = Record<string, unknown>>(
     options?: Subset<T, FirstEnterOptions>,
-  ): Promise<
-    ListResponse<GetFindResult<EnterModel, T["expand"]>, Entity.Enter>
-  >;
+  ): Promise<ListResponse<GetFindResult<EnterModel, T["expand"]>, Entity.Enter>>
 
   /**
    * Получить размер списка оприходований.
@@ -186,7 +182,7 @@ export interface EnterEndpoint {
    * const size = await moysklad.enter.size();
    * ```
    */
-  size(options?: AllEntersOptions): Promise<ListMeta<Entity.Enter>>;
+  size(options?: AllEntersOptions): Promise<ListMeta<Entity.Enter>>
 
   /**
    * Удалить оприходование.
@@ -201,7 +197,7 @@ export interface EnterEndpoint {
    * await moysklad.enter.delete("a7404318-550f-11e8-56c0-000800000006");
    * ```
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Массовое удаление оприходований.
@@ -219,5 +215,5 @@ export interface EnterEndpoint {
    * ]);
    * ```
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 }

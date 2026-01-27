@@ -1,32 +1,32 @@
-import { describe, it, expect } from "vitest";
-import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
-import { Entity } from "../../types/entity";
-import { MediaType } from "../../types/media-type";
-import { EnterOverheadDistribution } from "./types";
+import { describe, expect, it } from "vitest"
+import { createFetchMock, expectFetch, moysklad } from "../../../test-utils"
+import { Entity } from "../../types/entity"
+import { MediaType } from "../../types/media-type"
+import { EnterOverheadDistribution } from "./types"
 
 describe("enter", () => {
   describe("list", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.enter.list();
+      await moysklad.enter.list()
 
       expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with pagination options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.enter.list({
         pagination: {
           limit: 100,
           offset: 50,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -36,18 +36,18 @@ describe("enter", () => {
           limit: "100",
           offset: "50",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.enter.list({
         filter: {
           applicable: true,
           name: "Test Enter",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -56,18 +56,18 @@ describe("enter", () => {
         searchParameters: {
           filter: "applicable=true;name=Test Enter",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.enter.list({
         expand: {
           organization: true,
           positions: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -77,15 +77,15 @@ describe("enter", () => {
           expand: "organization,positions",
           limit: expect.any(String),
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with order options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.enter.list({
         order: { field: "moment", direction: "desc" },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -94,15 +94,15 @@ describe("enter", () => {
         searchParameters: {
           order: "moment,desc",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with search option", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.enter.list({
         search: "test enter",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -111,15 +111,15 @@ describe("enter", () => {
         searchParameters: {
           search: "test enter",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("all", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
-      await moysklad.enter.all();
+      await moysklad.enter.all()
 
       expectFetch({
         fetchMock,
@@ -128,11 +128,11 @@ describe("enter", () => {
         searchParameters: expect.objectContaining({
           limit: expect.any(String),
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.enter.all({
         filter: {
@@ -141,7 +141,7 @@ describe("enter", () => {
         expand: {
           organization: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -151,15 +151,15 @@ describe("enter", () => {
           filter: "applicable=true",
           expand: "organization",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("first", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.enter.first();
+      await moysklad.enter.first()
 
       expectFetch({
         fetchMock,
@@ -168,18 +168,18 @@ describe("enter", () => {
         searchParameters: {
           limit: "1",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.enter.first({
         filter: {
           applicable: true,
         },
         search: "test",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -190,34 +190,34 @@ describe("enter", () => {
           filter: "applicable=true",
           search: "test",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("get", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.enter.get(id);
+      await moysklad.enter.get(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/enter/${id}`,
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.enter.get(id, {
         expand: {
           organization: true,
           positions: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -227,15 +227,15 @@ describe("enter", () => {
           expand: "organization,positions",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("size", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.enter.size();
+      await moysklad.enter.size()
 
       expectFetch({
         fetchMock,
@@ -244,17 +244,17 @@ describe("enter", () => {
         searchParameters: expect.objectContaining({
           limit: "0",
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.enter.size({
         filter: {
           name: "Test Enter",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -264,57 +264,57 @@ describe("enter", () => {
           filter: "name=Test Enter",
           limit: "0",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("delete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.enter.delete(id);
+      await moysklad.enter.delete(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/enter/${id}`,
         method: "DELETE",
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("update", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Updated Enter",
         description: "New description",
-      };
+      }
 
-      await moysklad.enter.update(id, data);
+      await moysklad.enter.update(id, data)
 
       expectFetch({
         fetchMock,
         url: `/entity/enter/${id}`,
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Updated Enter",
         description: "New description",
-      };
+      }
 
       await moysklad.enter.update(id, data, {
         expand: {
           organization: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -325,13 +325,13 @@ describe("enter", () => {
           expand: "organization",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("create", () => {
     it("makes a request with required fields", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         organization: {
           meta: {
@@ -359,20 +359,20 @@ describe("enter", () => {
             type: Entity.Store,
           },
         },
-      } as const;
+      } as const
 
-      await moysklad.enter.create(data);
+      await moysklad.enter.create(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with overhead", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         organization: {
           meta: {
@@ -405,20 +405,20 @@ describe("enter", () => {
           sum: 10_000,
           distribution: EnterOverheadDistribution.Price,
         },
-      } as const;
+      } as const
 
-      await moysklad.enter.create(data);
+      await moysklad.enter.create(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         organization: {
           meta: {
@@ -447,14 +447,14 @@ describe("enter", () => {
           },
         },
         name: "New Enter",
-      } as const;
+      } as const
 
       await moysklad.enter.create(data, {
         expand: {
           organization: true,
           positions: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -465,19 +465,19 @@ describe("enter", () => {
           expand: "organization,positions",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("batchDelete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const ids = [
         "5427bc76-b95f-11eb-0a80-04bb000cd583",
         "5427bc76-b95f-11eb-0a80-04bb000cd584",
-      ];
+      ]
 
-      await moysklad.enter.batchDelete(ids);
+      await moysklad.enter.batchDelete(ids)
 
       expectFetch({
         fetchMock,
@@ -490,13 +490,13 @@ describe("enter", () => {
             mediaType: MediaType.Json,
           },
         })),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("upsert", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         // Create new enter
         {
@@ -543,20 +543,20 @@ describe("enter", () => {
           },
           description: "Updated description",
         },
-      ];
+      ]
 
-      await moysklad.enter.upsert(data as never);
+      await moysklad.enter.upsert(data as never)
 
       expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         // Create new enter
         {
@@ -588,14 +588,14 @@ describe("enter", () => {
           },
           name: "New Enter",
         },
-      ];
+      ]
 
       await moysklad.enter.upsert(data as never, {
         expand: {
           organization: true,
           positions: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -606,7 +606,7 @@ describe("enter", () => {
           expand: "organization,positions",
           limit: expect.any(String),
         },
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})

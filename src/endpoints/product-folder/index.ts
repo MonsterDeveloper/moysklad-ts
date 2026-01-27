@@ -1,2 +1,2 @@
-export * from "./product-folder";
-export * from "./types";
+export * from "./product-folder"
+export * from "./types"

@@ -7,19 +7,19 @@ import type {
   Entity,
   ExpandOptions,
   FilterOptions,
-  IdFilter,
   Idable,
+  IdFilter,
   Meta,
   Model,
   NumberFilter,
   OrderOptions,
   PaginationOptions,
   StringFilter,
-} from "../../types";
-import type { CounterpartyModel } from "../counterparty";
-import type { GroupModel } from "../group";
-import type { OrganizationModel } from "../organization";
-import type { EmployeeModel } from "../employee";
+} from "../../types"
+import type { CounterpartyModel } from "../counterparty"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
+import type { OrganizationModel } from "../organization"
 
 /**
  * Входящий платеж
@@ -28,58 +28,58 @@ import type { EmployeeModel } from "../employee";
  */
 export interface PaymentIn extends Idable, Meta<Entity.PaymentIn> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Метаданные контрагента */
-  agent: Meta<Entity.Counterparty>;
+  agent: Meta<Entity.Counterparty>
 
   /** Метаданные счета контрагента */
-  agentAccount?: Meta<Entity.Account>;
+  agentAccount?: Meta<Entity.Account>
 
   /** Отметка о проведении */
-  applicable: boolean;
+  applicable: boolean
 
   /** Коллекция метаданных доп. полей */
-  attributes?: unknown; // TODO add attributes
+  attributes?: unknown // TODO add attributes
 
   /** Код Входящего платежа */
-  code?: string;
+  code?: string
 
   /** Метаданные договора */
-  contract?: Meta<Entity.Contract>;
+  contract?: Meta<Entity.Contract>
 
   /** Дата создания */
-  readonly created: DateTime;
+  readonly created: DateTime
 
   /** Момент последнего удаления Входящего платежа */
-  readonly deleted?: DateTime;
+  readonly deleted?: DateTime
 
   /** Комментарий Входящего платежа */
-  description?: string;
+  description?: string
 
   /** Внешний код Входящего платежа */
-  externalCode: string;
+  externalCode: string
 
   /** Ссылка на Счет-фактуру выданный, с которым связан этот платеж */
-  factureOut?: Meta<Entity.FactureOut>;
+  factureOut?: Meta<Entity.FactureOut>
 
   /** Метаданные массива Файлов (Максимальное количество файлов - 100) */
-  files?: unknown[]; // TODO add files
+  files?: unknown[] // TODO add files
 
   /** Отдел сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /** Входящая дата */
-  incomingDate?: DateTime;
+  incomingDate?: DateTime
 
   /** Входящий номер */
-  incomingNumber?: number;
+  incomingNumber?: number
 
   /** Дата документа */
-  moment: DateTime;
+  moment: DateTime
 
   /** Наименование Входящего платежа */
-  name: string;
+  name: string
 
   /** Массив ссылок на связанные операции */
   operations?: Array<{
@@ -90,101 +90,101 @@ export interface PaymentIn extends Idable, Meta<Entity.PaymentIn> {
       | Entity.InvoiceOut
       | Entity.CommissionReportIn
       | Entity.RetailShift
-    >;
-    linkedSum?: number;
-  }>;
+    >
+    linkedSum?: number
+  }>
 
   /** Метаданные юрлица */
-  organization: Meta<Entity.Organization>;
+  organization: Meta<Entity.Organization>
 
   /** Метаданные счета юрлица */
-  organizationAccount?: Meta<Entity.Account>;
+  organizationAccount?: Meta<Entity.Account>
 
   /** Владелец (Сотрудник) */
-  owner?: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>
 
   /** Назначение платежа */
-  paymentPurpose: string;
+  paymentPurpose: string
 
   /** Напечатан ли документ */
-  readonly printed: boolean;
+  readonly printed: boolean
 
   /** Метаданные проекта */
-  project?: Meta<Entity.Project>;
+  project?: Meta<Entity.Project>
 
   /** Опубликован ли документ */
-  readonly published: boolean;
+  readonly published: boolean
 
   /** Валюта */
-  rate: DocumentRate; // TODO expand rate's currency
+  rate: DocumentRate // TODO expand rate's currency
 
   /** Метаданные канала продаж */
-  salesChannel?: Meta<Entity.SalesChannel>;
+  salesChannel?: Meta<Entity.SalesChannel>
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** Метаданные статуса Входящего платежа */
-  state?: Meta<Entity.State>;
+  state?: Meta<Entity.State>
 
   /** Сумма Входящего платежа в установленной валюте */
-  sum: number;
+  sum: number
 
   /** ID синхронизации. После заполнения недоступен для изменения */
-  syncId?: string;
+  syncId?: string
 
   /** Момент последнего обновления Входящего платежа */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 
   /** Сумма НДС */
-  vatSum?: number;
+  vatSum?: number
 }
 
 /**
  * Модель для работы с входящими платежами
  */
 export interface PaymentInModel extends Model {
-  object: PaymentIn;
+  object: PaymentIn
   expandable: {
-    agent: CounterpartyModel;
-    group: GroupModel;
-    organization: OrganizationModel;
-    owner: EmployeeModel;
-    agentAccount: AccountModel;
-    organizationAccount: AccountModel;
+    agent: CounterpartyModel
+    group: GroupModel
+    organization: OrganizationModel
+    owner: EmployeeModel
+    agentAccount: AccountModel
+    organizationAccount: AccountModel
     // TODO: expand contract, factureOut, files, project, salesChannel, state
-  };
+  }
   filters: {
-    id: IdFilter;
-    accountId: IdFilter;
-    agent: IdFilter;
-    agentAccount: IdFilter;
-    applicable: BooleanFilter;
-    code: StringFilter;
-    contract: IdFilter;
-    created: DateTimeFilter;
-    deleted: DateTimeFilter;
-    description: StringFilter;
-    externalCode: StringFilter;
-    group: IdFilter;
-    incomingDate: DateTimeFilter;
-    incomingNumber: NumberFilter;
-    moment: DateTimeFilter;
-    name: StringFilter;
-    organization: IdFilter;
-    organizationAccount: IdFilter;
-    owner: IdFilter;
-    paymentPurpose: StringFilter;
-    printed: BooleanFilter;
-    project: IdFilter;
-    published: BooleanFilter;
-    shared: BooleanFilter;
-    salesChannel: IdFilter;
-    state: IdFilter;
-    sum: NumberFilter;
-    syncId: IdFilter;
-    updated: DateTimeFilter;
-  };
+    id: IdFilter
+    accountId: IdFilter
+    agent: IdFilter
+    agentAccount: IdFilter
+    applicable: BooleanFilter
+    code: StringFilter
+    contract: IdFilter
+    created: DateTimeFilter
+    deleted: DateTimeFilter
+    description: StringFilter
+    externalCode: StringFilter
+    group: IdFilter
+    incomingDate: DateTimeFilter
+    incomingNumber: NumberFilter
+    moment: DateTimeFilter
+    name: StringFilter
+    organization: IdFilter
+    organizationAccount: IdFilter
+    owner: IdFilter
+    paymentPurpose: StringFilter
+    printed: BooleanFilter
+    project: IdFilter
+    published: BooleanFilter
+    shared: BooleanFilter
+    salesChannel: IdFilter
+    state: IdFilter
+    sum: NumberFilter
+    syncId: IdFilter
+    updated: DateTimeFilter
+  }
   orderableFields:
     | "id"
     | "syncId"
@@ -199,9 +199,9 @@ export interface PaymentInModel extends Model {
     | "created"
     | "paymentPurpose"
     | "incomingDate"
-    | "incomingNumber";
+    | "incomingNumber"
 
-  requiredCreateFields: "agent" | "organization";
+  requiredCreateFields: "agent" | "organization"
 }
 
 /**
@@ -209,15 +209,15 @@ export interface PaymentInModel extends Model {
  */
 export interface ListPaymentInsOptions {
   /** Опции пагинации */
-  pagination?: PaginationOptions;
+  pagination?: PaginationOptions
   /** Опции раскрытия связанных сущностей */
-  expand?: ExpandOptions<PaymentInModel>;
+  expand?: ExpandOptions<PaymentInModel>
   /** Опции сортировки */
-  order?: OrderOptions<PaymentInModel>;
+  order?: OrderOptions<PaymentInModel>
   /** Поисковая строка */
-  search?: string;
+  search?: string
   /** Опции фильтрации */
-  filter?: FilterOptions<PaymentInModel>;
+  filter?: FilterOptions<PaymentInModel>
 }
 
 /**
@@ -225,7 +225,7 @@ export interface ListPaymentInsOptions {
  */
 export interface GetPaymentInOptions {
   /** Опции раскрытия связанных сущностей */
-  expand?: ExpandOptions<PaymentInModel>;
+  expand?: ExpandOptions<PaymentInModel>
 }
 
 /**
@@ -233,7 +233,7 @@ export interface GetPaymentInOptions {
  */
 export interface UpdatePaymentInOptions {
   /** Опции раскрытия связанных сущностей */
-  expand?: ExpandOptions<PaymentInModel>;
+  expand?: ExpandOptions<PaymentInModel>
 }
 
 /**
@@ -241,11 +241,11 @@ export interface UpdatePaymentInOptions {
  */
 export interface CreatePaymentInOptions {
   /** Опции раскрытия связанных сущностей */
-  expand?: ExpandOptions<PaymentInModel>;
+  expand?: ExpandOptions<PaymentInModel>
 }
 
 /** Опции для получения первого входящего платежа */
-export type FirstPaymentInOptions = Omit<ListPaymentInsOptions, "pagination">;
+export type FirstPaymentInOptions = Omit<ListPaymentInsOptions, "pagination">
 
 /** Опции для получения всех входящих платежей */
-export type AllPaymentInsOptions = Omit<ListPaymentInsOptions, "pagination">;
+export type AllPaymentInsOptions = Omit<ListPaymentInsOptions, "pagination">

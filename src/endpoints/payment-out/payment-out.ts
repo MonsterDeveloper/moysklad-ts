@@ -4,11 +4,11 @@ import type {
   Entity,
   GetFindResult,
   GetModelUpdatableFields,
+  ListMeta,
   ListResponse,
   ModelCreateOrUpdateData,
   Subset,
-  ListMeta,
-} from "../../types";
+} from "../../types"
 import type {
   AllPaymentOutsOptions,
   CreatePaymentOutOptions,
@@ -17,7 +17,7 @@ import type {
   ListPaymentOutsOptions,
   PaymentOutModel,
   UpdatePaymentOutOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Исходящие платежи
@@ -42,7 +42,7 @@ export interface PaymentOutEndpoint {
     options?: Subset<T, ListPaymentOutsOptions>,
   ): Promise<
     ListResponse<GetFindResult<PaymentOutModel, T["expand"]>, Entity.Product>
-  >;
+  >
 
   /**
    * Получить все исходящие платежи с пагинацией.
@@ -64,7 +64,7 @@ export interface PaymentOutEndpoint {
       GetFindResult<PaymentOutModel, T["expand"]>,
       Entity.BonusTransaction
     >
-  >;
+  >
 
   /**
    * Получить первый исходящий платеж.
@@ -83,7 +83,7 @@ export interface PaymentOutEndpoint {
     options?: Subset<T, FirstPaymentOutOptions>,
   ): Promise<
     ListResponse<GetFindResult<PaymentOutModel, T["expand"]>, Entity.Product>
-  >;
+  >
 
   /**
    * Получить исходящий платеж по ID.
@@ -102,7 +102,7 @@ export interface PaymentOutEndpoint {
   get<T extends GetPaymentOutOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetPaymentOutOptions>,
-  ): Promise<GetFindResult<PaymentOutModel, T["expand"]>>;
+  ): Promise<GetFindResult<PaymentOutModel, T["expand"]>>
 
   /**
    * Получить размер списка исходящих платежей.
@@ -114,7 +114,7 @@ export interface PaymentOutEndpoint {
    * const size = await moysklad.paymentOut.size();
    * ```
    */
-  size(options?: AllPaymentOutsOptions): Promise<ListMeta<Entity.PaymentOut>>;
+  size(options?: AllPaymentOutsOptions): Promise<ListMeta<Entity.PaymentOut>>
 
   /**
    * Удалить исходящий платеж.
@@ -129,7 +129,7 @@ export interface PaymentOutEndpoint {
    * await moysklad.paymentOut.delete("a7404318-550f-11e8-56c0-001b21c78cd9");
    * ```
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Обновить исходящий платеж.
@@ -153,7 +153,7 @@ export interface PaymentOutEndpoint {
     id: string,
     data: GetModelUpdatableFields<PaymentOutModel>,
     options?: Subset<T, UpdatePaymentOutOptions>,
-  ): Promise<GetFindResult<PaymentOutModel, T["expand"]>>;
+  ): Promise<GetFindResult<PaymentOutModel, T["expand"]>>
 
   /**
    * Создать исходящий платеж.
@@ -188,7 +188,7 @@ export interface PaymentOutEndpoint {
   create<T extends CreatePaymentOutOptions = Record<string, unknown>>(
     data: ModelCreateOrUpdateData<PaymentOutModel>,
     options?: Subset<T, CreatePaymentOutOptions>,
-  ): Promise<GetFindResult<PaymentOutModel, T["expand"]>>;
+  ): Promise<GetFindResult<PaymentOutModel, T["expand"]>>
 
   /**
    * Массовое удаление исходящих платежей.
@@ -206,7 +206,7 @@ export interface PaymentOutEndpoint {
    * ]);
    * ```
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 
   /**
    * Переместить исходящий платеж в корзину.
@@ -221,5 +221,5 @@ export interface PaymentOutEndpoint {
    * await moysklad.paymentOut.trash("a7404318-550f-11e8-56c0-001b21c78cd9");
    * ```
    */
-  trash(id: string): Promise<void>;
+  trash(id: string): Promise<void>
 }

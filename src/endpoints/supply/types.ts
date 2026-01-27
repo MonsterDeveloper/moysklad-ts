@@ -1,7 +1,3 @@
-import type { CounterpartyModel } from "../counterparty";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
-import type { OrganizationModel } from "../organization";
 import type {
   AccountModel,
   AssortmentEntity,
@@ -25,8 +21,12 @@ import type {
   PaginationOptions,
   StringFilter,
   UpdateMeta,
-} from "../../types";
-import type { PurchaseOrderModel } from "../purchase-order";
+} from "../../types"
+import type { CounterpartyModel } from "../counterparty"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
+import type { OrganizationModel } from "../organization"
+import type { PurchaseOrderModel } from "../purchase-order"
 
 export enum SupplyOverheadDistribution {
   Weight = "weight",
@@ -35,8 +35,8 @@ export enum SupplyOverheadDistribution {
 }
 
 export interface SupplyOverhead {
-  sum: number;
-  distribution: SupplyOverheadDistribution;
+  sum: number
+  distribution: SupplyOverheadDistribution
 }
 
 /**
@@ -46,50 +46,50 @@ export interface SupplyOverhead {
  */
 export interface SupplyPosition extends Idable, Meta<Entity.SupplyPosition> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
   /** Метаданные товара/услуги/серии/модификации/комплекта, которую представляет собой позиция */
-  assortment: Meta<AssortmentEntity>;
+  assortment: Meta<AssortmentEntity>
   /** Метаданные страны */
-  country?: Meta<Entity.Country>; // TODO expand country,
+  country?: Meta<Entity.Country> // TODO expand country,
   /**
    * Процент скидки или наценки
    *
    * Наценка указывается отрицательным числом, т.е. -10 создаст наценку в 10%
    */
-  discount: number;
+  discount: number
   /** ГТД */
-  gtd?: Gtd;
+  gtd?: Gtd
   /**
    * Упаковка Товара.
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar-towary-atributy-wlozhennyh-suschnostej-upakowki-towara
    */
-  pack?: unknown; // TODO add pack type;
+  pack?: unknown // TODO add pack type;
   /** Цена товара/услуги в копейках */
-  price: number;
+  price: number
   /**
    * Количество товаров/услуг данного вида в позиции.
    *
    * Если позиция - товар, у которого включен учет по серийным номерам, то значение в этом поле всегда будет равно количеству серийных номеров для данной позиции в документе. */
-  quantity: number;
+  quantity: number
   /**
    * Ячейка на складе
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-sklad-yachejki-sklada
    */
-  slot?: Meta<Entity.Slot>; // TODO add slot expand
+  slot?: Meta<Entity.Slot> // TODO add slot expand
   /**
    * Серийные номера
    *
    * Значение данного атрибута игнорируется, если товар позиции не находится на серийном учете. В ином случае количество товаров в позиции будет равно количеству серийных номеров, переданных в значении атрибута.
    */
-  things?: string[];
+  things?: string[]
   /**
    * Коды маркировки товаров и транспортных упаковок
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka-priemki-kody-markirowki-towarow-i-transportnyh-upakowok
    */
-  trackingCodes?: unknown; // TODO add trackingCodes type;
+  trackingCodes?: unknown // TODO add trackingCodes type;
   /**
    * Накладные расходы
    *
@@ -97,14 +97,14 @@ export interface SupplyPosition extends Idable, Meta<Entity.SupplyPosition> {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka-priemki-nakladnye-rashody
    */
-  readonly overhead: number;
+  readonly overhead: number
   /** НДС, которым облагается текущая позиция */
-  vat: number;
+  vat: number
   /**
    * Включен ли НДС для позиции
    *
    * С помощью этого флага для позиции можно выставлять НДС = 0 или НДС = "без НДС". (`vat` = `0`, `vatEnabled` = `false`) -> `vat` = "без НДС", (`vat` = `0`, `vatEnabled` = `true`) -> `vat` = 0%. */
-  vatEnabled: boolean;
+  vatEnabled: boolean
 }
 
 /**
@@ -113,10 +113,10 @@ export interface SupplyPosition extends Idable, Meta<Entity.SupplyPosition> {
  * {@linkcode SupplyPosition}
  */
 export interface SupplyPositionModel extends Model {
-  object: SupplyPosition;
+  object: SupplyPosition
   expandable: {
-    assortment: AssortmentModel;
-  };
+    assortment: AssortmentModel
+  }
 }
 
 /**
@@ -126,51 +126,51 @@ export interface SupplyPositionModel extends Model {
  */
 export interface Supply extends Idable, Meta<Entity.Supply> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
   /** Метаданные контрагента */
-  agent: Meta<Entity.Counterparty>;
+  agent: Meta<Entity.Counterparty>
   /** Метаданные счета контрагента */
-  agentAccount?: Meta<Entity.Account>;
+  agentAccount?: Meta<Entity.Account>
   /** Отметка о проведении */
-  applicable: boolean;
+  applicable: boolean
   /**
    * Коллекция метаданных доп. полей.
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-rabota-s-dopolnitel-nymi-polqmi
    */
-  attributes?: Attribute[];
+  attributes?: Attribute[]
   /** Код Приемки */
-  code?: string;
+  code?: string
   /** Метаданные договора */
-  contract?: Meta<Entity.Contract>;
+  contract?: Meta<Entity.Contract>
   /** Дата создания */
-  readonly created: DateTime;
+  readonly created: DateTime
   /** Момент последнего удаления Приемки */
-  readonly deleted?: DateTime;
+  readonly deleted?: DateTime
   /** Комментарий Приемки */
-  description?: string;
+  description?: string
   /** Внешний код Приемки */
-  externalCode: string;
+  externalCode: string
   /**
    * Метаданные массива Файлов
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-fajly
    */
-  files: unknown[]; // TODO add files
+  files: unknown[] // TODO add files
   /** Отдел сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
   /** Входящая дата */
-  incomingDate?: DateTime;
+  incomingDate?: DateTime
   /** Входящий номер */
-  incomingNumber?: string;
+  incomingNumber?: string
   /** Дата документа */
-  moment: DateTime;
+  moment: DateTime
   /** Наименование прёмки */
-  name: string;
+  name: string
   /** Метаданные юрлица */
-  organization: Meta<Entity.Organization>;
+  organization: Meta<Entity.Organization>
   /** Метаданные счёта юрлица */
-  organizationAccount?: Meta<Entity.Account>;
+  organizationAccount?: Meta<Entity.Account>
   /**
    * Накладные расходы
    *
@@ -178,53 +178,53 @@ export interface Supply extends Idable, Meta<Entity.Supply> {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka-priemki-nakladnye-rashody
    */
-  overhead?: SupplyOverhead;
+  overhead?: SupplyOverhead
   /** Владелец (сотдруник) */
-  owner?: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>
   /** Сумма входящих платежей по приёмке */
-  readonly payedSum: number;
+  readonly payedSum: number
   /** Метаданные позиций */
-  positions: ListMeta<Entity.SupplyPosition>;
+  positions: ListMeta<Entity.SupplyPosition>
   /** Напечатан ли документ */
-  readonly printed: boolean;
+  readonly printed: boolean
   /** Метаданные проекта */
-  project?: Meta<Entity.Project>;
+  project?: Meta<Entity.Project>
   /** Опубликован ли документ */
-  readonly published: boolean;
+  readonly published: boolean
   /**
    * Валюта.
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-obschie-swedeniq-valuta-w-dokumentah
    */
-  rate: DocumentRate;
+  rate: DocumentRate
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
   /** Метаданные статуса приёмки */
-  state?: Meta<Entity.State>;
+  state?: Meta<Entity.State>
   /** Метаданные склада */
-  store: Meta<Entity.Store>;
+  store: Meta<Entity.Store>
   /** Сумма приёмки в копейках */
-  readonly sum: number;
+  readonly sum: number
   /**
    * ID синхронизации
    *
    * После заполнения недоступен для изменения.
    * */
-  syncId?: string;
+  syncId?: string
   /** Момент последнего обновления приёмки */
-  readonly updated: DateTime;
+  readonly updated: DateTime
   /** Учитывается ли НДС */
-  vatEnabled: boolean;
+  vatEnabled: boolean
   /** Включен ли НДС в цену */
-  vatIncluded?: boolean;
+  vatIncluded?: boolean
   /** Сумма НДС */
-  vatSum: number;
+  vatSum: number
   /**
    * Ссылка на связанный заказ поставщику в формате Метаданных
    *
    * {@linkcode PurchaseOrderModel}
    */
-  purchaseOrder?: Meta<Entity.PurchaseOrder>;
+  purchaseOrder?: Meta<Entity.PurchaseOrder>
 }
 
 /**
@@ -233,44 +233,44 @@ export interface Supply extends Idable, Meta<Entity.Supply> {
  * {@linkcode Supply}
  */
 export interface SupplyModel extends Model {
-  object: Supply;
+  object: Supply
   expandable: {
-    agent: CounterpartyModel;
-    group: GroupModel;
-    organization: OrganizationModel;
-    owner: EmployeeModel;
-    positions: SupplyPositionModel;
-    agentAccount: AccountModel;
-    organizationAccount: AccountModel;
-    purchaseOrder: PurchaseOrderModel;
-  };
+    agent: CounterpartyModel
+    group: GroupModel
+    organization: OrganizationModel
+    owner: EmployeeModel
+    positions: SupplyPositionModel
+    agentAccount: AccountModel
+    organizationAccount: AccountModel
+    purchaseOrder: PurchaseOrderModel
+  }
   filters: {
-    id: IdFilter;
-    assortment: IdFilter;
-    accountId: IdFilter;
-    agent: IdFilter;
-    applicable: BooleanFilter;
-    code: StringFilter;
-    contract: IdFilter;
-    created: DateTimeFilter;
-    deleted: DateTimeFilter;
-    description: StringFilter;
-    externalCode: StringFilter;
-    group: IdFilter;
-    moment: DateTimeFilter;
-    name: StringFilter;
-    organization: IdFilter;
-    owner: IdFilter;
-    printed: BooleanFilter;
-    project: IdFilter;
-    published: BooleanFilter;
-    shared: BooleanFilter;
-    state: IdFilter;
-    store: IdFilter;
-    sum: NumberFilter;
-    syncId: IdFilter;
-    updated: DateTimeFilter;
-  };
+    id: IdFilter
+    assortment: IdFilter
+    accountId: IdFilter
+    agent: IdFilter
+    applicable: BooleanFilter
+    code: StringFilter
+    contract: IdFilter
+    created: DateTimeFilter
+    deleted: DateTimeFilter
+    description: StringFilter
+    externalCode: StringFilter
+    group: IdFilter
+    moment: DateTimeFilter
+    name: StringFilter
+    organization: IdFilter
+    owner: IdFilter
+    printed: BooleanFilter
+    project: IdFilter
+    published: BooleanFilter
+    shared: BooleanFilter
+    state: IdFilter
+    store: IdFilter
+    sum: NumberFilter
+    syncId: IdFilter
+    updated: DateTimeFilter
+  }
   orderableFields:
     | "id"
     | "syncId"
@@ -281,33 +281,33 @@ export interface SupplyModel extends Model {
     | "externalCode"
     | "moment"
     | "applicable"
-    | "sum";
-  requiredCreateFields: "agent" | "organization" | "store";
+    | "sum"
+  requiredCreateFields: "agent" | "organization" | "store"
 }
 
 export interface ListSuppliesOptions {
-  pagination?: PaginationOptions;
-  expand?: ExpandOptions<SupplyModel>;
-  order?: OrderOptions<SupplyModel>;
-  search?: string;
-  filter?: FilterOptions<SupplyModel>;
+  pagination?: PaginationOptions
+  expand?: ExpandOptions<SupplyModel>
+  order?: OrderOptions<SupplyModel>
+  search?: string
+  filter?: FilterOptions<SupplyModel>
 }
 
 export interface GetSupplyOptions {
-  expand?: ExpandOptions<SupplyModel>;
+  expand?: ExpandOptions<SupplyModel>
 }
 
 export interface UpdateSupplyOptions {
-  expand?: ExpandOptions<SupplyModel>;
+  expand?: ExpandOptions<SupplyModel>
 }
 
 export interface UpsertSuppliesOptions {
-  expand?: ExpandOptions<SupplyModel>;
+  expand?: ExpandOptions<SupplyModel>
 }
 
-export type FirstSupplyOptions = Omit<ListSuppliesOptions, "pagination">;
-export type AllSuppliesOptions = Omit<ListSuppliesOptions, "pagination">;
+export type FirstSupplyOptions = Omit<ListSuppliesOptions, "pagination">
+export type AllSuppliesOptions = Omit<ListSuppliesOptions, "pagination">
 
 export interface SupplyTemplateData {
-  purchaseOrder: UpdateMeta<Entity.PurchaseOrder>;
+  purchaseOrder: UpdateMeta<Entity.PurchaseOrder>
 }

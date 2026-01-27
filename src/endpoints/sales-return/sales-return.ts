@@ -1,23 +1,23 @@
-import {
+import type {
+  BatchDeleteResult,
+  BatchGetResult,
   Entity,
-  type BatchDeleteResult,
-  type GetFindResult,
-  type ListResponse,
-  type Subset,
-  type BatchGetResult,
-  type ModelCreateOrUpdateData,
-  type MatchArrayType,
-  type ListMeta,
-} from "../../types";
+  GetFindResult,
+  ListMeta,
+  ListResponse,
+  MatchArrayType,
+  ModelCreateOrUpdateData,
+  Subset,
+} from "../../types"
 import type {
   AllSalesReturnsOptions,
-  SalesReturnModel,
-  SalesReturnTemplateData,
   FirstSalesReturnOptions,
   GetSalesReturnOptions,
   ListSalesReturnsOptions,
+  SalesReturnModel,
+  SalesReturnTemplateData,
   UpsertSalesReturnsOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Возвраты покупателей
@@ -45,7 +45,7 @@ export interface SalesReturnEndpoint {
       GetFindResult<SalesReturnModel, T["expand"], T["fields"]>,
       Entity.SalesReturn
     >
-  >;
+  >
 
   /**
    * Получить все возвраты покупателей с учетом пагинации.
@@ -67,7 +67,7 @@ export interface SalesReturnEndpoint {
       GetFindResult<SalesReturnModel, T["expand"], T["fields"]>,
       Entity.SalesReturn
     >
-  >;
+  >
 
   /**
    * Получить возврат покупателя по ID.
@@ -86,7 +86,7 @@ export interface SalesReturnEndpoint {
   get<T extends GetSalesReturnOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetSalesReturnOptions>,
-  ): Promise<GetFindResult<SalesReturnModel, T["expand"], T["fields"]>>;
+  ): Promise<GetFindResult<SalesReturnModel, T["expand"], T["fields"]>>
 
   /**
    * Получить первый возврат покупателя из списка.
@@ -106,7 +106,7 @@ export interface SalesReturnEndpoint {
       GetFindResult<SalesReturnModel, T["expand"], T["fields"]>,
       Entity.SalesReturn
     >
-  >;
+  >
 
   /**
    * Получить количество возвратов покупателей.
@@ -118,7 +118,7 @@ export interface SalesReturnEndpoint {
    * const count = await moysklad.salesReturn.size();
    * ```
    */
-  size(options?: AllSalesReturnsOptions): Promise<ListMeta<Entity.SalesReturn>>;
+  size(options?: AllSalesReturnsOptions): Promise<ListMeta<Entity.SalesReturn>>
 
   /**
    * Удалить возврат покупателя.
@@ -133,7 +133,7 @@ export interface SalesReturnEndpoint {
    * await moysklad.salesReturn.delete("a7404318-550f-11e8-56c0-000800000006");
    * ```
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Удалить несколько возвратов покупателей.
@@ -148,7 +148,7 @@ export interface SalesReturnEndpoint {
    * await moysklad.salesReturn.batchDelete(["a7404318-550f-11e8-56c0-000800000006", "a7404318-550f-11e8-56c0-000800000007"]);
    * ```
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 
   /**
    * Переместить возврат покупателя в корзину.
@@ -161,7 +161,7 @@ export interface SalesReturnEndpoint {
    * await moysklad.salesReturn.trash("a7404318-550f-11e8-56c0-000800000006");
    * ```
    */
-  trash(id: string): Promise<void>;
+  trash(id: string): Promise<void>
 
   /**
    * Создать или обновить возврат покупателя.
@@ -190,7 +190,7 @@ export interface SalesReturnEndpoint {
     options?: Subset<TOptions, UpsertSalesReturnsOptions>,
   ): Promise<
     MatchArrayType<TData, GetFindResult<SalesReturnModel, TOptions["expand"]>>
-  >;
+  >
 
   /**
    * Получить шаблон возврата покупателя на основе отгрузки.
@@ -209,5 +209,5 @@ export interface SalesReturnEndpoint {
    */
   template(
     data: SalesReturnTemplateData,
-  ): Promise<GetFindResult<SalesReturnModel, { positions: true }>>;
+  ): Promise<GetFindResult<SalesReturnModel, { positions: true }>>
 }

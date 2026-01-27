@@ -1,6 +1,6 @@
-import { describe, it } from "vitest";
-import { Entity, MediaType, type Meta } from "../../types";
-import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
+import { describe, it } from "vitest"
+import { createFetchMock, expectFetch, moysklad } from "../../../test-utils"
+import { Entity, MediaType, type Meta } from "../../types"
 
 const mockStore: Meta<Entity.Store> = {
   meta: {
@@ -9,12 +9,12 @@ const mockStore: Meta<Entity.Store> = {
     mediaType: MediaType.Json,
     metadataHref: "",
   },
-};
+}
 
 describe("wizard", () => {
   describe("salesreturn", () => {
     it("sends correct salesreturn request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       const requestData = {
         store: mockStore,
@@ -31,12 +31,12 @@ describe("wizard", () => {
             quantity: 5,
           },
         ],
-      };
+      }
 
       await moysklad.wizard.salesreturn({
         action: "evaluate_cost",
         ...requestData,
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -46,7 +46,7 @@ describe("wizard", () => {
         searchParameters: {
           action: "evaluate_cost",
         },
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})

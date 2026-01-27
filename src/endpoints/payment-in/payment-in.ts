@@ -5,11 +5,11 @@ import type {
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
+  ListMeta,
   ListResponse,
   Subset,
   UpdateMeta,
-  ListMeta,
-} from "../../types";
+} from "../../types"
 import type {
   AllPaymentInsOptions,
   CreatePaymentInOptions,
@@ -18,7 +18,7 @@ import type {
   ListPaymentInsOptions,
   PaymentInModel,
   UpdatePaymentInOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Входящие платежи
@@ -38,7 +38,7 @@ export interface PaymentInEndpoint {
     options?: Subset<T, ListPaymentInsOptions>,
   ): Promise<
     ListResponse<GetFindResult<PaymentInModel, T["expand"]>, Entity.PaymentIn>
-  >;
+  >
 
   /**
    * Получить все входящие платежи
@@ -50,7 +50,7 @@ export interface PaymentInEndpoint {
     options?: Subset<T, AllPaymentInsOptions>,
   ): Promise<
     BatchGetResult<GetFindResult<PaymentInModel, T["expand"]>, Entity.PaymentIn>
-  >;
+  >
 
   /**
    * Получить входящий платеж по ID
@@ -64,7 +64,7 @@ export interface PaymentInEndpoint {
   get<T extends GetPaymentInOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetPaymentInOptions>,
-  ): Promise<GetFindResult<PaymentInModel, T["expand"]>>;
+  ): Promise<GetFindResult<PaymentInModel, T["expand"]>>
 
   /**
    * Обновить входящий платеж
@@ -80,7 +80,7 @@ export interface PaymentInEndpoint {
     id: string,
     data: GetModelUpdatableFields<PaymentInModel>,
     options?: Subset<T, UpdatePaymentInOptions>,
-  ): Promise<GetFindResult<PaymentInModel, T["expand"]>>;
+  ): Promise<GetFindResult<PaymentInModel, T["expand"]>>
 
   /**
    * Создать входящий платеж
@@ -94,7 +94,7 @@ export interface PaymentInEndpoint {
   create<T extends CreatePaymentInOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<PaymentInModel>,
     options?: Subset<T, CreatePaymentInOptions>,
-  ): Promise<GetFindResult<PaymentInModel, T["expand"]>>;
+  ): Promise<GetFindResult<PaymentInModel, T["expand"]>>
 
   /**
    * Создать или обновить входящие платежи
@@ -109,7 +109,7 @@ export interface PaymentInEndpoint {
       | (GetModelUpdatableFields<PaymentInModel> & UpdateMeta<Entity.PaymentIn>)
     )[],
     options?: Subset<T, CreatePaymentInOptions>,
-  ): Promise<GetFindResult<PaymentInModel, T["expand"]>[]>;
+  ): Promise<GetFindResult<PaymentInModel, T["expand"]>[]>
 
   /**
    * Получить первый входящий платеж из списка
@@ -121,14 +121,14 @@ export interface PaymentInEndpoint {
     options?: Subset<T, FirstPaymentInOptions>,
   ): Promise<
     ListResponse<GetFindResult<PaymentInModel, T["expand"]>, Entity.PaymentIn>
-  >;
+  >
 
   /**
    * Получить количество входящих платежей
    *
    * @returns Количество входящих платежей
    */
-  size(options?: AllPaymentInsOptions): Promise<ListMeta<Entity.PaymentIn>>;
+  size(options?: AllPaymentInsOptions): Promise<ListMeta<Entity.PaymentIn>>
 
   /**
    * Удалить входящий платеж
@@ -137,7 +137,7 @@ export interface PaymentInEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-vhodqschij-platezh-udalit-vhodqschij-platezh
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Массовое удаление входящих платежей
@@ -145,12 +145,12 @@ export interface PaymentInEndpoint {
    * @param ids - Массив ID входящих платежей
    * @returns Результат удаления
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 
   /**
    * Переместить входящий платеж в корзину
    *
    * @param id - ID входящего платежа
    */
-  trash(id: string): Promise<void>;
+  trash(id: string): Promise<void>
 }

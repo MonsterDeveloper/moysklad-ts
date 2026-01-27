@@ -1,2 +1,2 @@
-export * from "./types";
-export type { FactureOutEndpoint } from "./facture-out";
+export type { FactureOutEndpoint } from "./facture-out"
+export * from "./types"

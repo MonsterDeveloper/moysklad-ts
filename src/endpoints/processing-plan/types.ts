@@ -12,12 +12,12 @@ import type {
   Model,
   OrderOptions,
   PaginationOptions,
-} from "../../types";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
-import type { ProcessingPlanFolderModel } from "../processing-plan-folder";
-import type { ProcessingProcessModel } from "../processing-process";
-import type { ProductModel } from "../product";
+} from "../../types"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
+import type { ProcessingPlanFolderModel } from "../processing-plan-folder"
+import type { ProcessingProcessModel } from "../processing-process"
+import type { ProductModel } from "../product"
 
 /** Тип распределения себестоимости */
 export enum ProcessingPlanCostDistributionType {
@@ -34,20 +34,20 @@ export interface ProcessingPlanStage
   extends Idable,
     Meta<Entity.ProcessingPlanStages> {
   /** Стоимость производства, на определенном этапе */
-  cost: number;
+  cost: number
 
   /** Оплата труда, на определенном этапе */
-  labourCost: number;
+  labourCost: number
 
   /** Нормо-часы, на определенном этапе */
-  standardHour: number;
+  standardHour: number
 
   /** Метаданные позиции техпроцесса */
-  processingProcessPosition: Meta<Entity.ProcessingProcessPosition>;
+  processingProcessPosition: Meta<Entity.ProcessingProcessPosition>
 }
 
 export interface ProcessingPlanStageModel extends Model {
-  object: ProcessingPlanStage;
+  object: ProcessingPlanStage
 }
 
 /**
@@ -59,33 +59,33 @@ export interface ProcessingPlanMaterial
   extends Idable,
     Meta<Entity.ProcessingPlanMaterial> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Метаданные товара или модификации позиции */
-  assortment: Meta<AssortmentEntity>;
+  assortment: Meta<AssortmentEntity>
 
   /** Метаданные товара позиции.
    *
    * В случае, если в поле assortment указана модификация, то это поле содержит товар, к которому относится эта модификация
    */
-  product: Meta<Entity.Product>;
+  product: Meta<Entity.Product>
 
   /** Количество товаров данного вида в позиции */
-  quantity: number;
+  quantity: number
 
   /** Метаданные позиции Техпроцесса */
-  processingProcessPosition: Meta<Entity.ProcessingProcessPosition>;
+  processingProcessPosition: Meta<Entity.ProcessingProcessPosition>
 
   /** Метаданные техкарты материала  */
-  readonly materialProcessingPlan?: Meta<Entity.ProcessingPlan>;
+  readonly materialProcessingPlan?: Meta<Entity.ProcessingPlan>
 }
 
 export interface ProcessingPlanMaterialModel extends Model {
-  object: ProcessingPlanMaterial;
+  object: ProcessingPlanMaterial
   expandable: {
-    assortment: AssortmentModel;
-    product: ProductModel;
-  };
+    assortment: AssortmentModel
+    product: ProductModel
+  }
 }
 
 /**
@@ -97,27 +97,27 @@ export interface ProcessingPlanProduct
   extends Idable,
     Meta<Entity.ProcessingPlanResult> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Метаданные товара или модификации позиции */
-  assortment: Meta<AssortmentEntity>;
+  assortment: Meta<AssortmentEntity>
 
   /** Метаданные товара позиции.
    *
    * В случае, если в поле assortment указана модификация, то это поле содержит товар, к которому относится эта модификация
    */
-  product: Meta<Entity.Product>;
+  product: Meta<Entity.Product>
 
   /** Количество товаров данного вида в позиции */
-  quantity: number;
+  quantity: number
 }
 
 export interface ProcessingPlanProductModel extends Model {
-  object: ProcessingPlanProduct;
+  object: ProcessingPlanProduct
   expandable: {
-    assortment: AssortmentModel;
-    product: ProductModel;
-  };
+    assortment: AssortmentModel
+    product: ProductModel
+  }
 }
 
 /**
@@ -127,95 +127,95 @@ export interface ProcessingPlanProductModel extends Model {
  */
 export interface ProcessingPlan extends Idable, Meta<Entity.ProcessingPlan> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Добавлена ли Техкарта в архив */
-  archived: boolean;
+  archived: boolean
 
   /** Код Техкарты */
-  code?: string;
+  code?: string
 
   /** Стоимость производства */
-  cost?: number;
+  cost?: number
 
   /** Тип распределения себестоимости */
-  readonly costDistributionType: ProcessingPlanCostDistributionType;
+  readonly costDistributionType: ProcessingPlanCostDistributionType
 
   /** Внешний код техкарты */
-  externalCode: string;
+  externalCode: string
 
   /** Отдел сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /** Коллекция метаданных этапов Техкарты */
-  stages: ListMeta<Entity.ProcessingPlanStages>;
+  stages: ListMeta<Entity.ProcessingPlanStages>
 
   /** Коллекция метаданных материалов Техкарты */
-  materials: ListMeta<Entity.ProcessingPlanMaterial>;
+  materials: ListMeta<Entity.ProcessingPlanMaterial>
 
   /** Наименование техкарты */
-  name: string;
+  name: string
 
   /** Владелец (Сотрудник) */
-  owner: Meta<Entity.Employee>;
+  owner: Meta<Entity.Employee>
 
   /** Метаданные группы Техкарты */
-  parent: Meta<Entity.ProcessingPlanFolder>;
+  parent: Meta<Entity.ProcessingPlanFolder>
 
   /** Наименование группы, в которую входит Техкарта */
-  readonly pathName: string;
+  readonly pathName: string
 
   /** Метаданные Техпроцесса */
-  processingProcess: Meta<Entity.ProcessingProcess>;
+  processingProcess: Meta<Entity.ProcessingProcess>
 
   /** Коллекция метаданных готовых продуктов Техкарты */
-  products: ListMeta<Entity.ProcessingPlanResult>;
+  products: ListMeta<Entity.ProcessingPlanResult>
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** Дополнительные поля */
-  attributes?: Attribute[];
+  attributes?: Attribute[]
 
   /** Момент последнего обновления техкарты */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 }
 
 export interface ProcessingPlanModel extends Model {
-  object: ProcessingPlan;
+  object: ProcessingPlan
   expandable: {
-    group: GroupModel;
-    stages: ProcessingPlanStageModel;
-    materials: ProcessingPlanMaterialModel;
-    owner: EmployeeModel;
-    parent: ProcessingPlanFolderModel;
-    processingProcess: ProcessingProcessModel;
-    products: ProcessingPlanProductModel;
-  };
+    group: GroupModel
+    stages: ProcessingPlanStageModel
+    materials: ProcessingPlanMaterialModel
+    owner: EmployeeModel
+    parent: ProcessingPlanFolderModel
+    processingProcess: ProcessingProcessModel
+    products: ProcessingPlanProductModel
+  }
 }
 
 export interface ListProcessingPlansOptions {
-  pagination?: PaginationOptions;
-  expand?: ExpandOptions<ProcessingPlanModel>;
-  order?: OrderOptions<ProcessingPlanModel>;
-  search?: string;
-  filter?: FilterOptions<ProcessingPlanModel>;
+  pagination?: PaginationOptions
+  expand?: ExpandOptions<ProcessingPlanModel>
+  order?: OrderOptions<ProcessingPlanModel>
+  search?: string
+  filter?: FilterOptions<ProcessingPlanModel>
 }
 
 export type AllProcessingPlansOptions = Omit<
   ListProcessingPlansOptions,
   "pagination"
->;
+>
 
 export type FirstProcessingPlanOptions = Omit<
   ListProcessingPlansOptions,
   "pagination"
->;
+>
 
 export interface GetProcessingPlanOptions {
-  expand?: ExpandOptions<ProcessingPlanModel>;
+  expand?: ExpandOptions<ProcessingPlanModel>
 }
 
 export interface UpdateProcessingPlanOptions {
-  expand?: ExpandOptions<ProcessingPlanModel>;
+  expand?: ExpandOptions<ProcessingPlanModel>
 }

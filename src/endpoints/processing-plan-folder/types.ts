@@ -1,6 +1,6 @@
-import type { DateTime, Entity, Idable, Meta, Model } from "../../types";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
+import type { DateTime, Entity, Idable, Meta, Model } from "../../types"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
 
 /** Группа техкарт
  *
@@ -10,43 +10,43 @@ export interface ProcessingPlanFolder
   extends Idable,
     Meta<Entity.ProcessingPlanFolder> {
   /** ID учётной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Добавлена ли Группа техкарт в архив */
-  archived: boolean;
+  archived: boolean
 
   /** Внешний код Группы техкарт */
-  externalCode: string;
+  externalCode: string
 
   /** Код Группы техкарт */
-  code?: string;
+  code?: string
 
   /** Описание Группы техкарт */
-  description?: string;
+  description?: string
 
   /** Метаданные отдела сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /** Наименование Группы техкарт */
-  name: string;
+  name: string
 
   /** Владелец (Сотрудник) */
-  owner: Meta<Entity.Employee>;
+  owner: Meta<Entity.Employee>
 
   /** Наименование Группы техкарт, в которую входит данная Группа техкарт */
-  readonly pathName: string;
+  readonly pathName: string
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** Момент последнего обновления сущности */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 }
 
 export interface ProcessingPlanFolderModel extends Model {
-  object: ProcessingPlanFolder;
+  object: ProcessingPlanFolder
   expandable: {
-    group: GroupModel;
-    owner: EmployeeModel;
-  };
+    group: GroupModel
+    owner: EmployeeModel
+  }
 }

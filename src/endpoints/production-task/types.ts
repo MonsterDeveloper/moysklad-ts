@@ -16,10 +16,10 @@ import type {
   OrderOptions,
   PaginationOptions,
   StringFilter,
-} from "../../types";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
-import type { OrganizationModel } from "../organization";
+} from "../../types"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
+import type { OrganizationModel } from "../organization"
 
 /**
  * Позиция производственного задания
@@ -28,22 +28,22 @@ import type { OrganizationModel } from "../organization";
  */
 export interface ProductionRow extends Idable, Meta<Entity.ProductionRow> {
   /** ID учётной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Внешний код */
-  externalCode?: string;
+  externalCode?: string
 
   /** Наименование */
-  name?: string;
+  name?: string
 
   /** Метаданные техкарты */
-  processingPlan: Meta<Entity.ProcessingPlan>;
+  processingPlan: Meta<Entity.ProcessingPlan>
 
   /** Объём производства */
-  productionVolume: number;
+  productionVolume: number
 
   /** Момент последнего обновления производственного задания */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 }
 
 /**
@@ -52,7 +52,7 @@ export interface ProductionRow extends Idable, Meta<Entity.ProductionRow> {
  * {@linkcode ProductionRow}
  */
 export interface ProductionRowModel extends Model {
-  object: ProductionRow;
+  object: ProductionRow
 }
 
 /**
@@ -64,16 +64,16 @@ export interface ProductionTaskResult
   extends Idable,
     Meta<Entity.ProductionTaskResult> {
   /** ID учётной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Ассортимент */
-  assortment: Meta<AssortmentEntity>;
+  assortment: Meta<AssortmentEntity>
 
   /** Запланированное для производства количество продукта */
-  planQuantity: number;
+  planQuantity: number
 
   /** Метаданные Позиции производственного задания */
-  readonly productionRow: Meta<Entity.ProductionRow>;
+  readonly productionRow: Meta<Entity.ProductionRow>
 }
 
 /**
@@ -82,12 +82,12 @@ export interface ProductionTaskResult
  * {@linkcode ProductionTaskResult}
  */
 export interface ProductionTaskResultModel extends Model {
-  object: ProductionTaskResult;
+  object: ProductionTaskResult
 
   expandable: {
-    assortment: AssortmentModel;
-    productionRow: ProductionRowModel;
-  };
+    assortment: AssortmentModel
+    productionRow: ProductionRowModel
+  }
 }
 
 /**
@@ -97,95 +97,95 @@ export interface ProductionTaskResultModel extends Model {
  */
 export interface ProductionTask extends Idable, Meta<Entity.ProductionTask> {
   /** ID учётной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Отметка о проведении */
-  applicable: boolean;
+  applicable: boolean
 
   /** Доп. поля */
-  attributes?: Attribute[];
+  attributes?: Attribute[]
 
   /** Флаг ожидания продукта Производственного задания */
-  awaiting?: boolean;
+  awaiting?: boolean
 
   /** Код */
-  code?: string;
+  code?: string
 
   /** Дата создания */
-  readonly created: DateTime;
+  readonly created: DateTime
 
   /** Момент удаления */
-  readonly deleted?: DateTime;
+  readonly deleted?: DateTime
 
   /** Планируемая дата выполнения */
-  deliveryPlannedMoment?: DateTime;
+  deliveryPlannedMoment?: DateTime
 
   /** Комментарий */
-  description?: string;
+  description?: string
 
   /** Внешний код */
-  externalCode: string;
+  externalCode: string
 
   /** Метаданные массива Файлов (Максимальное количество файлов - 100) */
-  files: ListMeta<Entity.Files>; // TODO add files expand
+  files: ListMeta<Entity.Files> // TODO add files expand
 
   /** Отдел сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
 
   /** Метаданные склада материалов */
-  materialsStore?: Meta<Entity.Store>; // TODO add materialsStore expand
+  materialsStore?: Meta<Entity.Store> // TODO add materialsStore expand
 
   /** Дата документа */
-  moment: DateTime;
+  moment: DateTime
 
   /** Наименование Производственного задания */
-  name: string;
+  name: string
 
   /** Метаданные юрлица */
-  organization: Meta<Entity.Organization>;
+  organization: Meta<Entity.Organization>
 
   /** Владелец (Сотрудник) */
-  owner?: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>
 
   /** Напечатан ли документ */
-  readonly printed: boolean;
+  readonly printed: boolean
 
   /**
    * Метаданные Позиций производственного задания
    *
    * Для поля `productionRows` недоступен `expand` вложенных полей.
    */
-  productionRows: ListMeta<Entity.ProductionRow>;
+  productionRows: ListMeta<Entity.ProductionRow>
 
   /** Дата окончания производства */
-  readonly productionEnd?: DateTime;
+  readonly productionEnd?: DateTime
 
   /** Дата начала производства */
-  productionStart?: DateTime;
+  productionStart?: DateTime
 
   /** Метаданные производимой продукции */
-  products: ListMeta<Entity.ProductionTaskResult>;
+  products: ListMeta<Entity.ProductionTaskResult>
 
   /** Метаданные склада продукции */
-  productsStore?: Meta<Entity.Store>; // TODO add productsStore expand
+  productsStore?: Meta<Entity.Store> // TODO add productsStore expand
 
   /** Опубликован ли документ */
-  readonly published: boolean;
+  readonly published: boolean
 
   /** Флаг резервирования материала Производственного задания */
-  reserve?: boolean;
+  reserve?: boolean
 
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
 
   /** Метаданные статуса Производственного задания */
-  state?: Meta<Entity.State>; // TODO add state expand
+  state?: Meta<Entity.State> // TODO add state expand
 
   /** Момент последнего обновления Производственного задания */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 
   /** Массив ссылок на связанные заказы покупателей в формате Метаданных */
-  customerOrders?: Meta<Entity.CustomerOrder>[];
+  customerOrders?: Meta<Entity.CustomerOrder>[]
 }
 
 /**
@@ -194,34 +194,34 @@ export interface ProductionTask extends Idable, Meta<Entity.ProductionTask> {
  * {@linkcode ProductionTask}
  */
 export interface ProductionTaskModel extends Model {
-  object: ProductionTask;
+  object: ProductionTask
 
   expandable: {
-    group: GroupModel;
-    organization: OrganizationModel;
-    owner: EmployeeModel;
-    productionRows: ProductionRowModel;
-    products: ProductionTaskResultModel;
-  };
+    group: GroupModel
+    organization: OrganizationModel
+    owner: EmployeeModel
+    productionRows: ProductionRowModel
+    products: ProductionTaskResultModel
+  }
 
-  requiredCreateFields: "organization";
+  requiredCreateFields: "organization"
 
   filters: {
-    id: IdFilter;
-    accountId: IdFilter;
-    code: StringFilter;
-    deleted: DateTimeFilter;
-    deliveryPlannedMoment: DateTimeFilter;
-    description: StringFilter;
-    externalCode: StringFilter;
-    group: IdFilter;
-    moment: DateTimeFilter;
-    name: StringFilter;
-    organization: IdFilter;
-    owner: IdFilter;
-    shared: BooleanFilter;
-    updated: DateTimeFilter;
-  };
+    id: IdFilter
+    accountId: IdFilter
+    code: StringFilter
+    deleted: DateTimeFilter
+    deliveryPlannedMoment: DateTimeFilter
+    description: StringFilter
+    externalCode: StringFilter
+    group: IdFilter
+    moment: DateTimeFilter
+    name: StringFilter
+    organization: IdFilter
+    owner: IdFilter
+    shared: BooleanFilter
+    updated: DateTimeFilter
+  }
 }
 
 export interface ListProductionTasksOptions {
@@ -237,7 +237,7 @@ export interface ListProductionTasksOptions {
    * })
    * ```
    */
-  pagination?: PaginationOptions;
+  pagination?: PaginationOptions
 
   /**
    * Замена ссылок объектами с помощью expand
@@ -256,7 +256,7 @@ export interface ListProductionTasksOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<ProductionTaskModel>;
+  expand?: ExpandOptions<ProductionTaskModel>
 
   /**
    * Опции сортировки
@@ -280,14 +280,14 @@ export interface ListProductionTasksOptions {
    * })
    * ```
    */
-  order?: OrderOptions<ProductionTaskModel>;
+  order?: OrderOptions<ProductionTaskModel>
 
   /**
    * Контекстный поиск
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-kontextnyj-poisk
    */
-  search?: string;
+  search?: string
 
   /**
    * Фильтры
@@ -305,18 +305,18 @@ export interface ListProductionTasksOptions {
    * });
    * ```
    */
-  filter?: FilterOptions<ProductionTaskModel>;
+  filter?: FilterOptions<ProductionTaskModel>
 }
 
 export type AllProductionTasksOptions = Omit<
   ListProductionTasksOptions,
   "pagination"
->;
+>
 
 export type FirstProductionTaskOptions = Omit<
   ListProductionTasksOptions,
   "pagination"
->;
+>
 
 export interface GetProductionTaskOptions {
   /**
@@ -336,7 +336,7 @@ export interface GetProductionTaskOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<ProductionTaskModel>;
+  expand?: ExpandOptions<ProductionTaskModel>
 }
 
 export interface UpdateProductionTaskOptions {
@@ -357,7 +357,7 @@ export interface UpdateProductionTaskOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<ProductionTaskModel>;
+  expand?: ExpandOptions<ProductionTaskModel>
 }
 
 export interface CreateProductionTaskOptions {
@@ -378,5 +378,5 @@ export interface CreateProductionTaskOptions {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-zamena-ssylok-ob-ektami-s-pomosch-u-expand
    */
-  expand?: ExpandOptions<ProductionTaskModel>;
+  expand?: ExpandOptions<ProductionTaskModel>
 }

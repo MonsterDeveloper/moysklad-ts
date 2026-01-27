@@ -1,16 +1,17 @@
 import type {
+  BatchGetResult,
   Entity,
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
-  ListResponse,
-  Subset,
-  BatchGetResult,
-  ModelCreateOrUpdateData,
-  MatchArrayType,
   ListMeta,
-} from "../../types";
+  ListResponse,
+  MatchArrayType,
+  ModelCreateOrUpdateData,
+  Subset,
+} from "../../types"
 import type {
+  AllBonusTransactionsOptions,
   BonusTransactionModel,
   CreateBonusTransactionOptions,
   FirstBonusTransactionOptions,
@@ -18,8 +19,7 @@ import type {
   ListBonusTransactionsOptions,
   UpdateBonusTransactionOptions,
   UpsertBonusTransactionOptions,
-  AllBonusTransactionsOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Бонусные операции
@@ -47,7 +47,7 @@ export interface BonusTransactionEndpoint {
       GetFindResult<BonusTransactionModel, T["expand"]>,
       Entity.BonusTransaction
     >
-  >;
+  >
 
   /**
    * Получить все бонусные операции
@@ -67,7 +67,7 @@ export interface BonusTransactionEndpoint {
       GetFindResult<BonusTransactionModel, T["expand"]>,
       Entity.BonusTransaction
     >
-  >;
+  >
 
   /**
    * Получить количество бонусных операций.
@@ -82,7 +82,7 @@ export interface BonusTransactionEndpoint {
    */
   size(
     options?: AllBonusTransactionsOptions,
-  ): Promise<ListMeta<Entity.BonusTransaction>>;
+  ): Promise<ListMeta<Entity.BonusTransaction>>
 
   /**
    * Получить первую бонусную операцию, соответствующую фильтру
@@ -97,7 +97,7 @@ export interface BonusTransactionEndpoint {
    */
   first<T extends FirstBonusTransactionOptions = Record<string, unknown>>(
     options?: Subset<T, FirstBonusTransactionOptions>,
-  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>>;
+  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>>
 
   /**
    * Получить бонусную операцию по ID
@@ -116,7 +116,7 @@ export interface BonusTransactionEndpoint {
   get<T extends GetBonusTransactionOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetBonusTransactionOptions>,
-  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>>;
+  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>>
 
   /**
    * Создать новую бонусную операцию
@@ -138,7 +138,7 @@ export interface BonusTransactionEndpoint {
   create<T extends CreateBonusTransactionOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<BonusTransactionModel>,
     options?: Subset<T, CreateBonusTransactionOptions>,
-  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>>;
+  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>>
 
   /**
    * Обновить бонусную операцию
@@ -162,7 +162,7 @@ export interface BonusTransactionEndpoint {
     id: string,
     data: GetModelUpdatableFields<BonusTransactionModel>,
     options?: Subset<T, UpdateBonusTransactionOptions>,
-  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>>;
+  ): Promise<GetFindResult<BonusTransactionModel, T["expand"]>>
 
   /**
    * Создать или обновить бонусную операцию
@@ -213,7 +213,7 @@ export interface BonusTransactionEndpoint {
       TData,
       GetFindResult<BonusTransactionModel, TOptions["expand"]>
     >
-  >;
+  >
 
   /**
    * Удалить бонусную операцию
@@ -227,7 +227,7 @@ export interface BonusTransactionEndpoint {
    * await moysklad.bonusTransaction.delete("a7404397-83a7-11ed-0a80-0e9700500d7e");
    * ```
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Удалить несколько бонусных операций
@@ -242,5 +242,5 @@ export interface BonusTransactionEndpoint {
    * ]);
    * ```
    */
-  batchDelete(ids: string[]): Promise<void>;
+  batchDelete(ids: string[]): Promise<void>
 }

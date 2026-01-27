@@ -1,7 +1,7 @@
-import { defineConfig } from "vitest/config";
-import { fileURLToPath } from "node:url";
-import dts from "vite-plugin-dts";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { fileURLToPath } from "node:url"
+import dts from "vite-plugin-dts"
+import tsconfigPaths from "vite-tsconfig-paths"
+import { defineConfig } from "vitest/config"
 
 export default defineConfig({
   build: {
@@ -49,4 +49,4 @@ export default defineConfig({
       },
     },
   },
-});
+})

@@ -1,31 +1,31 @@
-import { describe, it, expect } from "vitest";
-import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
-import { Entity } from "../../types/entity";
-import { MediaType } from "../../types/media-type";
+import { describe, expect, it } from "vitest"
+import { createFetchMock, expectFetch, moysklad } from "../../../test-utils"
+import { Entity } from "../../types/entity"
+import { MediaType } from "../../types/media-type"
 
 describe("productionStageCompletion", () => {
   describe("list", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.productionStageCompletion.list();
+      await moysklad.productionStageCompletion.list()
 
       expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with pagination options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.productionStageCompletion.list({
         pagination: {
           limit: 100,
           offset: 50,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -35,17 +35,17 @@ describe("productionStageCompletion", () => {
           limit: "100",
           offset: "50",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.productionStageCompletion.list({
         filter: {
           moment: "2023-01-01",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -54,11 +54,11 @@ describe("productionStageCompletion", () => {
         searchParameters: {
           filter: "moment=2023-01-01",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.productionStageCompletion.list({
         expand: {
@@ -66,7 +66,7 @@ describe("productionStageCompletion", () => {
           owner: true,
           performer: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -76,15 +76,15 @@ describe("productionStageCompletion", () => {
           expand: "group,owner,performer",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("all", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
-      await moysklad.productionStageCompletion.all();
+      await moysklad.productionStageCompletion.all()
 
       expectFetch({
         fetchMock,
@@ -93,11 +93,11 @@ describe("productionStageCompletion", () => {
         searchParameters: expect.objectContaining({
           limit: expect.any(String),
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.productionStageCompletion.all({
         filter: {
@@ -106,7 +106,7 @@ describe("productionStageCompletion", () => {
         expand: {
           group: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -116,15 +116,15 @@ describe("productionStageCompletion", () => {
           filter: "moment=2023-01-01",
           expand: "group",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("first", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.productionStageCompletion.first();
+      await moysklad.productionStageCompletion.first()
 
       expectFetch({
         fetchMock,
@@ -133,17 +133,17 @@ describe("productionStageCompletion", () => {
         searchParameters: {
           limit: "1",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.productionStageCompletion.first({
         filter: {
           moment: "2023-01-01",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -153,27 +153,27 @@ describe("productionStageCompletion", () => {
           limit: "1",
           filter: "moment=2023-01-01",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("get", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.productionStageCompletion.get(id);
+      await moysklad.productionStageCompletion.get(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${id}`,
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.productionStageCompletion.get(id, {
         expand: {
@@ -181,7 +181,7 @@ describe("productionStageCompletion", () => {
           owner: true,
           performer: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -191,15 +191,15 @@ describe("productionStageCompletion", () => {
           expand: "group,owner,performer",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("size", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.productionStageCompletion.size();
+      await moysklad.productionStageCompletion.size()
 
       expectFetch({
         fetchMock,
@@ -208,17 +208,17 @@ describe("productionStageCompletion", () => {
         searchParameters: expect.objectContaining({
           limit: "0",
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.productionStageCompletion.size({
         filter: {
           moment: "2023-01-01",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -228,57 +228,57 @@ describe("productionStageCompletion", () => {
           filter: "moment=2023-01-01",
           limit: "0",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("delete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.productionStageCompletion.delete(id);
+      await moysklad.productionStageCompletion.delete(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${id}`,
         method: "DELETE",
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("update", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Updated Production Stage Completion",
         productionVolume: 100,
-      };
+      }
 
-      await moysklad.productionStageCompletion.update(id, data);
+      await moysklad.productionStageCompletion.update(id, data)
 
       expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${id}`,
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Updated Production Stage Completion",
         productionVolume: 100,
-      };
+      }
 
       await moysklad.productionStageCompletion.update(id, data, {
         expand: {
           group: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -289,13 +289,13 @@ describe("productionStageCompletion", () => {
           expand: "group",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("create", () => {
     it("makes a request with required fields", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         productionStage: {
           meta: {
@@ -311,20 +311,20 @@ describe("productionStageCompletion", () => {
           },
         },
         productionVolume: 100,
-      } as const;
+      } as const
 
-      await moysklad.productionStageCompletion.create(data);
+      await moysklad.productionStageCompletion.create(data)
 
       expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = {
         productionStage: {
           meta: {
@@ -341,14 +341,14 @@ describe("productionStageCompletion", () => {
         },
         productionVolume: 100,
         name: "New Production Stage Completion",
-      } as const;
+      } as const
 
       await moysklad.productionStageCompletion.create(data, {
         expand: {
           group: true,
           owner: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -359,19 +359,19 @@ describe("productionStageCompletion", () => {
           expand: "group,owner",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("batchDelete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const ids = [
         "5427bc76-b95f-11eb-0a80-04bb000cd583",
         "5427bc76-b95f-11eb-0a80-04bb000cd584",
-      ];
+      ]
 
-      await moysklad.productionStageCompletion.batchDelete(ids);
+      await moysklad.productionStageCompletion.batchDelete(ids)
 
       expectFetch({
         fetchMock,
@@ -386,13 +386,13 @@ describe("productionStageCompletion", () => {
             mediaType: MediaType.Json,
           },
         })),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("upsert", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         // Create new production stage completion
         {
@@ -427,20 +427,20 @@ describe("productionStageCompletion", () => {
           },
           productionVolume: 200,
         },
-      ];
+      ]
 
-      await moysklad.productionStageCompletion.upsert(data as never);
+      await moysklad.productionStageCompletion.upsert(data as never)
 
       expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         // Create new production stage completion
         {
@@ -460,14 +460,14 @@ describe("productionStageCompletion", () => {
           productionVolume: 100,
           name: "New Production Stage Completion",
         },
-      ];
+      ]
 
       await moysklad.productionStageCompletion.upsert(data as never, {
         expand: {
           group: true,
           owner: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -478,34 +478,34 @@ describe("productionStageCompletion", () => {
           expand: "group,owner",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("materials.list", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.productionStageCompletion[completionId].materials.list();
+      await moysklad.productionStageCompletion[completionId].materials.list()
 
       expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with pagination options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.productionStageCompletion[completionId].materials.list({
         pagination: {
           limit: 100,
           offset: 50,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -515,18 +515,18 @@ describe("productionStageCompletion", () => {
           limit: "100",
           offset: "50",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.productionStageCompletion[completionId].materials.list({
         expand: {
           assortment: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -536,14 +536,14 @@ describe("productionStageCompletion", () => {
           expand: "assortment",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("materials.create", () => {
     it("makes a request with required fields", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         assortment: {
           meta: {
@@ -559,23 +559,23 @@ describe("productionStageCompletion", () => {
           },
         },
         consumedQuantity: 10,
-      } as const;
+      } as const
 
       await moysklad.productionStageCompletion[completionId].materials.create(
         data,
-      );
+      )
 
       expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         assortment: {
           meta: {
@@ -591,7 +591,7 @@ describe("productionStageCompletion", () => {
           },
         },
         consumedQuantity: 10,
-      } as const;
+      } as const
 
       await moysklad.productionStageCompletion[completionId].materials.create(
         data,
@@ -600,7 +600,7 @@ describe("productionStageCompletion", () => {
             assortment: true,
           },
         },
-      );
+      )
 
       expectFetch({
         fetchMock,
@@ -611,39 +611,39 @@ describe("productionStageCompletion", () => {
           expand: "assortment",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("materials.update", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
-      const materialId = "5427bc76-b95f-11eb-0a80-04bb000cd584";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
+      const materialId = "5427bc76-b95f-11eb-0a80-04bb000cd584"
       const data = {
         consumedQuantity: 20,
-      };
+      }
 
       await moysklad.productionStageCompletion[completionId].materials.update(
         materialId,
         data,
-      );
+      )
 
       expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials/${materialId}`,
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
-      const materialId = "5427bc76-b95f-11eb-0a80-04bb000cd584";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
+      const materialId = "5427bc76-b95f-11eb-0a80-04bb000cd584"
       const data = {
         consumedQuantity: 20,
-      };
+      }
 
       await moysklad.productionStageCompletion[completionId].materials.update(
         materialId,
@@ -653,7 +653,7 @@ describe("productionStageCompletion", () => {
             assortment: true,
           },
         },
-      );
+      )
 
       expectFetch({
         fetchMock,
@@ -664,16 +664,16 @@ describe("productionStageCompletion", () => {
           expand: "assortment",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("materials.first", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.productionStageCompletion[completionId].materials.first();
+      await moysklad.productionStageCompletion[completionId].materials.first()
 
       expectFetch({
         fetchMock,
@@ -682,18 +682,18 @@ describe("productionStageCompletion", () => {
         searchParameters: {
           limit: "1",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.productionStageCompletion[completionId].materials.first({
         expand: {
           assortment: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -703,16 +703,16 @@ describe("productionStageCompletion", () => {
           limit: "1",
           expand: "assortment",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("materials.size", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.productionStageCompletion[completionId].materials.size();
+      await moysklad.productionStageCompletion[completionId].materials.size()
 
       expectFetch({
         fetchMock,
@@ -721,18 +721,18 @@ describe("productionStageCompletion", () => {
         searchParameters: expect.objectContaining({
           limit: "0",
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.productionStageCompletion[completionId].materials.size({
         filter: {
           moment: "2025-01-01",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -742,34 +742,34 @@ describe("productionStageCompletion", () => {
           filter: "moment=2025-01-01",
           limit: "0",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("results.list", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.productionStageCompletion[completionId].products.list();
+      await moysklad.productionStageCompletion[completionId].products.list()
 
       expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products`,
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with pagination options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.productionStageCompletion[completionId].products.list({
         pagination: {
           limit: 100,
           offset: 50,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -779,18 +779,18 @@ describe("productionStageCompletion", () => {
           limit: "100",
           offset: "50",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.productionStageCompletion[completionId].products.list({
         expand: {
           assortment: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -800,39 +800,39 @@ describe("productionStageCompletion", () => {
           expand: "assortment",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("products.update", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
-      const resultId = "5427bc76-b95f-11eb-0a80-04bb000cd584";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
+      const resultId = "5427bc76-b95f-11eb-0a80-04bb000cd584"
       const data = {
         producedQuantity: 20,
-      };
+      }
 
       await moysklad.productionStageCompletion[completionId].products.update(
         resultId,
         data,
-      );
+      )
 
       expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products/${resultId}`,
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
-      const resultId = "5427bc76-b95f-11eb-0a80-04bb000cd584";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
+      const resultId = "5427bc76-b95f-11eb-0a80-04bb000cd584"
       const data = {
         producedQuantity: 20,
-      };
+      }
 
       await moysklad.productionStageCompletion[completionId].products.update(
         resultId,
@@ -842,7 +842,7 @@ describe("productionStageCompletion", () => {
             assortment: true,
           },
         },
-      );
+      )
 
       expectFetch({
         fetchMock,
@@ -853,16 +853,16 @@ describe("productionStageCompletion", () => {
           expand: "assortment",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("products.first", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.productionStageCompletion[completionId].products.first();
+      await moysklad.productionStageCompletion[completionId].products.first()
 
       expectFetch({
         fetchMock,
@@ -871,18 +871,18 @@ describe("productionStageCompletion", () => {
         searchParameters: {
           limit: "1",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.productionStageCompletion[completionId].products.first({
         expand: {
           assortment: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -892,16 +892,16 @@ describe("productionStageCompletion", () => {
           limit: "1",
           expand: "assortment",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("products.size", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.productionStageCompletion[completionId].products.size();
+      await moysklad.productionStageCompletion[completionId].products.size()
 
       expectFetch({
         fetchMock,
@@ -910,18 +910,18 @@ describe("productionStageCompletion", () => {
         searchParameters: expect.objectContaining({
           limit: "0",
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
-      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const completionId = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.productionStageCompletion[completionId].products.size({
         filter: {
           moment: "2025-01-01",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -931,7 +931,7 @@ describe("productionStageCompletion", () => {
           filter: "moment=2025-01-01",
           limit: "0",
         }),
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})

@@ -5,11 +5,11 @@ import type {
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
+  ListMeta,
   ListResponse,
   Subset,
   UpdateMeta,
-  ListMeta,
-} from "../../types";
+} from "../../types"
 import type {
   AllPurchaseOrdersOptions,
   CreatePurchaseOrderOptions,
@@ -18,7 +18,7 @@ import type {
   ListPurchaseOrdersOptions,
   PurchaseOrderModel,
   UpdatePurchaseOrderOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Заказ поставщику
@@ -67,7 +67,7 @@ export interface PurchaseOrderEndpoint {
       GetFindResult<PurchaseOrderModel, T["expand"]>,
       Entity.PurchaseOrder
     >
-  >;
+  >
 
   /**
    * Получить все заказы поставщикам.
@@ -89,7 +89,7 @@ export interface PurchaseOrderEndpoint {
       GetFindResult<PurchaseOrderModel, T["expand"]>,
       Entity.PurchaseOrder
     >
-  >;
+  >
 
   /**
    * Получить заказ поставщику по id.
@@ -108,7 +108,7 @@ export interface PurchaseOrderEndpoint {
   get<T extends GetPurchaseOrderOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetPurchaseOrderOptions>,
-  ): Promise<GetFindResult<PurchaseOrderModel, T["expand"]>>;
+  ): Promise<GetFindResult<PurchaseOrderModel, T["expand"]>>
 
   /**
    * Изменить заказ поставщику.
@@ -132,7 +132,7 @@ export interface PurchaseOrderEndpoint {
     id: string,
     data: GetModelUpdatableFields<PurchaseOrderModel>,
     options?: Subset<T, UpdatePurchaseOrderOptions>,
-  ): Promise<GetFindResult<PurchaseOrderModel, T["expand"]>>;
+  ): Promise<GetFindResult<PurchaseOrderModel, T["expand"]>>
 
   /**
    * Создать заказ поставщику.
@@ -166,7 +166,7 @@ export interface PurchaseOrderEndpoint {
   create<T extends CreatePurchaseOrderOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<PurchaseOrderModel>,
     options?: Subset<T, CreatePurchaseOrderOptions>,
-  ): Promise<GetFindResult<PurchaseOrderModel, T["expand"]>>;
+  ): Promise<GetFindResult<PurchaseOrderModel, T["expand"]>>
 
   /**
    * Массово создать и обновить заказы поставщикам.
@@ -216,7 +216,7 @@ export interface PurchaseOrderEndpoint {
           UpdateMeta<Entity.PurchaseOrder>)
     )[],
     options?: Subset<T, CreatePurchaseOrderOptions>,
-  ): Promise<GetFindResult<PurchaseOrderModel, T["expand"]>[]>;
+  ): Promise<GetFindResult<PurchaseOrderModel, T["expand"]>[]>
 
   /**
    * Получить первый заказ поставщику.
@@ -241,7 +241,7 @@ export interface PurchaseOrderEndpoint {
       GetFindResult<PurchaseOrderModel, T["expand"]>,
       Entity.PurchaseOrder
     >
-  >;
+  >
 
   /**
    * Получить общее количество заказов поставщикам.
@@ -250,7 +250,7 @@ export interface PurchaseOrderEndpoint {
    */
   size(
     options?: AllPurchaseOrdersOptions,
-  ): Promise<ListMeta<Entity.PurchaseOrder>>;
+  ): Promise<ListMeta<Entity.PurchaseOrder>>
 
   /**
    * Удалить заказ поставщику по id.
@@ -258,7 +258,7 @@ export interface PurchaseOrderEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-postawschiku-udalit-zakaz-postawschiku
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Массово удалить заказы поставщикам.
@@ -268,5 +268,5 @@ export interface PurchaseOrderEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-postawschiku-massowoe-udalenie-zakazow-postawschikam
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 }

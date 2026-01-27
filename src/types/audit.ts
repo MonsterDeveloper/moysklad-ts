@@ -6,7 +6,7 @@ import type {
   LessOrEqualsFilter,
   Meta,
   PaginationOptions,
-} from ".";
+} from "."
 
 /**
  * Действие события аудита
@@ -111,9 +111,9 @@ export enum AuditObjectType {
  */
 export interface RegistrationAuditDiff {
   /** Название аккаунта */
-  account: string;
+  account: string
   /** Конфигурация аккаунта (страна) */
-  country: string;
+  country: string
 }
 
 /**
@@ -123,9 +123,9 @@ export interface RegistrationAuditDiff {
  */
 export interface PublicationAuditDiff {
   /** Название шаблона */
-  templateName: string;
+  templateName: string
   /** Ссылка на публикацию */
-  publicationHref: string;
+  publicationHref: string
 }
 
 /**
@@ -135,13 +135,13 @@ export interface PublicationAuditDiff {
  */
 export interface EmailAuditDiff {
   /** Почта отправителя письма */
-  senderEmail: string;
+  senderEmail: string
   /** Почта получателя письма */
-  targetEmail: string;
+  targetEmail: string
   /** Тема письма */
-  subjectEmail: string;
+  subjectEmail: string
   /** Текст письма */
-  text: string;
+  text: string
 }
 
 /**
@@ -153,9 +153,9 @@ export type DeleteAuditDiff = Record<
   string,
   {
     /** Значение атрибута до удаления */
-    oldValue: unknown;
+    oldValue: unknown
   }
->;
+>
 
 /**
  * Diff для событий обновления сущностей, перемещения/восстановления из корзины, перемещение/восстановление из архива
@@ -166,11 +166,11 @@ export type UpdateAuditDiff = Record<
   string,
   {
     /** Значение атрибута до обновления */
-    oldValue: unknown;
+    oldValue: unknown
     /** Значение атрибута после обновления */
-    newValue: unknown;
+    newValue: unknown
   }
->;
+>
 
 /**
  * Объединенный тип для всех возможных diff
@@ -180,36 +180,36 @@ export type AuditDiff =
   | PublicationAuditDiff
   | EmailAuditDiff
   | DeleteAuditDiff
-  | UpdateAuditDiff;
+  | UpdateAuditDiff
 
 /**
  * Базовое событие аудита
  */
 interface BaseAuditEvent {
   /** Дополнительная информация о Событии */
-  readonly additionalInfo?: string;
+  readonly additionalInfo?: string
 
   /** Метаданные контекста */
-  readonly audit: Meta<Entity.AuditEvent>;
+  readonly audit: Meta<Entity.AuditEvent>
 
   /**
    * Метаданные сущности.
    *
    * Не будет выводиться только для товаров, услуг, модификаций, комплектов удаленных до 20.08.2017
    */
-  readonly entity?: Meta<Entity>;
+  readonly entity?: Meta<Entity>
 
   /** Название сущности */
-  readonly entityType: Entity;
+  readonly entityType: Entity
 
   /** Время создания события */
-  readonly moment: DateTime;
+  readonly moment: DateTime
 
   /** Имя сущности */
-  readonly name: string;
+  readonly name: string
 
   /** Количество измененных объектов */
-  readonly objectCount?: number;
+  readonly objectCount?: number
 
   /**
    * Тип сущностей, с которыми связанно данное изменение.
@@ -218,24 +218,24 @@ interface BaseAuditEvent {
    *
    * {@linkcode AuditObjectType}
    */
-  readonly objectType?: AuditObjectType;
+  readonly objectType?: AuditObjectType
 
   /**
    * Тип изменения
    *
    * {@linkcode AuditEventSource}
    */
-  readonly source: AuditEventSource;
+  readonly source: AuditEventSource
 
   /**
    * Был ли доступ произведен поддержкой от имени пользователя.
    *
    * Флаг отсутствует, если значение false
    */
-  readonly supportAccess?: boolean;
+  readonly supportAccess?: boolean
 
   /** Логин Сотрудника */
-  readonly uid: string;
+  readonly uid: string
 }
 
 /**
@@ -247,22 +247,22 @@ interface BaseAuditEvent {
  */
 export type AuditEvent =
   | (BaseAuditEvent & {
-      readonly eventType: AuditEventType.Registration;
-      readonly diff?: RegistrationAuditDiff;
+      readonly eventType: AuditEventType.Registration
+      readonly diff?: RegistrationAuditDiff
     })
   | (BaseAuditEvent & {
       readonly eventType:
         | AuditEventType.OpenPublication
-        | AuditEventType.ClosePublication;
-      readonly diff?: PublicationAuditDiff;
+        | AuditEventType.ClosePublication
+      readonly diff?: PublicationAuditDiff
     })
   | (BaseAuditEvent & {
-      readonly eventType: AuditEventType.SendEmailFromEntity;
-      readonly diff?: EmailAuditDiff;
+      readonly eventType: AuditEventType.SendEmailFromEntity
+      readonly diff?: EmailAuditDiff
     })
   | (BaseAuditEvent & {
-      readonly eventType: AuditEventType.Delete;
-      readonly diff?: DeleteAuditDiff;
+      readonly eventType: AuditEventType.Delete
+      readonly diff?: DeleteAuditDiff
     })
   | (BaseAuditEvent & {
       readonly eventType:
@@ -270,37 +270,37 @@ export type AuditEvent =
         | AuditEventType.PutToArchive
         | AuditEventType.RestoreFromArchive
         | AuditEventType.PutToRecycleBin
-        | AuditEventType.RestoreFromRecycleBin;
-      readonly diff?: UpdateAuditDiff;
+        | AuditEventType.RestoreFromRecycleBin
+      readonly diff?: UpdateAuditDiff
     })
   | (BaseAuditEvent & {
       readonly eventType:
         | AuditEventType.BulkOperation
         | AuditEventType.Create
         | AuditEventType.Print
-        | AuditEventType.ReplaceToken;
-      readonly diff?: AuditDiff;
-    });
+        | AuditEventType.ReplaceToken
+      readonly diff?: AuditDiff
+    })
 
 export interface GetAuditByEntityOptions {
   filter?: {
     moment?: Partial<
       GreaterOrEqualsFilter<DateTime> & LessOrEqualsFilter<DateTime>
-    >;
+    >
     /**
      * В качестве значения должен быть передан href сущности сотрудника. В отфильтрованную выборку попадут все сущности аудита, автором изменений которых является данный пользователь.
      */
-    employee?: IdFilter;
+    employee?: IdFilter
 
     /**
      * В качестве значения должен быть передан тип События, по которому должны быть отфильтрованы сущности аудита.
      */
-    eventType?: AuditEventType;
+    eventType?: AuditEventType
     /**
      * В качестве значения должен быть передан тип действия, по которому должны быть отфильтрованы сущности аудита.
      * Список возможных значений параметра:
      */
-    source?: AuditEventSource;
-  };
-  pagination?: PaginationOptions;
+    source?: AuditEventSource
+  }
+  pagination?: PaginationOptions
 }

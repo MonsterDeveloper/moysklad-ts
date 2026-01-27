@@ -1,5 +1,5 @@
-import { afterEach, vi } from "vitest";
+import { afterEach, vi } from "vitest"
 
 afterEach(() => {
-  vi.clearAllMocks();
-});
+  vi.clearAllMocks()
+})

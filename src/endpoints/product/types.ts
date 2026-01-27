@@ -8,8 +8,8 @@ import type {
   Entity,
   ExpandOptions,
   FilterOptions,
-  IdFilter,
   Idable,
+  IdFilter,
   Meta,
   Model,
   NumberFilter,
@@ -19,9 +19,9 @@ import type {
   StringFilter,
   TaxSystem,
   TrackingType,
-} from "../../types";
-import type { CounterpartyModel } from "..";
-import type { GroupModel } from "../group";
+} from "../../types"
+import type { CounterpartyModel } from ".."
+import type { GroupModel } from "../group"
 
 export enum ProductPaymentItemType {
   Good = "GOOD",
@@ -76,100 +76,100 @@ export type PpeType =
   | "2400003495908"
   | "2400003496004"
   | "2400003496103"
-  | "2400003675805";
+  | "2400003675805"
 
 export interface Product extends Idable, Meta<Entity.Product> {
-  readonly accountId: string;
+  readonly accountId: string
   alcoholic?: {
-    excise?: number;
-    type?: number;
-    strength?: number;
-    volume?: number;
-  };
-  archived: boolean;
-  article?: string;
-  attributes?: Attribute[]; // TODO add attributes filters
-  barcodes?: Barcodes;
+    excise?: number
+    type?: number
+    strength?: number
+    volume?: number
+  }
+  archived: boolean
+  article?: string
+  attributes?: Attribute[] // TODO add attributes filters
+  barcodes?: Barcodes
   buyPrice?: {
-    value: number;
-    currency: Meta<Entity.Currency>;
-  };
-  code?: string;
-  country?: Meta<Entity.Country>;
-  description?: string;
-  discountProhibited: boolean;
-  readonly effectiveVat?: number;
-  readonly effectiveVatEnabled?: boolean;
-  externalCode: string;
-  files?: unknown[]; // TODO add files types & expand
-  group: Meta<Entity.Group>;
-  images?: unknown[]; // TODO add files types & expand
-  isSerialTrackable?: boolean;
-  minimumBalance?: number;
-  name: string;
-  owner?: Meta<Entity.Employee>;
+    value: number
+    currency: Meta<Entity.Currency>
+  }
+  code?: string
+  country?: Meta<Entity.Country>
+  description?: string
+  discountProhibited: boolean
+  readonly effectiveVat?: number
+  readonly effectiveVatEnabled?: boolean
+  externalCode: string
+  files?: unknown[] // TODO add files types & expand
+  group: Meta<Entity.Group>
+  images?: unknown[] // TODO add files types & expand
+  isSerialTrackable?: boolean
+  minimumBalance?: number
+  name: string
+  owner?: Meta<Entity.Employee>
   packs?: {
-    barcodes?: Barcodes;
-    readonly id: string;
-    quantity: number;
-    uom: Meta<Entity.Uom>;
-  }[];
-  partialDisposal?: boolean;
-  readonly pathName: string;
-  paymentItemType?: ProductPaymentItemType;
-  ppeType?: PpeType;
-  productFolder?: Meta<Entity.ProductFolder>;
+    barcodes?: Barcodes
+    readonly id: string
+    quantity: number
+    uom: Meta<Entity.Uom>
+  }[]
+  partialDisposal?: boolean
+  readonly pathName: string
+  paymentItemType?: ProductPaymentItemType
+  ppeType?: PpeType
+  productFolder?: Meta<Entity.ProductFolder>
   salePrices?: {
-    value: number;
-    currency: Meta<Entity.Currency>;
-    priceType: PriceType;
-  }[];
-  shared: boolean;
-  supplier?: Meta<Entity.Counterparty>;
-  readonly syncId?: string;
-  taxSystem?: TaxSystem;
-  things?: string[];
-  tnved?: string;
-  trackingType?: TrackingType;
-  uom?: Meta<Entity.Uom>;
-  readonly updated: DateTime;
-  useParentVat: boolean;
-  readonly variantsCount: number;
-  vat?: number;
-  vatEnabled?: boolean;
-  volume?: number;
-  weight?: number;
+    value: number
+    currency: Meta<Entity.Currency>
+    priceType: PriceType
+  }[]
+  shared: boolean
+  supplier?: Meta<Entity.Counterparty>
+  readonly syncId?: string
+  taxSystem?: TaxSystem
+  things?: string[]
+  tnved?: string
+  trackingType?: TrackingType
+  uom?: Meta<Entity.Uom>
+  readonly updated: DateTime
+  useParentVat: boolean
+  readonly variantsCount: number
+  vat?: number
+  vatEnabled?: boolean
+  volume?: number
+  weight?: number
 }
 
 export interface ProductModel extends Model {
-  object: Product;
+  object: Product
   expandable: {
-    agent: CounterpartyModel;
-    group: GroupModel;
-    owner: CounterpartyModel;
-  };
+    agent: CounterpartyModel
+    group: GroupModel
+    owner: CounterpartyModel
+  }
   filters: {
-    id: IdFilter;
-    accountId: IdFilter;
-    archived: ArchivedFilter;
-    article: StringFilter;
-    barcodes: StringFilter;
-    code: StringFilter;
-    description: StringFilter;
-    externalCode: StringFilter;
-    group: IdFilter;
-    isSerialTrackable: BooleanFilter;
-    minimumBalance: NumberFilter;
-    name: StringFilter;
-    owner: IdFilter;
-    pathName: StringFilter;
-    shared: BooleanFilter;
-    supplier: IdFilter;
-    syncId: IdFilter;
-    updated: DateTimeFilter;
-    volume: NumberFilter;
-    weight: NumberFilter;
-  };
+    id: IdFilter
+    accountId: IdFilter
+    archived: ArchivedFilter
+    article: StringFilter
+    barcodes: StringFilter
+    code: StringFilter
+    description: StringFilter
+    externalCode: StringFilter
+    group: IdFilter
+    isSerialTrackable: BooleanFilter
+    minimumBalance: NumberFilter
+    name: StringFilter
+    owner: IdFilter
+    pathName: StringFilter
+    shared: BooleanFilter
+    supplier: IdFilter
+    syncId: IdFilter
+    updated: DateTimeFilter
+    volume: NumberFilter
+    weight: NumberFilter
+  }
   orderableFields:
     | "id"
     | "updated"
@@ -182,29 +182,29 @@ export interface ProductModel extends Model {
     | "weighed"
     | "weight"
     | "volume"
-    | "syncId";
-  requiredCreateFields: "name";
+    | "syncId"
+  requiredCreateFields: "name"
 }
 
 export interface ListProductsOptions {
-  pagination?: PaginationOptions;
-  expand?: ExpandOptions<ProductModel>;
-  order?: OrderOptions<ProductModel>;
-  search?: string;
-  filter?: FilterOptions<ProductModel>;
+  pagination?: PaginationOptions
+  expand?: ExpandOptions<ProductModel>
+  order?: OrderOptions<ProductModel>
+  search?: string
+  filter?: FilterOptions<ProductModel>
 }
 
 export interface UpsertProductsOptions {
-  expand?: ExpandOptions<ProductModel>;
+  expand?: ExpandOptions<ProductModel>
 }
 
 export interface UpdateProductOptions {
-  expand?: ExpandOptions<ProductModel>;
+  expand?: ExpandOptions<ProductModel>
 }
 
 export interface GetProductOptions {
-  expand?: ExpandOptions<ProductModel>;
+  expand?: ExpandOptions<ProductModel>
 }
 
-export type FirstProductOptions = Omit<ListProductsOptions, "pagination">;
-export type AllProductsOptions = Omit<ListProductsOptions, "pagination">;
+export type FirstProductOptions = Omit<ListProductsOptions, "pagination">
+export type AllProductsOptions = Omit<ListProductsOptions, "pagination">

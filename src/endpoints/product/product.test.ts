@@ -1,32 +1,32 @@
-import { describe, it, expect } from "vitest";
-import { moysklad, createFetchMock, expectFetch } from "../../../test-utils";
-import { Entity } from "../../types/entity";
-import { MediaType } from "../../types/media-type";
-import { AuditEventType, AuditEventSource } from "../../types/audit";
+import { describe, expect, it } from "vitest"
+import { createFetchMock, expectFetch, moysklad } from "../../../test-utils"
+import { AuditEventSource, AuditEventType } from "../../types/audit"
+import { Entity } from "../../types/entity"
+import { MediaType } from "../../types/media-type"
 
 describe("product", () => {
   describe("list", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.product.list();
+      await moysklad.product.list()
 
       expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with pagination options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.product.list({
         pagination: {
           limit: 100,
           offset: 50,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -36,18 +36,18 @@ describe("product", () => {
           limit: "100",
           offset: "50",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.product.list({
         filter: {
           archived: false,
           name: "Test Product",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -56,18 +56,18 @@ describe("product", () => {
         searchParameters: {
           filter: "archived=false;name=Test Product",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.product.list({
         expand: {
           agent: true,
           group: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -77,15 +77,15 @@ describe("product", () => {
           expand: "agent,group",
           limit: expect.any(String),
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with order options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.product.list({
         order: { field: "name", direction: "asc" },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -94,15 +94,15 @@ describe("product", () => {
         searchParameters: {
           order: "name,asc",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with search option", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.product.list({
         search: "test product",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -111,15 +111,15 @@ describe("product", () => {
         searchParameters: {
           search: "test product",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("all", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
-      await moysklad.product.all();
+      await moysklad.product.all()
 
       expectFetch({
         fetchMock,
@@ -128,11 +128,11 @@ describe("product", () => {
         searchParameters: expect.objectContaining({
           limit: expect.any(String),
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock(true);
+      const fetchMock = createFetchMock(true)
 
       await moysklad.product.all({
         filter: {
@@ -141,7 +141,7 @@ describe("product", () => {
         expand: {
           agent: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -151,15 +151,15 @@ describe("product", () => {
           filter: "archived=false",
           expand: "agent",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("first", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.product.first();
+      await moysklad.product.first()
 
       expectFetch({
         fetchMock,
@@ -168,18 +168,18 @@ describe("product", () => {
         searchParameters: {
           limit: "1",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.product.first({
         filter: {
           archived: false,
         },
         search: "test",
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -190,27 +190,27 @@ describe("product", () => {
           filter: "archived=false",
           search: "test",
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("get", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.product.get(id);
+      await moysklad.product.get(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/product/${id}`,
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.product.get(id, {
         expand: {
@@ -218,7 +218,7 @@ describe("product", () => {
           group: true,
           owner: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -228,15 +228,15 @@ describe("product", () => {
           expand: "agent,group,owner",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("size", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
-      await moysklad.product.size();
+      await moysklad.product.size()
 
       expectFetch({
         fetchMock,
@@ -245,17 +245,17 @@ describe("product", () => {
         searchParameters: expect.objectContaining({
           limit: "0",
         }),
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
 
       await moysklad.product.size({
         filter: {
           name: "Test Product",
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -265,57 +265,57 @@ describe("product", () => {
           filter: "name=Test Product",
           limit: "0",
         }),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("delete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.product.delete(id);
+      await moysklad.product.delete(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/product/${id}`,
         method: "DELETE",
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("update", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Updated Product",
         description: "New description",
-      };
+      }
 
-      await moysklad.product.update(id, data);
+      await moysklad.product.update(id, data)
 
       expectFetch({
         fetchMock,
         url: `/entity/product/${id}`,
         method: "PUT",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
       const data = {
         name: "Updated Product",
         description: "New description",
-      };
+      }
 
       await moysklad.product.update(id, data, {
         expand: {
           agent: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -326,13 +326,13 @@ describe("product", () => {
           expand: "agent",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("upsert", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         // Create new product
         {
@@ -355,34 +355,34 @@ describe("product", () => {
           },
           description: "Updated description",
         },
-      ];
+      ]
 
-      await moysklad.product.upsert(data as never);
+      await moysklad.product.upsert(data as never)
 
       expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "POST",
         body: data,
-      });
-    });
+      })
+    })
 
     it("makes a request with expand options", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const data = [
         {
           name: "New Product",
           code: "prod001",
           description: "Product description",
         },
-      ];
+      ]
 
       await moysklad.product.upsert(data as never, {
         expand: {
           agent: true,
           group: true,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -393,19 +393,19 @@ describe("product", () => {
           expand: "agent,group",
           limit: expect.any(String),
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("batchDelete", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
+      const fetchMock = createFetchMock()
       const ids = [
         "5427bc76-b95f-11eb-0a80-04bb000cd583",
         "5427bc76-b95f-11eb-0a80-04bb000cd584",
-      ];
+      ]
 
-      await moysklad.product.batchDelete(ids);
+      await moysklad.product.batchDelete(ids)
 
       expectFetch({
         fetchMock,
@@ -418,48 +418,48 @@ describe("product", () => {
             mediaType: MediaType.Json,
           },
         })),
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("trash", () => {
     it("makes a request", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.product.trash(id);
+      await moysklad.product.trash(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/product/${id}/trash`,
         method: "POST",
-      });
-    });
-  });
+      })
+    })
+  })
 
   describe("audit", () => {
     it("makes a request without options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
-      await moysklad.product.audit(id);
+      await moysklad.product.audit(id)
 
       expectFetch({
         fetchMock,
         url: `/entity/product/${id}/audit`,
         method: "GET",
-      });
-    });
+      })
+    })
 
     it("makes a request with filter options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.product.audit(id, {
         filter: {
           eventType: AuditEventType.Create,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -468,19 +468,19 @@ describe("product", () => {
         searchParameters: {
           filter: "eventType=create",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with pagination options", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.product.audit(id, {
         pagination: {
           limit: 50,
           offset: 10,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -490,18 +490,18 @@ describe("product", () => {
           limit: "50",
           offset: "10",
         },
-      });
-    });
+      })
+    })
 
     it("makes a request with source filter", async () => {
-      const fetchMock = createFetchMock();
-      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583";
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.product.audit(id, {
         filter: {
           source: AuditEventSource.JsonApi,
         },
-      });
+      })
 
       expectFetch({
         fetchMock,
@@ -510,7 +510,7 @@ describe("product", () => {
         searchParameters: {
           filter: "source=jsonapi",
         },
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})

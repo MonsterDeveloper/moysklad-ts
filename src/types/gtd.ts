@@ -5,5 +5,5 @@
  */
 export interface Gtd {
   /** Номер ГТД */
-  name: string;
+  name: string
 }

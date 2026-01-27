@@ -1,24 +1,24 @@
-import {
-  type BatchDeleteResult,
-  type GetFindResult,
-  type GetModelCreatableFields,
-  type GetModelUpdatableFields,
-  type ListResponse,
-  type Subset,
-  type UpdateMeta,
-  type BatchGetResult,
+import type {
+  BatchDeleteResult,
+  BatchGetResult,
   Entity,
-  type ListMeta,
-} from "../../types";
+  GetFindResult,
+  GetModelCreatableFields,
+  GetModelUpdatableFields,
+  ListMeta,
+  ListResponse,
+  Subset,
+  UpdateMeta,
+} from "../../types"
 import type {
   AllInvoiceOutsOptions,
-  InvoiceOutModel,
   CreateInvoiceOutOptions,
   FirstInvoiceOutOptions,
   GetInvoiceOutOptions,
+  InvoiceOutModel,
   ListInvoiceOutsOptions,
   UpdateInvoiceOutOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Счета покупателям
@@ -43,7 +43,7 @@ export interface InvoiceOutEndpoint {
     options?: Subset<T, ListInvoiceOutsOptions>,
   ): Promise<
     ListResponse<GetFindResult<InvoiceOutModel, T["expand"]>, Entity.InvoiceOut>
-  >;
+  >
 
   /**
    * Получить все счета покупателям с пагинацией.
@@ -65,7 +65,7 @@ export interface InvoiceOutEndpoint {
       GetFindResult<InvoiceOutModel, T["expand"]>,
       Entity.InvoiceOut
     >
-  >;
+  >
 
   /**
    * Получить счет покупателю по ID.
@@ -84,7 +84,7 @@ export interface InvoiceOutEndpoint {
   get<T extends GetInvoiceOutOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetInvoiceOutOptions>,
-  ): Promise<GetFindResult<InvoiceOutModel, T["expand"]>>;
+  ): Promise<GetFindResult<InvoiceOutModel, T["expand"]>>
 
   /**
    * Обновить счет покупателю.
@@ -108,7 +108,7 @@ export interface InvoiceOutEndpoint {
     id: string,
     data: GetModelUpdatableFields<InvoiceOutModel>,
     options?: Subset<T, UpdateInvoiceOutOptions>,
-  ): Promise<GetFindResult<InvoiceOutModel, T["expand"]>>;
+  ): Promise<GetFindResult<InvoiceOutModel, T["expand"]>>
 
   /**
    * Создать счет покупателю.
@@ -131,7 +131,7 @@ export interface InvoiceOutEndpoint {
   create<T extends CreateInvoiceOutOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<InvoiceOutModel>,
     options?: Subset<T, CreateInvoiceOutOptions>,
-  ): Promise<GetFindResult<InvoiceOutModel, T["expand"]>>;
+  ): Promise<GetFindResult<InvoiceOutModel, T["expand"]>>
 
   /**
    * Создать или обновить несколько счетов покупателям.
@@ -164,7 +164,7 @@ export interface InvoiceOutEndpoint {
           UpdateMeta<Entity.InvoiceOut>)
     )[],
     options?: Subset<T, CreateInvoiceOutOptions>,
-  ): Promise<GetFindResult<InvoiceOutModel, T["expand"]>[]>;
+  ): Promise<GetFindResult<InvoiceOutModel, T["expand"]>[]>
 
   /**
    * Получить первый счет покупателю из списка.
@@ -184,7 +184,7 @@ export interface InvoiceOutEndpoint {
     options?: Subset<T, FirstInvoiceOutOptions>,
   ): Promise<
     ListResponse<GetFindResult<InvoiceOutModel, T["expand"]>, Entity.InvoiceOut>
-  >;
+  >
 
   /**
    * Получить размер списка счетов покупателям.
@@ -196,7 +196,7 @@ export interface InvoiceOutEndpoint {
    * const count = await moysklad.invoiceOut.size();
    * ```
    */
-  size(options?: AllInvoiceOutsOptions): Promise<ListMeta<Entity.InvoiceOut>>;
+  size(options?: AllInvoiceOutsOptions): Promise<ListMeta<Entity.InvoiceOut>>
 
   /**
    * Удалить счет покупателю.
@@ -211,7 +211,7 @@ export interface InvoiceOutEndpoint {
    * await moysklad.invoiceOut.delete("a7404318-550f-11e8-56c0-001b21c78cd9");
    * ```
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Удалить несколько счетов покупателям.
@@ -229,5 +229,5 @@ export interface InvoiceOutEndpoint {
    * ]);
    * ```
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 }

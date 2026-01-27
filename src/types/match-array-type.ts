@@ -1,3 +1,3 @@
 export type MatchArrayType<TInput, TOutput> =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  TInput extends Array<any> ? TOutput[] : TOutput;
+  // biome-ignore lint/suspicious/noExplicitAny: just checking if it's an array
+  TInput extends any[] ? TOutput[] : TOutput

@@ -1,20 +1,27 @@
 {
-	"compilerOptions": {
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"skipLibCheck": true,
-		"target": "es2022",
-		"verbatimModuleSyntax": true,
-		"allowJs": false,
-		"resolveJsonModule": true,
-		"moduleDetection": "force",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "verbatimModuleSyntax": true,
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
 
-		"strict": true,
+    "strict": true,
 
-		"moduleResolution": "Bundler",
-		"module": "ESNext",
-		"noEmit": true,
-		"lib": ["ES2022", "DOM"],
-	},
-	"include": ["src", "*.d.ts", "src/**/*.json", "vite*.ts", "scripts", "test-utils.ts"]
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "noEmit": true,
+    "lib": ["ES2022", "DOM"]
+  },
+  "include": [
+    "src",
+    "*.d.ts",
+    "src/**/*.json",
+    "vite*.ts",
+    "scripts",
+    "test-utils.ts"
+  ]
 }

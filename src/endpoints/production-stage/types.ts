@@ -1,18 +1,18 @@
+import type { SetRequired } from "type-fest"
 import type {
   Entity,
   ExpandOptions,
+  FilterOptions,
   Idable,
+  IdFilter,
   Meta,
+  Model,
+  NumberFilter,
   OrderOptions,
   PaginationOptions,
-  Model,
-  IdFilter,
-  NumberFilter,
-  FilterOptions,
-} from "../../types";
-import type { ProcessingStageModel } from "../processing-stage";
-import type { SetRequired } from "type-fest";
-import type { ProductionRowModel } from "../production-task";
+} from "../../types"
+import type { ProcessingStageModel } from "../processing-stage"
+import type { ProductionRowModel } from "../production-task"
 
 /**
  * Производственные этапы
@@ -21,65 +21,65 @@ import type { ProductionRowModel } from "../production-task";
  */
 export interface ProductionStage extends Idable, Meta<Entity.ProductionStage> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Затраты на оплату труда за единицу объема производства */
-  labourUnitCost?: number;
+  labourUnitCost?: number
 
   /** Метаданные Материалов производственного этапа */
   materials: {
     /** ID учетной записи */
-    readonly accountId: string;
+    readonly accountId: string
     /** Метаданные товара/услуги/серии/модификации */
-    assortment: Meta<Entity.Assortment>;
+    assortment: Meta<Entity.Assortment>
     /** ID позиции */
-    readonly id: string;
+    readonly id: string
     /** Количество товаров/модификаций данного вида в позиции */
-    planQuantity: number;
-  }[];
+    planQuantity: number
+  }[]
 
   /** Метаданные склада материалов */
-  readonly materialStore?: Meta<Entity.Store>; // TODO store expand
+  readonly materialStore?: Meta<Entity.Store> // TODO store expand
 
   /** Индекс Производственного этапа в Позиции производственного задания */
-  readonly orderingPosition: number;
+  readonly orderingPosition: number
 
   /** Метаданные Этапа производства */
-  readonly stage: Meta<Entity.ProcessingStage>;
+  readonly stage: Meta<Entity.ProcessingStage>
 
   /** Метаданные Позиции производственного задания */
-  readonly productionRow: Meta<Entity.ProductionRow>;
+  readonly productionRow: Meta<Entity.ProductionRow>
 
   /** Объем Производственного этапа. Соответствует объему Позиции производственного задания */
-  readonly totalQuantity?: number;
+  readonly totalQuantity?: number
 
   /** Выполненное количество */
-  readonly completedQuantity?: number;
+  readonly completedQuantity?: number
 
   /** Количество, доступное к выполнению */
-  readonly availableQuantity?: number;
+  readonly availableQuantity?: number
 
   /** Количество, которое на данный момент выполнять нельзя */
-  readonly blockedQuantity?: number;
+  readonly blockedQuantity?: number
 
   /** Количество, которое не будет выполнено */
-  readonly skippedQuantity?: number;
+  readonly skippedQuantity?: number
 
   /** Затраты на единицу объема производства */
-  processingUnitCost?: number;
+  processingUnitCost?: number
 
   /** Нормо-часы единицы объема производства */
-  standardHourUnit?: number;
+  standardHourUnit?: number
 }
 
 export interface ProductionStageModel extends Model {
   /** Основная сущность производственного этапа {@linkcode ProductionStage} */
-  object: ProductionStage;
+  object: ProductionStage
 
   expandable: {
-    stage: ProcessingStageModel;
-    productionRow: ProductionRowModel;
-  };
+    stage: ProcessingStageModel
+    productionRow: ProductionRowModel
+  }
 
   orderableFields:
     | "id"
@@ -92,53 +92,53 @@ export interface ProductionStageModel extends Model {
     | "blockedQuantity"
     | "skippedQuantity"
     | "processingUnitCost"
-    | "standardHourUnit";
+    | "standardHourUnit"
 
-  requiredCreateFields: "stage" | "productionRow";
+  requiredCreateFields: "stage" | "productionRow"
 
   filters: {
-    accountId: IdFilter;
-    id: IdFilter;
-    productionTask: IdFilter;
-    labourUnitCost: NumberFilter;
-    materialStore: IdFilter;
-    orderingPosition: NumberFilter;
-    stage: IdFilter;
-    productionRow: IdFilter;
-    totalQuantity: NumberFilter;
-    completedQuantity: NumberFilter;
-    availableQuantity: NumberFilter;
-    blockedQuantity: NumberFilter;
-    skippedQuantity: NumberFilter;
-    processingUnitCost: NumberFilter;
-    standardHourUnit: NumberFilter;
-  };
+    accountId: IdFilter
+    id: IdFilter
+    productionTask: IdFilter
+    labourUnitCost: NumberFilter
+    materialStore: IdFilter
+    orderingPosition: NumberFilter
+    stage: IdFilter
+    productionRow: IdFilter
+    totalQuantity: NumberFilter
+    completedQuantity: NumberFilter
+    availableQuantity: NumberFilter
+    blockedQuantity: NumberFilter
+    skippedQuantity: NumberFilter
+    processingUnitCost: NumberFilter
+    standardHourUnit: NumberFilter
+  }
 }
 
 export interface ListProductionStagesOptions {
-  pagination?: PaginationOptions;
-  expand?: ExpandOptions<ProductionStageModel>;
-  order?: OrderOptions<ProductionStageModel>;
-  search?: string;
-  filter: SetRequired<FilterOptions<ProductionStageModel>, "productionTask">;
+  pagination?: PaginationOptions
+  expand?: ExpandOptions<ProductionStageModel>
+  order?: OrderOptions<ProductionStageModel>
+  search?: string
+  filter: SetRequired<FilterOptions<ProductionStageModel>, "productionTask">
 }
 
 export type AllProductionStagesOptions = Omit<
   ListProductionStagesOptions,
   "pagination"
->;
+>
 
 export type FirstProductionStageOptions = Omit<
   ListProductionStagesOptions,
   "pagination"
->;
+>
 
 export interface GetProductionStageOptions {
-  expand?: ExpandOptions<ProductionStageModel>;
+  expand?: ExpandOptions<ProductionStageModel>
 }
 
 export interface UpdateProductionStageOptions {
-  expand?: ExpandOptions<ProductionStageModel>;
+  expand?: ExpandOptions<ProductionStageModel>
 }
 
 /**
@@ -150,59 +150,59 @@ export interface ProductionTaskMaterial
   extends Idable,
     Meta<Entity.ProductionTaskMaterial> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Метаданные товара/услуги/серии/модификации */
-  assortment: Meta<Entity.Assortment>;
+  assortment: Meta<Entity.Assortment>
 
   /** Количество товаров/модификаций данного вида в позиции */
-  planQuantity: number;
+  planQuantity: number
 }
 
 export interface ProductionTaskMaterialModel extends Model {
-  object: ProductionTaskMaterial;
+  object: ProductionTaskMaterial
 
   expandable: {
-    assortment: Model;
-  };
+    assortment: Model
+  }
 
-  orderableFields: "id" | "accountId" | "planQuantity";
+  orderableFields: "id" | "accountId" | "planQuantity"
 
-  requiredCreateFields: "assortment" | "planQuantity";
+  requiredCreateFields: "assortment" | "planQuantity"
 
   filters: {
-    accountId: IdFilter;
-    id: IdFilter;
-    planQuantity: NumberFilter;
-  };
+    accountId: IdFilter
+    id: IdFilter
+    planQuantity: NumberFilter
+  }
 }
 
 export interface ListProductionTaskMaterialsOptions {
-  pagination?: PaginationOptions;
-  expand?: ExpandOptions<ProductionTaskMaterialModel>;
-  order?: OrderOptions<ProductionTaskMaterialModel>;
-  search?: string;
-  filter?: FilterOptions<ProductionTaskMaterialModel>;
+  pagination?: PaginationOptions
+  expand?: ExpandOptions<ProductionTaskMaterialModel>
+  order?: OrderOptions<ProductionTaskMaterialModel>
+  search?: string
+  filter?: FilterOptions<ProductionTaskMaterialModel>
 }
 
 export type AllProductionTaskMaterialsOptions = Omit<
   ListProductionTaskMaterialsOptions,
   "pagination"
->;
+>
 
 export type FirstProductionTaskMaterialOptions = Omit<
   ListProductionTaskMaterialsOptions,
   "pagination"
->;
+>
 
 export interface GetProductionTaskMaterialOptions {
-  expand?: ExpandOptions<ProductionTaskMaterialModel>;
+  expand?: ExpandOptions<ProductionTaskMaterialModel>
 }
 
 export interface UpdateProductionTaskMaterialOptions {
-  expand?: ExpandOptions<ProductionTaskMaterialModel>;
+  expand?: ExpandOptions<ProductionTaskMaterialModel>
 }
 
 export interface CreateProductionTaskMaterialOptions {
-  expand?: ExpandOptions<ProductionTaskMaterialModel>;
+  expand?: ExpandOptions<ProductionTaskMaterialModel>
 }

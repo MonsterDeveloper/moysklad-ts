@@ -1,14 +1,14 @@
-import type { DateTime } from "../types";
+import type { DateTime } from "../types"
 
 // Moysklad timezone (Moscow / UTC +3)
-const MOSCOW_TIMEZONE_MS = +3 * 60 * 60 * 1000;
+const MOSCOW_TIMEZONE_MS = +3 * 60 * 60 * 1000
 
 function leftPad1(value: number) {
-  return `0${value}`.slice(-2);
+  return `0${value}`.slice(-2)
 }
 
 function leftPad2(value: number) {
-  return `00${value}`.slice(-3);
+  return `00${value}`.slice(-3)
 }
 
 /**
@@ -21,7 +21,7 @@ export function composeDateTime(
   date: Date | number,
   shouldIncludeMs = false,
 ): DateTime {
-  const moscowTime = new Date(+date + MOSCOW_TIMEZONE_MS);
+  const moscowTime = new Date(+date + MOSCOW_TIMEZONE_MS)
 
   // 2000-01-01 01:00:00.123
   return [
@@ -37,5 +37,5 @@ export function composeDateTime(
     ":",
     leftPad1(moscowTime.getUTCSeconds()),
     shouldIncludeMs ? `.${leftPad2(moscowTime.getUTCMilliseconds())}` : "",
-  ].join("");
+  ].join("")
 }

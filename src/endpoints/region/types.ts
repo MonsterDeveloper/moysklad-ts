@@ -1,18 +1,18 @@
+import type { EmptyObject } from "type-fest"
 import type {
   DateTime,
   DateTimeFilter,
   Entity,
   ExpandOptions,
   FilterOptions,
-  IdFilter,
   Idable,
+  IdFilter,
   Meta,
   Model,
   OrderOptions,
   PaginationOptions,
   StringFilter,
-} from "../../types";
-import type { EmptyObject } from "type-fest";
+} from "../../types"
 
 /**
  * Регион
@@ -23,22 +23,22 @@ import type { EmptyObject } from "type-fest";
  */
 export interface Region extends Idable, Meta<Entity.Region> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Код Региона */
-  code?: string;
+  code?: string
 
   /** Внешний код Региона */
-  externalCode: string;
+  externalCode: string
 
   /** Наименование Региона */
-  name: string;
+  name: string
 
   /** Момент последнего обновления сущности */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 
   /** Версия сущности */
-  readonly version: number;
+  readonly version: number
 }
 
 /**
@@ -47,30 +47,30 @@ export interface Region extends Idable, Meta<Entity.Region> {
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-region
  */
 export interface RegionModel extends Model {
-  object: Region;
-  expandable: EmptyObject;
+  object: Region
+  expandable: EmptyObject
   filters: {
     /** ID в формате UUID */
-    id: IdFilter;
+    id: IdFilter
     /** ID учетной записи */
-    accountId: IdFilter;
+    accountId: IdFilter
     /** Код Региона */
-    code: StringFilter;
+    code: StringFilter
     /** Внешний код Региона */
-    externalCode: StringFilter;
+    externalCode: StringFilter
     /** Наименование Региона */
-    name: StringFilter;
+    name: StringFilter
     /** Момент последнего обновления сущности */
-    updated: DateTimeFilter;
-  };
+    updated: DateTimeFilter
+  }
   orderableFields:
     | "id"
     | "code"
     | "externalCode"
     | "name"
     | "updated"
-    | "version";
-  requiredCreateFields: never; // Read-only entity
+    | "version"
+  requiredCreateFields: never // Read-only entity
 }
 
 /**
@@ -80,15 +80,15 @@ export interface RegionModel extends Model {
  */
 export interface ListRegionsOptions {
   /** Параметры пагинации */
-  pagination?: PaginationOptions;
+  pagination?: PaginationOptions
   /** Параметры раскрытия вложенных сущностей */
-  expand?: ExpandOptions<RegionModel>;
+  expand?: ExpandOptions<RegionModel>
   /** Параметры сортировки */
-  order?: OrderOptions<RegionModel>;
+  order?: OrderOptions<RegionModel>
   /** Строка поиска */
-  search?: string;
+  search?: string
   /** Параметры фильтрации */
-  filter?: FilterOptions<RegionModel>;
+  filter?: FilterOptions<RegionModel>
 }
 
 /**
@@ -98,11 +98,11 @@ export interface ListRegionsOptions {
  */
 export interface GetRegionOptions {
   /** Параметры раскрытия вложенных сущностей */
-  expand?: ExpandOptions<RegionModel>;
+  expand?: ExpandOptions<RegionModel>
 }
 
 /** Опции для получения первого региона из списка */
-export type FirstRegionOptions = Omit<ListRegionsOptions, "pagination">;
+export type FirstRegionOptions = Omit<ListRegionsOptions, "pagination">
 
 /** Опции для получения всех регионов */
-export type AllRegionsOptions = Omit<ListRegionsOptions, "pagination">;
+export type AllRegionsOptions = Omit<ListRegionsOptions, "pagination">

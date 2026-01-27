@@ -1,15 +1,15 @@
 import type {
-  BatchGetResult,
-  GetFindResult,
-  ListResponse,
-  Subset,
   BatchDeleteResult,
+  BatchGetResult,
+  Entity,
+  GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
-  UpdateMeta,
-  Entity,
   ListMeta,
-} from "../../types";
+  ListResponse,
+  Subset,
+  UpdateMeta,
+} from "../../types"
 import type {
   AllCustomerOrdersOptions,
   CreateCustomerOrderOptions,
@@ -19,7 +19,7 @@ import type {
   GetCustomerOrderOptions,
   ListCustomerOrdersOptions,
   UpdateCustomerOrderOptions,
-} from "./types";
+} from "./types"
 
 /**
  * Заказы покупателей
@@ -68,7 +68,7 @@ export interface CustomerOrderEndpoint {
       GetFindResult<CustomerOrderModel, T["expand"]>,
       Entity.CustomerOrder
     >
-  >;
+  >
 
   /**
    * Получить все заказы покупателей.
@@ -90,7 +90,7 @@ export interface CustomerOrderEndpoint {
       GetFindResult<CustomerOrderModel, T["expand"]>,
       Entity.BonusTransaction
     >
-  >;
+  >
 
   /**
    * Получить первый заказ покупателя.
@@ -115,7 +115,7 @@ export interface CustomerOrderEndpoint {
       GetFindResult<CustomerOrderModel, T["expand"]>,
       Entity.CustomerOrder
     >
-  >;
+  >
 
   /**
    * Получить заказ покупателя по id.
@@ -134,7 +134,7 @@ export interface CustomerOrderEndpoint {
   get<T extends GetCustomerOrderOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetCustomerOrderOptions>,
-  ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>>;
+  ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>>
 
   /**
    * Получить общее количество заказов покупателей.
@@ -143,7 +143,7 @@ export interface CustomerOrderEndpoint {
    */
   size(
     options?: AllCustomerOrdersOptions,
-  ): Promise<ListMeta<Entity.CustomerOrder>>;
+  ): Promise<ListMeta<Entity.CustomerOrder>>
 
   /**
    * Удалить заказ покупателя по id.
@@ -151,7 +151,7 @@ export interface CustomerOrderEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq-udalit-zakaz-pokupatelq
    */
-  delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>
 
   /**
    * Изменить заказ покупателя.
@@ -174,7 +174,7 @@ export interface CustomerOrderEndpoint {
     id: string,
     data: GetModelUpdatableFields<CustomerOrderModel>,
     options?: Subset<T, UpdateCustomerOrderOptions>,
-  ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>>;
+  ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>>
 
   /**
    * Создать заказ покупателя.
@@ -208,7 +208,7 @@ export interface CustomerOrderEndpoint {
   create<T extends CreateCustomerOrderOptions = Record<string, unknown>>(
     data: GetModelCreatableFields<CustomerOrderModel>,
     options?: Subset<T, CreateCustomerOrderOptions>,
-  ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>>;
+  ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>>
 
   /**
    * Массово удалить заказы покупателей.
@@ -218,7 +218,7 @@ export interface CustomerOrderEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq-massowoe-udalenie-zakazow-pokupatelej
    */
-  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>;
+  batchDelete(ids: string[]): Promise<BatchDeleteResult[]>
 
   /**
    * Переместить заказ покупателя в корзину.
@@ -227,7 +227,7 @@ export interface CustomerOrderEndpoint {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq-peremestit-zakaz-pokupatelq-w-korzinu
    */
-  trash(id: string): Promise<void>;
+  trash(id: string): Promise<void>
 
   /**
    * Массово создать и обновить заказы покупателей
@@ -295,7 +295,7 @@ export interface CustomerOrderEndpoint {
           UpdateMeta<Entity.CustomerOrder>)
     )[],
     options?: Subset<T, CreateCustomerOrderOptions>,
-  ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>[]>;
+  ): Promise<GetFindResult<CustomerOrderModel, T["expand"]>[]>
 
   /**
    * Получить метаданные заказов покупателей.
@@ -310,5 +310,5 @@ export interface CustomerOrderEndpoint {
    * console.log(metadata.states); // массив статусов
    * ```
    */
-  metadata(): Promise<CustomerOrderMetadata>;
+  metadata(): Promise<CustomerOrderMetadata>
 }

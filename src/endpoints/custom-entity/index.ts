@@ -1,2 +1,2 @@
-export type { CustomEntityEndpoint } from "./custom-entity";
-export * from "./types";
+export type { CustomEntityEndpoint } from "./custom-entity"
+export * from "./types"

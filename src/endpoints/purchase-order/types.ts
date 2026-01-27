@@ -1,7 +1,3 @@
-import type { CounterpartyModel } from "../counterparty";
-import type { EmployeeModel } from "../employee";
-import type { GroupModel } from "../group";
-import type { OrganizationModel } from "../organization";
 import type {
   AccountModel,
   AssortmentEntity,
@@ -22,7 +18,11 @@ import type {
   OrderOptions,
   PaginationOptions,
   StringFilter,
-} from "../../types";
+} from "../../types"
+import type { CounterpartyModel } from "../counterparty"
+import type { EmployeeModel } from "../employee"
+import type { GroupModel } from "../group"
+import type { OrganizationModel } from "../organization"
 
 /**
  * Позиция заказа поставщику
@@ -33,35 +33,35 @@ export interface PurchaseOrderPosition
   extends Idable,
     Meta<Entity.PurchaseOrderPosition> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
   /** Метаданные товара/услуги/серии/модификации, которую представляет собой позиция */
-  assortment: Meta<AssortmentEntity>;
+  assortment: Meta<AssortmentEntity>
   /** Процент скидки или наценки */
-  discount: number;
+  discount: number
   /** Упаковка Товара */
-  pack?: unknown; // TODO add pack type
+  pack?: unknown // TODO add pack type
   /** Цена товара/услуги в копейках */
-  price: number;
+  price: number
   /** Количество товаров/услуг данного вида в позиции */
-  quantity: number;
+  quantity: number
   /** Принято */
-  shipped: number;
+  shipped: number
   /** Ожидание */
-  inTransit: number;
+  inTransit: number
   /** НДС, которым облагается текущая позиция */
-  vat: number;
+  vat: number
   /** Включен ли НДС для позиции */
-  vatEnabled: boolean;
+  vatEnabled: boolean
 }
 
 /**
  * Модель позиции заказа поставщику
  */
 export interface PurchaseOrderPositionModel extends Model {
-  object: PurchaseOrderPosition;
+  object: PurchaseOrderPosition
   expandable: {
-    assortment: AssortmentModel;
-  };
+    assortment: AssortmentModel
+  }
 }
 
 /**
@@ -71,121 +71,121 @@ export interface PurchaseOrderPositionModel extends Model {
  */
 export interface PurchaseOrder extends Idable, Meta<Entity.PurchaseOrder> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
   /** Метаданные контрагента */
-  agent: Meta<Entity.Counterparty>;
+  agent: Meta<Entity.Counterparty>
   /** Метаданные счета контрагента */
-  agentAccount?: Meta<Entity.Account>;
+  agentAccount?: Meta<Entity.Account>
   /** Отметка о проведении */
-  applicable: boolean;
+  applicable: boolean
   /** Коллекция метаданных доп. полей */
-  attributes?: unknown[]; // TODO add attributes type
+  attributes?: unknown[] // TODO add attributes type
   /** Код Заказа поставщику */
-  code?: string;
+  code?: string
   /** Метаданные договора */
-  contract?: Meta<Entity.Contract>;
+  contract?: Meta<Entity.Contract>
   /** Дата создания */
-  readonly created: DateTime;
+  readonly created: DateTime
   /** Момент последнего удаления Заказа поставщику */
-  readonly deleted?: DateTime;
+  readonly deleted?: DateTime
   /** Планируемая дата отгрузки */
-  deliveryPlannedMoment?: DateTime;
+  deliveryPlannedMoment?: DateTime
   /** Комментарий Заказа поставщику */
-  description?: string;
+  description?: string
   /** Внешний код Заказа поставщику */
-  externalCode: string;
+  externalCode: string
   /** Метаданные массива Файлов */
-  files: unknown[]; // TODO add files type
+  files: unknown[] // TODO add files type
   /** Отдел сотрудника */
-  group: Meta<Entity.Group>;
+  group: Meta<Entity.Group>
   /** Сумма счетов поставщику */
-  readonly invoicedSum: number;
+  readonly invoicedSum: number
   /** Дата документа */
-  moment: DateTime;
+  moment: DateTime
   /** Наименование Заказа поставщику */
-  name: string;
+  name: string
   /** Метаданные юрлица */
-  organization: Meta<Entity.Organization>;
+  organization: Meta<Entity.Organization>
   /** Метаданные счета юрлица */
-  organizationAccount?: Meta<Entity.Account>;
+  organizationAccount?: Meta<Entity.Account>
   /** Владелец (Сотрудник) */
-  owner?: Meta<Entity.Employee>;
+  owner?: Meta<Entity.Employee>
   /** Сумма входящих платежей по Заказу */
-  readonly payedSum: number;
+  readonly payedSum: number
   /** Метаданные позиций Заказа поставщику */
-  positions: ListMeta<Entity.PurchaseOrderPosition>;
+  positions: ListMeta<Entity.PurchaseOrderPosition>
   /** Напечатан ли документ */
-  readonly printed: boolean;
+  readonly printed: boolean
   /** Метаданные проекта */
-  project?: Meta<Entity.Project>;
+  project?: Meta<Entity.Project>
   /** Опубликован ли документ */
-  readonly published: boolean;
+  readonly published: boolean
   /** Валюта */
-  rate: DocumentRate;
+  rate: DocumentRate
   /** Общий доступ */
-  shared: boolean;
+  shared: boolean
   /** Сумма принятого */
-  readonly shippedSum: number;
+  readonly shippedSum: number
   /** Метаданные статуса заказа */
-  state?: Meta<Entity.State>;
+  state?: Meta<Entity.State>
   /** Метаданные склада */
-  store?: Meta<Entity.Store>;
+  store?: Meta<Entity.Store>
   /** Сумма Заказа поставщику в установленной валюте */
-  readonly sum: number;
+  readonly sum: number
   /** ID синхронизации */
-  syncId?: string;
+  syncId?: string
   /** Момент последнего обновления */
-  readonly updated: DateTime;
+  readonly updated: DateTime
   /** Учитывается ли НДС */
-  vatEnabled: boolean;
+  vatEnabled: boolean
   /** Включен ли НДС в цену */
-  vatIncluded?: boolean;
+  vatIncluded?: boolean
   /** Сумма НДС */
-  readonly vatSum: number;
+  readonly vatSum: number
   /** Сумма товаров в пути */
-  readonly waitSum: number;
+  readonly waitSum: number
 }
 
 /**
  * Модель заказа поставщику
  */
 export interface PurchaseOrderModel extends Model {
-  object: PurchaseOrder;
+  object: PurchaseOrder
   expandable: {
-    agent: CounterpartyModel;
-    group: GroupModel;
-    organization: OrganizationModel;
-    owner: EmployeeModel;
-    positions: PurchaseOrderPositionModel;
-    agentAccount: AccountModel;
-    organizationAccount: AccountModel;
-  };
+    agent: CounterpartyModel
+    group: GroupModel
+    organization: OrganizationModel
+    owner: EmployeeModel
+    positions: PurchaseOrderPositionModel
+    agentAccount: AccountModel
+    organizationAccount: AccountModel
+  }
   filters: {
-    id: IdFilter;
-    accountId: IdFilter;
-    agent: IdFilter;
-    applicable: BooleanFilter;
-    code: StringFilter;
-    contract: IdFilter;
-    created: DateTimeFilter;
-    deleted: DateTimeFilter;
-    description: StringFilter;
-    externalCode: StringFilter;
-    group: IdFilter;
-    moment: DateTimeFilter;
-    name: StringFilter;
-    organization: IdFilter;
-    owner: IdFilter;
-    printed: BooleanFilter;
-    project: IdFilter;
-    published: BooleanFilter;
-    shared: BooleanFilter;
-    state: IdFilter;
-    store: IdFilter;
-    sum: NumberFilter;
-    syncId: IdFilter;
-    updated: DateTimeFilter;
-  };
+    id: IdFilter
+    accountId: IdFilter
+    agent: IdFilter
+    applicable: BooleanFilter
+    code: StringFilter
+    contract: IdFilter
+    created: DateTimeFilter
+    deleted: DateTimeFilter
+    description: StringFilter
+    externalCode: StringFilter
+    group: IdFilter
+    moment: DateTimeFilter
+    name: StringFilter
+    organization: IdFilter
+    owner: IdFilter
+    printed: BooleanFilter
+    project: IdFilter
+    published: BooleanFilter
+    shared: BooleanFilter
+    state: IdFilter
+    store: IdFilter
+    sum: NumberFilter
+    syncId: IdFilter
+    updated: DateTimeFilter
+  }
   orderableFields:
     | "id"
     | "syncId"
@@ -196,35 +196,35 @@ export interface PurchaseOrderModel extends Model {
     | "externalCode"
     | "moment"
     | "applicable"
-    | "sum";
-  requiredCreateFields: "agent" | "organization";
+    | "sum"
+  requiredCreateFields: "agent" | "organization"
 }
 
 export interface ListPurchaseOrdersOptions {
-  pagination?: PaginationOptions;
-  expand?: ExpandOptions<PurchaseOrderModel>;
-  order?: OrderOptions<PurchaseOrderModel>;
-  search?: string;
-  filter?: FilterOptions<PurchaseOrderModel>;
+  pagination?: PaginationOptions
+  expand?: ExpandOptions<PurchaseOrderModel>
+  order?: OrderOptions<PurchaseOrderModel>
+  search?: string
+  filter?: FilterOptions<PurchaseOrderModel>
 }
 
 export interface GetPurchaseOrderOptions {
-  expand?: ExpandOptions<PurchaseOrderModel>;
+  expand?: ExpandOptions<PurchaseOrderModel>
 }
 
 export interface UpdatePurchaseOrderOptions {
-  expand?: ExpandOptions<PurchaseOrderModel>;
+  expand?: ExpandOptions<PurchaseOrderModel>
 }
 
 export interface CreatePurchaseOrderOptions {
-  expand?: ExpandOptions<PurchaseOrderModel>;
+  expand?: ExpandOptions<PurchaseOrderModel>
 }
 
 export type FirstPurchaseOrderOptions = Omit<
   ListPurchaseOrdersOptions,
   "pagination"
->;
+>
 export type AllPurchaseOrdersOptions = Omit<
   ListPurchaseOrdersOptions,
   "pagination"
->;
+>

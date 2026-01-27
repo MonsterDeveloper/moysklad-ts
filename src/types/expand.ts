@@ -3,25 +3,23 @@ import type {
   IsEmptyObject,
   OptionalKeysOf,
   SetOptional,
-} from "type-fest";
-import type { Model } from "./model";
+} from "type-fest"
+import type { Model } from "./model"
 
 // prettier-ignore
 /**
  * Given a model `M`, get an option for `expand` query parameter.
  */
-export type ExpandOptions<M extends Model> = IsEmptyObject<
-  M["expandable"]
-> extends false
-  ? {
-      [key in keyof M["expandable"]]?:
-        key extends "assortment"
-        ? boolean
-        : M["expandable"][key] extends Model
-        ? boolean | ExpandOptions<M["expandable"][key]>
-        : never;
-    }
-  : never;
+export type ExpandOptions<M extends Model> =
+  IsEmptyObject<M["expandable"]> extends false
+    ? {
+        [key in keyof M["expandable"]]?: key extends "assortment"
+          ? boolean
+          : M["expandable"][key] extends Model
+            ? boolean | ExpandOptions<M["expandable"][key]>
+            : never
+      }
+    : never
 
 // prettier-ignore
 /**
@@ -34,4 +32,4 @@ export type RestoreExpandableFieldsOptionality<
   ? T
   : HasOptionalKeys<M["object"]> extends true
     ? SetOptional<T, Extract<OptionalKeysOf<M["object"]>, keyof T>>
-    : T;
+    : T

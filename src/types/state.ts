@@ -1,20 +1,20 @@
-import type { Entity } from "./entity";
-import type { Idable } from "./mixins";
-import type { Meta } from "./metadata";
+import type { Entity } from "./entity"
+import type { Meta } from "./metadata"
+import type { Idable } from "./mixins"
 
 export interface State extends Idable, Meta<Entity.State> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Название статуса */
-  name: string;
+  name: string
 
   /** Цвет статуса */
-  color: number;
+  color: number
 
   /** Тип статуса */
-  stateType: "Regular" | "Successful" | "Unsuccessful";
+  stateType: "Regular" | "Successful" | "Unsuccessful"
 
   /** Тип сущности */
-  entityType: string;
+  entityType: string
 }

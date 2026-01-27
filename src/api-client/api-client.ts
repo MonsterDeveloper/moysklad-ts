@@ -1,12 +1,12 @@
-import { version } from "../../package.json" with { type: "json" };
-import { handleError } from "./handle-error";
+import { version } from "../../package.json" with { type: "json" }
 import type {
-  ListResponse,
-  Entity,
-  BatchGetResult,
   BatchGetOptions,
-} from "../types";
-import { batchPromises } from "../utils";
+  BatchGetResult,
+  Entity,
+  ListResponse,
+} from "../types"
+import { batchPromises } from "../utils"
+import { handleError } from "./handle-error"
 
 /**
  * Опции для Basic авторизации
@@ -15,10 +15,10 @@ import { batchPromises } from "../utils";
  */
 export type BasicAuth = {
   /** Логин */
-  login: string;
+  login: string
   /** Пароль */
-  password: string;
-};
+  password: string
+}
 
 /**
  * Опции для авторизации по токену
@@ -27,15 +27,15 @@ export type BasicAuth = {
  */
 export type TokenAuth = {
   /** Токен */
-  token: string;
-};
+  token: string
+}
 
 /**
  * Опции для авторизации
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq
  */
-export type Auth = BasicAuth | TokenAuth;
+export type Auth = BasicAuth | TokenAuth
 
 /**
  * Опции для инициализации API клиента
@@ -48,20 +48,20 @@ export type ApiClientOptions = {
    *
    * @default https://api.moysklad.ru/api/remap/1.2
    */
-  baseUrl?: string;
+  baseUrl?: string
 
   /**
    * User-Agent header
    *
    * @default `moysklad-ts/${version} (+https://github.com/MonsterDeveloper/moysklad-ts)`, где `{version}` - версия библиотеки
    */
-  userAgent?: string;
+  userAgent?: string
   /**
    * Опции авторизации
    *
    * {@linkcode Auth}
    */
-  auth: Auth;
+  auth: Auth
   /**
    * Опции для получения всех сущностей из API (метод `.all()`).
    *
@@ -69,35 +69,35 @@ export type ApiClientOptions = {
    *
    * @default { limit: 1000, expandLimit: 100, concurrencyLimit: 3 }
    */
-  batchGetOptions?: BatchGetOptions;
-};
+  batchGetOptions?: BatchGetOptions
+}
 
 type RequestOptions = Omit<RequestInit, "body"> & {
-  body?: object;
-  searchParameters?: URLSearchParams;
-};
-type RequestOptionsWithoutMethod = Omit<RequestOptions, "method">;
+  body?: object
+  searchParameters?: URLSearchParams
+}
+type RequestOptionsWithoutMethod = Omit<RequestOptions, "method">
 
 /** API клиент */
 export class ApiClient {
-  private baseUrl: string;
-  private userAgent: string;
-  private auth: Auth;
-  private batchGetOptions: Required<BatchGetOptions>;
+  private baseUrl: string
+  private userAgent: string
+  private auth: Auth
+  private batchGetOptions: Required<BatchGetOptions>
 
   constructor(options: ApiClientOptions) {
-    this.baseUrl = options.baseUrl ?? "https://api.moysklad.ru/api/remap/1.2";
+    this.baseUrl = options.baseUrl ?? "https://api.moysklad.ru/api/remap/1.2"
     this.userAgent =
       options.userAgent ??
-      `moysklad-ts/${version} (+https://github.com/MonsterDeveloper/moysklad-ts)`;
+      `moysklad-ts/${version} (+https://github.com/MonsterDeveloper/moysklad-ts)`
 
-    this.auth = options.auth;
+    this.auth = options.auth
     this.batchGetOptions = {
       limit: 1000,
       expandLimit: 100,
       concurrencyLimit: 3,
       ...options.batchGetOptions,
-    };
+    }
   }
 
   /**
@@ -115,7 +115,7 @@ export class ApiClient {
     endpoint: string,
     { searchParameters, ...options }: RequestOptions = {},
   ): Promise<Response> {
-    const url = this.buildUrl(endpoint);
+    const url = this.buildUrl(endpoint)
 
     const response = await fetch(
       url.toString() +
@@ -137,11 +137,13 @@ export class ApiClient {
           "Accept-Encoding": "gzip",
         },
       },
-    );
+    )
 
-    if (!response.ok) await handleError(response);
+    if (!response.ok) {
+      await handleError(response)
+    }
 
-    return response;
+    return response
   }
 
   /**
@@ -149,11 +151,11 @@ export class ApiClient {
    *
    * {@linkcode request}
    * */
-  async get(
+  get(
     url: string,
     options: RequestOptionsWithoutMethod = {},
   ): Promise<Response> {
-    return this.request(url, { ...options, method: "GET" });
+    return this.request(url, { ...options, method: "GET" })
   }
 
   /**
@@ -161,11 +163,11 @@ export class ApiClient {
    *
    * {@linkcode request}
    */
-  async post(
+  post(
     url: string,
     options: RequestOptionsWithoutMethod = {},
   ): Promise<Response> {
-    return this.request(url, { ...options, method: "POST" });
+    return this.request(url, { ...options, method: "POST" })
   }
 
   /**
@@ -173,11 +175,11 @@ export class ApiClient {
    *
    * {@linkcode request}
    */
-  async put(
+  put(
     url: string,
     options: RequestOptionsWithoutMethod = {},
   ): Promise<Response> {
-    return this.request(url, { ...options, method: "PUT" });
+    return this.request(url, { ...options, method: "PUT" })
   }
 
   /**
@@ -185,11 +187,11 @@ export class ApiClient {
    *
    * {@linkcode request}
    */
-  async delete(
+  delete(
     url: string,
     options: RequestOptionsWithoutMethod = {},
   ): Promise<Response> {
-    return this.request(url, { ...options, method: "DELETE" });
+    return this.request(url, { ...options, method: "DELETE" })
   }
 
   /**
@@ -200,7 +202,7 @@ export class ApiClient {
    * @returns Нормализованный URL
    */
   private normalizeUrl(url: string): string {
-    return url.replaceAll(/\/{2,}/g, "/");
+    return url.replaceAll(/\/{2,}/g, "/")
   }
 
   /**
@@ -211,11 +213,11 @@ export class ApiClient {
    * @returns Объект типа `URL`
    */
   private buildStringUrl(url: string): URL {
-    const shouldIncludeBaseUrl = !url.startsWith("http");
+    const shouldIncludeBaseUrl = !url.startsWith("http")
 
-    const returnUrl = shouldIncludeBaseUrl ? `${this.baseUrl}/${url}` : url;
+    const returnUrl = shouldIncludeBaseUrl ? `${this.baseUrl}/${url}` : url
 
-    return new URL(this.normalizeUrl(returnUrl));
+    return new URL(this.normalizeUrl(returnUrl))
   }
 
   /**
@@ -226,13 +228,13 @@ export class ApiClient {
    * @returns Объект типа `URL`
    */
   private buildArrayUrl(url: string[]): URL {
-    const shouldIncludeBaseUrl = !url[0]?.startsWith("http");
+    const shouldIncludeBaseUrl = !url[0]?.startsWith("http")
 
     const returnUrl = shouldIncludeBaseUrl
       ? `${this.baseUrl}/${url.join("/")}`
-      : url.join("/");
+      : url.join("/")
 
-    return new URL(this.normalizeUrl(returnUrl));
+    return new URL(this.normalizeUrl(returnUrl))
   }
 
   /**
@@ -255,9 +257,11 @@ export class ApiClient {
    * ```
    */
   buildUrl(url: string | string[]): URL {
-    if (typeof url === "string") return this.buildStringUrl(url);
+    if (typeof url === "string") {
+      return this.buildStringUrl(url)
+    }
 
-    return this.buildArrayUrl(url);
+    return this.buildArrayUrl(url)
   }
 
   /**
@@ -272,34 +276,34 @@ export class ApiClient {
     fetcher: (limit: number, offset: number) => Promise<ListResponse<T, E>>,
     hasExpand?: boolean,
   ): Promise<BatchGetResult<T, E>> {
-    const rows: T[] = [];
+    const rows: T[] = []
     const limit = hasExpand
       ? this.batchGetOptions.expandLimit
-      : this.batchGetOptions.limit;
+      : this.batchGetOptions.limit
 
-    const data = await fetcher(limit, 0);
-    const size = data.meta.size;
-    const context = data.context;
+    const data = await fetcher(limit, 0)
+    const size = data.meta.size
+    const context = data.context
 
-    rows.push(...data.rows);
+    rows.push(...data.rows)
 
-    const tasks: (() => Promise<unknown>)[] = [];
+    const tasks: (() => Promise<unknown>)[] = []
     for (let offset = limit; offset < size; offset += limit) {
-      tasks.push(() => fetcher(limit, offset).then(({ rows }) => rows));
+      tasks.push(() => fetcher(limit, offset).then(({ rows }) => rows))
     }
 
     const generator = batchPromises(
       tasks,
       this.batchGetOptions.concurrencyLimit,
-    );
+    )
 
     for await (const promisesValues of generator) {
-      rows.push(...(promisesValues.flat() as T[]));
+      rows.push(...(promisesValues.flat() as T[]))
     }
 
     return {
       context,
       rows,
-    };
+    }
   }
 }

@@ -1,2 +1,2 @@
-export * from "./types";
-export type { PaymentInEndpoint } from "./payment-in";
+export type { PaymentInEndpoint } from "./payment-in"
+export * from "./types"

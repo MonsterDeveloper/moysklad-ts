@@ -1,37 +1,37 @@
-import type { DateTime } from "./datetime";
-import type { Entity } from "./entity";
-import type { Meta } from "./metadata";
-import type { Idable } from "./mixins";
-import type { Model } from "./model";
+import type { DateTime } from "./datetime"
+import type { Entity } from "./entity"
+import type { Meta } from "./metadata"
+import type { Idable } from "./mixins"
+import type { Model } from "./model"
 
 /** Счёт юрлциа / контрагента */
 export interface Account extends Idable, Meta<Entity.Account> {
   /** ID учетной записи */
-  readonly accountId: string;
+  readonly accountId: string
 
   /** Номер счета */
-  accountNumber: string;
+  accountNumber: string
 
   /** Адрес банка */
-  bankLocation?: string;
+  bankLocation?: string
 
   /** Наименование банка */
-  bankName?: string;
+  bankName?: string
 
   /** БИК */
-  bic?: string;
+  bic?: string
 
   /** Корреспондентский счет */
-  correspondentAccount?: string;
+  correspondentAccount?: string
 
   /** Является ли счет основным */
-  isDefault: boolean;
+  isDefault: boolean
 
   /** Момент последнего обновления */
-  readonly updated: DateTime;
+  readonly updated: DateTime
 }
 
 export interface AccountModel extends Model {
-  object: Account;
-  requiredCreateFields: "accountNumber";
+  object: Account
+  requiredCreateFields: "accountNumber"
 }

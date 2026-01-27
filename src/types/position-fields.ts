@@ -1,4 +1,4 @@
-export type PositionFields = "stock"[];
+export type PositionFields = "stock"[]
 
 /**
  * Остатки и себестоимость в позициях документов
@@ -13,13 +13,13 @@ export type PositionFields = "stock"[];
  */
 export interface PositionStockData {
   /** Сумма себестоимости. Для возврата покупателя без основания и розничного возврата без основания будет отсутствовать. */
-  cost?: number;
+  cost?: number
   /** Количество */
-  quantity: number;
+  quantity: number
   /** Зарезервировано */
-  reserve: number;
+  reserve: number
   /** В транзите */
-  intransit: number;
+  intransit: number
   /** Доступно */
-  available: number;
+  available: number
 }

@@ -1,47 +1,47 @@
-import type { DateTime, Entity, EqualsFilter, Meta } from "../../types";
+import type { DateTime, Entity, EqualsFilter, Meta } from "../../types"
 
 export interface GetCashFlowOptions {
   filter?: {
     /** ссылка на юр. лицо */
-    organization?: EqualsFilter<string>;
+    organization?: EqualsFilter<string>
 
     /** ссылка на проект */
-    project?: EqualsFilter<string>;
-  };
+    project?: EqualsFilter<string>
+  }
 
   /** Начало периода отчета */
-  momentFrom: DateTime;
+  momentFrom: DateTime
 
   /** Конец периода отчета */
-  momentTo: DateTime;
+  momentTo: DateTime
 
   /** Интервал, с которым будет построен отчет.
    *
    * Может принимать значения `hour`, `day`, `month` для разбиения указанного периода по часам, дням и месяцам соответственно */
-  interval: "hour" | "day" | "month";
+  interval: "hour" | "day" | "month"
 }
 
 export interface GetCashFlowResponse extends Meta<Entity.MoneyPlotSeries> {
   /** Доход */
-  credit: number;
+  credit: number
 
   /** Расход */
-  debit: number;
+  debit: number
 
   /** Массив показателей */
   series: {
     /** Дата */
-    date: DateTime;
+    date: DateTime
 
     /** Доход за период */
-    credit: number;
+    credit: number
 
     /** Расход за период */
-    debit: number;
+    debit: number
 
     /** Баланс (доход - расход) */
-    balance: number;
-  }[];
+    balance: number
+  }[]
 }
 
 /**
@@ -54,8 +54,8 @@ export interface GetCashBalanceResponse extends Meta<Entity.MoneyReport> {
     /** Юрлицо */
     organization: Meta<Entity.Organization> & {
       /** Наименование */
-      name: string;
-    };
+      name: string
+    }
 
     /**
      * Счёт организации
@@ -64,12 +64,12 @@ export interface GetCashBalanceResponse extends Meta<Entity.MoneyReport> {
      */
     account?: Meta<Entity.Account> & {
       /** Номер счёта */
-      name: string;
-    };
+      name: string
+    }
 
     /** Текущий остаток */
-    balance: number;
-  }[];
+    balance: number
+  }[]
 }
 
 export interface ReportMoneyEndpoint {
@@ -81,7 +81,7 @@ export interface ReportMoneyEndpoint {
    * @param options Параметры запроса {@linkcode GetCashFlowOptions}
    * @returns Отчёт о движении денежных средств {@linkcode GetCashFlowResponse}
    */
-  plotSeries: (options: GetCashFlowOptions) => Promise<GetCashFlowResponse>;
+  plotSeries: (options: GetCashFlowOptions) => Promise<GetCashFlowResponse>
 
   /**
    * Получить отчёт Остатки денежных средств.
@@ -90,5 +90,5 @@ export interface ReportMoneyEndpoint {
    *
    * @returns Отчёт о движении денежных средств {@linkcode GetCashBalanceResponse}
    */
-  byAccount: () => Promise<GetCashBalanceResponse>;
+  byAccount: () => Promise<GetCashBalanceResponse>
 }
