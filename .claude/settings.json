@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun check:*)",
+      "Bash(bun typecheck:*)",
+      "Bash(bun run test:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read file_path; if echo \"$file_path\" | grep -q '\\.(tsx?|json)$'; then bun biome check --write \"$file_path\"; fi; }"
+          }
+        ]
+      }
+    ]
+  }
+}
