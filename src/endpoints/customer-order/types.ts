@@ -16,7 +16,6 @@ import {
   type ListMetadata,
   type MediaType,
   type Meta,
-  type Metadata,
   type Model,
   type NumberFilter,
   type OrderOptions,
