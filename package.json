@@ -33,7 +33,7 @@
     "check": "biome check --write",
     "test:ui": "vitest --ui --coverage.enabled=true",
     "typecheck": "tsc && vitest --typecheck.only --run",
-    "update": "bunx npm-check-updates -ui --reject '*eslint*' --reject bun",
+    "update": "bunx npm-check-updates -ui --reject --reject bun",
     "prepare": "husky",
     "bump-version": "bun scripts/bump-version.ts",
     "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",

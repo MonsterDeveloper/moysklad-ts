@@ -42,7 +42,6 @@ export function expectFetch({
 
   const callUrl = new URL(fetchMock.mock.calls[0]?.[0] as string)
   const callBody = fetchMock.mock.calls[0]?.[1]?.body
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const callBodyJson = callBody ? JSON.parse(callBody as string) : undefined
 
   expect(callUrl.pathname).toBe(expectedUrl.pathname)

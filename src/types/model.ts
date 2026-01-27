@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ReadonlyKeysOf } from "type-fest"
 import type { Attribute } from "./attribute"
 import type { Entity } from "./entity"
