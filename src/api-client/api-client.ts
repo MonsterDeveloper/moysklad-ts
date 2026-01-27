@@ -130,7 +130,7 @@ export class ApiClient {
           Authorization:
             "token" in this.auth
               ? `Bearer ${this.auth.token}`
-              : "Basic " + btoa(`${this.auth.login}:${this.auth.password}`),
+              : `Basic ${btoa(`${this.auth.login}:${this.auth.password}`)}`,
           "User-Agent": this.userAgent,
           "Content-Type": "application/json",
           Accept: "application/json;charset=utf-8",

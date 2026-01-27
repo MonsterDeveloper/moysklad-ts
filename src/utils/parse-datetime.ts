@@ -22,7 +22,7 @@ export function parseDateTime(dateTime: DateTime): Date {
   }
 
   const dateTimeExpression = `${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}${
-    m[7] && Number.parseInt(m[7]) !== 0 ? "." + rightPad2(m[7]) : ""
+    m[7] && Number.parseInt(m[7], 10) !== 0 ? `.${rightPad2(m[7])}` : ""
   }+03:00`
 
   return new Date(dateTimeExpression)

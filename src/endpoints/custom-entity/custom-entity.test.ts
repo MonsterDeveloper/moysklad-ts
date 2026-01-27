@@ -11,7 +11,7 @@ describe("custom-entity", () => {
 
       expectFetch({
         fetchMock,
-        url: "/entity/customentity/" + customEntityId,
+        url: `/entity/customentity/${customEntityId}`,
         method: "GET",
       })
     })
