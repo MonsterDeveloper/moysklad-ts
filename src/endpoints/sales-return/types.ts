@@ -18,6 +18,8 @@ import type {
   OrderOptions,
   PaginationOptions,
   PositionFields,
+  ProjectModel,
+  StoreModel,
   StringFilter,
   UpdateMeta,
 } from "../../types"
@@ -170,7 +172,7 @@ export interface SalesReturn extends Idable, Meta<Entity.SalesReturn> {
   readonly printed: boolean
 
   /** Метаданные проекта */
-  project?: Meta<Entity.Project> // TODO expand project
+  project?: Meta<Entity.Project>
 
   /** Опубликован ли документ */
   readonly published: boolean
@@ -188,7 +190,7 @@ export interface SalesReturn extends Idable, Meta<Entity.SalesReturn> {
   state?: Meta<Entity.State> // TODO expand state
 
   /** Метаданные склада */
-  store: Meta<Entity.Store> // TODO expand store
+  store: Meta<Entity.Store>
 
   /** Сумма Возврата Покупателя в копейках */
   readonly sum: number
@@ -237,6 +239,8 @@ export interface SalesReturnModel extends Model {
     positions: SalesReturnPositionModel
     agentAccount: AccountModel
     organizationAccount: AccountModel
+    store: StoreModel
+    project: ProjectModel
   }
   filters: {
     id: IdFilter

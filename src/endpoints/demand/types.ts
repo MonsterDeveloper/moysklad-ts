@@ -19,6 +19,8 @@ import type {
   OrderOptions,
   PaginationOptions,
   PositionFields,
+  ProjectModel,
+  StoreModel,
   StringFilter,
   UpdateMeta,
 } from "../../types"
@@ -110,7 +112,7 @@ export interface Demand extends Idable, Meta<Entity.Demand> {
   readonly payedSum: number
   positions: ListMeta<Entity.DemandPosition> // TODO add positions types & expand
   readonly printed: boolean
-  project?: Meta<Entity.Project> // TODO expand project
+  project?: Meta<Entity.Project>
   readonly published: boolean
   rate: DocumentRate // TODO expand rate's currency
   salesChannel?: Meta<Entity.SalesChannel> // TODO expand salesChannel
@@ -128,7 +130,7 @@ export interface Demand extends Idable, Meta<Entity.Demand> {
     street?: string
   }
   state?: Meta<Entity.State> // TODO expand state
-  store: Meta<Entity.Store> // TODO expand store
+  store: Meta<Entity.Store>
   readonly sum: number
   syncId?: string
   readonly updated: DateTime
@@ -162,6 +164,8 @@ export interface DemandModel extends Model {
     positions: DemandPositionModel
     agentAccount: AccountModel
     organizationAccount: AccountModel
+    store: StoreModel
+    project: ProjectModel
   }
   filters: {
     assortment: IdFilter

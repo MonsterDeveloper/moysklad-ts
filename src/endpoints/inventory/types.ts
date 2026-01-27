@@ -16,6 +16,7 @@ import type {
   NumberFilter,
   OrderOptions,
   PaginationOptions,
+  StoreModel,
   StringFilter,
 } from "../../types"
 import type { EmployeeModel } from "../employee"
@@ -117,7 +118,7 @@ export interface Inventory extends Idable, Meta<Entity.Inventory> {
   state?: Meta<Entity.State>
 
   /** Метаданные склада */
-  store: Meta<Entity.Store> // TODO: add store expand
+  store: Meta<Entity.Store>
 
   /** Сумма Инвентаризации в копейках */
   readonly sum: number
@@ -143,6 +144,7 @@ export interface InventoryModel extends Model {
     owner: EmployeeModel
     enters: EnterModel
     positions: InventoryPositionModel
+    store: StoreModel
   }
   filters: {
     id: IdFilter

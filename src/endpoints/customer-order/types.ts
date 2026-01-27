@@ -20,7 +20,9 @@ import type {
   NumberFilter,
   OrderOptions,
   PaginationOptions,
+  ProjectModel,
   State,
+  StoreModel,
   StringFilter,
   TaxSystem,
 } from "../../types"
@@ -115,7 +117,7 @@ export interface CustomerOrder extends Idable, Meta<Entity.CustomerOrder> {
   readonly payedSum: number
   positions: ListMeta<Entity.CustomerOrderPosition>
   readonly printed: boolean
-  project?: Meta<Entity.Project> // TODO expand project
+  project?: Meta<Entity.Project>
   readonly published: boolean
   rate: DocumentRate // TODO expand rate's currency
   readonly reservedSum: number
@@ -136,7 +138,7 @@ export interface CustomerOrder extends Idable, Meta<Entity.CustomerOrder> {
 
   readonly shippedSum: number
   state?: Meta<Entity.State> // TODO expand state
-  store?: Meta<Entity.Store> // TODO expand store
+  store?: Meta<Entity.Store>
   readonly sum: number
   syncId?: string
   taxSystem?: TaxSystem
@@ -164,6 +166,8 @@ export interface CustomerOrderModel extends Model {
     organizationAccount: AccountModel
     agentAccount: AccountModel
     positions: CustomerOrderPositionModel
+    store: StoreModel
+    project: ProjectModel
   }
   filters: {
     id: IdFilter

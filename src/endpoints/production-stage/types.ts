@@ -10,6 +10,7 @@ import type {
   NumberFilter,
   OrderOptions,
   PaginationOptions,
+  StoreModel,
 } from "../../types"
 import type { ProcessingStageModel } from "../processing-stage"
 import type { ProductionRowModel } from "../production-task"
@@ -39,7 +40,7 @@ export interface ProductionStage extends Idable, Meta<Entity.ProductionStage> {
   }[]
 
   /** Метаданные склада материалов */
-  readonly materialStore?: Meta<Entity.Store> // TODO store expand
+  readonly materialStore?: Meta<Entity.Store>
 
   /** Индекс Производственного этапа в Позиции производственного задания */
   readonly orderingPosition: number
@@ -79,6 +80,7 @@ export interface ProductionStageModel extends Model {
   expandable: {
     stage: ProcessingStageModel
     productionRow: ProductionRowModel
+    materialStore: StoreModel
   }
 
   orderableFields:

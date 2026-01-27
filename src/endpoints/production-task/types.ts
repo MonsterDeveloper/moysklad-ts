@@ -15,6 +15,7 @@ import type {
   Model,
   OrderOptions,
   PaginationOptions,
+  StoreModel,
   StringFilter,
 } from "../../types"
 import type { EmployeeModel } from "../employee"
@@ -133,7 +134,7 @@ export interface ProductionTask extends Idable, Meta<Entity.ProductionTask> {
   group: Meta<Entity.Group>
 
   /** Метаданные склада материалов */
-  materialsStore?: Meta<Entity.Store> // TODO add materialsStore expand
+  materialsStore?: Meta<Entity.Store>
 
   /** Дата документа */
   moment: DateTime
@@ -167,7 +168,7 @@ export interface ProductionTask extends Idable, Meta<Entity.ProductionTask> {
   products: ListMeta<Entity.ProductionTaskResult>
 
   /** Метаданные склада продукции */
-  productsStore?: Meta<Entity.Store> // TODO add productsStore expand
+  productsStore?: Meta<Entity.Store>
 
   /** Опубликован ли документ */
   readonly published: boolean
@@ -202,6 +203,8 @@ export interface ProductionTaskModel extends Model {
     owner: EmployeeModel
     productionRows: ProductionRowModel
     products: ProductionTaskResultModel
+    materialsStore: StoreModel
+    productsStore: StoreModel
   }
 
   requiredCreateFields: "organization"
