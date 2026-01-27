@@ -25,16 +25,12 @@ describe("filters", () => {
       assertType(
         equalityFilter({
           name: {
+            // @ts-expect-error wrong types
             eq: "test",
-            // @ts-expect-error wrong types
             ne: "test",
-            // @ts-expect-error wrong types
             gt: "test",
-            // @ts-expect-error wrong types
             gte: "test",
-            // @ts-expect-error wrong types
             lt: "test",
-            // @ts-expect-error wrong types
             lte: "test",
           },
         }),
