@@ -10,4 +10,9 @@ export type { Moysklad } from "./moysklad"
 export { createMoysklad } from "./proxy"
 export * from "./types"
 
-export { composeDateTime, isAssortmentOfType, parseDateTime } from "./utils"
+export {
+  composeDateTime,
+  extractIdFromMetaHref,
+  isAssortmentOfType,
+  parseDateTime,
+} from "./utils"
