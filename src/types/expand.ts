@@ -6,7 +6,6 @@ import type {
 } from "type-fest"
 import type { Model } from "./model"
 
-// prettier-ignore
 /**
  * Given a model `M`, get an option for `expand` query parameter.
  */
@@ -21,7 +20,6 @@ export type ExpandOptions<M extends Model> =
       }
     : never
 
-// prettier-ignore
 /**
  * Given a model `M` and some type `T`, make fields in `T` optional based on their optionality in model's object.
  */

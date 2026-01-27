@@ -17,7 +17,6 @@ export type IncludeFields<
     : Result
   : Result
 
-// prettier-ignore
 export type GetFindResult<
   M extends Model,
   E,

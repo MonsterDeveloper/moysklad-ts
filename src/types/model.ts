@@ -16,7 +16,6 @@ export interface Model<T extends object = object> {
   requiredCreateFields?: string
 }
 
-// prettier-ignore
 /**
  * Extract the updatable fields from a model's object and replace the Meta with UpdateMeta.
  */
@@ -58,7 +57,6 @@ export type GetModelUpdatableFields<M extends Model> = {
             : M["object"][Key]
 }
 
-// prettier-ignore
 /**
  * Given model M, get the required fields for creating a new object.
  */
@@ -74,7 +72,6 @@ export type GetModelRequiredCreateFields<M extends Model> = {
     : NonNullable<M["object"][Key]>
 }
 
-// prettier-ignore
 /**
  * Given model M, get the fields for creating a new object.
  */
@@ -83,7 +80,6 @@ export type GetModelCreatableFields<
   R = GetModelRequiredCreateFields<M>,
 > = R & Omit<GetModelUpdatableFields<M>, keyof R> // required create fields + updatable fields excluding the required ones
 
-// prettier-ignore
 /**
  * Data for creating or batch updating a model.
  */
