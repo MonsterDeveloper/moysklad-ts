@@ -23,11 +23,9 @@ export type ExpandOptions<M extends Model> =
 /**
  * Given a model `M` and some type `T`, make fields in `T` optional based on their optionality in model's object.
  */
-export type RestoreExpandableFieldsOptionality<
-  M extends Model,
-  T,
-> = IsEmptyObject<T> extends true
-  ? T
-  : HasOptionalKeys<M["object"]> extends true
-    ? SetOptional<T, Extract<OptionalKeysOf<M["object"]>, keyof T>>
-    : T
+export type RestoreExpandableFieldsOptionality<M extends Model, T> =
+  IsEmptyObject<T> extends true
+    ? T
+    : HasOptionalKeys<M["object"]> extends true
+      ? SetOptional<T, Extract<OptionalKeysOf<M["object"]>, keyof T>>
+      : T
