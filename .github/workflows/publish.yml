@@ -48,8 +48,6 @@ jobs:
         uses: softprops/action-gh-release@v1
 
       - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish-to-jsr:
     runs-on: ubuntu-latest
