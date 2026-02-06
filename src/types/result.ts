@@ -21,8 +21,8 @@ export type GetFindResult<
   M extends Model,
   E,
   F extends PositionFields | undefined = undefined,
-  // biome-ignore lint/suspicious/noExplicitAny: we need to check for any
 > =
+  // biome-ignore lint/suspicious/noExplicitAny: we need to check for any
   IsEqual<E, any> extends true // ❔ Is expand not defined ..
     ? // 🚫 return default.
       IncludeFields<M["object"], M, F>
