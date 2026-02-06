@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url"
-import dts from "vite-plugin-dts"
+import dts from "unplugin-dts/vite"
 import tsconfigPaths from "vite-tsconfig-paths"
 import { defineConfig } from "vitest/config"
 
@@ -20,14 +20,13 @@ export default defineConfig({
     dts({
       entryRoot: "src",
       exclude: ["**/*.test.ts", "**/*.test-d.ts", "vite.config.ts", "scripts"],
-      rollupTypes: true,
+      bundleTypes: true,
     }),
   ],
   test: {
     setupFiles: ["./vitest-setup.ts"],
     coverage: {
       reporter: ["json", "json-summary", "html"],
-      all: true,
       exclude: [
         // type tests
         "**/*.test-d.ts",
