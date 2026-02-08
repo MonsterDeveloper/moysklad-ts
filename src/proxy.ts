@@ -246,6 +246,30 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
           .then((response) => response.json())
       }
 
+      if (method === "listAccounts") {
+        const id = callbackOptions.args[0] as string
+        const options = callbackOptions.args[1] as
+          | ComposeSearchParametersOptions
+          | undefined
+
+        return client
+          .get(`${path}/${id}/accounts`, {
+            searchParameters: composeSearchParameters(options ?? {}),
+          })
+          .then((response) => response.json())
+      }
+
+      if (method === "updateAccounts") {
+        const id = callbackOptions.args[0] as string
+        const data = callbackOptions.args[1] as object
+
+        return client
+          .post(`${path}/${id}/accounts`, {
+            body: data,
+          })
+          .then((response) => response.json())
+      }
+
       if (method === "audit") {
         const id = callbackOptions.args[0] as string
         const options = callbackOptions.args[1] as

@@ -10,6 +10,7 @@ import type {
   FactureOutEndpoint,
   InventoryEndpoint,
   InvoiceOutEndpoint,
+  OrganizationEndpoint,
   PaymentInEndpoint,
   PaymentOutEndpoint,
   ProcessingPlanEndpoint,
@@ -57,6 +58,13 @@ export interface Moysklad {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent
    */
   counterparty: CounterpartyEndpoint
+
+  /**
+   * Юрлица
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-jurlico
+   */
+  organization: OrganizationEndpoint
 
   /**
    * Пользовательские справочники
