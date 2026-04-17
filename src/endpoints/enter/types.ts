@@ -1,5 +1,6 @@
 import type {
   AssortmentEntity,
+  Attribute,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -115,7 +116,7 @@ export interface Enter extends Idable, Meta<Entity.Enter> {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-rabota-s-dopolnitel-nymi-polqmi
    */
-  attributes?: unknown[] // TODO add attributes
+  attributes?: Attribute[]
   /** Отметка о проведении */
   applicable: boolean
   /** Код оприходования */

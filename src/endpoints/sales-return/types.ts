@@ -1,6 +1,7 @@
 import type {
   AccountModel,
   AssortmentEntity,
+  Attribute,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -119,7 +120,7 @@ export interface SalesReturn extends Idable, Meta<Entity.SalesReturn> {
   applicable: boolean
 
   /** Коллекция метаданных доп. полей */
-  attributes?: unknown[] // TODO add attributes types & filters
+  attributes?: Attribute[]
 
   /** Код Возврата Покупателя */
   code?: string

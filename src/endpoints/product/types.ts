@@ -88,7 +88,8 @@ export interface Product extends Idable, Meta<Entity.Product> {
   }
   archived: boolean
   article?: string
-  attributes?: Attribute[] // TODO add attributes filters
+  /** Дополнительные поля */
+  attributes?: Attribute[]
   barcodes?: Barcodes
   buyPrice?: {
     value: number

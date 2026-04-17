@@ -1,11 +1,18 @@
-import type { DateTime, Entity, Idable, Meta, Model } from "../../types"
+import type {
+  Attribute,
+  DateTime,
+  Entity,
+  Idable,
+  Meta,
+  Model,
+} from "../../types"
 import type { GroupModel } from "../group"
 
 export interface Employee extends Idable, Meta<Entity.Employee> {
   readonly accountId: string
   archived: boolean
-  // TODO add attributes
-  attributes?: unknown
+  /** Дополнительные поля */
+  attributes?: Attribute[]
   // TODO expand cashiers
   readonly cashiers?: unknown
   code?: string

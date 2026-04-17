@@ -1,4 +1,5 @@
 import type {
+  Attribute,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -39,7 +40,7 @@ export interface FactureOut extends Idable, Meta<Entity.FactureOut> {
   applicable: boolean
 
   /** Коллекция метаданных доп. полей */
-  attributes?: unknown[] // TODO add attributes types & filters
+  attributes?: Attribute[]
 
   /** Код выданного Счета-фактуры */
   code?: string

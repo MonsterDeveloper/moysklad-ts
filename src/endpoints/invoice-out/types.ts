@@ -1,6 +1,7 @@
 import type {
   AccountModel,
   AssortmentEntity,
+  Attribute,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -86,7 +87,7 @@ export interface InvoiceOut extends Idable, Meta<Entity.InvoiceOut> {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-rabota-s-dopolnitel-nymi-polqmi
    */
-  attributes?: unknown[] // TODO add attributes
+  attributes?: Attribute[]
   /** Код Счета покупателю */
   code?: string
   /** Метаданные договора */

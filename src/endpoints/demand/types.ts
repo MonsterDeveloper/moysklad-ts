@@ -3,6 +3,7 @@ import type {
   AccountModel,
   AssortmentEntity,
   AssortmentModel,
+  Attribute,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -95,7 +96,8 @@ export interface Demand extends Idable, Meta<Entity.Demand> {
   agent: Meta<Entity.Counterparty>
   agentAccount?: Meta<Entity.Account>
   applicable: boolean
-  attributes: unknown // TODO add attributes types & filters
+  /** Дополнительные поля */
+  attributes?: Attribute[]
   code?: string
   contract?: Meta<Entity.Contract> // TODO expand contract
   readonly created: DateTime

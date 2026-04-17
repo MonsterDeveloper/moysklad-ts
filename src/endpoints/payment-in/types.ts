@@ -1,5 +1,6 @@
 import type {
   AccountModel,
+  Attribute,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -42,7 +43,7 @@ export interface PaymentIn extends Idable, Meta<Entity.PaymentIn> {
   applicable: boolean
 
   /** Коллекция метаданных доп. полей */
-  attributes?: unknown // TODO add attributes
+  attributes?: Attribute[]
 
   /** Код Входящего платежа */
   code?: string

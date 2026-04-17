@@ -2,6 +2,7 @@ import type {
   AccountModel,
   AssortmentEntity,
   AssortmentModel,
+  Attribute,
   BooleanFilter,
   DateTime,
   DateTimeFilter,
@@ -79,7 +80,7 @@ export interface PurchaseOrder extends Idable, Meta<Entity.PurchaseOrder> {
   /** Отметка о проведении */
   applicable: boolean
   /** Коллекция метаданных доп. полей */
-  attributes?: unknown[] // TODO add attributes type
+  attributes?: Attribute[]
   /** Код Заказа поставщику */
   code?: string
   /** Метаданные договора */

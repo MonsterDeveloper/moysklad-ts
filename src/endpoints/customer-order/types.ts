@@ -99,7 +99,8 @@ export interface CustomerOrder extends Idable, Meta<Entity.CustomerOrder> {
   agent: Meta<Entity.Counterparty>
   agentAccount?: Meta<Entity.Account>
   applicable: boolean
-  attributes?: Attribute[] // TODO add attributes filters
+  /** Дополнительные поля */
+  attributes?: Attribute[]
   code?: string
   contract?: Meta<Entity.Contract> // TODO expand contract
   readonly created: DateTime
