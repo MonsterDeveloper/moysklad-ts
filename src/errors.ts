@@ -4,6 +4,7 @@ export class MoyskladError extends Error {
   constructor(message: string, response: Response) {
     super(message)
     this.response = response
+    this.name = this.constructor.name
   }
 }
 

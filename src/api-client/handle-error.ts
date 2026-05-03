@@ -76,15 +76,16 @@ export async function handleError(response: Response): Promise<never> {
   if (!response.headers.has("Content-Type")) {
     throw new MoyskladError("Response has no Content-Type header", response)
   }
+  const contentType = response.headers.get("Content-Type")
 
-  if (!response.headers.get("Content-Type")?.includes("application/json")) {
+  const text = await response.clone().text()
+
+  if (!contentType?.includes("application/json")) {
     throw new MoyskladError(
-      "Response Content-Type is not application/json",
+      `Response Content-Type is not application/json, got ${contentType}. Body: ${text}`,
       response,
     )
   }
-
-  const text = await response.clone().text()
 
   if (!text || text.length === 0) {
     throw new MoyskladError("Response body is empty", response)

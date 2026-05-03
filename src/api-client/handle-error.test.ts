@@ -11,13 +11,13 @@ describe("handleError", () => {
   })
 
   it("throws a MoyskladError if the response Content-Type is not application/json", async () => {
-    const response = new Response(undefined, {
+    const response = new Response("Some response body text", {
       status: 400,
       headers: { "Content-Type": "text/plain" },
     })
     await expect(handleError(response)).rejects.toThrow(
       new MoyskladError(
-        "Response Content-Type is not application/json",
+        "Response Content-Type is not application/json, got text/plain. Body: Some response body text",
         response,
       ),
     )
