@@ -11,7 +11,7 @@ describe("product", () => {
 
       await moysklad.product.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -28,7 +28,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -49,7 +49,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -69,7 +69,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -87,7 +87,7 @@ describe("product", () => {
         order: { field: "name", direction: "asc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -104,7 +104,7 @@ describe("product", () => {
         search: "test product",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -121,7 +121,7 @@ describe("product", () => {
 
       await moysklad.product.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -143,7 +143,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -161,7 +161,7 @@ describe("product", () => {
 
       await moysklad.product.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -181,7 +181,7 @@ describe("product", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -201,7 +201,7 @@ describe("product", () => {
 
       await moysklad.product.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/product/${id}`,
         method: "GET",
@@ -220,7 +220,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/product/${id}`,
         method: "GET",
@@ -238,7 +238,7 @@ describe("product", () => {
 
       await moysklad.product.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -257,7 +257,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "GET",
@@ -276,7 +276,7 @@ describe("product", () => {
 
       await moysklad.product.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/product/${id}`,
         method: "DELETE",
@@ -295,7 +295,7 @@ describe("product", () => {
 
       await moysklad.product.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/product/${id}`,
         method: "PUT",
@@ -317,7 +317,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/product/${id}`,
         method: "PUT",
@@ -359,7 +359,7 @@ describe("product", () => {
 
       await moysklad.product.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "POST",
@@ -384,7 +384,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product",
         method: "POST",
@@ -407,7 +407,7 @@ describe("product", () => {
 
       await moysklad.product.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/product/delete",
         method: "POST",
@@ -429,7 +429,7 @@ describe("product", () => {
 
       await moysklad.product.trash(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/product/${id}/trash`,
         method: "POST",
@@ -444,7 +444,7 @@ describe("product", () => {
 
       await moysklad.product.audit(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/product/${id}/audit`,
         method: "GET",
@@ -461,7 +461,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/product/${id}/audit`,
         method: "GET",
@@ -482,7 +482,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/product/${id}/audit`,
         method: "GET",
@@ -503,7 +503,7 @@ describe("product", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/product/${id}/audit`,
         method: "GET",

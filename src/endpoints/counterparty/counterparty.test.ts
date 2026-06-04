@@ -9,7 +9,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "GET",
@@ -30,7 +30,7 @@ describe("counterparty", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "GET",
@@ -55,7 +55,7 @@ describe("counterparty", () => {
         ],
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "GET",
@@ -72,7 +72,7 @@ describe("counterparty", () => {
         order: "name",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "GET",
@@ -89,12 +89,9 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.all()
 
-      // Check that the URL contains the expected path and parameters
-      const firstCallUrl = fetchMock.mock.calls[0]?.[0] as string
-      expect(firstCallUrl).toContain("/entity/counterparty?limit=")
-      expect(fetchMock.mock.calls[0]?.[1]).toMatchObject({
-        method: "GET",
-      })
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.url).toContain("/entity/counterparty?limit=")
+      expect(request.method).toBe("GET")
     })
 
     it("makes a request with options", async () => {
@@ -109,14 +106,11 @@ describe("counterparty", () => {
         },
       })
 
-      // Check that the URL contains the expected path
-      const firstCallUrl = fetchMock.mock.calls[0]?.[0] as string
-      expect(firstCallUrl).toContain("/entity/counterparty?")
-      expect(fetchMock.mock.calls[0]?.[1]).toMatchObject({
-        method: "GET",
-      })
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.url).toContain("/entity/counterparty?")
+      expect(request.method).toBe("GET")
 
-      const callUrl = new URL(firstCallUrl)
+      const callUrl = new URL(request.url)
       expect(callUrl.searchParams.get("expand")).toBe("owner")
       expect(callUrl.searchParams.get("order")).toBe("name,asc")
       expect(callUrl.searchParams.get("search")).toBe("ООО Ромашка")
@@ -131,7 +125,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "GET",
@@ -146,7 +140,7 @@ describe("counterparty", () => {
         expand: { owner: true, group: true },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "GET",
@@ -168,7 +162,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "PUT",
@@ -188,7 +182,7 @@ describe("counterparty", () => {
         expand: { owner: true },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "PUT",
@@ -213,7 +207,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "PUT",
@@ -236,7 +230,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "PUT",
@@ -258,7 +252,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/counterparty/${id}`,
         method: "PUT",
@@ -273,7 +267,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "GET",
@@ -295,7 +289,7 @@ describe("counterparty", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "GET",
@@ -316,7 +310,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "GET",
@@ -335,7 +329,7 @@ describe("counterparty", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "GET",
@@ -359,7 +353,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
@@ -379,7 +373,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
@@ -398,7 +392,7 @@ describe("counterparty", () => {
         expand: { owner: true },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
@@ -424,7 +418,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
@@ -456,7 +450,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
@@ -484,7 +478,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",
@@ -510,7 +504,7 @@ describe("counterparty", () => {
 
       await moysklad.counterparty.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/counterparty",
         method: "POST",

@@ -8,7 +8,7 @@ describe("region", () => {
 
       await moysklad.region.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -25,7 +25,7 @@ describe("region", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -46,7 +46,7 @@ describe("region", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -63,7 +63,7 @@ describe("region", () => {
         order: { field: "code", direction: "asc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -80,7 +80,7 @@ describe("region", () => {
         search: "область",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -97,7 +97,7 @@ describe("region", () => {
 
       await moysklad.region.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -116,7 +116,7 @@ describe("region", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -133,7 +133,7 @@ describe("region", () => {
 
       await moysklad.region.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -152,7 +152,7 @@ describe("region", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -170,7 +170,7 @@ describe("region", () => {
         order: { field: "code", direction: "asc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -189,7 +189,7 @@ describe("region", () => {
 
       await moysklad.region.get(regionId)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/region/${regionId}`,
         method: "GET",
@@ -202,7 +202,7 @@ describe("region", () => {
 
       await moysklad.region.get(regionId, {})
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/region/${regionId}`,
         method: "GET",
@@ -216,7 +216,7 @@ describe("region", () => {
 
       await moysklad.region.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",
@@ -235,7 +235,7 @@ describe("region", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/region",
         method: "GET",

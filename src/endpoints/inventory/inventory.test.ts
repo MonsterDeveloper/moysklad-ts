@@ -10,7 +10,7 @@ describe("inventory", () => {
 
       await moysklad.inventory.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -27,7 +27,7 @@ describe("inventory", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -48,7 +48,7 @@ describe("inventory", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -69,7 +69,7 @@ describe("inventory", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -87,7 +87,7 @@ describe("inventory", () => {
         order: { field: "moment", direction: "desc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -104,7 +104,7 @@ describe("inventory", () => {
         search: "test inventory",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -121,7 +121,7 @@ describe("inventory", () => {
 
       await moysklad.inventory.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -143,7 +143,7 @@ describe("inventory", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -161,7 +161,7 @@ describe("inventory", () => {
 
       await moysklad.inventory.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -181,7 +181,7 @@ describe("inventory", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -201,7 +201,7 @@ describe("inventory", () => {
 
       await moysklad.inventory.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/inventory/${id}`,
         method: "GET",
@@ -220,7 +220,7 @@ describe("inventory", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/inventory/${id}`,
         method: "GET",
@@ -243,7 +243,7 @@ describe("inventory", () => {
 
       await moysklad.inventory.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/inventory/${id}`,
         method: "PUT",
@@ -265,7 +265,7 @@ describe("inventory", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/inventory/${id}`,
         method: "PUT",
@@ -312,7 +312,7 @@ describe("inventory", () => {
 
       await moysklad.inventory.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "POST",
@@ -359,7 +359,7 @@ describe("inventory", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "POST",
@@ -425,7 +425,7 @@ describe("inventory", () => {
 
       await moysklad.inventory.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "POST",
@@ -475,7 +475,7 @@ describe("inventory", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "POST",
@@ -498,7 +498,7 @@ describe("inventory", () => {
 
       await moysklad.inventory.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory/delete",
         method: "POST",
@@ -519,7 +519,7 @@ describe("inventory", () => {
 
       await moysklad.inventory.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",
@@ -538,7 +538,7 @@ describe("inventory", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/inventory",
         method: "GET",

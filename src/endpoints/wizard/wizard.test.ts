@@ -38,7 +38,7 @@ describe("wizard", () => {
         ...requestData,
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/wizard/salesreturn",
         method: "POST",

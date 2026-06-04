@@ -10,7 +10,7 @@ describe("productionTask", () => {
 
       await moysklad.productionTask.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -27,7 +27,7 @@ describe("productionTask", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -48,7 +48,7 @@ describe("productionTask", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -68,7 +68,7 @@ describe("productionTask", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -86,7 +86,7 @@ describe("productionTask", () => {
         search: "test production task",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -103,7 +103,7 @@ describe("productionTask", () => {
 
       await moysklad.productionTask.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -125,7 +125,7 @@ describe("productionTask", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -143,7 +143,7 @@ describe("productionTask", () => {
 
       await moysklad.productionTask.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -163,7 +163,7 @@ describe("productionTask", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -183,7 +183,7 @@ describe("productionTask", () => {
 
       await moysklad.productionTask.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productiontask/${id}`,
         method: "GET",
@@ -202,7 +202,7 @@ describe("productionTask", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productiontask/${id}`,
         method: "GET",
@@ -220,7 +220,7 @@ describe("productionTask", () => {
 
       await moysklad.productionTask.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -239,7 +239,7 @@ describe("productionTask", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "GET",
@@ -258,7 +258,7 @@ describe("productionTask", () => {
 
       await moysklad.productionTask.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productiontask/${id}`,
         method: "DELETE",
@@ -277,7 +277,7 @@ describe("productionTask", () => {
 
       await moysklad.productionTask.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productiontask/${id}`,
         method: "PUT",
@@ -299,7 +299,7 @@ describe("productionTask", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productiontask/${id}`,
         method: "PUT",
@@ -335,7 +335,7 @@ describe("productionTask", () => {
 
       await moysklad.productionTask.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "POST",
@@ -370,7 +370,7 @@ describe("productionTask", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "POST",
@@ -393,7 +393,7 @@ describe("productionTask", () => {
 
       await moysklad.productionTask.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask/delete",
         method: "POST",
@@ -449,7 +449,7 @@ describe("productionTask", () => {
 
       await moysklad.productionTask.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "POST",
@@ -487,7 +487,7 @@ describe("productionTask", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productiontask",
         method: "POST",

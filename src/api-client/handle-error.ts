@@ -68,13 +68,27 @@ function isErrorsObject(
 function processErrorsObject(
   { errors: [error] }: { errors: MoyskladApiErrorObject[] },
   response: Response,
+  request: Request,
 ): void {
-  throw new MoyskladApiError(error.error, response, error.code, error.moreInfo)
+  throw new MoyskladApiError(
+    error.error,
+    response,
+    request,
+    error.code,
+    error.moreInfo,
+  )
 }
 
-export async function handleError(response: Response): Promise<never> {
+export async function handleError(
+  response: Response,
+  request: Request,
+): Promise<never> {
   if (!response.headers.has("Content-Type")) {
-    throw new MoyskladError("Response has no Content-Type header", response)
+    throw new MoyskladError(
+      "Response has no Content-Type header",
+      response,
+      request,
+    )
   }
   const contentType = response.headers.get("Content-Type")
 
@@ -84,11 +98,12 @@ export async function handleError(response: Response): Promise<never> {
     throw new MoyskladError(
       `Response Content-Type is not application/json, got ${contentType}. Body: ${text}`,
       response,
+      request,
     )
   }
 
   if (!text || text.length === 0) {
-    throw new MoyskladError("Response body is empty", response)
+    throw new MoyskladError("Response body is empty", response, request)
   }
 
   const data: unknown = JSON.parse(text)
@@ -100,16 +115,18 @@ export async function handleError(response: Response): Promise<never> {
       throw new MoyskladError(
         `HTTP ${response.status} ${response.statusText} (${JSON.stringify(data)})`,
         response,
+        request,
       )
     }
 
-    processErrorsObject(errorsObject, response)
+    processErrorsObject(errorsObject, response, request)
   } else if (isErrorsObject(data)) {
-    processErrorsObject(data, response)
+    processErrorsObject(data, response, request)
   }
 
   throw new MoyskladError(
     `HTTP ${response.status} ${response.statusText}`,
     response,
+    request,
   )
 }

@@ -11,7 +11,7 @@ describe("variant", () => {
 
       await moysklad.variant.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -28,7 +28,7 @@ describe("variant", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -49,7 +49,7 @@ describe("variant", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -68,7 +68,7 @@ describe("variant", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -86,7 +86,7 @@ describe("variant", () => {
         order: { field: "name", direction: "desc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -103,7 +103,7 @@ describe("variant", () => {
         search: "test variant",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -120,7 +120,7 @@ describe("variant", () => {
 
       await moysklad.variant.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -142,7 +142,7 @@ describe("variant", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -160,7 +160,7 @@ describe("variant", () => {
 
       await moysklad.variant.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -180,7 +180,7 @@ describe("variant", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -200,7 +200,7 @@ describe("variant", () => {
 
       await moysklad.variant.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/variant/${id}`,
         method: "GET",
@@ -217,7 +217,7 @@ describe("variant", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/variant/${id}`,
         method: "GET",
@@ -235,7 +235,7 @@ describe("variant", () => {
 
       await moysklad.variant.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -254,7 +254,7 @@ describe("variant", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "GET",
@@ -273,7 +273,7 @@ describe("variant", () => {
 
       await moysklad.variant.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/variant/${id}`,
         method: "DELETE",
@@ -292,7 +292,7 @@ describe("variant", () => {
 
       await moysklad.variant.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/variant/${id}`,
         method: "PUT",
@@ -314,7 +314,7 @@ describe("variant", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/variant/${id}`,
         method: "PUT",
@@ -368,7 +368,7 @@ describe("variant", () => {
 
       await moysklad.variant.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "POST",
@@ -420,7 +420,7 @@ describe("variant", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "POST",
@@ -443,7 +443,7 @@ describe("variant", () => {
 
       await moysklad.variant.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant/delete",
         method: "POST",
@@ -465,7 +465,7 @@ describe("variant", () => {
 
       await moysklad.variant.trash(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/variant/${id}/trash`,
         method: "POST",
@@ -532,7 +532,7 @@ describe("variant", () => {
 
       await moysklad.variant.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "POST",
@@ -587,7 +587,7 @@ describe("variant", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/variant",
         method: "POST",

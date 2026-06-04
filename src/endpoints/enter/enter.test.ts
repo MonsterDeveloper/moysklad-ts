@@ -11,7 +11,7 @@ describe("enter", () => {
 
       await moysklad.enter.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -28,7 +28,7 @@ describe("enter", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -49,7 +49,7 @@ describe("enter", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -69,7 +69,7 @@ describe("enter", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -87,7 +87,7 @@ describe("enter", () => {
         order: { field: "moment", direction: "desc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -104,7 +104,7 @@ describe("enter", () => {
         search: "test enter",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -121,7 +121,7 @@ describe("enter", () => {
 
       await moysklad.enter.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -143,7 +143,7 @@ describe("enter", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -161,7 +161,7 @@ describe("enter", () => {
 
       await moysklad.enter.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -181,7 +181,7 @@ describe("enter", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -201,7 +201,7 @@ describe("enter", () => {
 
       await moysklad.enter.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/enter/${id}`,
         method: "GET",
@@ -219,7 +219,7 @@ describe("enter", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/enter/${id}`,
         method: "GET",
@@ -237,7 +237,7 @@ describe("enter", () => {
 
       await moysklad.enter.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -256,7 +256,7 @@ describe("enter", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "GET",
@@ -275,7 +275,7 @@ describe("enter", () => {
 
       await moysklad.enter.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/enter/${id}`,
         method: "DELETE",
@@ -294,7 +294,7 @@ describe("enter", () => {
 
       await moysklad.enter.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/enter/${id}`,
         method: "PUT",
@@ -316,7 +316,7 @@ describe("enter", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/enter/${id}`,
         method: "PUT",
@@ -363,7 +363,7 @@ describe("enter", () => {
 
       await moysklad.enter.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "POST",
@@ -409,7 +409,7 @@ describe("enter", () => {
 
       await moysklad.enter.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "POST",
@@ -456,7 +456,7 @@ describe("enter", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "POST",
@@ -479,7 +479,7 @@ describe("enter", () => {
 
       await moysklad.enter.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter/delete",
         method: "POST",
@@ -547,7 +547,7 @@ describe("enter", () => {
 
       await moysklad.enter.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "POST",
@@ -597,7 +597,7 @@ describe("enter", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/enter",
         method: "POST",

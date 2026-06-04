@@ -10,7 +10,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -27,7 +27,7 @@ describe("paymentIn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -48,7 +48,7 @@ describe("paymentIn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -68,7 +68,7 @@ describe("paymentIn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -86,7 +86,7 @@ describe("paymentIn", () => {
         order: { field: "moment", direction: "desc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -103,7 +103,7 @@ describe("paymentIn", () => {
         search: "test payment",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -120,7 +120,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -142,7 +142,7 @@ describe("paymentIn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -160,7 +160,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -180,7 +180,7 @@ describe("paymentIn", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -200,7 +200,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/paymentin/${id}`,
         method: "GET",
@@ -218,7 +218,7 @@ describe("paymentIn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/paymentin/${id}`,
         method: "GET",
@@ -236,7 +236,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -255,7 +255,7 @@ describe("paymentIn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "GET",
@@ -274,7 +274,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/paymentin/${id}`,
         method: "DELETE",
@@ -294,7 +294,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/paymentin/${id}`,
         method: "PUT",
@@ -317,7 +317,7 @@ describe("paymentIn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/paymentin/${id}`,
         method: "PUT",
@@ -364,7 +364,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "POST",
@@ -412,7 +412,7 @@ describe("paymentIn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "POST",
@@ -435,7 +435,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin/delete",
         method: "POST",
@@ -457,7 +457,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.trash(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/paymentin/${id}/trash`,
         method: "POST",
@@ -520,7 +520,7 @@ describe("paymentIn", () => {
 
       await moysklad.paymentIn.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "POST",
@@ -571,7 +571,7 @@ describe("paymentIn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/paymentin",
         method: "POST",

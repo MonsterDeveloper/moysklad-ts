@@ -10,7 +10,7 @@ describe("purchaseOrder", () => {
 
       await moysklad.purchaseOrder.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -27,7 +27,7 @@ describe("purchaseOrder", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -48,7 +48,7 @@ describe("purchaseOrder", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -68,7 +68,7 @@ describe("purchaseOrder", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -86,7 +86,7 @@ describe("purchaseOrder", () => {
         order: { field: "moment", direction: "desc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -103,7 +103,7 @@ describe("purchaseOrder", () => {
         search: "test order",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -120,7 +120,7 @@ describe("purchaseOrder", () => {
 
       await moysklad.purchaseOrder.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -142,7 +142,7 @@ describe("purchaseOrder", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -160,7 +160,7 @@ describe("purchaseOrder", () => {
 
       await moysklad.purchaseOrder.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -180,7 +180,7 @@ describe("purchaseOrder", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -200,7 +200,7 @@ describe("purchaseOrder", () => {
 
       await moysklad.purchaseOrder.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/purchaseorder/${id}`,
         method: "GET",
@@ -219,7 +219,7 @@ describe("purchaseOrder", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/purchaseorder/${id}`,
         method: "GET",
@@ -237,7 +237,7 @@ describe("purchaseOrder", () => {
 
       await moysklad.purchaseOrder.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -256,7 +256,7 @@ describe("purchaseOrder", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "GET",
@@ -275,7 +275,7 @@ describe("purchaseOrder", () => {
 
       await moysklad.purchaseOrder.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/purchaseorder/${id}`,
         method: "DELETE",
@@ -294,7 +294,7 @@ describe("purchaseOrder", () => {
 
       await moysklad.purchaseOrder.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/purchaseorder/${id}`,
         method: "PUT",
@@ -316,7 +316,7 @@ describe("purchaseOrder", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/purchaseorder/${id}`,
         method: "PUT",
@@ -363,7 +363,7 @@ describe("purchaseOrder", () => {
 
       await moysklad.purchaseOrder.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "POST",
@@ -410,7 +410,7 @@ describe("purchaseOrder", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "POST",
@@ -433,7 +433,7 @@ describe("purchaseOrder", () => {
 
       await moysklad.purchaseOrder.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder/delete",
         method: "POST",
@@ -501,7 +501,7 @@ describe("purchaseOrder", () => {
 
       await moysklad.purchaseOrder.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "POST",
@@ -551,7 +551,7 @@ describe("purchaseOrder", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/purchaseorder",
         method: "POST",

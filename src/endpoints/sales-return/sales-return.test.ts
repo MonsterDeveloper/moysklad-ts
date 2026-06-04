@@ -10,7 +10,7 @@ describe("salesReturn", () => {
 
       await moysklad.salesReturn.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -27,7 +27,7 @@ describe("salesReturn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -48,7 +48,7 @@ describe("salesReturn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -68,7 +68,7 @@ describe("salesReturn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -86,7 +86,7 @@ describe("salesReturn", () => {
         order: { field: "moment", direction: "desc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -103,7 +103,7 @@ describe("salesReturn", () => {
         search: "test salesReturn",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -120,7 +120,7 @@ describe("salesReturn", () => {
 
       await moysklad.salesReturn.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -142,7 +142,7 @@ describe("salesReturn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -160,7 +160,7 @@ describe("salesReturn", () => {
 
       await moysklad.salesReturn.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -180,7 +180,7 @@ describe("salesReturn", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -200,7 +200,7 @@ describe("salesReturn", () => {
 
       await moysklad.salesReturn.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/salesreturn/${id}`,
         method: "GET",
@@ -219,7 +219,7 @@ describe("salesReturn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/salesreturn/${id}`,
         method: "GET",
@@ -237,7 +237,7 @@ describe("salesReturn", () => {
 
       await moysklad.salesReturn.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -256,7 +256,7 @@ describe("salesReturn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "GET",
@@ -275,7 +275,7 @@ describe("salesReturn", () => {
 
       await moysklad.salesReturn.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/salesreturn/${id}`,
         method: "DELETE",
@@ -293,7 +293,7 @@ describe("salesReturn", () => {
 
       await moysklad.salesReturn.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn/delete",
         method: "POST",
@@ -315,7 +315,7 @@ describe("salesReturn", () => {
 
       await moysklad.salesReturn.trash(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/salesreturn/${id}/trash`,
         method: "POST",
@@ -376,7 +376,7 @@ describe("salesReturn", () => {
 
       await moysklad.salesReturn.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "POST",
@@ -435,7 +435,7 @@ describe("salesReturn", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn",
         method: "POST",
@@ -469,7 +469,7 @@ describe("salesReturn", () => {
 
       await moysklad.salesReturn.template(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/salesreturn/new",
         method: "PUT",

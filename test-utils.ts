@@ -25,7 +25,7 @@ export const moysklad = createMoysklad({
   baseUrl: BASE_URL,
 })
 
-export function expectFetch({
+export async function expectFetch({
   url,
   method = "GET",
   body,
@@ -40,9 +40,11 @@ export function expectFetch({
 }) {
   const expectedUrl = new URL(BASE_URL + url, BASE_URL)
 
-  const callUrl = new URL(fetchMock.mock.calls[0]?.[0] as string)
-  const callBody = fetchMock.mock.calls[0]?.[1]?.body
-  const callBodyJson = callBody ? JSON.parse(callBody as string) : undefined
+  const firstArg = fetchMock.mock.calls[0]?.[0] as Request
+  const callUrl = new URL(firstArg.url)
+  const callBodyText =
+    body !== undefined ? await firstArg.clone().text() : undefined
+  const callBodyJson = callBodyText ? JSON.parse(callBodyText) : undefined
 
   expect(callUrl.pathname).toBe(expectedUrl.pathname)
   expect(callUrl.hostname).toBe(expectedUrl.hostname)
@@ -52,10 +54,5 @@ export function expectFetch({
 
   expect(callBodyJson).toEqual(body)
 
-  expect(fetchMock).toHaveBeenCalledWith(
-    expect.any(String), // already checked above
-    expect.objectContaining({
-      method,
-    }),
-  )
+  expect(fetchMock).toHaveBeenCalledWith(expect.objectContaining({ method }))
 }

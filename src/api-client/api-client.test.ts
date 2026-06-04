@@ -28,10 +28,8 @@ describe("ApiClient", () => {
 
       await client.request("/")
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        "https://api.moysklad.ru/api/remap/1.2/",
-        expect.any(Object),
-      )
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.url).toBe("https://api.moysklad.ru/api/remap/1.2/")
     })
 
     it("sends a request with a custom base URL", async () => {
@@ -43,10 +41,8 @@ describe("ApiClient", () => {
 
       await client.request("/")
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        `${EXAMPLE_BASE_URL}/`,
-        expect.any(Object),
-      )
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.url).toBe(`${EXAMPLE_BASE_URL}/`)
     })
 
     it("sends a request to a full URL", async () => {
@@ -55,10 +51,8 @@ describe("ApiClient", () => {
 
       await client.request(EXAMPLE_BASE_URL)
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        EXAMPLE_BASE_URL,
-        expect.any(Object),
-      )
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.url).toBe(EXAMPLE_BASE_URL)
     })
 
     it("sends a request with basic auth", async () => {
@@ -67,15 +61,9 @@ describe("ApiClient", () => {
 
       await client.request("/")
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          headers: expect.objectContaining({
-            Authorization: `Basic ${btoa(
-              `${basicAuth.login}:${basicAuth.password}`,
-            )}`,
-          }),
-        }),
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.headers.get("Authorization")).toBe(
+        `Basic ${btoa(`${basicAuth.login}:${basicAuth.password}`)}`,
       )
     })
 
@@ -85,13 +73,9 @@ describe("ApiClient", () => {
 
       await client.request("/")
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          headers: expect.objectContaining({
-            Authorization: `Bearer ${tokenAuth.token}`,
-          }),
-        }),
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.headers.get("Authorization")).toBe(
+        `Bearer ${tokenAuth.token}`,
       )
     })
 
@@ -101,14 +85,8 @@ describe("ApiClient", () => {
 
       await client.request("/")
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          headers: expect.objectContaining({
-            "User-Agent": userAgent,
-          }),
-        }),
-      )
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.headers.get("User-Agent")).toBe(userAgent)
     })
 
     it("sends a request with a JSON body", async () => {
@@ -117,12 +95,8 @@ describe("ApiClient", () => {
 
       await client.request("/", { method: "POST", body })
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          body: JSON.stringify(body),
-        }),
-      )
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(await request.json()).toEqual(body)
     })
 
     it("throws an error if a response is not OK", async () => {
@@ -142,10 +116,8 @@ describe("ApiClient", () => {
         searchParameters: new URLSearchParams({ foo: "bar" }),
       })
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        "https://api.moysklad.ru/api/remap/1.2/?foo=bar",
-        expect.any(Object),
-      )
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.url).toBe("https://api.moysklad.ru/api/remap/1.2/?foo=bar")
     })
   })
 
@@ -156,12 +128,8 @@ describe("ApiClient", () => {
 
       await client.get("/")
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          method: "GET",
-        }),
-      )
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.method).toBe("GET")
     })
   })
 
@@ -172,12 +140,8 @@ describe("ApiClient", () => {
 
       await client.post("/")
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          method: "POST",
-        }),
-      )
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.method).toBe("POST")
     })
   })
 
@@ -188,12 +152,8 @@ describe("ApiClient", () => {
 
       await client.put("/")
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          method: "PUT",
-        }),
-      )
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.method).toBe("PUT")
     })
   })
 
@@ -204,12 +164,8 @@ describe("ApiClient", () => {
 
       await client.delete("/")
 
-      expect(fetchMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          method: "DELETE",
-        }),
-      )
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.method).toBe("DELETE")
     })
   })
 

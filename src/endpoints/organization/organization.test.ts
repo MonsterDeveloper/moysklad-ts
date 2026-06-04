@@ -9,7 +9,7 @@ describe("organization", () => {
 
       await moysklad.organization.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "GET",
@@ -30,7 +30,7 @@ describe("organization", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "GET",
@@ -55,7 +55,7 @@ describe("organization", () => {
         ],
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "GET",
@@ -72,7 +72,7 @@ describe("organization", () => {
         order: "name",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "GET",
@@ -89,11 +89,9 @@ describe("organization", () => {
 
       await moysklad.organization.all()
 
-      const firstCallUrl = fetchMock.mock.calls[0]?.[0] as string
-      expect(firstCallUrl).toContain("/entity/organization?limit=")
-      expect(fetchMock.mock.calls[0]?.[1]).toMatchObject({
-        method: "GET",
-      })
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.url).toContain("/entity/organization?limit=")
+      expect(request.method).toBe("GET")
     })
 
     it("makes a request with options", async () => {
@@ -108,13 +106,11 @@ describe("organization", () => {
         },
       })
 
-      const firstCallUrl = fetchMock.mock.calls[0]?.[0] as string
-      expect(firstCallUrl).toContain("/entity/organization?")
-      expect(fetchMock.mock.calls[0]?.[1]).toMatchObject({
-        method: "GET",
-      })
+      const request = fetchMock.mock.calls[0]?.[0] as Request
+      expect(request.url).toContain("/entity/organization?")
+      expect(request.method).toBe("GET")
 
-      const callUrl = new URL(firstCallUrl)
+      const callUrl = new URL(request.url)
       expect(callUrl.searchParams.get("expand")).toBe("owner")
       expect(callUrl.searchParams.get("order")).toBe("name,asc")
       expect(callUrl.searchParams.get("search")).toBe("ООО Ромашка")
@@ -129,7 +125,7 @@ describe("organization", () => {
 
       await moysklad.organization.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/organization/${id}`,
         method: "GET",
@@ -144,7 +140,7 @@ describe("organization", () => {
         expand: { owner: true, group: true },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/organization/${id}`,
         method: "GET",
@@ -166,7 +162,7 @@ describe("organization", () => {
 
       await moysklad.organization.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/organization/${id}`,
         method: "PUT",
@@ -186,7 +182,7 @@ describe("organization", () => {
         expand: { owner: true },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/organization/${id}`,
         method: "PUT",
@@ -211,7 +207,7 @@ describe("organization", () => {
 
       await moysklad.organization.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/organization/${id}`,
         method: "PUT",
@@ -234,7 +230,7 @@ describe("organization", () => {
 
       await moysklad.organization.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/organization/${id}`,
         method: "PUT",
@@ -255,7 +251,7 @@ describe("organization", () => {
 
       await moysklad.organization.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/organization/${id}`,
         method: "PUT",
@@ -270,7 +266,7 @@ describe("organization", () => {
 
       await moysklad.organization.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "GET",
@@ -292,7 +288,7 @@ describe("organization", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "GET",
@@ -313,7 +309,7 @@ describe("organization", () => {
 
       await moysklad.organization.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "GET",
@@ -332,7 +328,7 @@ describe("organization", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "GET",
@@ -351,7 +347,7 @@ describe("organization", () => {
 
       await moysklad.organization.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/organization/${id}`,
         method: "DELETE",
@@ -369,7 +365,7 @@ describe("organization", () => {
 
       await moysklad.organization.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization/delete",
         method: "POST",
@@ -396,7 +392,7 @@ describe("organization", () => {
 
       await moysklad.organization.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "POST",
@@ -416,7 +412,7 @@ describe("organization", () => {
 
       await moysklad.organization.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "POST",
@@ -435,7 +431,7 @@ describe("organization", () => {
         expand: { owner: true },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "POST",
@@ -461,7 +457,7 @@ describe("organization", () => {
 
       await moysklad.organization.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "POST",
@@ -496,7 +492,7 @@ describe("organization", () => {
 
       await moysklad.organization.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "POST",
@@ -524,7 +520,7 @@ describe("organization", () => {
 
       await moysklad.organization.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "POST",
@@ -548,7 +544,7 @@ describe("organization", () => {
 
       await moysklad.organization.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/organization",
         method: "POST",
@@ -564,7 +560,7 @@ describe("organization", () => {
 
       await moysklad.organization.listAccounts(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/organization/${id}/accounts`,
         method: "GET",
@@ -587,7 +583,7 @@ describe("organization", () => {
 
       await moysklad.organization.updateAccounts(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/organization/${id}/accounts`,
         method: "POST",

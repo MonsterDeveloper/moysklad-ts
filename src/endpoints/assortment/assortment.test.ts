@@ -8,7 +8,7 @@ describe("assortment", () => {
 
       await moysklad.assortment.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -25,7 +25,7 @@ describe("assortment", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -43,7 +43,7 @@ describe("assortment", () => {
         groupBy: "consignment",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -62,7 +62,7 @@ describe("assortment", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -81,7 +81,7 @@ describe("assortment", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -100,7 +100,7 @@ describe("assortment", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -117,7 +117,7 @@ describe("assortment", () => {
 
       await moysklad.assortment.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -135,7 +135,7 @@ describe("assortment", () => {
         groupBy: "consignment",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -156,7 +156,7 @@ describe("assortment", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -175,7 +175,7 @@ describe("assortment", () => {
 
       await moysklad.assortment.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -192,7 +192,7 @@ describe("assortment", () => {
         groupBy: "consignment",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -212,7 +212,7 @@ describe("assortment", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -230,7 +230,7 @@ describe("assortment", () => {
 
       await moysklad.assortment.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",
@@ -249,7 +249,7 @@ describe("assortment", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/assortment",
         method: "GET",

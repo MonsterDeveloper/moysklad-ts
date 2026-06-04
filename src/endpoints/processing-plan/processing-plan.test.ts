@@ -11,7 +11,7 @@ describe("processingPlan", () => {
 
       await moysklad.processingPlan.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -28,7 +28,7 @@ describe("processingPlan", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -49,7 +49,7 @@ describe("processingPlan", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -69,7 +69,7 @@ describe("processingPlan", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -87,7 +87,7 @@ describe("processingPlan", () => {
         search: "test plan",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -104,7 +104,7 @@ describe("processingPlan", () => {
 
       await moysklad.processingPlan.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -126,7 +126,7 @@ describe("processingPlan", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -144,7 +144,7 @@ describe("processingPlan", () => {
 
       await moysklad.processingPlan.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -164,7 +164,7 @@ describe("processingPlan", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -184,7 +184,7 @@ describe("processingPlan", () => {
 
       await moysklad.processingPlan.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/processingplan/${id}`,
         method: "GET",
@@ -204,7 +204,7 @@ describe("processingPlan", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/processingplan/${id}`,
         method: "GET",
@@ -222,7 +222,7 @@ describe("processingPlan", () => {
 
       await moysklad.processingPlan.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -241,7 +241,7 @@ describe("processingPlan", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "GET",
@@ -260,7 +260,7 @@ describe("processingPlan", () => {
 
       await moysklad.processingPlan.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/processingplan/${id}`,
         method: "DELETE",
@@ -279,7 +279,7 @@ describe("processingPlan", () => {
 
       await moysklad.processingPlan.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/processingplan/${id}`,
         method: "PUT",
@@ -301,7 +301,7 @@ describe("processingPlan", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/processingplan/${id}`,
         method: "PUT",
@@ -337,7 +337,7 @@ describe("processingPlan", () => {
 
       await moysklad.processingPlan.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "POST",
@@ -372,7 +372,7 @@ describe("processingPlan", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "POST",
@@ -395,7 +395,7 @@ describe("processingPlan", () => {
 
       await moysklad.processingPlan.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan/delete",
         method: "POST",
@@ -451,7 +451,7 @@ describe("processingPlan", () => {
 
       await moysklad.processingPlan.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "POST",
@@ -489,7 +489,7 @@ describe("processingPlan", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/processingplan",
         method: "POST",

@@ -10,7 +10,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
@@ -27,7 +27,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
@@ -47,7 +47,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
@@ -68,7 +68,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
@@ -86,7 +86,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
@@ -108,7 +108,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
@@ -126,7 +126,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
@@ -145,7 +145,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
@@ -164,7 +164,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${id}`,
         method: "GET",
@@ -183,7 +183,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${id}`,
         method: "GET",
@@ -201,7 +201,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
@@ -220,7 +220,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "GET",
@@ -239,7 +239,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${id}`,
         method: "DELETE",
@@ -258,7 +258,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${id}`,
         method: "PUT",
@@ -280,7 +280,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${id}`,
         method: "PUT",
@@ -315,7 +315,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "POST",
@@ -350,7 +350,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "POST",
@@ -373,7 +373,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion/delete",
         method: "POST",
@@ -431,7 +431,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "POST",
@@ -469,7 +469,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productionstagecompletion",
         method: "POST",
@@ -489,7 +489,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion[completionId].materials.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "GET",
@@ -507,7 +507,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "GET",
@@ -528,7 +528,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "GET",
@@ -565,7 +565,7 @@ describe("productionStageCompletion", () => {
         data,
       )
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "POST",
@@ -602,7 +602,7 @@ describe("productionStageCompletion", () => {
         },
       )
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "POST",
@@ -629,7 +629,7 @@ describe("productionStageCompletion", () => {
         data,
       )
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials/${materialId}`,
         method: "PUT",
@@ -655,7 +655,7 @@ describe("productionStageCompletion", () => {
         },
       )
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials/${materialId}`,
         method: "PUT",
@@ -675,7 +675,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion[completionId].materials.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "GET",
@@ -695,7 +695,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "GET",
@@ -714,7 +714,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion[completionId].materials.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "GET",
@@ -734,7 +734,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/materials`,
         method: "GET",
@@ -753,7 +753,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion[completionId].products.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products`,
         method: "GET",
@@ -771,7 +771,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products`,
         method: "GET",
@@ -792,7 +792,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products`,
         method: "GET",
@@ -818,7 +818,7 @@ describe("productionStageCompletion", () => {
         data,
       )
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products/${resultId}`,
         method: "PUT",
@@ -844,7 +844,7 @@ describe("productionStageCompletion", () => {
         },
       )
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products/${resultId}`,
         method: "PUT",
@@ -864,7 +864,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion[completionId].products.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products`,
         method: "GET",
@@ -884,7 +884,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products`,
         method: "GET",
@@ -903,7 +903,7 @@ describe("productionStageCompletion", () => {
 
       await moysklad.productionStageCompletion[completionId].products.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products`,
         method: "GET",
@@ -923,7 +923,7 @@ describe("productionStageCompletion", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productionstagecompletion/${completionId}/products`,
         method: "GET",

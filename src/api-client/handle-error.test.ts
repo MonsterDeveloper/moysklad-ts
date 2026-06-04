@@ -2,11 +2,17 @@ import { describe, expect, it } from "vitest"
 import { MoyskladApiError, MoyskladError } from "../errors"
 import { handleError } from "./handle-error"
 
+const request = new Request("https://example.com")
+
 describe("handleError", () => {
   it("should throw a MoyskladError if the response has no Content-Type header", async () => {
     const response = new Response(undefined, { status: 400 })
-    await expect(handleError(response)).rejects.toThrow(
-      new MoyskladError("Response has no Content-Type header", response),
+    await expect(handleError(response, request)).rejects.toThrow(
+      new MoyskladError(
+        "Response has no Content-Type header",
+        response,
+        request,
+      ),
     )
   })
 
@@ -15,10 +21,11 @@ describe("handleError", () => {
       status: 400,
       headers: { "Content-Type": "text/plain" },
     })
-    await expect(handleError(response)).rejects.toThrow(
+    await expect(handleError(response, request)).rejects.toThrow(
       new MoyskladError(
         "Response Content-Type is not application/json, got text/plain. Body: Some response body text",
         response,
+        request,
       ),
     )
   })
@@ -39,10 +46,11 @@ describe("handleError", () => {
         headers: { "Content-Type": "application/json" },
       },
     )
-    await expect(handleError(response)).rejects.toThrow(
+    await expect(handleError(response, request)).rejects.toThrow(
       new MoyskladApiError(
         "Some error message",
         response,
+        request,
         123,
         "https://example.com",
       ),
@@ -68,10 +76,11 @@ describe("handleError", () => {
         headers: { "Content-Type": "application/json" },
       },
     )
-    await expect(handleError(response)).rejects.toThrow(
+    await expect(handleError(response, request)).rejects.toThrow(
       new MoyskladApiError(
         "Ошибка валидации сохраняемого объекта: 'Нельзя списать товар, которого нет на складе'",
         response,
+        request,
         3007,
         "https://dev.moysklad.ru/doc/api/remap/1.2/#error_3007",
       ),
@@ -101,10 +110,11 @@ describe("handleError", () => {
         headers: { "Content-Type": "application/json" },
       },
     )
-    await expect(handleError(response)).rejects.toThrow(
+    await expect(handleError(response, request)).rejects.toThrow(
       new MoyskladApiError(
         "Ошибка валидации сохраняемого объекта: 'Нельзя списать товар, которого нет на складе'",
         response,
+        request,
         3007,
         "https://dev.moysklad.ru/doc/api/remap/1.2/#error_3007",
       ),
@@ -116,8 +126,8 @@ describe("handleError", () => {
       status: 400,
       headers: { "Content-Type": "application/json" },
     })
-    await expect(handleError(response)).rejects.toThrow(
-      new MoyskladError("Response body is empty", response),
+    await expect(handleError(response, request)).rejects.toThrow(
+      new MoyskladError("Response body is empty", response, request),
     )
   })
 
@@ -127,8 +137,8 @@ describe("handleError", () => {
       statusText: "Bad Request",
       headers: { "Content-Type": "application/json" },
     })
-    await expect(handleError(response)).rejects.toThrow(
-      new MoyskladError("HTTP 400 Bad Request", response),
+    await expect(handleError(response, request)).rejects.toThrow(
+      new MoyskladError("HTTP 400 Bad Request", response, request),
     )
   })
 })

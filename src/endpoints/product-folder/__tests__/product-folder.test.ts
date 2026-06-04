@@ -10,7 +10,7 @@ describe("product folder", () => {
 
       await moysklad.productFolder.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productfolder",
         method: "GET",
@@ -27,7 +27,7 @@ describe("product folder", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productfolder",
         method: "GET",
@@ -47,7 +47,7 @@ describe("product folder", () => {
         name: "Овощи",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productfolder",
         method: "POST",
@@ -70,7 +70,7 @@ describe("product folder", () => {
         taxSystem: TaxSystem.General,
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productfolder",
         method: "POST",
@@ -94,7 +94,7 @@ describe("product folder", () => {
 
       await moysklad.productFolder.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productfolder/${id}`,
         method: "GET",
@@ -114,7 +114,7 @@ describe("product folder", () => {
         vat: 5,
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productfolder/${id}`,
         method: "PUT",
@@ -135,7 +135,7 @@ describe("product folder", () => {
 
       await moysklad.productFolder.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/productfolder/${id}`,
         method: "DELETE",
@@ -151,7 +151,7 @@ describe("product folder", () => {
 
       await moysklad.productFolder.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productfolder/delete",
         method: "POST",
@@ -174,7 +174,7 @@ describe("product folder", () => {
         name: "Овощи",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productfolder",
         method: "POST",
@@ -197,7 +197,7 @@ describe("product folder", () => {
         name: "Группа Овощи",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productfolder",
         method: "POST",
@@ -233,7 +233,7 @@ describe("product folder", () => {
         },
       ])
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/productfolder",
         method: "POST",

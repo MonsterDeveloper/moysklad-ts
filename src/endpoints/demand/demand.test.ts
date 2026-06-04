@@ -10,7 +10,7 @@ describe("demand", () => {
 
       await moysklad.demand.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -27,7 +27,7 @@ describe("demand", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -48,7 +48,7 @@ describe("demand", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -68,7 +68,7 @@ describe("demand", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -86,7 +86,7 @@ describe("demand", () => {
         order: { field: "moment", direction: "desc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -103,7 +103,7 @@ describe("demand", () => {
         search: "test demand",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -120,7 +120,7 @@ describe("demand", () => {
 
       await moysklad.demand.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -142,7 +142,7 @@ describe("demand", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -160,7 +160,7 @@ describe("demand", () => {
 
       await moysklad.demand.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -180,7 +180,7 @@ describe("demand", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -200,7 +200,7 @@ describe("demand", () => {
 
       await moysklad.demand.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/demand/${id}`,
         method: "GET",
@@ -219,7 +219,7 @@ describe("demand", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/demand/${id}`,
         method: "GET",
@@ -237,7 +237,7 @@ describe("demand", () => {
 
       await moysklad.demand.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "GET",
@@ -255,7 +255,7 @@ describe("demand", () => {
 
       await moysklad.demand.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/demand/${id}`,
         method: "DELETE",
@@ -273,7 +273,7 @@ describe("demand", () => {
 
       await moysklad.demand.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand/delete",
         method: "POST",
@@ -295,7 +295,7 @@ describe("demand", () => {
 
       await moysklad.demand.trash(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/demand/${id}/trash`,
         method: "POST",
@@ -350,7 +350,7 @@ describe("demand", () => {
 
       await moysklad.demand.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "POST",
@@ -410,7 +410,7 @@ describe("demand", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand",
         method: "POST",
@@ -444,7 +444,7 @@ describe("demand", () => {
 
       await moysklad.demand.template(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand/new",
         method: "PUT",
@@ -472,7 +472,7 @@ describe("demand", () => {
 
       await moysklad.demand.template(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/demand/new",
         method: "PUT",

@@ -10,7 +10,7 @@ describe("invoiceOut", () => {
 
       await moysklad.invoiceOut.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -27,7 +27,7 @@ describe("invoiceOut", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -48,7 +48,7 @@ describe("invoiceOut", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -68,7 +68,7 @@ describe("invoiceOut", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -86,7 +86,7 @@ describe("invoiceOut", () => {
         order: { field: "moment", direction: "desc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -103,7 +103,7 @@ describe("invoiceOut", () => {
         search: "test invoice",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -120,7 +120,7 @@ describe("invoiceOut", () => {
 
       await moysklad.invoiceOut.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -142,7 +142,7 @@ describe("invoiceOut", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -160,7 +160,7 @@ describe("invoiceOut", () => {
 
       await moysklad.invoiceOut.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -180,7 +180,7 @@ describe("invoiceOut", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -200,7 +200,7 @@ describe("invoiceOut", () => {
 
       await moysklad.invoiceOut.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/invoiceout/${id}`,
         method: "GET",
@@ -219,7 +219,7 @@ describe("invoiceOut", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/invoiceout/${id}`,
         method: "GET",
@@ -237,7 +237,7 @@ describe("invoiceOut", () => {
 
       await moysklad.invoiceOut.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -256,7 +256,7 @@ describe("invoiceOut", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "GET",
@@ -275,7 +275,7 @@ describe("invoiceOut", () => {
 
       await moysklad.invoiceOut.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/invoiceout/${id}`,
         method: "DELETE",
@@ -294,7 +294,7 @@ describe("invoiceOut", () => {
 
       await moysklad.invoiceOut.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/invoiceout/${id}`,
         method: "PUT",
@@ -316,7 +316,7 @@ describe("invoiceOut", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/invoiceout/${id}`,
         method: "PUT",
@@ -363,7 +363,7 @@ describe("invoiceOut", () => {
 
       await moysklad.invoiceOut.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "POST",
@@ -410,7 +410,7 @@ describe("invoiceOut", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "POST",
@@ -433,7 +433,7 @@ describe("invoiceOut", () => {
 
       await moysklad.invoiceOut.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout/delete",
         method: "POST",
@@ -501,7 +501,7 @@ describe("invoiceOut", () => {
 
       await moysklad.invoiceOut.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "POST",
@@ -551,7 +551,7 @@ describe("invoiceOut", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/invoiceout",
         method: "POST",

@@ -10,7 +10,7 @@ describe("supply", () => {
 
       await moysklad.supply.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -27,7 +27,7 @@ describe("supply", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -48,7 +48,7 @@ describe("supply", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -68,7 +68,7 @@ describe("supply", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -86,7 +86,7 @@ describe("supply", () => {
         order: { field: "moment", direction: "desc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -103,7 +103,7 @@ describe("supply", () => {
         search: "test supply",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -120,7 +120,7 @@ describe("supply", () => {
 
       await moysklad.supply.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -142,7 +142,7 @@ describe("supply", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -160,7 +160,7 @@ describe("supply", () => {
 
       await moysklad.supply.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -180,7 +180,7 @@ describe("supply", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -200,7 +200,7 @@ describe("supply", () => {
 
       await moysklad.supply.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/supply/${id}`,
         method: "GET",
@@ -219,7 +219,7 @@ describe("supply", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/supply/${id}`,
         method: "GET",
@@ -237,7 +237,7 @@ describe("supply", () => {
 
       await moysklad.supply.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -256,7 +256,7 @@ describe("supply", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "GET",
@@ -275,7 +275,7 @@ describe("supply", () => {
 
       await moysklad.supply.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/supply/${id}`,
         method: "DELETE",
@@ -294,7 +294,7 @@ describe("supply", () => {
 
       await moysklad.supply.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/supply/${id}`,
         method: "PUT",
@@ -316,7 +316,7 @@ describe("supply", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/supply/${id}`,
         method: "PUT",
@@ -339,7 +339,7 @@ describe("supply", () => {
 
       await moysklad.supply.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply/delete",
         method: "POST",
@@ -420,7 +420,7 @@ describe("supply", () => {
 
       await moysklad.supply.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "POST",
@@ -483,7 +483,7 @@ describe("supply", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply",
         method: "POST",
@@ -517,7 +517,7 @@ describe("supply", () => {
 
       await moysklad.supply.template(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/supply/new",
         method: "PUT",

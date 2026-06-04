@@ -9,7 +9,7 @@ describe("custom-entity", () => {
 
       await moysklad.customEntity.get(customEntityId)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/customentity/${customEntityId}`,
         method: "GET",

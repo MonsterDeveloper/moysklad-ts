@@ -11,7 +11,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.list()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -28,7 +28,7 @@ describe("bonusTransaction", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -48,7 +48,7 @@ describe("bonusTransaction", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -68,7 +68,7 @@ describe("bonusTransaction", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -86,7 +86,7 @@ describe("bonusTransaction", () => {
         order: { field: "moment", direction: "asc" },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -103,7 +103,7 @@ describe("bonusTransaction", () => {
         search: "test",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -120,7 +120,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.all()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -140,7 +140,7 @@ describe("bonusTransaction", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -159,7 +159,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.first()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -178,7 +178,7 @@ describe("bonusTransaction", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -197,7 +197,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.get(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/bonustransaction/${id}`,
         method: "GET",
@@ -215,7 +215,7 @@ describe("bonusTransaction", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/bonustransaction/${id}`,
         method: "GET",
@@ -243,7 +243,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "POST",
@@ -279,7 +279,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.create(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "POST",
@@ -307,7 +307,7 @@ describe("bonusTransaction", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "POST",
@@ -331,7 +331,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.update(id, data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/bonustransaction/${id}`,
         method: "PUT",
@@ -352,7 +352,7 @@ describe("bonusTransaction", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/bonustransaction/${id}`,
         method: "PUT",
@@ -382,7 +382,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "POST",
@@ -411,7 +411,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.upsert(data)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "POST",
@@ -444,7 +444,7 @@ describe("bonusTransaction", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "POST",
@@ -482,7 +482,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.upsert(data as never)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "POST",
@@ -498,7 +498,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.delete(id)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: `/entity/bonustransaction/${id}`,
         method: "DELETE",
@@ -516,7 +516,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.batchDelete(ids)
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction/delete",
         method: "POST",
@@ -537,7 +537,7 @@ describe("bonusTransaction", () => {
 
       await moysklad.bonusTransaction.size()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",
@@ -558,7 +558,7 @@ describe("bonusTransaction", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/entity/bonustransaction",
         method: "GET",

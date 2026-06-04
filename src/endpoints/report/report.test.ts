@@ -11,7 +11,7 @@ describe("report", () => {
       momentTo: "1",
     })
 
-    expectFetch({
+    await expectFetch({
       fetchMock,
       url: "/report/profit/byvariant",
       method: "GET",
@@ -36,7 +36,7 @@ describe("report", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/report/turnover/all",
         method: "GET",
@@ -62,7 +62,7 @@ describe("report", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/report/turnover/bystore",
         method: "GET",
@@ -88,7 +88,7 @@ describe("report", () => {
         },
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/report/turnover/byoperation",
         method: "GET",
@@ -112,7 +112,7 @@ describe("report", () => {
         interval: "day",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/report/money/plotseries",
         method: "GET",
@@ -129,7 +129,7 @@ describe("report", () => {
 
       await moysklad.report.money.byAccount()
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/report/money/byaccount",
         method: "GET",
@@ -145,7 +145,7 @@ describe("report", () => {
         groupBy: "variant",
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/report/stock/all",
         method: "GET",
@@ -162,7 +162,7 @@ describe("report", () => {
         stockType: StockAllCurrentStockType.FreeStock,
       })
 
-      expectFetch({
+      await expectFetch({
         fetchMock,
         url: "/report/stock/all/current",
         method: "GET",
@@ -184,7 +184,7 @@ describe("report", () => {
           },
         })
 
-        expectFetch({
+        await expectFetch({
           fetchMock,
           url: "/report/stock/bystore",
           method: "GET",
@@ -218,7 +218,7 @@ describe("report", () => {
           },
         })
 
-        expectFetch({
+        await expectFetch({
           fetchMock,
           url: "/report/stock/bystore",
           method: "GET",
@@ -245,7 +245,7 @@ describe("report", () => {
           order: { field: "stockOnAllStores", direction: "asc" },
         })
 
-        expectFetch({
+        await expectFetch({
           fetchMock,
           url: "/report/stock/bystore",
           method: "GET",
@@ -265,7 +265,7 @@ describe("report", () => {
           },
         })
 
-        expectFetch({
+        await expectFetch({
           fetchMock,
           url: "/report/stock/bystore",
           method: "GET",
@@ -283,7 +283,7 @@ describe("report", () => {
           groupBy: "product",
         })
 
-        expectFetch({
+        await expectFetch({
           fetchMock,
           url: "/report/stock/bystore",
           method: "GET",
@@ -300,7 +300,7 @@ describe("report", () => {
           groupBy: "consignment",
         })
 
-        expectFetch({
+        await expectFetch({
           fetchMock,
           url: "/report/stock/bystore",
           method: "GET",
@@ -326,7 +326,7 @@ describe("report", () => {
           },
         })
 
-        expectFetch({
+        await expectFetch({
           fetchMock,
           url: "/report/stock/bystore",
           method: "GET",

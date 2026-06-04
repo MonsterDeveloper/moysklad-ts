@@ -117,7 +117,7 @@ export class ApiClient {
   ): Promise<Response> {
     const url = this.buildUrl(endpoint)
 
-    const response = await fetch(
+    const request = new Request(
       url.toString() +
         (searchParameters && searchParameters.size > 0
           ? `?${searchParameters.toString()}`
@@ -139,8 +139,10 @@ export class ApiClient {
       },
     )
 
+    const response = await fetch(request)
+
     if (!response.ok) {
-      await handleError(response)
+      await handleError(response, request)
     }
 
     return response
