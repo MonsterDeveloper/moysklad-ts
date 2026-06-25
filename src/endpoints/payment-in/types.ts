@@ -107,7 +107,7 @@ export interface PaymentIn extends Idable, Meta<Entity.PaymentIn> {
   owner?: Meta<Entity.Employee>
 
   /** Назначение платежа */
-  paymentPurpose: string
+  paymentPurpose?: string
 
   /** Напечатан ли документ */
   readonly printed: boolean

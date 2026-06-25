@@ -77,7 +77,7 @@ export interface PaymentOut extends Idable, Meta<Entity.PaymentOut> {
   /** Владелец (Сотрудник) */
   owner?: Meta<Entity.Employee>
   /** Назначение платежа */
-  paymentPurpose: string
+  paymentPurpose?: string
   /** Напечатан ли документ */
   readonly printed: boolean
   /** Метаданные проекта */
