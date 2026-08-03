@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { createFetchMock, expectFetch, moysklad } from "../../../test-utils"
+import { MoyskladApiError } from "../../errors"
 import { Entity } from "../../types/entity"
 import { MediaType } from "../../types/media-type"
 
@@ -280,6 +281,85 @@ describe("paymentIn", () => {
         method: "DELETE",
       })
     })
+
+    it("resolves undefined for an empty 200 response", async () => {
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
+      fetchMock.mockResolvedValue(new Response(null, { status: 200 }))
+
+      await expect(moysklad.paymentIn.delete(id)).resolves.toBeUndefined()
+
+      await expectFetch({
+        fetchMock,
+        url: `/entity/paymentin/${id}`,
+        method: "DELETE",
+      })
+    })
+
+    it("resolves undefined for a 204 response", async () => {
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
+      fetchMock.mockResolvedValue(new Response(null, { status: 204 }))
+
+      await expect(moysklad.paymentIn.delete(id)).resolves.toBeUndefined()
+
+      await expectFetch({
+        fetchMock,
+        url: `/entity/paymentin/${id}`,
+        method: "DELETE",
+      })
+    })
+
+    it("discards a successful response body", async () => {
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
+      fetchMock.mockResolvedValue(
+        new Response(JSON.stringify({ deleted: true }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+      )
+
+      await expect(moysklad.paymentIn.delete(id)).resolves.toBeUndefined()
+
+      await expectFetch({
+        fetchMock,
+        url: `/entity/paymentin/${id}`,
+        method: "DELETE",
+      })
+    })
+
+    it("preserves a JSON API error", async () => {
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
+      fetchMock.mockResolvedValue(
+        new Response(
+          JSON.stringify({
+            errors: [
+              {
+                code: 404,
+                error: "Payment in not found",
+              },
+            ],
+          }),
+          {
+            status: 404,
+            headers: { "Content-Type": "application/json" },
+          },
+        ),
+      )
+
+      const deletion = moysklad.paymentIn.delete(id)
+
+      await expect(deletion).rejects.toBeInstanceOf(MoyskladApiError)
+      await expect(deletion).rejects.toMatchObject({ code: 404 })
+
+      await expectFetch({
+        fetchMock,
+        url: `/entity/paymentin/${id}`,
+        method: "DELETE",
+      })
+    })
   })
 
   describe("update", () => {
@@ -456,6 +536,20 @@ describe("paymentIn", () => {
       const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
 
       await moysklad.paymentIn.trash(id)
+
+      await expectFetch({
+        fetchMock,
+        url: `/entity/paymentin/${id}/trash`,
+        method: "POST",
+      })
+    })
+
+    it("resolves undefined for an empty response", async () => {
+      const fetchMock = createFetchMock()
+      const id = "5427bc76-b95f-11eb-0a80-04bb000cd583"
+      fetchMock.mockResolvedValue(new Response(null, { status: 200 }))
+
+      await expect(moysklad.paymentIn.trash(id)).resolves.toBeUndefined()
 
       await expectFetch({
         fetchMock,

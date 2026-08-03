@@ -177,9 +177,7 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
       if (method === "delete") {
         const id = callbackOptions.args[0] as string
 
-        return client
-          .delete(`${path}/${id}`)
-          .then((response) => response.json())
+        return client.delete(`${path}/${id}`).then((): void => undefined)
       }
 
       if (method === "batchDelete") {
@@ -202,9 +200,7 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
       if (method === "trash") {
         const id = callbackOptions.args[0] as string
 
-        return client
-          .post(`${path}/${id}/trash`)
-          .then((response) => response.json())
+        return client.post(`${path}/${id}/trash`).then((): void => undefined)
       }
 
       if (method === "upsert" || method === "create") {
