@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 import { createFetchMock, expectFetch, moysklad } from "../../../test-utils"
 import { Entity } from "../../types/entity"
 import { MediaType } from "../../types/media-type"
+import type { SupplyTemplateData } from "./types"
 
 describe("supply", () => {
   describe("list", () => {
@@ -35,6 +36,18 @@ describe("supply", () => {
           limit: "100",
           offset: "50",
         },
+      })
+    })
+
+    it("requests stock data for positions", async () => {
+      const fetchMock: ReturnType<typeof createFetchMock> = createFetchMock()
+
+      await moysklad.supply.list({ fields: ["stock"] })
+
+      await expectFetch({
+        fetchMock,
+        url: "/entity/supply",
+        searchParameters: { fields: "stock" },
       })
     })
 
@@ -497,6 +510,44 @@ describe("supply", () => {
   })
 
   describe("template", () => {
+    it("makes a request for the default template", async () => {
+      const fetchMock: ReturnType<typeof createFetchMock> = createFetchMock()
+
+      await moysklad.supply.template()
+
+      await expectFetch({
+        fetchMock,
+        url: "/entity/supply/new",
+        method: "PUT",
+      })
+    })
+
+    it("makes a request with supplier invoices", async () => {
+      const fetchMock: ReturnType<typeof createFetchMock> = createFetchMock()
+      const data: SupplyTemplateData = {
+        invoicesIn: [
+          {
+            meta: {
+              href: moysklad.client
+                .buildUrl(["entity", Entity.InvoiceIn, "invoice-id"])
+                .toString(),
+              mediaType: MediaType.Json,
+              type: Entity.InvoiceIn,
+            },
+          },
+        ],
+      }
+
+      await moysklad.supply.template(data)
+
+      await expectFetch({
+        fetchMock,
+        url: "/entity/supply/new",
+        method: "PUT",
+        body: data,
+      })
+    })
+
     it("makes a request with purchase order", async () => {
       const fetchMock = createFetchMock()
       const data = {

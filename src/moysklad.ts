@@ -9,6 +9,7 @@ import type {
   EnterEndpoint,
   FactureOutEndpoint,
   InventoryEndpoint,
+  InvoiceInEndpoint,
   InvoiceOutEndpoint,
   OrganizationEndpoint,
   PaymentInEndpoint,
@@ -156,6 +157,13 @@ export interface Moysklad {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-schet-pokupatelu-scheta-pokupatelqm
    */
   invoiceOut: InvoiceOutEndpoint
+
+  /**
+   * Счета поставщиков
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/#/documents/invoice-in%233-scheta-postavshikov
+   */
+  invoiceIn: InvoiceInEndpoint
 
   /**
    * Автозаполнение

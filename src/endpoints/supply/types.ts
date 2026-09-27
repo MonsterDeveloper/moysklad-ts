@@ -19,6 +19,8 @@ import type {
   NumberFilter,
   OrderOptions,
   PaginationOptions,
+  PositionFields,
+  StateModel,
   StringFilter,
   UpdateMeta,
 } from "../../types"
@@ -28,15 +30,42 @@ import type { GroupModel } from "../group"
 import type { OrganizationModel } from "../organization"
 import type { PurchaseOrderModel } from "../purchase-order"
 
+/**
+ * Распределение накладных расходов приёмки.
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/#/documents/supply%232-priemka
+ */
 export enum SupplyOverheadDistribution {
+  /** По весу. */
   Weight = "weight",
+  /** По объёму. */
   Volume = "volume",
+  /** По цене. */
   Price = "price",
 }
 
+/**
+ * Накладные расходы приёмки в копейках.
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/#/documents/supply%232-priemka
+ */
 export interface SupplyOverhead {
   sum: number
   distribution: SupplyOverheadDistribution
+}
+
+/**
+ * Код маркировки товара или упаковки в позиции приёмки.
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/#/documents/supply%232-priemka
+ */
+export interface SupplyTrackingCode {
+  /** Значение кода маркировки. */
+  cis: string
+  /** Вид кода маркировки. */
+  type: "trackingcode" | "consumerpack" | "transportpack"
+  /** Коды маркировки внутри упаковки. */
+  trackingCodes?: SupplyTrackingCode[]
 }
 
 /**
@@ -89,7 +118,7 @@ export interface SupplyPosition extends Idable, Meta<Entity.SupplyPosition> {
    *
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka-priemki-kody-markirowki-towarow-i-transportnyh-upakowok
    */
-  trackingCodes?: unknown // TODO add trackingCodes type;
+  trackingCodes?: SupplyTrackingCode[]
   /**
    * Накладные расходы
    *
@@ -105,6 +134,8 @@ export interface SupplyPosition extends Idable, Meta<Entity.SupplyPosition> {
    *
    * С помощью этого флага для позиции можно выставлять НДС = 0 или НДС = "без НДС". (`vat` = `0`, `vatEnabled` = `false`) -> `vat` = "без НДС", (`vat` = `0`, `vatEnabled` = `true`) -> `vat` = 0%. */
   vatEnabled: boolean
+  /** Остатки и себестоимость при запросе `fields=stock`. */
+  readonly stock?: undefined
 }
 
 /**
@@ -218,13 +249,23 @@ export interface Supply extends Idable, Meta<Entity.Supply> {
   /** Включен ли НДС в цену */
   vatIncluded?: boolean
   /** Сумма НДС */
-  vatSum: number
+  readonly vatSum?: number
   /**
    * Ссылка на связанный заказ поставщику в формате Метаданных
    *
    * {@linkcode PurchaseOrderModel}
    */
   purchaseOrder?: Meta<Entity.PurchaseOrder>
+  /** Ссылка на связанный полученный счёт-фактуру. */
+  factureIn?: Meta<Entity.FactureIn>
+  /** Связанные счета поставщиков. */
+  invoicesIn?: Meta<Entity.InvoiceIn>[]
+  /** Связанные платежи. */
+  payments?: Meta<Entity>[]
+  /** Ссылка на связанное производственное задание. */
+  productionTask?: Meta<Entity.ProductionTask>
+  /** Связанные возвраты поставщику. */
+  returns?: Meta<Entity.PurchaseReturn>[]
 }
 
 /**
@@ -243,6 +284,7 @@ export interface SupplyModel extends Model {
     agentAccount: AccountModel
     organizationAccount: AccountModel
     purchaseOrder: PurchaseOrderModel
+    state: StateModel
   }
   filters: {
     id: IdFilter
@@ -287,6 +329,7 @@ export interface SupplyModel extends Model {
 
 export interface ListSuppliesOptions {
   pagination?: PaginationOptions
+  fields?: PositionFields
   expand?: ExpandOptions<SupplyModel>
   order?: OrderOptions<SupplyModel>
   search?: string
@@ -295,6 +338,7 @@ export interface ListSuppliesOptions {
 
 export interface GetSupplyOptions {
   expand?: ExpandOptions<SupplyModel>
+  fields?: PositionFields
 }
 
 export interface UpdateSupplyOptions {
@@ -308,6 +352,10 @@ export interface UpsertSuppliesOptions {
 export type FirstSupplyOptions = Omit<ListSuppliesOptions, "pagination">
 export type AllSuppliesOptions = Omit<ListSuppliesOptions, "pagination">
 
+/** Документы, на основе которых МойСклад заполняет шаблон приёмки. */
 export interface SupplyTemplateData {
-  purchaseOrder: UpdateMeta<Entity.PurchaseOrder>
+  /** Связанный заказ поставщику. */
+  purchaseOrder?: UpdateMeta<Entity.PurchaseOrder>
+  /** Связанные счета поставщиков. */
+  invoicesIn?: UpdateMeta<Entity.InvoiceIn>[]
 }
