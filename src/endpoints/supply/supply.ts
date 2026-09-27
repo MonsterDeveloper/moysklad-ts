@@ -43,7 +43,10 @@ export interface SupplyEndpoint {
   list<T extends ListSuppliesOptions = Record<string, unknown>>(
     options?: Subset<T, ListSuppliesOptions>,
   ): Promise<
-    ListResponse<GetFindResult<SupplyModel, T["expand"]>, Entity.Supply>
+    ListResponse<
+      GetFindResult<SupplyModel, T["expand"], T["fields"]>,
+      Entity.Supply
+    >
   >
 
   /**
@@ -60,7 +63,10 @@ export interface SupplyEndpoint {
   all<T extends AllSuppliesOptions = Record<string, unknown>>(
     options?: Subset<T, AllSuppliesOptions>,
   ): Promise<
-    BatchGetResult<GetFindResult<SupplyModel, T["expand"]>, Entity.Supply>
+    BatchGetResult<
+      GetFindResult<SupplyModel, T["expand"], T["fields"]>,
+      Entity.Supply
+    >
   >
 
   /**
@@ -80,7 +86,7 @@ export interface SupplyEndpoint {
   get<T extends GetSupplyOptions = Record<string, unknown>>(
     id: string,
     options?: Subset<T, GetSupplyOptions>,
-  ): Promise<GetFindResult<SupplyModel, T["expand"]>>
+  ): Promise<GetFindResult<SupplyModel, T["expand"], T["fields"]>>
 
   /**
    * Обновить приёмку
@@ -148,7 +154,10 @@ export interface SupplyEndpoint {
   first<T extends FirstSupplyOptions = Record<string, unknown>>(
     options?: Subset<T, FirstSupplyOptions>,
   ): Promise<
-    ListResponse<GetFindResult<SupplyModel, T["expand"]>, Entity.Supply>
+    ListResponse<
+      GetFindResult<SupplyModel, T["expand"], T["fields"]>,
+      Entity.Supply
+    >
   >
 
   /**
@@ -208,6 +217,6 @@ export interface SupplyEndpoint {
    * ```
    */
   template(
-    data: SupplyTemplateData,
+    data?: SupplyTemplateData,
   ): Promise<GetFindResult<SupplyModel, { positions: true }>>
 }
