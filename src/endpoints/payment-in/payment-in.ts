@@ -2,6 +2,7 @@ import type {
   BatchDeleteResult,
   BatchGetResult,
   Entity,
+  FilesMethods,
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
@@ -25,7 +26,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-vhodqschij-platezh
  */
-export interface PaymentInEndpoint {
+export interface PaymentInEndpoint extends FilesMethods {
   /**
    * Получить список входящих платежей
    *

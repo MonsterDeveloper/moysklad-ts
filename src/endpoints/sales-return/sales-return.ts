@@ -2,6 +2,7 @@ import type {
   BatchDeleteResult,
   BatchGetResult,
   Entity,
+  FilesMethods,
   GetFindResult,
   ListMeta,
   ListResponse,
@@ -24,7 +25,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-vozwrat-pokupatelq
  */
-export interface SalesReturnEndpoint {
+export interface SalesReturnEndpoint extends FilesMethods {
   /**
    * Получить список возвратов покупателей.
    *

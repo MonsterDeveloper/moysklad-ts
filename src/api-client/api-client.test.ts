@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
 import { createFetchMock } from "../../test-utils"
 import { MoyskladError } from "../errors"
-import type { ListMetadata } from "../types"
+import { Entity, type ListMetadata, MediaType } from "../types"
 import { ApiClient, type BasicAuth, type TokenAuth } from "./api-client"
 
 const EXAMPLE_BASE_URL = "https://example.com/api"
@@ -213,6 +213,47 @@ describe("ApiClient", () => {
       const url = client.buildUrl(`/foo//bar/123`)
 
       expect(url.toString()).toBe(`${EXAMPLE_BASE_URL}/foo/bar/123`)
+    })
+  })
+
+  describe("composeMeta", () => {
+    it("builds entity and metadata URLs with the configured base URL", () => {
+      const client = new ApiClient({
+        auth: tokenAuth,
+        baseUrl: EXAMPLE_BASE_URL,
+      })
+
+      expect(client.composeMeta(Entity.Store, "store-id")).toEqual({
+        meta: {
+          href: `${EXAMPLE_BASE_URL}/entity/store/store-id`,
+          metadataHref: `${EXAMPLE_BASE_URL}/entity/store/metadata`,
+          type: Entity.Store,
+          mediaType: MediaType.Json,
+        },
+      })
+    })
+
+    it.each([
+      Entity.Service,
+      Entity.Bundle,
+    ] as const)("uses product metadata for %s", (entity) => {
+      const client = new ApiClient({ auth: tokenAuth })
+
+      const result = client.composeMeta(entity, "catalog-id")
+
+      expect(result.meta.metadataHref).toBe(
+        "https://api.moysklad.ru/api/remap/1.2/entity/product/metadata",
+      )
+      expect(result.meta.type).toBe(entity)
+      expect(result.meta).not.toHaveProperty("uuidHref")
+    })
+
+    it("rejects unsupported resources at runtime", () => {
+      const client = new ApiClient({ auth: tokenAuth })
+
+      expect(() =>
+        client.composeMeta(Entity.Account as never, "account-id"),
+      ).toThrow("Unsupported root entity type: account")
     })
   })
 

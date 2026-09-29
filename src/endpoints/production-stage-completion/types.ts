@@ -90,6 +90,8 @@ export interface ProductionStageCompletionModel extends Model {
   filters: {
     id: IdFilter
     moment: DateTimeFilter
+    /** Полный URL производственного задания */
+    productionTask: IdFilter
   }
   requiredCreateFields: "productionStage" | "productionVolume"
 }

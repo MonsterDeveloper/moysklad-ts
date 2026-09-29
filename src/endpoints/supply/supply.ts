@@ -2,6 +2,7 @@ import type {
   BatchDeleteResult,
   BatchGetResult,
   Entity,
+  FilesMethods,
   GetFindResult,
   GetModelUpdatableFields,
   ListMeta,
@@ -26,7 +27,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka-priemki
  */
-export interface SupplyEndpoint {
+export interface SupplyEndpoint extends FilesMethods {
   /**
    * Получить список приёмок
    *

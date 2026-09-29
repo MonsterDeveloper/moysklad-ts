@@ -2,6 +2,7 @@ import type {
   BatchDeleteResult,
   BatchGetResult,
   Entity,
+  FilesMethods,
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
@@ -25,7 +26,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-proizwodstwennoe-zadanie
  */
-export interface ProductionTaskEndpoint {
+export interface ProductionTaskEndpoint extends FilesMethods {
   /**
    * Получить массив производственных заданий.
    *

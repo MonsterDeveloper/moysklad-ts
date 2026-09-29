@@ -5,9 +5,10 @@ import {
   type ApiClientOptions,
   composeSearchParameters,
 } from "./api-client"
+import { isRootEntity } from "./api-client/metadata-owner"
 import type { WizardOptions } from "./endpoints"
 import type { Moysklad } from "./moysklad"
-import { MediaType } from "./types"
+import { type AttachedFile, type FileUpload, MediaType } from "./types"
 
 type ComposeSearchParametersOptions = Parameters<
   typeof composeSearchParameters
@@ -19,6 +20,39 @@ interface CallbackOptions {
   path: string[]
   // biome-ignore lint/suspicious/noExplicitAny: we don't know the args yet
   args: any[]
+}
+
+const FILE_UPLOAD_CHUNK_SIZE = 10
+const FILE_UPLOAD_LIMIT = 100
+const BYTE_ENCODING_CHUNK_SIZE = 32_768
+
+function encodeBytesToBase64(bytes: Uint8Array): string {
+  let binary = ""
+
+  for (
+    let offset = 0;
+    offset < bytes.length;
+    offset += BYTE_ENCODING_CHUNK_SIZE
+  ) {
+    binary += String.fromCharCode(
+      ...bytes.subarray(offset, offset + BYTE_ENCODING_CHUNK_SIZE),
+    )
+  }
+
+  return btoa(binary)
+}
+
+function prepareFileUploads(files: FileUpload[]): Array<{
+  filename: string
+  content: string
+}> {
+  return files.map((file) => ({
+    filename: file.filename,
+    content:
+      typeof file.content === "string"
+        ? file.content
+        : encodeBytesToBase64(file.content),
+  }))
 }
 
 const createProxy = (client: ApiClient, callback: Callback, path: string[]) => {
@@ -62,8 +96,17 @@ const createProxy = (client: ApiClient, callback: Callback, path: string[]) => {
 export const createMoysklad = (options: ApiClientOptions): Moysklad => {
   const client = new ApiClient(options)
 
+  const composeEndpointSearchParameters = (
+    path: string,
+    options?: ComposeSearchParametersOptions,
+  ): URLSearchParams | undefined =>
+    composeSearchParameters(options ?? {}, {
+      endpoint: path,
+      buildUrl: (url: string | string[]): URL => client.buildUrl(url),
+    })
+
   const list = (path: string, options?: ComposeSearchParametersOptions) => {
-    const searchParameters = composeSearchParameters(options ?? {})
+    const searchParameters = composeEndpointSearchParameters(path, options)
 
     return client
       .get(path, {
@@ -169,7 +212,7 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
 
         return client
           .get(`${path}/${id}`, {
-            searchParameters: composeSearchParameters(options ?? {}),
+            searchParameters: composeEndpointSearchParameters(path, options),
           })
           .then((response) => response.json())
       }
@@ -183,16 +226,33 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
       if (method === "batchDelete") {
         const ids = callbackOptions.args[0] as string[]
         const entity = callbackOptions.path[0].toLowerCase()
+        const rootEntity =
+          callbackOptions.path.length === 2 && isRootEntity(entity)
+            ? entity
+            : undefined
 
         return client
           .post(`${path}/delete`, {
-            body: ids.map((id) => ({
-              meta: {
-                href: client.buildUrl(`${path}/${id}`),
-                type: entity,
-                mediaType: MediaType.Json,
-              },
-            })),
+            body: ids.map((id) => {
+              if (rootEntity) {
+                const composed = client.composeMeta(rootEntity, id).meta
+                return {
+                  meta: {
+                    href: composed.href,
+                    type: composed.type,
+                    mediaType: composed.mediaType,
+                  },
+                }
+              }
+
+              return {
+                meta: {
+                  href: client.buildUrl(`${path}/${id}`),
+                  type: entity,
+                  mediaType: MediaType.Json,
+                },
+              }
+            }),
           })
           .then((response) => response.json())
       }
@@ -212,7 +272,7 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
         return client
           .post(path, {
             body: data,
-            searchParameters: composeSearchParameters(options ?? {}),
+            searchParameters: composeEndpointSearchParameters(path, options),
           })
           .then((response) => response.json())
       }
@@ -227,7 +287,7 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
         return client
           .put(`${path}/${id}`, {
             body: data,
-            searchParameters: composeSearchParameters(options ?? {}),
+            searchParameters: composeEndpointSearchParameters(path, options),
           })
           .then((response) => response.json())
       }
@@ -250,7 +310,7 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
 
         return client
           .get(`${path}/${id}/accounts`, {
-            searchParameters: composeSearchParameters(options ?? {}),
+            searchParameters: composeEndpointSearchParameters(path, options),
           })
           .then((response) => response.json())
       }
@@ -266,6 +326,66 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
           .then((response) => response.json())
       }
 
+      if (method === "listFiles") {
+        const id = callbackOptions.args[0] as string
+        const options = callbackOptions.args[1] as
+          | ComposeSearchParametersOptions
+          | undefined
+
+        return client
+          .get(`${path}/${id}/files`, {
+            searchParameters: composeEndpointSearchParameters(path, options),
+          })
+          .then((response) => response.json())
+      }
+
+      if (method === "addFiles") {
+        const id = callbackOptions.args[0] as string
+        const files = callbackOptions.args[1] as FileUpload[]
+
+        if (files.length > FILE_UPLOAD_LIMIT) {
+          return Promise.reject(
+            new RangeError(
+              `Cannot add more than ${FILE_UPLOAD_LIMIT} files at once`,
+            ),
+          )
+        }
+
+        if (files.length === 0) {
+          return client
+            .get(`${path}/${id}/files`)
+            .then((response) => response.json())
+            .then((response: { rows: AttachedFile[] }) => response.rows)
+        }
+
+        return (async (): Promise<AttachedFile[]> => {
+          let attachedFiles: AttachedFile[] = []
+
+          for (
+            let offset = 0;
+            offset < files.length;
+            offset += FILE_UPLOAD_CHUNK_SIZE
+          ) {
+            const chunk = files.slice(offset, offset + FILE_UPLOAD_CHUNK_SIZE)
+            const response = await client.post(`${path}/${id}/files`, {
+              body: prepareFileUploads(chunk),
+            })
+            attachedFiles = (await response.json()) as AttachedFile[]
+          }
+
+          return attachedFiles
+        })()
+      }
+
+      if (method === "deleteFile") {
+        const id = callbackOptions.args[0] as string
+        const fileId = callbackOptions.args[1] as string
+
+        return client
+          .delete(`${path}/${id}/files/${fileId}`)
+          .then((): void => undefined)
+      }
+
       if (method === "audit") {
         const id = callbackOptions.args[0] as string
         const options = callbackOptions.args[1] as
@@ -274,7 +394,7 @@ export const createMoysklad = (options: ApiClientOptions): Moysklad => {
 
         return client
           .get(`${path}/${id}/audit`, {
-            searchParameters: composeSearchParameters(options ?? {}),
+            searchParameters: composeEndpointSearchParameters(path, options),
           })
           .then((response) => response.json())
       }

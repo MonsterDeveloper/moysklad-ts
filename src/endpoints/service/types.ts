@@ -6,10 +6,14 @@ import type {
   DateTime,
   DateTimeFilter,
   Entity,
+  ExpandOptions,
+  FilterOptions,
   Idable,
   IdFilter,
   Meta,
   Model,
+  OrderOptions,
+  PaginationOptions,
   PriceType,
   StringFilter,
   TaxSystem,
@@ -203,4 +207,58 @@ export interface ServiceModel extends Model {
     syncId: IdFilter
     updated: DateTimeFilter
   }
+
+  orderableFields:
+    | "id"
+    | "updated"
+    | "name"
+    | "code"
+    | "externalCode"
+    | "archived"
+    | "pathName"
+    | "syncId"
+}
+
+/** Опции для получения списка услуг. */
+export interface ListServicesOptions {
+  /** Опции пагинации */
+  pagination?: PaginationOptions
+  /** Опции раскрытия связанных сущностей */
+  expand?: ExpandOptions<ServiceModel>
+  /** Опции сортировки */
+  order?: OrderOptions<ServiceModel>
+  /** Строка контекстного поиска */
+  search?: string
+  /** Опции фильтрации */
+  filter?: FilterOptions<ServiceModel>
+}
+
+/** Опции для получения всех услуг. */
+export type AllServicesOptions = Omit<ListServicesOptions, "pagination">
+
+/** Опции для получения первой услуги. */
+export type FirstServiceOptions = Omit<ListServicesOptions, "pagination">
+
+/** Опции для получения услуги по ID. */
+export interface GetServiceOptions {
+  /** Опции раскрытия связанных сущностей */
+  expand?: ExpandOptions<ServiceModel>
+}
+
+/** Опции для создания услуг. */
+export interface CreateServiceOptions {
+  /** Опции раскрытия связанных сущностей */
+  expand?: ExpandOptions<ServiceModel>
+}
+
+/** Опции для массового создания и обновления услуг. */
+export interface UpsertServicesOptions {
+  /** Опции раскрытия связанных сущностей */
+  expand?: ExpandOptions<ServiceModel>
+}
+
+/** Опции для обновления услуги. */
+export interface UpdateServiceOptions {
+  /** Опции раскрытия связанных сущностей */
+  expand?: ExpandOptions<ServiceModel>
 }

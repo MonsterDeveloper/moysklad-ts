@@ -10,6 +10,7 @@ import type {
   FilterOptions,
   Idable,
   IdFilter,
+  MediaType,
   Meta,
   Model,
   NumberFilter,
@@ -199,6 +200,12 @@ export interface UpsertProductsOptions {
   expand?: ExpandOptions<ProductModel>
 }
 
+/** Опции для создания товара. */
+export interface CreateProductOptions {
+  /** Опции раскрытия связанных сущностей */
+  expand?: ExpandOptions<ProductModel>
+}
+
 export interface UpdateProductOptions {
   expand?: ExpandOptions<ProductModel>
 }
@@ -209,3 +216,39 @@ export interface GetProductOptions {
 
 export type FirstProductOptions = Omit<ListProductsOptions, "pagination">
 export type AllProductsOptions = Omit<ListProductsOptions, "pagination">
+
+/**
+ * Общие метаданные товаров, комплектов и услуг.
+ *
+ * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar-metadannye-towarow
+ */
+export interface ProductMetadata {
+  /** Метаданные ресурса */
+  meta: {
+    href: string
+    mediaType: MediaType
+  }
+  /** Метаданные списка дополнительных полей */
+  attributes: {
+    meta: {
+      /** URL списка дополнительных полей */
+      href: string
+      /** Тип ресурса */
+      type: Entity.AttributeMetadata
+      /** MIME-тип ресурса */
+      mediaType: MediaType
+      /** Общее количество дополнительных полей */
+      size: number
+      /** Лимит страницы */
+      limit: number
+      /** Смещение страницы */
+      offset: number
+      /** URL следующей страницы */
+      nextHref?: string
+      /** URL предыдущей страницы */
+      previousHref?: string
+    }
+  }
+  /** Создавать новые товары, комплекты и услуги с меткой "Общий" */
+  createShared: boolean
+}

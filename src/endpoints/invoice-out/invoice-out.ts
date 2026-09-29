@@ -2,6 +2,7 @@ import type {
   BatchDeleteResult,
   BatchGetResult,
   Entity,
+  FilesMethods,
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
@@ -25,7 +26,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-schet-pokupatelu-scheta-pokupatelqm
  */
-export interface InvoiceOutEndpoint {
+export interface InvoiceOutEndpoint extends FilesMethods {
   /**
    * Получить список счетов покупателям.
    *

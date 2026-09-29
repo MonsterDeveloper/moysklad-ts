@@ -2,6 +2,7 @@ import type {
   BatchDeleteResult,
   BatchGetResult,
   Entity,
+  FilesMethods,
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
@@ -26,7 +27,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/#/documents/invoice-in%233-scheta-postavshikov
  */
-export interface InvoiceInEndpoint {
+export interface InvoiceInEndpoint extends FilesMethods {
   /**
    * Получить список счетов поставщиков.
    *

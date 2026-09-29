@@ -2,11 +2,13 @@ import type {
   ArchivedFilter,
   AssortmentEntity,
   AssortmentModel,
+  AttributeFilters,
   BatchGetResult,
   BooleanFilter,
   DateTimeFilter,
   Entity,
   EqualityFilter,
+  Filter,
   IdFilter,
   ListMeta,
   ListResponse,
@@ -77,6 +79,9 @@ export interface ListAssortmentOptions {
   groupBy?: "consignment"
 
   filter?: {
+    /** Фильтры дополнительных полей по их ID */
+    attributes?: AttributeFilters
+
     /** Фильтрация по коду вида алкогольной продукции */
     "alcoholic.type"?: NumberFilter
 
@@ -157,6 +162,9 @@ export interface ListAssortmentOptions {
 
     /** Параметр учета вложенных подгрупп */
     withSubFolders?: boolean
+
+    /** URL дополнительных полей для обратной совместимости */
+    [attributeUrl: string]: Filter | AttributeFilters | undefined
   }
 
   pagination?: PaginationOptions

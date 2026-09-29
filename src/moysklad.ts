@@ -3,6 +3,7 @@ import type {
   AssortmentEndpoint,
   BonusTransactionEndpoint,
   CounterpartyEndpoint,
+  CurrencyEndpoint,
   CustomEntityEndpoint,
   CustomerOrderEndpoint,
   DemandEndpoint,
@@ -25,7 +26,9 @@ import type {
   ReportEndpoint,
   SalesReturnEndpoint,
   SecurityEndpoint,
+  ServiceEndpoint,
   SupplyEndpoint,
+  UomEndpoint,
   VariantEndpoint,
   WizardEndpoint,
 } from "./endpoints"
@@ -59,6 +62,13 @@ export interface Moysklad {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent
    */
   counterparty: CounterpartyEndpoint
+
+  /**
+   * Валюты
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-valuta
+   */
+  currency: CurrencyEndpoint
 
   /**
    * Юрлица
@@ -122,6 +132,20 @@ export interface Moysklad {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar
    */
   product: ProductEndpoint
+
+  /**
+   * Услуги
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-usluga
+   */
+  service: ServiceEndpoint
+
+  /**
+   * Единицы измерения
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-edinica-izmereniq
+   */
+  uom: UomEndpoint
 
   /**
    * Группы товаров

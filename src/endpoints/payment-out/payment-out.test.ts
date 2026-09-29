@@ -112,6 +112,30 @@ describe("paymentOut", () => {
         },
       })
     })
+
+    it("updates operations with a single metadata layer", async () => {
+      const fetchMock = createFetchMock()
+      const id = "payment-id"
+      const data = {
+        noClosingDocs: false,
+        operations: [
+          {
+            meta: moysklad.client.composeMeta(Entity.InvoiceIn, "invoice-id")
+              .meta,
+            linkedSum: 12_500,
+          },
+        ],
+      }
+
+      await moysklad.paymentOut.update(id, data)
+
+      await expectFetch({
+        fetchMock,
+        url: `/entity/paymentout/${id}`,
+        method: "PUT",
+        body: data,
+      })
+    })
   })
 
   describe("all", () => {
