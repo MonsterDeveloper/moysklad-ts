@@ -40,7 +40,9 @@ type GetFindResultForModel<
                 // ℹ️ only map through truthy values (explicitly expanded fields)
                 [K in keyof E as E[K] extends false | undefined
                   ? never
-                  : K]: // ❔ Can the expanded field to be expanded ..
+                  : K extends keyof M["expandable"]
+                    ? K
+                    : never]: // ❔ Can the expanded field to be expanded ..
                 K extends keyof M["expandable"]
                   ? // ❔ Does the entity contain expanded field ..
                     K extends keyof M["object"]

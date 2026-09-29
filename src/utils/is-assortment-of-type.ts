@@ -1,4 +1,4 @@
-import type { AssortmentEntity, AssortmentModel } from "../types"
+import type { AssortmentEntity } from "../types"
 
 type AssortmentOfType<
   Assortment,
@@ -22,7 +22,7 @@ type AssortmentOfType<
  * ```
  */
 export function isAssortmentOfType<
-  Assortment extends AssortmentModel["object"],
+  Assortment extends { meta: { type: AssortmentEntity } },
   T extends AssortmentEntity,
 >(
   assortment: Assortment,
