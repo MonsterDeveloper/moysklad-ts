@@ -1,6 +1,6 @@
 import type { EmptyObject, Simplify, SimplifyDeep } from "type-fest"
 import { describe, expectTypeOf, it } from "vitest"
-import type { PositionStockData } from "."
+import type { AssortmentModel, PositionStockData } from "."
 import type { Entity } from "./entity"
 import type { ListMeta, Meta } from "./metadata"
 import type { Model } from "./model"
@@ -172,6 +172,38 @@ describe("result", () => {
           }
         }
       }>()
+    })
+
+    it("keeps assortment members without the nested expandable field", () => {
+      type Result = GetFindResult<AssortmentModel, { product: true }>
+
+      expectTypeOf<
+        "product" extends keyof Extract<
+          Result,
+          { meta: { type: Entity.Product } }
+        >
+          ? true
+          : false
+      >().toEqualTypeOf<false>()
+      expectTypeOf<
+        "product" extends keyof Extract<
+          Result,
+          { meta: { type: Entity.Service } }
+        >
+          ? true
+          : false
+      >().toEqualTypeOf<false>()
+      expectTypeOf<
+        "product" extends keyof Extract<
+          Result,
+          { meta: { type: Entity.Bundle } }
+        >
+          ? true
+          : false
+      >().toEqualTypeOf<false>()
+      expectTypeOf<
+        Extract<Result, { meta: { type: Entity.Variant } }>["product"]["name"]
+      >().toBeString()
     })
 
     it("should handle position fields", () => {
