@@ -2,6 +2,7 @@ import type {
   BatchDeleteResult,
   BatchGetResult,
   Entity,
+  FilesMethods,
   GetFindResult,
   GetModelCreatableFields,
   GetModelUpdatableFields,
@@ -25,7 +26,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-postawschiku
  */
-export interface PurchaseOrderEndpoint {
+export interface PurchaseOrderEndpoint extends FilesMethods {
   /**
    * Получить массив заказов поставщикам.
    *

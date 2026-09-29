@@ -1,4 +1,21 @@
-import type { Filter, OrderOption, PaginationOptions } from "../types"
+import type {
+  AttributeFilters,
+  Filter,
+  OrderOption,
+  PaginationOptions,
+} from "../types"
+import { Entity } from "../types/entity"
+import { getMetadataOwner, isRootEntity } from "./metadata-owner"
+
+const ENTITY_ENDPOINT_PATTERN = /^\/entity\/([^/]+)/
+
+/** Контекст endpoint для составления параметров запроса. */
+export interface ComposeSearchParametersContext {
+  /** Путь endpoint, например `/entity/product` */
+  endpoint: string
+  /** Построитель URL настроенного API клиента */
+  buildUrl: (url: string | string[]) => URL
+}
 
 function traverseExpand(expand: Record<string, unknown>, depth = 0) {
   if (depth > 2) {
@@ -134,23 +151,59 @@ function traverseFilter(field: string, filter: Filter | undefined) {
   return filters
 }
 
+function getAttributeOwner(endpoint: string): string {
+  const entity = endpoint.match(ENTITY_ENDPOINT_PATTERN)?.[1]
+
+  if (!entity) {
+    throw new Error(`Cannot resolve attribute owner for endpoint: ${endpoint}`)
+  }
+
+  if (entity === Entity.Assortment) {
+    return Entity.Product
+  }
+
+  return isRootEntity(entity) ? getMetadataOwner(entity) : entity
+}
+
+function composeAttributeUrl(
+  attributeId: string,
+  context: ComposeSearchParametersContext | undefined,
+): string {
+  if (!context) {
+    throw new Error("Attribute filters require endpoint and client URL context")
+  }
+
+  return context
+    .buildUrl([
+      "entity",
+      getAttributeOwner(context.endpoint),
+      "metadata",
+      "attributes",
+      attributeId,
+    ])
+    .toString()
+}
+
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: look okay for now
-export function composeSearchParameters({
-  pagination,
-  expand,
-  order,
-  search,
-  filter,
-  namedfilter,
-  ...options
-}: {
-  pagination?: PaginationOptions
-  expand?: Record<string, unknown>
-  order?: OrderOption<string> | OrderOption<string>[]
-  search?: string
-  filter?: Record<string, Filter | undefined>
-  namedfilter?: string
-}) {
+export function composeSearchParameters(
+  {
+    pagination,
+    expand,
+    order,
+    search,
+    filter,
+    namedfilter,
+    ...options
+  }: {
+    pagination?: PaginationOptions
+    expand?: Record<string, unknown>
+    order?: OrderOption<string> | OrderOption<string>[]
+    search?: string
+    filter?: Record<string, Filter | AttributeFilters | undefined>
+    namedfilter?: string
+  },
+  context?: ComposeSearchParametersContext,
+) {
   const searchParameters = new URLSearchParams()
   const expandFields = expand && traverseExpand(expand)
 
@@ -187,7 +240,21 @@ export function composeSearchParameters({
     const filters = [] as string[]
 
     for (const [field, value] of Object.entries(filter)) {
-      filters.push(...traverseFilter(field, value))
+      if (field === "attributes" && value && typeof value === "object") {
+        for (const [attributeId, attributeFilter] of Object.entries(
+          value as AttributeFilters,
+        )) {
+          filters.push(
+            ...traverseFilter(
+              composeAttributeUrl(attributeId, context),
+              attributeFilter,
+            ),
+          )
+        }
+        continue
+      }
+
+      filters.push(...traverseFilter(field, value as Filter | undefined))
     }
 
     if (filters.length > 0) {

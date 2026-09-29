@@ -29,6 +29,7 @@ export enum Entity {
   CustomerOrderPosition = "customerorderposition",
   PurchaseReturn = "purchasereturn",
   CommissionReportIn = "commissionreportin",
+  CommissionReportOut = "commissionreportout",
   RetailShift = "retailshift",
   Product = "product",
   Service = "service",
@@ -97,6 +98,63 @@ export enum Entity {
   TurnoverByOperation = "turnoverbyoperation",
   StockByStore = "stockbystore",
 }
+
+/**
+ * Корневые сущности, для которых можно составить метаданные по ID.
+ *
+ * Вложенные ресурсы в этот тип не входят, поскольку их URL требует ID
+ * родительской сущности.
+ */
+export type RootEntity =
+  | Entity.BonusProgram
+  | Entity.BonusTransaction
+  | Entity.Bundle
+  | Entity.CommissionReportIn
+  | Entity.CommissionReportOut
+  | Entity.Consignment
+  | Entity.Contract
+  | Entity.Counterparty
+  | Entity.Country
+  | Entity.Currency
+  | Entity.CustomerOrder
+  | Entity.Demand
+  | Entity.Employee
+  | Entity.Enter
+  | Entity.ExpenseItem
+  | Entity.FactureIn
+  | Entity.FactureOut
+  | Entity.Group
+  | Entity.Inventory
+  | Entity.InvoiceIn
+  | Entity.InvoiceOut
+  | Entity.Loss
+  | Entity.Organization
+  | Entity.PaymentIn
+  | Entity.PaymentOut
+  | Entity.Processing
+  | Entity.ProcessingOrder
+  | Entity.ProcessingPlan
+  | Entity.ProcessingPlanFolder
+  | Entity.ProcessingProcess
+  | Entity.ProcessingStage
+  | Entity.Product
+  | Entity.ProductFolder
+  | Entity.ProductionStage
+  | Entity.ProductionStageCompletion
+  | Entity.ProductionTask
+  | Entity.Project
+  | Entity.PurchaseOrder
+  | Entity.PurchaseReturn
+  | Entity.Region
+  | Entity.RetailSalesReturn
+  | Entity.RetailShift
+  | Entity.SalesChannel
+  | Entity.SalesReturn
+  | Entity.Service
+  | Entity.Store
+  | Entity.Supply
+  | Entity.Uom
+  | Entity.Variant
 
 export type AssortmentEntity =
   | Entity.Product

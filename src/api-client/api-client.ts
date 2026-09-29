@@ -4,9 +4,13 @@ import type {
   BatchGetResult,
   Entity,
   ListResponse,
+  Meta,
+  RootEntity,
 } from "../types"
+import { MediaType } from "../types"
 import { batchPromises } from "../utils"
 import { handleError } from "./handle-error"
+import { getMetadataOwner, isRootEntity } from "./metadata-owner"
 
 /**
  * Опции для Basic авторизации
@@ -264,6 +268,44 @@ export class ApiClient {
     }
 
     return this.buildArrayUrl(url)
+  }
+
+  /**
+   * Составляет метаданные корневой сущности для тела запроса.
+   *
+   * Для Услуг и Комплектов ссылка на метаданные ведёт к общим метаданным
+   * Товаров, как требует JSON API. Вложенные ресурсы не поддерживаются.
+   *
+   * @param type - Тип корневой сущности
+   * @param id - ID сущности
+   * @returns Метаданные сущности с URL текущего клиента
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-metadannye
+   *
+   * @example
+   * ```ts
+   * const store = moysklad.client.composeMeta(Entity.Store, "5427bc76-b95f-11eb-0a80-04bb000cd583");
+   * ```
+   */
+  composeMeta<T extends RootEntity>(type: T, id: string): Meta<T> {
+    if (!isRootEntity(type)) {
+      throw new TypeError(`Unsupported root entity type: ${type}`)
+    }
+
+    const metadataOwner: RootEntity = getMetadataOwner(type)
+
+    return {
+      meta: {
+        href: this.buildUrl(["entity", type, id]).toString(),
+        metadataHref: this.buildUrl([
+          "entity",
+          metadataOwner,
+          "metadata",
+        ]).toString(),
+        type,
+        mediaType: MediaType.Json,
+      },
+    }
   }
 
   /**

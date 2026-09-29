@@ -125,13 +125,23 @@ export type Filter =
   | StringFilter
   | DateTimeFilter
 
+/** Фильтры дополнительных полей, сгруппированные по ID поля. */
+export type AttributeFilters = Record<string, Filter | undefined>
+
+type FiltersWithAttributes<F> = F & {
+  /** Фильтры дополнительных полей по их ID */
+  attributes?: AttributeFilters
+  /** URL дополнительных полей для обратной совместимости */
+  [attributeUrl: string]: Filter | AttributeFilters | undefined
+}
+
 type AddAttributesFilters<
   M extends Model,
   F,
 > = "attributes" extends keyof M["object"]
   ? IsNever<F> extends false
-    ? F & { [attributeUrl: string]: Filter }
-    : { [attributeUrl: string]: Filter }
+    ? FiltersWithAttributes<F>
+    : FiltersWithAttributes<object>
   : F
 
 type GetFiltersForModel<M extends Model> =

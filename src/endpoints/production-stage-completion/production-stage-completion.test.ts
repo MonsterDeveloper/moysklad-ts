@@ -57,6 +57,25 @@ describe("productionStageCompletion", () => {
       })
     })
 
+    it("filters by production task URL and equality arrays", async () => {
+      const fetchMock = createFetchMock()
+      const firstTask = "https://example.com/entity/productiontask/first"
+      const secondTask = "https://example.com/entity/productiontask/second"
+
+      await moysklad.productionStageCompletion.list({
+        filter: { productionTask: { eq: [firstTask, secondTask] } },
+      })
+
+      await expectFetch({
+        fetchMock,
+        url: "/entity/productionstagecompletion",
+        method: "GET",
+        searchParameters: {
+          filter: `productionTask=${firstTask};productionTask=${secondTask}`,
+        },
+      })
+    })
+
     it("makes a request with expand options", async () => {
       const fetchMock = createFetchMock()
 

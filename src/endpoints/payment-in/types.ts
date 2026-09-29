@@ -11,6 +11,7 @@ import type {
   Idable,
   IdFilter,
   Meta,
+  Metadata,
   Model,
   NumberFilter,
   OrderOptions,
@@ -86,7 +87,7 @@ export interface PaymentIn extends Idable, Meta<Entity.PaymentIn> {
 
   /** Массив ссылок на связанные операции */
   operations?: Array<{
-    meta: Meta<
+    meta: Metadata<
       | Entity.CustomerOrder
       | Entity.PurchaseReturn
       | Entity.Demand

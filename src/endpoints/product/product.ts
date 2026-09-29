@@ -3,8 +3,10 @@ import type {
   BatchDeleteResult,
   BatchGetResult,
   Entity,
+  FilesMethods,
   GetAuditByEntityOptions,
   GetFindResult,
+  GetModelCreatableFields,
   GetModelUpdatableFields,
   ListMeta,
   ListResponse,
@@ -14,9 +16,11 @@ import type {
 } from "../../types"
 import type {
   AllProductsOptions,
+  CreateProductOptions,
   FirstProductOptions,
   GetProductOptions,
   ListProductsOptions,
+  ProductMetadata,
   ProductModel,
   UpdateProductOptions,
   UpsertProductsOptions,
@@ -27,7 +31,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar
  */
-export interface ProductEndpoint {
+export interface ProductEndpoint extends FilesMethods {
   /**
    * Получить список товаров.
    *
@@ -121,6 +125,22 @@ export interface ProductEndpoint {
   ): Promise<GetFindResult<ProductModel, T["expand"]>>
 
   /**
+   * Создать товар.
+   *
+   * `syncId` можно задать только при создании.
+   *
+   * @param data - Данные нового товара
+   * @param options - Опции создания
+   * @returns Созданный товар
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar-sozdat-towar
+   */
+  create<T extends CreateProductOptions = Record<string, unknown>>(
+    data: GetModelCreatableFields<ProductModel> & { syncId?: string },
+    options?: Subset<T, CreateProductOptions>,
+  ): Promise<GetFindResult<ProductModel, T["expand"]>>
+
+  /**
    * Создать или обновить товар.
    *
    * @param data - Данные для создания или обновления
@@ -130,7 +150,7 @@ export interface ProductEndpoint {
    * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar-sozdat-towar
    */
   upsert<
-    TData extends ModelCreateOrUpdateData<ProductModel>,
+    TData extends ModelCreateOrUpdateData<ProductModel, { syncId?: string }>,
     TOptions extends UpsertProductsOptions = Record<string, unknown>,
   >(
     data: TData,
@@ -174,4 +194,12 @@ export interface ProductEndpoint {
     id: string,
     options?: GetAuditByEntityOptions,
   ): Promise<ListResponse<AuditEvent, Entity.AuditEvent>>
+
+  /**
+   * Получить общие метаданные товаров, комплектов и услуг.
+   *
+   * @returns Метаданные дополнительных полей каталога
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-towar-metadannye-towarow
+   */
+  metadata(): Promise<ProductMetadata>
 }

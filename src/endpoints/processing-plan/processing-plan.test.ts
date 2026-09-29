@@ -80,6 +80,27 @@ describe("processingPlan", () => {
       })
     })
 
+    it("expands products and materials through assortment", async () => {
+      const fetchMock = createFetchMock()
+
+      await moysklad.processingPlan.list({
+        expand: {
+          products: { assortment: { product: true } },
+          materials: { assortment: { product: true } },
+        },
+      })
+
+      await expectFetch({
+        fetchMock,
+        url: "/entity/processingplan",
+        method: "GET",
+        searchParameters: {
+          expand: "products.assortment.product,materials.assortment.product",
+          limit: expect.any(String),
+        },
+      })
+    })
+
     it("makes a request with search option", async () => {
       const fetchMock = createFetchMock()
 

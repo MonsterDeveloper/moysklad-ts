@@ -1,6 +1,7 @@
 import type {
   BatchGetResult,
   Entity,
+  FilesMethods,
   GetFindResult,
   GetModelUpdatableFields,
   ListMeta,
@@ -24,7 +25,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent
  */
-export interface CounterpartyEndpoint {
+export interface CounterpartyEndpoint extends FilesMethods {
   /**
    * Получить список контрагентов.
    *

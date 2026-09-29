@@ -11,6 +11,7 @@ import type {
   Idable,
   IdFilter,
   Meta,
+  Metadata,
   Model,
   NumberFilter,
   OrderOptions,
@@ -66,10 +67,39 @@ export interface PaymentOut extends Idable, Meta<Entity.PaymentOut> {
   files: Meta<never>[] // TODO add files
   /** Отдел сотрудника */
   group: Meta<Entity.Group>
+  /**
+   * Признак "Без закрывающих документов".
+   *
+   * Значение `true` нельзя передавать вместе с непустым массивом
+   * {@linkcode operations}.
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-ishodqschij-platezh-ishodqschie-platezhi
+   */
+  noClosingDocs?: boolean
   /** Дата документа */
   moment: DateTime
   /** Наименование Исходящего платежа */
   name: string
+  /**
+   * Операции, оплачиваемые этим платежом.
+   *
+   * При обновлении API заменяет массив целиком. Чтобы добавить связь,
+   * передайте существующие операции вместе с новой.
+   *
+   * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-ishodqschij-platezh-ishodqschie-platezhi
+   */
+  operations?: Array<{
+    /** Метаданные связанной операции */
+    meta: Metadata<
+      | Entity.InvoiceIn
+      | Entity.Supply
+      | Entity.PurchaseOrder
+      | Entity.SalesReturn
+      | Entity.CommissionReportOut
+    >
+    /** Сумма, оплаченная по связанной операции */
+    linkedSum?: number
+  }>
   /** Метаданные юрлица */
   organization: Meta<Entity.Organization>
   /** Метаданные счета юрлица */

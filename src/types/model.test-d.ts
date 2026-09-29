@@ -1,8 +1,7 @@
 import type { IsEmptyObject } from "type-fest"
 import { describe, expectTypeOf, it } from "vitest"
 import type { Entity } from "./entity"
-import type { MediaType } from "./media-type"
-import type { Meta } from "./metadata"
+import type { Meta, Metadata, UpdateMeta, UpdateMetadata } from "./metadata"
 import type {
   GetModelCreatableFields,
   GetModelRequiredCreateFields,
@@ -65,13 +64,7 @@ describe("model", () => {
       }
 
       expectTypeOf<GetModelUpdatableFields<TestModel>>().toEqualTypeOf<{
-        agent?: {
-          meta: {
-            type: Entity.Counterparty
-            href: string
-            mediaType: MediaType
-          }
-        }
+        agent?: Meta<Entity.Counterparty> | UpdateMeta<Entity.Counterparty>
       }>()
     })
 
@@ -83,13 +76,10 @@ describe("model", () => {
       }
 
       expectTypeOf<GetModelUpdatableFields<TestModel>>().toEqualTypeOf<{
-        agent?: {
-          meta: {
-            type: Entity.Counterparty
-            href: string
-            mediaType: MediaType
-          }
-        } | null
+        agent?:
+          | Meta<Entity.Counterparty>
+          | UpdateMeta<Entity.Counterparty>
+          | null
       }>()
     })
   })
@@ -135,11 +125,9 @@ describe("model", () => {
 
       expectTypeOf<GetModelRequiredCreateFields<TestModel>>().toEqualTypeOf<{
         agent: {
-          meta: {
-            type: Entity.Counterparty
-            href: string
-            mediaType: MediaType
-          }
+          meta:
+            | Metadata<Entity.Counterparty>
+            | UpdateMetadata<Entity.Counterparty>
         }
       }>()
     })

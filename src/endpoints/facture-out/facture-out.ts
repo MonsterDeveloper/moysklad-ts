@@ -2,6 +2,7 @@ import type {
   BatchDeleteResult,
   BatchGetResult,
   Entity,
+  FilesMethods,
   GetFindResult,
   ListMeta,
   ListResponse,
@@ -24,7 +25,7 @@ import type {
  *
  * @see https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-schet-faktura-wydannyj
  */
-export interface FactureOutEndpoint {
+export interface FactureOutEndpoint extends FilesMethods {
   /**
    * Получить список счетов-фактур выданных.
    *

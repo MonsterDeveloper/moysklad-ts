@@ -2,7 +2,13 @@ import type { ReadonlyKeysOf } from "type-fest"
 import type { Attribute } from "./attribute"
 import type { Entity } from "./entity"
 import type { Filter } from "./filters"
-import type { ListMeta, Meta, Metadata, UpdateMeta } from "./metadata"
+import type {
+  ListMeta,
+  Meta,
+  Metadata,
+  UpdateMeta,
+  UpdateMetadata,
+} from "./metadata"
 
 export interface Model<T extends object = object> {
   object: T
@@ -15,6 +21,22 @@ export interface Model<T extends object = object> {
   orderableFields?: string
   requiredCreateFields?: string
 }
+
+/**
+ * Подготавливает значение модели для отправки в запросе.
+ *
+ * Рекурсивно заменяет полные метаданные ссылок сокращёнными метаданными,
+ * которые принимает API в запросах. Объекты, массивы и объединения типов
+ * сохраняют остальные поля без изменений.
+ */
+export type ToUpdatable<T> =
+  T extends Metadata<infer E>
+    ? Metadata<E> | UpdateMetadata<E>
+    : T extends ReadonlyArray<infer Item>
+      ? ToUpdatable<Item>[]
+      : T extends object
+        ? { [Key in keyof T]: ToUpdatable<T[Key]> }
+        : T
 
 /**
  * Extract the updatable fields from a model's object and replace the Meta with UpdateMeta.
@@ -36,25 +58,23 @@ export type GetModelUpdatableFields<M extends Model> = {
         UpdateMeta<T>[]
     : // value is a Meta object?
       M["object"][Key] extends Meta<infer T>
-      ? UpdateMeta<T>
+      ? Meta<T> | UpdateMeta<T>
       : // key is optional?
         M["object"][Key] extends Meta<infer T> | undefined
         ? // make it nullable
-          UpdateMeta<T> | null
+          Meta<T> | UpdateMeta<T> | null
         : // value is an array?
           NonNullable<M["object"][Key]> extends Array<infer T>
           ? // value is an Attribute array?
             T extends Attribute
             ? (UpdateMeta<Entity.AttributeMetadata> &
                 Pick<Attribute, "value">)[]
-            : T extends Meta<infer U>
-              ? UpdateMeta<U>[]
-              : T[]
+            : ToUpdatable<NonNullable<M["object"][Key]>>
           : // key is optional?
             undefined extends M["object"][Key]
             ? // make it nullable
-              M["object"][Key] | null
-            : M["object"][Key]
+              ToUpdatable<Exclude<M["object"][Key], undefined>> | null
+            : ToUpdatable<M["object"][Key]>
 }
 
 /**
@@ -66,10 +86,7 @@ export type GetModelRequiredCreateFields<M extends Model> = {
     M["requiredCreateFields"],
     keyof M["object"]
   >]-?: // value is a Meta object?
-  M["object"][Key] extends Meta<infer T>
-    ? // replace it with UpdateMeta
-      UpdateMeta<T>
-    : NonNullable<M["object"][Key]>
+  ToUpdatable<NonNullable<M["object"][Key]>>
 }
 
 /**
@@ -83,15 +100,18 @@ export type GetModelCreatableFields<
 /**
  * Data for creating or batch updating a model.
  */
-export type ModelCreateOrUpdateData<M extends Model> =
+export type ModelCreateOrUpdateData<
+  M extends Model,
+  AdditionalCreateFields extends object = object,
+> =
   // Object has a meta field?
   "meta" extends keyof M["object"]
     ? // Meta is a Meta object?
       M["object"]["meta"] extends Metadata<infer T>
       ? // Create object or an array of create/update objects
-          | GetModelCreatableFields<M>
+          | (GetModelCreatableFields<M> & AdditionalCreateFields)
           | Array<
-              | GetModelCreatableFields<M>
+              | (GetModelCreatableFields<M> & AdditionalCreateFields)
               | (GetModelUpdatableFields<M> & UpdateMeta<T>)
             >
       : never
